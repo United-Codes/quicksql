@@ -1,0 +1,5 @@
+日本語
+  id /pk
+  status int /check 1,2,3
+
+#settings = { genpk: false  }

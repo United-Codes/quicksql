@@ -448,7 +448,7 @@ let tree = (function(){
             if( this.isOption('check') ) {
                 let parentPref = '';
                 if( parent != null )
-                    parentPref = parent.parseName()+'_';
+                    parentPref = concatNames(parent.parseName(),'_');
                 const parent_child = concatNames(parentPref,this.parseName());
 
                 let offset = tab;
