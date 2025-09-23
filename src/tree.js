@@ -10,11 +10,11 @@ let tree = (function(){
     let tab= '    ';
     const stringTypes = ['string', 'varchar2', 'varchar', 'vc' , 'char'];
     const boolTypes = ['yn', 'boolean', 'bool', ];
+    const vectTypes = ['vect', 'vector', ];
     let datatypes = [
         'integer',
         'number', 'num',
         'int',
-        'num',    
         'blob', 'clob',
         'json',
         'file',
@@ -26,6 +26,7 @@ let tree = (function(){
     ];           
     datatypes = datatypes.concat(stringTypes);
     datatypes = datatypes.concat(boolTypes);
+    datatypes = datatypes.concat(vectTypes);
 
     /**
      * Node in QSQL tree defining a Table, a Column, a View, or an Option
@@ -237,7 +238,9 @@ let tree = (function(){
         
             
             for( let i = 0; i < datatypes.length; i++ ) {
-                const pos = this.indexOf(datatypes[i]);
+                let pos = this.indexOf(datatypes[i]);
+                if( pos < 0 )
+                    pos = this.indexOf(datatypes[i], true);
                 if( 0 < pos && pos < nameTo ) {
                     nameTo = pos;
                     return this.sugarcoatName(nameFrom, nameTo); 
@@ -319,6 +322,15 @@ let tree = (function(){
                 ret = 'varchar2('+len+char+')';
                 if( pure == 'plsql' )
                     ret = 'varchar2';
+            }
+
+            const vector = this.vectorType('vector'); 
+            if( vector != null ) 
+                ret = vector;
+            else {
+                const vect = this.vectorType('vect'); 
+                if( vect != null ) 
+                    ret = vect;
             }
 
             const parent_child = concatNames(parent.parseName(),'_',this.parseName());
@@ -442,6 +454,31 @@ let tree = (function(){
             return ret;
         };
 
+        this.vectorType = function( mnemonics ) {
+            const vectPos = this.indexOf(mnemonics, true);  
+            const src = this.src; 
+            if( 0 < vectPos ) {
+                var start = src[vectPos].begin;
+                var end = src[vectPos].end;
+                let dim = src[vectPos].value.substring(mnemonics.length);
+                if( '' == dim ) {
+                    let oParenPos = this.indexOf('(');
+                    if( oParenPos == dim + 1 ) {
+                        dim = src[dim+2].value;
+                    }
+                }
+                let len = '*';
+                if( '' != dim ) {  
+                    let factor = 1; 
+                    if( dim.endsWith('k') ) 
+                        factor =  1024; 
+                    dim = dim.substring(0,dim.length-1);              
+                    len = parseInt(dim)*factor;
+                }
+                return 'vector('+len+',*,*)';
+            }
+            return null;
+        }
 
         this.genConstraint = function ( optQuote ) {
             let ret = '';
