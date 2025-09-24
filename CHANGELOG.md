@@ -54,11 +54,15 @@ Error diagnostic fixes
 
 ## [1.2.12] - 2024-4-2
 
+Misindented error diagnostics, one more time
+Table and column directive syntax check
+
 #71
 
 ## [1.2.14] - 2024-9-22
 
-Misindented error diagnostics, one more time
-Table and column directive syntax check
+#78
+
+## [1.2.15] - 2024-9-24
 
 
