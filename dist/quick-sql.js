@@ -1,46 +1,46 @@
-function z(c) {
-  return c == null ? c : c.toUpperCase().endsWith("IES") ? c.substring(0, c.length - 3) + "y" : c.toUpperCase().endsWith("ES") || c.toUpperCase().endsWith("S") ? c.substring(0, c.length - 1) : c;
+function W(f) {
+  return f == null ? f : f.toUpperCase().endsWith("IES") ? f.substring(0, f.length - 3) + "y" : f.toUpperCase().endsWith("ES") || f.toUpperCase().endsWith("S") ? f.substring(0, f.length - 1) : f;
 }
-function pe(c, u) {
+function be(f, c) {
   let D = '"';
-  if (c == null)
+  if (f == null)
     return null;
   let G = !1;
-  const E = "$#_ ";
-  if (!c.startsWith(D) && !G) {
-    const x = c;
-    if (x.length > 0 && "0" <= x[0] && x[0] <= "9")
+  const P = "$#_ ";
+  if (!f.startsWith(D) && !G) {
+    const N = f;
+    if (N.length > 0 && "0" <= N[0] && N[0] <= "9")
       G = !0;
     else
-      for (let C = 0; C < x.length; C++) {
-        const g = x[C];
-        if (!("a" <= g && g <= "z") && !("A" <= g && g <= "Z") && !("0" <= g && g <= "9") && !(0 <= E.indexOf(g))) {
+      for (let g = 0; g < N.length; g++) {
+        const p = N[g];
+        if (!("a" <= p && p <= "z") && !("A" <= p && p <= "Z") && !("0" <= p && p <= "9") && !(0 <= P.indexOf(p))) {
           G = !0;
           break;
         }
       }
   }
-  return (c.startsWith("_") || c.startsWith("$") || c.startsWith("#")) && (G = !0), G || (D = ""), D + c + D;
+  return (f.startsWith("_") || f.startsWith("$") || f.startsWith("#")) && (G = !0), G || (D = ""), D + f + D;
 }
-function Q(c) {
-  if (c == null)
+function Q(f) {
+  if (f == null)
     return null;
-  if (c.indexOf('"') == 0)
-    return c;
-  let u = pe(c);
-  return u.indexOf('"') == 0 || (u = u.replace(/ /g, "_")), u;
+  if (f.indexOf('"') == 0)
+    return f;
+  let c = be(f);
+  return c.indexOf('"') == 0 || (c = c.replace(/ /g, "_")), c;
 }
-function U(c, u, D) {
+function U(f, c, D) {
   let G = !1;
-  D == null && (D = ""), c.indexOf('"') == 0 && (G = !0, c = c.substring(1, c.length - 1)), u.indexOf('"') == 0 && (G = !0, u = u.substring(1, u.length - 1)), D.indexOf('"') == 0 && (G = !0, D = D.substring(1, D.length - 1));
-  let E = c + u + D;
-  return G ? E = '"' + E + '"' : E = E.toLowerCase(), E;
+  D == null && (D = ""), f.indexOf('"') == 0 && (G = !0, f = f.substring(1, f.length - 1)), c.indexOf('"') == 0 && (G = !0, c = c.substring(1, c.length - 1)), D.indexOf('"') == 0 && (G = !0, D = D.substring(1, D.length - 1));
+  let P = f + c + D;
+  return G ? P = '"' + P + '"' : P = P.toLowerCase(), P;
 }
-function ge(c) {
-  return c.length < 2 ? null : parseInt(c.substring(0, 2));
+function pe(f) {
+  return f.length < 2 ? null : parseInt(f.substring(0, 2));
 }
 var le = /* @__PURE__ */ (function() {
-  var c = [
+  var f = [
     "Sales",
     "Finance",
     "Delivery",
@@ -53,7 +53,7 @@ var le = /* @__PURE__ */ (function() {
     "Specialist",
     "Evangelist",
     "Salesman"
-  ], u = [
+  ], c = [
     "\u300C\u8CA9\u58F2\u300D",
     "\u300C\u8CA1\u52D9\u300D",
     "\u300C\u914D\u9001\u300D",
@@ -79,31 +79,31 @@ var le = /* @__PURE__ */ (function() {
     "\uC804\uB3C4\uC790",
     "\uD310\uB9E4\uC6D0"
   ];
-  function G(E, x) {
-    if (typeof x != "string" || E.substring(0, 2).toLowerCase() == "en")
-      return x;
-    x.indexOf("'") == 0 && (x = x.substring(1, x.length - 1));
-    for (var C = -1, g = 0; g < c.length; g++)
-      if (c[g] == x) {
-        C = g;
+  function G(P, N) {
+    if (typeof N != "string" || P.substring(0, 2).toLowerCase() == "en")
+      return N;
+    N.indexOf("'") == 0 && (N = N.substring(1, N.length - 1));
+    for (var g = -1, p = 0; p < f.length; p++)
+      if (f[p] == N) {
+        g = p;
         break;
       }
-    return 0 <= C && E.substring(0, 2).toLowerCase() == "jp" && C < u.length ? "'" + u[C] + "'" : 0 <= C && E.substring(0, 2).toLowerCase() == "kr" && C < D.length ? "'" + D[C] + "'" : x;
+    return 0 <= g && P.substring(0, 2).toLowerCase() == "jp" && g < c.length ? "'" + c[g] + "'" : 0 <= g && P.substring(0, 2).toLowerCase() == "kr" && g < D.length ? "'" + D[g] + "'" : N;
   }
   return G;
 })();
-function Ce(c) {
-  return c && c.__esModule && Object.prototype.hasOwnProperty.call(c, "default") ? c.default : c;
+function ge(f) {
+  return f && f.__esModule && Object.prototype.hasOwnProperty.call(f, "default") ? f.default : f;
 }
 var ee = { exports: {} }, se;
-function ve() {
-  return se || (se = 1, (function(c, u) {
+function Ce() {
+  return se || (se = 1, (function(f, c) {
     (function() {
-      var D = 9007199254740992, G = -D, E = "0123456789", x = "abcdefghijklmnopqrstuvwxyz", C = x.toUpperCase(), g = E + "abcdef";
-      function B(e) {
+      var D = 9007199254740992, G = -D, P = "0123456789", N = "abcdefghijklmnopqrstuvwxyz", g = N.toUpperCase(), p = P + "abcdef";
+      function I(e) {
         this.name = "UnsupportedError", this.message = e || "This feature is not supported on this platform";
       }
-      B.prototype = new Error(), B.prototype.constructor = B;
+      I.prototype = new Error(), I.prototype.constructor = I;
       var k = Array.prototype.slice;
       function r(e) {
         if (!(this instanceof r))
@@ -115,9 +115,9 @@ function ve() {
           var i = 0;
           if (Object.prototype.toString.call(arguments[a]) === "[object String]")
             for (var s = 0; s < arguments[a].length; s++) {
-              for (var h = 0, M = 0; M < arguments[a].length; M++)
-                h = arguments[a].charCodeAt(M) + (h << 6) + (h << 16) - h;
-              i += h;
+              for (var d = 0, S = 0; S < arguments[a].length; S++)
+                d = arguments[a].charCodeAt(S) + (d << 6) + (d << 16) - d;
+              i += d;
             }
           else
             i = arguments[a];
@@ -127,19 +127,19 @@ function ve() {
           return this.mt.random(this.seed);
         }, this;
       }
-      r.prototype.VERSION = "1.1.11";
+      r.prototype.VERSION = "1.1.13";
       function o(e, a) {
         if (e = e || {}, a)
           for (var i in a)
             typeof e[i] > "u" && (e[i] = a[i]);
         return e;
       }
-      function p(e) {
+      function b(e) {
         return Array.apply(null, Array(e)).map(function(a, i) {
           return i;
         });
       }
-      function b(e, a) {
+      function x(e, a) {
         if (e)
           throw new RangeError(a);
       }
@@ -151,7 +151,7 @@ function ve() {
           return new Buffer(a).toString("base64");
         });
       })(), r.prototype.bool = function(e) {
-        return e = o(e, { likelihood: 50 }), b(
+        return e = o(e, { likelihood: 50 }), x(
           e.likelihood < 0 || e.likelihood > 100,
           "Chance: Likelihood accepts values from 0 to 100."
         ), this.random() * 100 < e.likelihood;
@@ -161,7 +161,7 @@ function ve() {
         return s;
       }, r.prototype.animal = function(e) {
         if (e = o(e), typeof e.type < "u")
-          return b(
+          return x(
             !this.get("animals")[e.type.toLowerCase()],
             "Please pick from desert, ocean, grassland, forest, zoo, pets, farm."
           ), this.pick(this.get("animals")[e.type.toLowerCase()]);
@@ -170,32 +170,32 @@ function ve() {
       }, r.prototype.character = function(e) {
         e = o(e);
         var a = "!@#$%^&*()[]", i, s;
-        return e.casing === "lower" ? i = x : e.casing === "upper" ? i = C : i = x + C, e.pool ? s = e.pool : (s = "", e.alpha && (s += i), e.numeric && (s += E), e.symbols && (s += a), s || (s = i + E + a)), s.charAt(this.natural({ max: s.length - 1 }));
+        return e.casing === "lower" ? i = N : e.casing === "upper" ? i = g : i = N + g, e.pool ? s = e.pool : (s = "", e.alpha && (s += i), e.numeric && (s += P), e.symbols && (s += a), s || (s = i + P + a)), s.charAt(this.natural({ max: s.length - 1 }));
       }, r.prototype.floating = function(e) {
-        e = o(e, { fixed: 4 }), b(
+        e = o(e, { fixed: 4 }), x(
           e.fixed && e.precision,
           "Chance: Cannot specify both fixed and precision."
         );
-        var a, i = Math.pow(10, e.fixed), s = D / i, h = -s;
-        b(
-          e.min && e.fixed && e.min < h,
-          "Chance: Min specified is out of range with fixed. Min should be, at least, " + h
-        ), b(
+        var a, i = Math.pow(10, e.fixed), s = D / i, d = -s;
+        x(
+          e.min && e.fixed && e.min < d,
+          "Chance: Min specified is out of range with fixed. Min should be, at least, " + d
+        ), x(
           e.max && e.fixed && e.max > s,
           "Chance: Max specified is out of range with fixed. Max should be, at most, " + s
-        ), e = o(e, { min: h, max: s }), a = this.integer({ min: e.min * i, max: e.max * i });
-        var M = (a / i).toFixed(e.fixed);
-        return parseFloat(M);
+        ), e = o(e, { min: d, max: s }), a = this.integer({ min: e.min * i, max: e.max * i });
+        var S = (a / i).toFixed(e.fixed);
+        return parseFloat(S);
       }, r.prototype.integer = function(e) {
-        return e = o(e, { min: G, max: D }), b(e.min > e.max, "Chance: Min cannot be greater than Max."), Math.floor(this.random() * (e.max - e.min + 1) + e.min);
+        return e = o(e, { min: G, max: D }), x(e.min > e.max, "Chance: Min cannot be greater than Max."), Math.floor(this.random() * (e.max - e.min + 1) + e.min);
       }, r.prototype.natural = function(e) {
-        if (e = o(e, { min: 0, max: D }), typeof e.numerals == "number" && (b(e.numerals < 1, "Chance: Numerals cannot be less than one."), e.min = Math.pow(10, e.numerals - 1), e.max = Math.pow(10, e.numerals) - 1), b(e.min < 0, "Chance: Min cannot be less than zero."), e.exclude) {
-          b(!Array.isArray(e.exclude), "Chance: exclude must be an array.");
+        if (e = o(e, { min: 0, max: D }), typeof e.numerals == "number" && (x(e.numerals < 1, "Chance: Numerals cannot be less than one."), e.min = Math.pow(10, e.numerals - 1), e.max = Math.pow(10, e.numerals) - 1), x(e.min < 0, "Chance: Min cannot be less than zero."), e.exclude) {
+          x(!Array.isArray(e.exclude), "Chance: exclude must be an array.");
           for (var a in e.exclude)
-            b(!Number.isInteger(e.exclude[a]), "Chance: exclude must be numbers.");
-          var i = e.min + this.natural({ max: e.max - e.min - e.exclude.length }), s = e.exclude.sort();
-          for (var h in s) {
-            if (i < s[h])
+            x(!Number.isInteger(e.exclude[a]), "Chance: exclude must be numbers.");
+          var i = e.min + this.natural({ max: e.max - e.min - e.exclude.length }), s = e.exclude.sort((S, v) => S - v);
+          for (var d in s) {
+            if (i < s[d])
               break;
             i++;
           }
@@ -203,13 +203,13 @@ function ve() {
         }
         return this.integer(e);
       }, r.prototype.prime = function(e) {
-        e = o(e, { min: 0, max: 1e4 }), b(e.min < 0, "Chance: Min cannot be less than zero."), b(e.min > e.max, "Chance: Min cannot be greater than Max.");
-        var a = v.primes[v.primes.length - 1];
+        e = o(e, { min: 0, max: 1e4 }), x(e.min < 0, "Chance: Min cannot be less than zero."), x(e.min > e.max, "Chance: Min cannot be greater than Max.");
+        var a = C.primes[C.primes.length - 1];
         if (e.max > a)
           for (var i = a + 2; i <= e.max; ++i)
-            this.is_prime(i) && v.primes.push(i);
-        var s = v.primes.filter(function(h) {
-          return h >= e.min && h <= e.max;
+            this.is_prime(i) && C.primes.push(i);
+        var s = C.primes.filter(function(d) {
+          return d >= e.min && d <= e.max;
         });
         return this.pick(s);
       }, r.prototype.is_prime = function(e) {
@@ -224,7 +224,7 @@ function ve() {
             return !1;
         return !0;
       }, r.prototype.hex = function(e) {
-        e = o(e, { min: 0, max: D, casing: "lower" }), b(e.min < 0, "Chance: Min cannot be less than zero.");
+        e = o(e, { min: 0, max: D, casing: "lower" }), x(e.min < 0, "Chance: Min cannot be less than zero.");
         var a = this.natural({ min: e.min, max: e.max });
         return e.casing === "upper" ? a.toString(16).toUpperCase() : a.toString(16);
       }, r.prototype.letter = function(e) {
@@ -232,7 +232,7 @@ function ve() {
         var a = "abcdefghijklmnopqrstuvwxyz", i = this.character({ pool: a });
         return e.casing === "upper" && (i = i.toUpperCase()), i;
       }, r.prototype.string = function(e) {
-        e = o(e, { min: 5, max: 20 }), e.length !== 0 && !e.length && (e.length = this.natural({ min: e.min, max: e.max })), b(e.length < 0, "Chance: Length cannot be less than zero.");
+        e = o(e, { min: 5, max: 20 }), e.length !== 0 && !e.length && (e.length = this.natural({ min: e.min, max: e.max })), x(e.length < 0, "Chance: Length cannot be less than zero.");
         var a = e.length, i = this.n(this.character, a, e);
         return i.join("");
       };
@@ -254,19 +254,19 @@ function ve() {
           return this.c;
         }
       };
-      function m(e) {
+      function u(e) {
         this.c = e;
       }
-      m.prototype = {
+      u.prototype = {
         replacers: {
           "#": function(e) {
-            return e.character({ pool: E });
+            return e.character({ pool: P });
           },
           A: function(e) {
-            return e.character({ pool: C });
+            return e.character({ pool: g });
           },
           a: function(e) {
-            return e.character({ pool: x });
+            return e.character({ pool: N });
           }
         },
         substitute: function(e) {
@@ -276,18 +276,18 @@ function ve() {
           return a(e);
         }
       };
-      function S(e) {
+      function y(e) {
         for (var a = [], i = "identity", s = 0; s < e.length; s++) {
-          var h = e[s];
+          var d = e[s];
           switch (i) {
             case "escape":
-              a.push(new t(h)), i = "identity";
+              a.push(new t(d)), i = "identity";
               break;
             case "identity":
-              h === "{" ? i = "replace" : h === "\\" ? i = "escape" : a.push(new n(h));
+              d === "{" ? i = "replace" : d === "\\" ? i = "escape" : a.push(new n(d));
               break;
             case "replace":
-              h === "}" ? i = "identity" : a.push(new m(h));
+              d === "}" ? i = "identity" : a.push(new u(d));
               break;
           }
         }
@@ -297,13 +297,13 @@ function ve() {
         if (!e)
           throw new Error("Template string is required");
         var a = this;
-        return S(e).map(function(i) {
+        return y(e).map(function(i) {
           return i.substitute(a);
         }).join("");
       }, r.prototype.buffer = function(e) {
         if (typeof Buffer > "u")
-          throw new B("Sorry, the buffer() function is not supported on your platform");
-        e = o(e, { length: this.natural({ min: 5, max: 20 }) }), b(e.length < 0, "Chance: Length cannot be less than zero.");
+          throw new I("Sorry, the buffer() function is not supported on your platform");
+        e = o(e, { length: this.natural({ min: 5, max: 20 }) }), x(e.length < 0, "Chance: Length cannot be less than zero.");
         var a = e.length, i = this.n(this.character, a, e);
         return Buffer.from(i);
       }, r.prototype.capitalize = function(e) {
@@ -313,28 +313,28 @@ function ve() {
           this[a] = e[a];
         return this;
       }, r.prototype.unique = function(e, a, i) {
-        b(
+        x(
           typeof e != "function",
           "Chance: The first argument must be a function."
         );
-        var s = function(T, H) {
-          return T.indexOf(H) !== -1;
+        var s = function(M, _) {
+          return M.indexOf(_) !== -1;
         };
         i && (s = i.comparator || s);
-        for (var h = [], M = 0, A, d = a * 50, I = k.call(arguments, 2); h.length < a; ) {
-          var y = JSON.parse(JSON.stringify(I));
-          if (A = e.apply(this, y), s(h, A) || (h.push(A), M = 0), ++M > d)
+        for (var d = [], S = 0, v, m = a * 50, T = k.call(arguments, 2); d.length < a; ) {
+          var A = JSON.parse(JSON.stringify(T));
+          if (v = e.apply(this, A), s(d, v) || (d.push(v), S = 0), ++S > m)
             throw new RangeError("Chance: num is likely too large for sample set");
         }
-        return h;
+        return d;
       }, r.prototype.n = function(e, a) {
-        b(
+        x(
           typeof e != "function",
           "Chance: The first argument must be a function."
         ), typeof a > "u" && (a = 1);
-        var i = a, s = [], h = k.call(arguments, 2);
+        var i = a, s = [], d = k.call(arguments, 2);
         for (i = Math.max(0, i), null; i--; null)
-          s.push(e.apply(this, h));
+          s.push(e.apply(this, d));
         return s;
       }, r.prototype.pad = function(e, a, i) {
         return i = i || "0", e = e + "", e.length >= a ? e : new Array(a - e.length + 1).join(i) + e;
@@ -357,36 +357,36 @@ function ve() {
           return [this.pickone(e)];
         var i = e.slice(0), s = i.length;
         return this.n(function() {
-          var h = this.natural({ max: --s }), M = i[h];
-          return i[h] = i[s], M;
+          var d = this.natural({ max: --s }), S = i[d];
+          return i[d] = i[s], S;
         }, Math.min(s, a));
       }, r.prototype.shuffle = function(e) {
-        for (var a = [], i = 0, s = Number(e.length), h = p(s), M = s - 1, A, d = 0; d < s; d++)
-          A = this.natural({ max: M }), i = h[A], a[d] = e[i], h[A] = h[M], M -= 1;
+        for (var a = [], i = 0, s = Number(e.length), d = b(s), S = s - 1, v, m = 0; m < s; m++)
+          v = this.natural({ max: S }), i = d[v], a[m] = e[i], d[v] = d[S], S -= 1;
         return a;
       }, r.prototype.weighted = function(e, a, i) {
         if (e.length !== a.length)
           throw new RangeError("Chance: Length of array and weights must match");
-        for (var s = 0, h, M = 0; M < a.length; ++M) {
-          if (h = a[M], isNaN(h))
+        for (var s = 0, d, S = 0; S < a.length; ++S) {
+          if (d = a[S], isNaN(d))
             throw new RangeError("Chance: All weights must be numbers");
-          h > 0 && (s += h);
+          d > 0 && (s += d);
         }
         if (s === 0)
           throw new RangeError("Chance: No valid entries in array weights");
-        var A = this.random() * s, d = 0, I = -1, y;
-        for (M = 0; M < a.length; ++M) {
-          if (h = a[M], d += h, h > 0) {
-            if (A <= d) {
-              y = M;
+        var v = this.random() * s, m = 0, T = -1, A;
+        for (S = 0; S < a.length; ++S) {
+          if (d = a[S], m += d, d > 0) {
+            if (v <= m) {
+              A = S;
               break;
             }
-            I = M;
+            T = S;
           }
-          M === a.length - 1 && (y = I);
+          S === a.length - 1 && (A = T);
         }
-        var T = e[y];
-        return i = typeof i > "u" ? !1 : i, i && (e.splice(y, 1), a.splice(y, 1)), T;
+        var M = e[A];
+        return i = typeof i > "u" ? !1 : i, i && (e.splice(A, 1), a.splice(A, 1)), M;
       }, r.prototype.paragraph = function(e) {
         e = o(e);
         var a = e.sentences || this.natural({ min: 3, max: 7 }), i = this.n(this.sentence, a), s = e.linebreak === !0 ? `
@@ -394,15 +394,15 @@ function ve() {
         return i.join(s);
       }, r.prototype.sentence = function(e) {
         e = o(e);
-        var a = e.words || this.natural({ min: 12, max: 18 }), i = e.punctuation, s, h = this.n(this.word, a);
-        return s = h.join(" "), s = this.capitalize(s), i !== !1 && !/^[.?;!:]$/.test(i) && (i = "."), i && (s += i), s;
+        var a = e.words || this.natural({ min: 12, max: 18 }), i = e.punctuation, s, d = this.n(this.word, a);
+        return s = d.join(" "), s = this.capitalize(s), i !== !1 && !/^[.?;!:]$/.test(i) && (i = "."), i && (s += i), s;
       }, r.prototype.syllable = function(e) {
         e = o(e);
-        for (var a = e.length || this.natural({ min: 2, max: 3 }), i = "bcdfghjklmnprstvwz", s = "aeiou", h = i + s, M = "", A, d = 0; d < a; d++)
-          d === 0 ? A = this.character({ pool: h }) : i.indexOf(A) === -1 ? A = this.character({ pool: i }) : A = this.character({ pool: s }), M += A;
-        return e.capitalize && (M = this.capitalize(M)), M;
+        for (var a = e.length || this.natural({ min: 2, max: 3 }), i = "bcdfghjklmnprstvwz", s = "aeiou", d = i + s, S = "", v, m = 0; m < a; m++)
+          m === 0 ? v = this.character({ pool: d }) : i.indexOf(v) === -1 ? v = this.character({ pool: i }) : v = this.character({ pool: s }), S += v;
+        return e.capitalize && (S = this.capitalize(S)), S;
       }, r.prototype.word = function(e) {
-        e = o(e), b(
+        e = o(e), x(
           e.syllables && e.length,
           "Chance: Cannot specify both syllables AND length."
         );
@@ -416,6 +416,20 @@ function ve() {
           for (var s = 0; s < a; s++)
             i += this.syllable();
         return e.capitalize && (i = this.capitalize(i)), i;
+      }, r.prototype.emoji = function(e) {
+        e = o(e, { category: "all", length: 1 }), x(
+          e.length < 1 || BigInt(e.length) > BigInt(D),
+          "Chance: length must be between 1 and " + String(D)
+        );
+        var a = this.get("emojis");
+        e.category === "all" && (e.category = this.pickone(Object.keys(a)));
+        var i = a[e.category];
+        return x(
+          i === void 0,
+          "Chance: Unrecognised emoji category: [" + e.category + "]."
+        ), this.pickset(i, e.length).map(function(s) {
+          return String.fromCodePoint(s);
+        }).join("");
       }, r.prototype.age = function(e) {
         e = o(e);
         var a;
@@ -443,17 +457,17 @@ function ve() {
       }, r.prototype.birthday = function(e) {
         var a = this.age(e), i = /* @__PURE__ */ new Date(), s = i.getFullYear();
         if (e && e.type) {
-          var h = /* @__PURE__ */ new Date(), M = /* @__PURE__ */ new Date();
-          h.setFullYear(s - a - 1), M.setFullYear(s - a), e = o(e, {
-            min: h,
-            max: M
+          var d = /* @__PURE__ */ new Date(), S = /* @__PURE__ */ new Date();
+          d.setFullYear(s - a - 1), S.setFullYear(s - a), e = o(e, {
+            min: d,
+            max: S
           });
         } else if (e && (e.minAge !== void 0 || e.maxAge !== void 0)) {
-          b(e.minAge < 0, "Chance: MinAge cannot be less than zero."), b(e.minAge > e.maxAge, "Chance: MinAge cannot be greater than MaxAge.");
-          var A = e.minAge !== void 0 ? e.minAge : 0, d = e.maxAge !== void 0 ? e.maxAge : 100, I = new Date(s - d - 1, i.getMonth(), i.getDate()), y = new Date(s - A, i.getMonth(), i.getDate());
-          I.setDate(I.getDate() + 1), y.setDate(y.getDate() + 1), y.setMilliseconds(y.getMilliseconds() - 1), e = o(e, {
-            min: I,
-            max: y
+          x(e.minAge < 0, "Chance: MinAge cannot be less than zero."), x(e.minAge > e.maxAge, "Chance: MinAge cannot be greater than MaxAge.");
+          var v = e.minAge !== void 0 ? e.minAge : 0, m = e.maxAge !== void 0 ? e.maxAge : 100, T = new Date(s - m - 1, i.getMonth(), i.getDate()), A = new Date(s - v, i.getMonth(), i.getDate());
+          T.setDate(T.getDate() + 1), A.setDate(A.getDate() + 1), A.setMilliseconds(A.getMilliseconds() - 1), e = o(e, {
+            min: T,
+            max: A
           });
         } else
           e = o(e, {
@@ -468,8 +482,8 @@ function ve() {
         i = 11 - i % 11, i >= 10 && (i = 0);
         var s = i * 2 + a[8] * 3 + a[7] * 4 + a[6] * 5 + a[5] * 6 + a[4] * 7 + a[3] * 8 + a[2] * 9 + a[1] * 10 + a[0] * 11;
         s = 11 - s % 11, s >= 10 && (s = 0);
-        var h = "" + a[0] + a[1] + a[2] + "." + a[3] + a[4] + a[5] + "." + a[6] + a[7] + a[8] + "-" + i + s;
-        return e.formatted ? h : h.replace(/\D/g, "");
+        var d = "" + a[0] + a[1] + a[2] + "." + a[3] + a[4] + a[5] + "." + a[6] + a[7] + a[8] + "-" + i + s;
+        return e.formatted ? d : d.replace(/\D/g, "");
       }, r.prototype.cnpj = function(e) {
         e = o(e, {
           formatted: !0
@@ -478,8 +492,8 @@ function ve() {
         i = 11 - i % 11, i < 2 && (i = 0);
         var s = i * 2 + a[11] * 3 + a[10] * 4 + a[9] * 5 + a[8] * 6 + a[7] * 7 + a[6] * 8 + a[5] * 9 + a[4] * 2 + a[3] * 3 + a[2] * 4 + a[1] * 5 + a[0] * 6;
         s = 11 - s % 11, s < 2 && (s = 0);
-        var h = "" + a[0] + a[1] + "." + a[2] + a[3] + a[4] + "." + a[5] + a[6] + a[7] + "/" + a[8] + a[9] + a[10] + a[11] + "-" + i + s;
-        return e.formatted ? h : h.replace(/\D/g, "");
+        var d = "" + a[0] + a[1] + "." + a[2] + a[3] + a[4] + "." + a[5] + a[6] + a[7] + "/" + a[8] + a[9] + a[10] + a[11] + "-" + i + s;
+        return e.formatted ? d : d.replace(/\D/g, "");
       }, r.prototype.first = function(e) {
         return e = o(e, { gender: this.gender(), nationality: "en" }), this.pick(this.get("firstNames")[e.gender.toLowerCase()][e.nationality.toLowerCase()]);
       }, r.prototype.profession = function(e) {
@@ -503,53 +517,53 @@ function ve() {
         }
         return e = e + (10 - parseInt(a.toString().slice(-1))).toString().slice(-1), e;
       }, r.prototype.mrz = function(e) {
-        var a = function(h) {
-          var M = "<ABCDEFGHIJKLMNOPQRSTUVWXYXZ".split(""), A = [7, 3, 1], d = 0;
-          return typeof h != "string" && (h = h.toString()), h.split("").forEach(function(I, y) {
-            var T = M.indexOf(I);
-            T !== -1 ? I = T === 0 ? 0 : T + 9 : I = parseInt(I, 10), I *= A[y % A.length], d += I;
-          }), d % 10;
-        }, i = function(h) {
-          var M = function(d) {
-            return new Array(d + 1).join("<");
-          }, A = [
+        var a = function(d) {
+          var S = "<ABCDEFGHIJKLMNOPQRSTUVWXYXZ".split(""), v = [7, 3, 1], m = 0;
+          return typeof d != "string" && (d = d.toString()), d.split("").forEach(function(T, A) {
+            var M = S.indexOf(T);
+            M !== -1 ? T = M === 0 ? 0 : M + 9 : T = parseInt(T, 10), T *= v[A % v.length], m += T;
+          }), m % 10;
+        }, i = function(d) {
+          var S = function(m) {
+            return new Array(m + 1).join("<");
+          }, v = [
             "P<",
-            h.issuer,
-            h.last.toUpperCase(),
+            d.issuer,
+            d.last.toUpperCase(),
             "<<",
-            h.first.toUpperCase(),
-            M(39 - (h.last.length + h.first.length + 2)),
-            h.passportNumber,
-            a(h.passportNumber),
-            h.nationality,
-            h.dob,
-            a(h.dob),
-            h.gender,
-            h.expiry,
-            a(h.expiry),
-            M(14),
-            a(M(14))
+            d.first.toUpperCase(),
+            S(39 - (d.last.length + d.first.length + 2)),
+            d.passportNumber,
+            a(d.passportNumber),
+            d.nationality,
+            d.dob,
+            a(d.dob),
+            d.gender,
+            d.expiry,
+            a(d.expiry),
+            S(14),
+            a(S(14))
           ].join("");
-          return A + a(A.substr(44, 10) + A.substr(57, 7) + A.substr(65, 7));
+          return v + a(v.substr(44, 10) + v.substr(57, 7) + v.substr(65, 7));
         }, s = this;
         return e = o(e, {
           first: this.first(),
           last: this.last(),
           passportNumber: this.integer({ min: 1e8, max: 999999999 }),
           dob: (function() {
-            var h = s.birthday({ type: "adult" });
+            var d = s.birthday({ type: "adult" });
             return [
-              h.getFullYear().toString().substr(2),
-              s.pad(h.getMonth() + 1, 2),
-              s.pad(h.getDate(), 2)
+              d.getFullYear().toString().substr(2),
+              s.pad(d.getMonth() + 1, 2),
+              s.pad(d.getDate(), 2)
             ].join("");
           })(),
           expiry: (function() {
-            var h = /* @__PURE__ */ new Date();
+            var d = /* @__PURE__ */ new Date();
             return [
-              (h.getFullYear() + 5).toString().substr(2),
-              s.pad(h.getMonth() + 1, 2),
-              s.pad(h.getDate(), 2)
+              (d.getFullYear() + 5).toString().substr(2),
+              s.pad(d.getMonth() + 1, 2),
+              s.pad(d.getDate(), 2)
             ].join("");
           })(),
           gender: this.gender() === "Female" ? "F" : "M",
@@ -625,12 +639,12 @@ function ve() {
         var a = null, i = "//www.gravatar.com/avatar/", s = {
           http: "http",
           https: "https"
-        }, h = {
+        }, d = {
           bmp: "bmp",
           gif: "gif",
           jpg: "jpg",
           png: "png"
-        }, M = {
+        }, S = {
           404: "404",
           // Return 404 if not found
           mm: "mm",
@@ -645,12 +659,12 @@ function ve() {
           // 8-bit icon
           blank: "blank"
           // A transparent png
-        }, A = {
+        }, v = {
           g: "g",
           pg: "pg",
           r: "r",
           x: "x"
-        }, d = {
+        }, m = {
           protocol: null,
           email: null,
           fileExtension: null,
@@ -659,27 +673,27 @@ function ve() {
           rating: null
         };
         if (!e)
-          d.email = this.email(), e = {};
+          m.email = this.email(), e = {};
         else if (typeof e == "string")
-          d.email = e, e = {};
+          m.email = e, e = {};
         else {
           if (typeof e != "object")
             return null;
           if (e.constructor === "Array")
             return null;
         }
-        return d = o(e, d), d.email || (d.email = this.email()), d.protocol = s[d.protocol] ? d.protocol + ":" : "", d.size = parseInt(d.size, 0) ? d.size : "", d.rating = A[d.rating] ? d.rating : "", d.fallback = M[d.fallback] ? d.fallback : "", d.fileExtension = h[d.fileExtension] ? d.fileExtension : "", a = d.protocol + i + this.bimd5.md5(d.email) + (d.fileExtension ? "." + d.fileExtension : "") + (d.size || d.rating || d.fallback ? "?" : "") + (d.size ? "&s=" + d.size.toString() : "") + (d.rating ? "&r=" + d.rating : "") + (d.fallback ? "&d=" + d.fallback : ""), a;
+        return m = o(e, m), m.email || (m.email = this.email()), m.protocol = s[m.protocol] ? m.protocol + ":" : "", m.size = parseInt(m.size, 0) ? m.size : "", m.rating = v[m.rating] ? m.rating : "", m.fallback = S[m.fallback] ? m.fallback : "", m.fileExtension = d[m.fileExtension] ? m.fileExtension : "", a = m.protocol + i + this.bimd5.md5(m.email) + (m.fileExtension ? "." + m.fileExtension : "") + (m.size || m.rating || m.fallback ? "?" : "") + (m.size ? "&s=" + m.size.toString() : "") + (m.rating ? "&r=" + m.rating : "") + (m.fallback ? "&d=" + m.fallback : ""), a;
       }, r.prototype.color = function(e) {
         function a(V, $) {
           return [V, V, V].join($ || "");
         }
         function i(V) {
-          var $ = V ? "rgba" : "rgb", ae = V ? "," + this.floating({ min: W, max: J }) : "", ne = h ? a(this.natural({ min: M, max: A }), ",") : this.natural({ min: y, max: T }) + "," + this.natural({ min: H, max: _ }) + "," + this.natural({ max: 255 });
+          var $ = V ? "rgba" : "rgb", ae = V ? "," + this.floating({ min: z, max: J }) : "", ne = d ? a(this.natural({ min: S, max: v }), ",") : this.natural({ min: A, max: M }) + "," + this.natural({ min: _, max: H }) + "," + this.natural({ max: 255 });
           return $ + "(" + ne + ae + ")";
         }
         function s(V, $, ae) {
           var ne = ae ? "#" : "", q = "";
-          return h ? (q = a(this.pad(this.hex({ min: M, max: A }), 2)), e.format === "shorthex" && (q = a(this.hex({ min: 0, max: 15 })))) : e.format === "shorthex" ? q = this.pad(this.hex({ min: Math.floor(d / 16), max: Math.floor(I / 16) }), 1) + this.pad(this.hex({ min: Math.floor(y / 16), max: Math.floor(T / 16) }), 1) + this.pad(this.hex({ min: Math.floor(H / 16), max: Math.floor(_ / 16) }), 1) : d !== void 0 || I !== void 0 || y !== void 0 || T !== void 0 || H !== void 0 || _ !== void 0 ? q = this.pad(this.hex({ min: d, max: I }), 2) + this.pad(this.hex({ min: y, max: T }), 2) + this.pad(this.hex({ min: H, max: _ }), 2) : q = this.pad(this.hex({ min: M, max: A }), 2) + this.pad(this.hex({ min: M, max: A }), 2) + this.pad(this.hex({ min: M, max: A }), 2), ne + q;
+          return d ? (q = a(this.pad(this.hex({ min: S, max: v }), 2)), e.format === "shorthex" && (q = a(this.hex({ min: 0, max: 15 })))) : e.format === "shorthex" ? q = this.pad(this.hex({ min: Math.floor(m / 16), max: Math.floor(T / 16) }), 1) + this.pad(this.hex({ min: Math.floor(A / 16), max: Math.floor(M / 16) }), 1) + this.pad(this.hex({ min: Math.floor(_ / 16), max: Math.floor(H / 16) }), 1) : m !== void 0 || T !== void 0 || A !== void 0 || M !== void 0 || _ !== void 0 || H !== void 0 ? q = this.pad(this.hex({ min: m, max: T }), 2) + this.pad(this.hex({ min: A, max: M }), 2) + this.pad(this.hex({ min: _, max: H }), 2) : q = this.pad(this.hex({ min: S, max: v }), 2) + this.pad(this.hex({ min: S, max: v }), 2) + this.pad(this.hex({ min: S, max: v }), 2), ne + q;
         }
         e = o(e, {
           format: this.pick(["hex", "shorthex", "rgb", "rgba", "0x", "name"]),
@@ -696,8 +710,8 @@ function ve() {
           min_alpha: 0,
           max_alpha: 1
         });
-        var h = e.grayscale, M = e.min, A = e.max, d = e.min_red, I = e.max_red, y = e.min_green, T = e.max_green, H = e.min_blue, _ = e.max_blue, W = e.min_alpha, J = e.max_alpha;
-        e.min_red === void 0 && (d = M), e.max_red === void 0 && (I = A), e.min_green === void 0 && (y = M), e.max_green === void 0 && (T = A), e.min_blue === void 0 && (H = M), e.max_blue === void 0 && (_ = A), e.min_alpha === void 0 && (W = 0), e.max_alpha === void 0 && (J = 1), h && M === 0 && A === 255 && d !== void 0 && I !== void 0 && (M = (d + y + H) / 3, A = (I + T + _) / 3);
+        var d = e.grayscale, S = e.min, v = e.max, m = e.min_red, T = e.max_red, A = e.min_green, M = e.max_green, _ = e.min_blue, H = e.max_blue, z = e.min_alpha, J = e.max_alpha;
+        e.min_red === void 0 && (m = S), e.max_red === void 0 && (T = v), e.min_green === void 0 && (A = S), e.max_green === void 0 && (M = v), e.min_blue === void 0 && (_ = S), e.max_blue === void 0 && (H = v), e.min_alpha === void 0 && (z = 0), e.max_alpha === void 0 && (J = 1), d && S === 0 && v === 255 && m !== void 0 && T !== void 0 && (S = (m + A + _) / 3, v = (T + M + H) / 3);
         var K;
         if (e.format === "hex")
           K = s.call(this, 2, 6, !0);
@@ -742,7 +756,7 @@ function ve() {
         var i = "";
         return e.include_prerelease && (i = this.weighted(["", "-dev", "-beta", "-alpha"], [50, 10, 5, 1])), a + this.rpg("3d10").join(".") + i;
       }, r.prototype.tlds = function() {
-        return ["com", "org", "edu", "gov", "co.uk", "net", "io", "ac", "ad", "ae", "af", "ag", "ai", "al", "am", "ao", "aq", "ar", "as", "at", "au", "aw", "ax", "az", "ba", "bb", "bd", "be", "bf", "bg", "bh", "bi", "bj", "bm", "bn", "bo", "br", "bs", "bt", "bv", "bw", "by", "bz", "ca", "cc", "cd", "cf", "cg", "ch", "ci", "ck", "cl", "cm", "cn", "co", "cr", "cu", "cv", "cw", "cx", "cy", "cz", "de", "dj", "dk", "dm", "do", "dz", "ec", "ee", "eg", "eh", "er", "es", "et", "eu", "fi", "fj", "fk", "fm", "fo", "fr", "ga", "gb", "gd", "ge", "gf", "gg", "gh", "gi", "gl", "gm", "gn", "gp", "gq", "gr", "gs", "gt", "gu", "gw", "gy", "hk", "hm", "hn", "hr", "ht", "hu", "id", "ie", "il", "im", "in", "io", "iq", "ir", "is", "it", "je", "jm", "jo", "jp", "ke", "kg", "kh", "ki", "km", "kn", "kp", "kr", "kw", "ky", "kz", "la", "lb", "lc", "li", "lk", "lr", "ls", "lt", "lu", "lv", "ly", "ma", "mc", "md", "me", "mg", "mh", "mk", "ml", "mm", "mn", "mo", "mp", "mq", "mr", "ms", "mt", "mu", "mv", "mw", "mx", "my", "mz", "na", "nc", "ne", "nf", "ng", "ni", "nl", "no", "np", "nr", "nu", "nz", "om", "pa", "pe", "pf", "pg", "ph", "pk", "pl", "pm", "pn", "pr", "ps", "pt", "pw", "py", "qa", "re", "ro", "rs", "ru", "rw", "sa", "sb", "sc", "sd", "se", "sg", "sh", "si", "sj", "sk", "sl", "sm", "sn", "so", "sr", "ss", "st", "su", "sv", "sx", "sy", "sz", "tc", "td", "tf", "tg", "th", "tj", "tk", "tl", "tm", "tn", "to", "tp", "tr", "tt", "tv", "tw", "tz", "ua", "ug", "uk", "us", "uy", "uz", "va", "vc", "ve", "vg", "vi", "vn", "vu", "wf", "ws", "ye", "yt", "za", "zm", "zw"];
+        return ["com", "org", "edu", "gov", "co.uk", "net", "io", "ac", "ad", "ae", "af", "ag", "ai", "al", "am", "ao", "aq", "ar", "as", "at", "au", "aw", "ax", "az", "ba", "bb", "bd", "be", "bf", "bg", "bh", "bi", "bj", "bm", "bn", "bo", "br", "bs", "bt", "bv", "bw", "by", "bz", "ca", "cc", "cd", "cf", "cg", "ch", "ci", "ck", "cl", "cm", "cn", "co", "cr", "cu", "cv", "cw", "cx", "cy", "cz", "de", "dj", "dk", "dm", "do", "dz", "ec", "ee", "eg", "eh", "er", "es", "et", "eu", "fi", "fj", "fk", "fm", "fo", "fr", "ga", "gb", "gd", "ge", "gf", "gg", "gh", "gi", "gl", "gm", "gn", "gp", "gq", "gr", "gs", "gt", "gu", "gw", "gy", "hk", "hm", "hn", "hr", "ht", "hu", "id", "ie", "il", "im", "in", "io", "iq", "ir", "is", "it", "je", "jm", "jo", "jp", "ke", "kg", "kh", "ki", "km", "kn", "kp", "kr", "kw", "ky", "kz", "la", "lb", "lc", "li", "lk", "lr", "ls", "lt", "lu", "lv", "ly", "ma", "mc", "md", "me", "mg", "mh", "mk", "ml", "mm", "mn", "mo", "mp", "mq", "mr", "ms", "mt", "mu", "mv", "mw", "mx", "my", "mz", "na", "nc", "ne", "nf", "ng", "ni", "nl", "no", "np", "nr", "nu", "nz", "om", "pa", "pe", "pf", "pg", "ph", "pk", "pl", "pm", "pn", "pr", "ps", "pt", "pw", "py", "qa", "re", "ro", "rs", "ru", "rw", "sa", "sb", "sc", "sd", "se", "sg", "sh", "si", "sj", "sk", "sl", "sm", "sn", "so", "sr", "ss", "st", "su", "sv", "sx", "sy", "sz", "tc", "td", "tf", "tg", "th", "tj", "tk", "tl", "tm", "tn", "to", "tr", "tt", "tv", "tw", "tz", "ua", "ug", "uk", "us", "uy", "uz", "va", "vc", "ve", "vg", "vi", "vn", "vu", "wf", "ws", "ye", "yt", "za", "zm", "zw"];
       }, r.prototype.tld = function() {
         return this.pick(this.tlds());
       }, r.prototype.twitter = function() {
@@ -799,8 +813,8 @@ function ve() {
           e,
           e && e.format && [a, i].includes(e.format.toLowerCase()) ? { min: 0, max: 89, fixed: 4 } : { fixed: 5, min: -90, max: 90, format: s }
         );
-        var h = e.format.toLowerCase();
-        switch ((h === a || h === i) && (b(e.min < 0 || e.min > 89, "Chance: Min specified is out of range. Should be between 0 - 89"), b(e.max < 0 || e.max > 89, "Chance: Max specified is out of range. Should be between 0 - 89"), b(e.fixed > 4, "Chance: Fixed specified should be below or equal to 4")), h) {
+        var d = e.format.toLowerCase();
+        switch ((d === a || d === i) && (x(e.min < 0 || e.min > 89, "Chance: Min specified is out of range. Should be between 0 - 89"), x(e.max < 0 || e.max > 89, "Chance: Max specified is out of range. Should be between 0 - 89"), x(e.fixed > 4, "Chance: Fixed specified should be below or equal to 4")), d) {
           case a:
             return this.integer({ min: e.min, max: e.max }) + "\xB0" + this.floating({ min: 0, max: 59, fixed: e.fixed });
           case i:
@@ -815,8 +829,8 @@ function ve() {
           e,
           e && e.format && [a, i].includes(e.format.toLowerCase()) ? { min: 0, max: 179, fixed: 4 } : { fixed: 5, min: -180, max: 180, format: s }
         );
-        var h = e.format.toLowerCase();
-        switch ((h === a || h === i) && (b(e.min < 0 || e.min > 179, "Chance: Min specified is out of range. Should be between 0 - 179"), b(e.max < 0 || e.max > 179, "Chance: Max specified is out of range. Should be between 0 - 179"), b(e.fixed > 4, "Chance: Fixed specified should be below or equal to 4")), h) {
+        var d = e.format.toLowerCase();
+        switch ((d === a || d === i) && (x(e.min < 0 || e.min > 179, "Chance: Min specified is out of range. Should be between 0 - 179"), x(e.max < 0 || e.max > 179, "Chance: Max specified is out of range. Should be between 0 - 179"), x(e.fixed > 4, "Chance: Fixed specified should be below or equal to 4")), d) {
           case a:
             return this.integer({ min: e.min, max: e.max }) + "\xB0" + this.floating({ min: 0, max: 59.9999, fixed: e.fixed });
           case i:
@@ -826,11 +840,11 @@ function ve() {
             return this.floating({ min: e.min, max: e.max, fixed: e.fixed });
         }
       }, r.prototype.phone = function(e) {
-        var a = this, i, s = function(H) {
-          var _ = [];
-          return H.sections.forEach(function(W) {
-            _.push(a.string({ pool: "0123456789", length: W }));
-          }), H.area + _.join(" ");
+        var a = this, i, s = function(_) {
+          var H = [];
+          return _.sections.forEach(function(z) {
+            H.push(a.string({ pool: "0123456789", length: z }));
+          }), _.area + H.join(" ");
         };
         e = o(e, {
           formatted: !0,
@@ -838,10 +852,10 @@ function ve() {
           mobile: !1,
           exampleNumber: !1
         }), e.formatted || (e.parens = !1);
-        var h;
+        var d;
         switch (e.country) {
           case "fr":
-            e.mobile ? (i = this.pick(["06", "07"]) + a.string({ pool: "0123456789", length: 8 }), h = e.formatted ? i.match(/../g).join(" ") : i) : (i = this.pick([
+            e.mobile ? (i = this.pick(["06", "07"]) + a.string({ pool: "0123456789", length: 8 }), d = e.formatted ? i.match(/../g).join(" ") : i) : (i = this.pick([
               // Valid zone and département codes.
               "01" + this.pick(["30", "34", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "53", "55", "56", "58", "60", "64", "69", "70", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83"]) + a.string({ pool: "0123456789", length: 6 }),
               "02" + this.pick(["14", "18", "22", "23", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "40", "41", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "56", "57", "61", "62", "69", "72", "76", "77", "78", "85", "90", "96", "97", "98", "99"]) + a.string({ pool: "0123456789", length: 6 }),
@@ -849,13 +863,13 @@ function ve() {
               "04" + this.pick(["11", "13", "15", "20", "22", "26", "27", "30", "32", "34", "37", "42", "43", "44", "50", "56", "57", "63", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "88", "89", "90", "91", "92", "93", "94", "95", "97", "98"]) + a.string({ pool: "0123456789", length: 6 }),
               "05" + this.pick(["08", "16", "17", "19", "24", "31", "32", "33", "34", "35", "40", "45", "46", "47", "49", "53", "55", "56", "57", "58", "59", "61", "62", "63", "64", "65", "67", "79", "81", "82", "86", "87", "90", "94"]) + a.string({ pool: "0123456789", length: 6 }),
               "09" + a.string({ pool: "0123456789", length: 8 })
-            ]), h = e.formatted ? i.match(/../g).join(" ") : i);
+            ]), d = e.formatted ? i.match(/../g).join(" ") : i);
             break;
           case "uk":
             e.mobile ? (i = this.pick([
               { area: "07" + this.pick(["4", "5", "7", "8", "9"]), sections: [2, 6] },
               { area: "07624 ", sections: [6] }
-            ]), h = e.formatted ? s(i) : s(i).replace(" ", "")) : (i = this.pick([
+            ]), d = e.formatted ? s(i) : s(i).replace(" ", "")) : (i = this.pick([
               //valid area codes of major cities/counties followed by random numbers in required format.
               { area: "01" + this.character({ pool: "234569" }) + "1 ", sections: [3, 4] },
               { area: "020 " + this.character({ pool: "378" }), sections: [3, 4] },
@@ -870,7 +884,7 @@ function ve() {
               { area: "017" + this.pick(["26", "44", "50", "68"]) + " ", sections: [6] },
               { area: "018" + this.pick(["27", "37", "84", "97"]) + " ", sections: [6] },
               { area: "019" + this.pick(["00", "05", "35", "46", "49", "63", "95"]) + " ", sections: [6] }
-            ]), h = e.formatted ? s(i) : s(i).replace(" ", "", "g"));
+            ]), d = e.formatted ? s(i) : s(i).replace(" ", "", "g"));
             break;
           case "za":
             e.mobile ? (i = this.pick([
@@ -880,32 +894,32 @@ function ve() {
               "071" + this.pick(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]) + a.string({ pool: "0123456789", length: 6 }),
               "07" + this.pick(["2", "3", "4", "6", "7", "8", "9"]) + a.string({ pool: "0123456789", length: 7 }),
               "08" + this.pick(["0", "1", "2", "3", "4", "5"]) + a.string({ pool: "0123456789", length: 7 })
-            ]), h = e.formatted || i) : (i = this.pick([
+            ]), d = e.formatted || i) : (i = this.pick([
               "01" + this.pick(["0", "1", "2", "3", "4", "5", "6", "7", "8"]) + a.string({ pool: "0123456789", length: 7 }),
               "02" + this.pick(["1", "2", "3", "4", "7", "8"]) + a.string({ pool: "0123456789", length: 7 }),
               "03" + this.pick(["1", "2", "3", "5", "6", "9"]) + a.string({ pool: "0123456789", length: 7 }),
               "04" + this.pick(["1", "2", "3", "4", "5", "6", "7", "8", "9"]) + a.string({ pool: "0123456789", length: 7 }),
               "05" + this.pick(["1", "3", "4", "6", "7", "8"]) + a.string({ pool: "0123456789", length: 7 })
-            ]), h = e.formatted || i);
+            ]), d = e.formatted || i);
             break;
           case "us":
-            var M = this.areacode(e).toString(), A = this.natural({ min: 2, max: 9 }).toString() + this.natural({ min: 0, max: 9 }).toString() + this.natural({ min: 0, max: 9 }).toString(), d = this.natural({ min: 1e3, max: 9999 }).toString();
-            h = e.formatted ? M + " " + A + "-" + d : M + A + d;
+            var S = this.areacode(e).toString(), v = this.natural({ min: 2, max: 9 }).toString() + this.natural({ min: 0, max: 9 }).toString() + this.natural({ min: 0, max: 9 }).toString(), m = this.natural({ min: 1e3, max: 9999 }).toString();
+            d = e.formatted ? S + " " + v + "-" + m : S + v + m;
             break;
           case "br":
-            var I = this.pick(["11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22", "24", "27", "28", "31", "32", "33", "34", "35", "37", "38", "41", "42", "43", "44", "45", "46", "47", "48", "49", "51", "53", "54", "55", "61", "62", "63", "64", "65", "66", "67", "68", "69", "71", "73", "74", "75", "77", "79", "81", "82", "83", "84", "85", "86", "87", "88", "89", "91", "92", "93", "94", "95", "96", "97", "98", "99"]), y;
-            e.mobile ? y = "9" + a.string({ pool: "0123456789", length: 4 }) : y = this.natural({ min: 2e3, max: 5999 }).toString();
-            var T = a.string({ pool: "0123456789", length: 4 });
-            h = e.formatted ? "(" + I + ") " + y + "-" + T : I + y + T;
+            var T = this.pick(["11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22", "24", "27", "28", "31", "32", "33", "34", "35", "37", "38", "41", "42", "43", "44", "45", "46", "47", "48", "49", "51", "53", "54", "55", "61", "62", "63", "64", "65", "66", "67", "68", "69", "71", "73", "74", "75", "77", "79", "81", "82", "83", "84", "85", "86", "87", "88", "89", "91", "92", "93", "94", "95", "96", "97", "98", "99"]), A;
+            e.mobile ? A = "9" + a.string({ pool: "0123456789", length: 4 }) : A = this.natural({ min: 2e3, max: 5999 }).toString();
+            var M = a.string({ pool: "0123456789", length: 4 });
+            d = e.formatted ? "(" + T + ") " + A + "-" + M : T + A + M;
             break;
         }
-        return h;
+        return d;
       }, r.prototype.postal = function() {
         var e = this.character({ pool: "XVTSRPNKLMHJGECBA" }), a = e + this.natural({ max: 9 }) + this.character({ alpha: !0, casing: "upper" }), i = this.natural({ max: 9 }) + this.character({ alpha: !0, casing: "upper" }) + this.natural({ max: 9 });
         return a + " " + i;
       }, r.prototype.postcode = function() {
-        var e = this.pick(this.get("postcodeAreas")).code, a = this.natural({ max: 9 }), i = this.bool() ? this.character({ alpha: !0, casing: "upper" }) : "", s = e + a + i, h = this.natural({ max: 9 }), M = this.character({ alpha: !0, casing: "upper" }) + this.character({ alpha: !0, casing: "upper" }), A = h + M;
-        return s + " " + A;
+        var e = this.pick(this.get("postcodeAreas")).code, a = this.natural({ max: 9 }), i = this.bool() ? this.character({ alpha: !0, casing: "upper" }) : "", s = e + a + i, d = this.natural({ max: 9 }), S = this.character({ alpha: !0, casing: "upper" }) + this.character({ alpha: !0, casing: "upper" }), v = d + S;
+        return s + " " + v;
       }, r.prototype.counties = function(e) {
         return e = o(e, { country: "uk" }), this.get("counties")[e.country.toLowerCase()];
       }, r.prototype.county = function(e) {
@@ -921,8 +935,8 @@ function ve() {
         var a;
         switch (e.country.toLowerCase()) {
           case "us":
-            var i = this.get("us_states_and_dc"), s = this.get("territories"), h = this.get("armed_forces");
-            a = [], e.us_states_and_dc && (a = a.concat(i)), e.territories && (a = a.concat(s)), e.armed_forces && (a = a.concat(h));
+            var i = this.get("us_states_and_dc"), s = this.get("territories"), d = this.get("armed_forces");
+            a = [], e.us_states_and_dc && (a = a.concat(i)), e.territories && (a = a.concat(s)), e.armed_forces && (a = a.concat(d));
             break;
           case "it":
           case "mx":
@@ -961,16 +975,16 @@ function ve() {
             american: !0,
             string: !1
           });
-          var s = typeof e.min < "u" ? e.min.getTime() : 1, h = typeof e.max < "u" ? e.max.getTime() : 864e13;
-          i = new Date(this.integer({ min: s, max: h }));
+          var s = typeof e.min < "u" ? e.min.getTime() : 1, d = typeof e.max < "u" ? e.max.getTime() : 864e13;
+          i = new Date(this.integer({ min: s, max: d }));
         } else {
-          var M = this.month({ raw: !0 }), A = M.days;
-          e && e.month && (A = this.get("months")[(e.month % 12 + 12) % 12].days), e = o(e, {
+          var S = this.month({ raw: !0 }), v = S.days;
+          e && e.month && (v = this.get("months")[(e.month % 12 + 12) % 12].days), e = o(e, {
             year: parseInt(this.year(), 10),
             // Necessary to subtract 1 because Date() 0-indexes month but not day or year
             // for some reason.
-            month: M.numeric - 1,
-            day: this.natural({ min: 1, max: A }),
+            month: S.numeric - 1,
+            day: this.natural({ min: 1, max: v }),
             hour: this.hour({ twentyfour: !0 }),
             minute: this.minute(),
             second: this.second(),
@@ -986,13 +1000,13 @@ function ve() {
         return e = o(e, {
           min: e && e.twentyfour ? 0 : 1,
           max: e && e.twentyfour ? 23 : 12
-        }), b(e.min < 0, "Chance: Min cannot be less than 0."), b(e.twentyfour && e.max > 23, "Chance: Max cannot be greater than 23 for twentyfour option."), b(!e.twentyfour && e.max > 12, "Chance: Max cannot be greater than 12."), b(e.min > e.max, "Chance: Min cannot be greater than Max."), this.natural({ min: e.min, max: e.max });
+        }), x(e.min < 0, "Chance: Min cannot be less than 0."), x(e.twentyfour && e.max > 23, "Chance: Max cannot be greater than 23 for twentyfour option."), x(!e.twentyfour && e.max > 12, "Chance: Max cannot be greater than 12."), x(e.min > e.max, "Chance: Min cannot be greater than Max."), this.natural({ min: e.min, max: e.max });
       }, r.prototype.millisecond = function() {
         return this.natural({ max: 999 });
       }, r.prototype.minute = r.prototype.second = function(e) {
-        return e = o(e, { min: 0, max: 59 }), b(e.min < 0, "Chance: Min cannot be less than 0."), b(e.max > 59, "Chance: Max cannot be greater than 59."), b(e.min > e.max, "Chance: Min cannot be greater than Max."), this.natural({ min: e.min, max: e.max });
+        return e = o(e, { min: 0, max: 59 }), x(e.min < 0, "Chance: Min cannot be less than 0."), x(e.max > 59, "Chance: Max cannot be greater than 59."), x(e.min > e.max, "Chance: Min cannot be greater than Max."), this.natural({ min: e.min, max: e.max });
       }, r.prototype.month = function(e) {
-        e = o(e, { min: 1, max: 12 }), b(e.min < 1, "Chance: Min cannot be less than 1."), b(e.max > 12, "Chance: Max cannot be greater than 12."), b(e.min > e.max, "Chance: Min cannot be greater than Max.");
+        e = o(e, { min: 1, max: 12 }), x(e.min < 1, "Chance: Min cannot be less than 1."), x(e.max > 12, "Chance: Max cannot be greater than 12."), x(e.min > e.max, "Chance: Min cannot be greater than Max.");
         var a = this.pick(this.months().slice(e.min - 1, e.max));
         return e.raw ? a : a.name;
       }, r.prototype.months = function() {
@@ -1038,8 +1052,8 @@ function ve() {
       }, r.prototype.currency_pair = function(e) {
         var a = this.unique(this.currency, 2, {
           comparator: function(i, s) {
-            return i.reduce(function(h, M) {
-              return h || M.code === s.code;
+            return i.reduce(function(d, S) {
+              return d || S.code === s.code;
             }, !1);
           }
         });
@@ -1080,22 +1094,22 @@ function ve() {
         return e = this.pad(e, 7) + this.pad(this.pick(this.provinces({ country: "it" })).code, 3), e + this.luhn_calculate(e);
       }, r.prototype.cf = function(e) {
         e = e || {};
-        var a = e.gender ? e.gender : this.gender(), i = e.first ? e.first : this.first({ gender: a, nationality: "it" }), s = e.last ? e.last : this.last({ nationality: "it" }), h = e.birthday ? e.birthday : this.birthday(), M = e.city ? e.city : this.pickone(["A", "B", "C", "D", "E", "F", "G", "H", "I", "L", "M", "Z"]) + this.pad(this.natural({ max: 999 }), 3), A = [], d = function(T, H) {
-          var _, W = [];
-          return T.length < 3 ? W = T.split("").concat("XXX".split("")).splice(0, 3) : (_ = T.toUpperCase().split("").map(function(J) {
+        var a = e.gender ? e.gender : this.gender(), i = e.first ? e.first : this.first({ gender: a, nationality: "it" }), s = e.last ? e.last : this.last({ nationality: "it" }), d = e.birthday ? e.birthday : this.birthday(), S = e.city ? e.city : this.pickone(["A", "B", "C", "D", "E", "F", "G", "H", "I", "L", "M", "Z"]) + this.pad(this.natural({ max: 999 }), 3), v = [], m = function(M, _) {
+          var H, z = [];
+          return M.length < 3 ? z = M.split("").concat("XXX".split("")).splice(0, 3) : (H = M.toUpperCase().split("").map(function(J) {
             return "BCDFGHJKLMNPRSTVWZ".indexOf(J) !== -1 ? J : void 0;
-          }).join(""), _.length > 3 && (H ? _ = _.substr(0, 3) : _ = _[0] + _.substr(2, 2)), _.length < 3 && (W = _, _ = T.toUpperCase().split("").map(function(J) {
+          }).join(""), H.length > 3 && (_ ? H = H.substr(0, 3) : H = H[0] + H.substr(2, 2)), H.length < 3 && (z = H, H = M.toUpperCase().split("").map(function(J) {
             return "AEIOU".indexOf(J) !== -1 ? J : void 0;
-          }).join("").substr(0, 3 - W.length)), W = W + _), W;
-        }, I = function(T, H, _) {
-          var W = ["A", "B", "C", "D", "E", "H", "L", "M", "P", "R", "S", "T"];
-          return T.getFullYear().toString().substr(2) + W[T.getMonth()] + _.pad(T.getDate() + (H.toLowerCase() === "female" ? 40 : 0), 2);
-        }, y = function(T) {
-          for (var H = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", _ = "ABCDEFGHIJABCDEFGHIJKLMNOPQRSTUVWXYZ", W = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", J = "BAKPLCQDREVOSFTGUHMINJWZYX", K = 0, V = 0; V < 15; V++)
-            V % 2 !== 0 ? K += W.indexOf(_[H.indexOf(T[V])]) : K += J.indexOf(_[H.indexOf(T[V])]);
-          return W[K % 26];
+          }).join("").substr(0, 3 - z.length)), z = z + H), z;
+        }, T = function(M, _, H) {
+          var z = ["A", "B", "C", "D", "E", "H", "L", "M", "P", "R", "S", "T"];
+          return M.getFullYear().toString().substr(2) + z[M.getMonth()] + H.pad(M.getDate() + (_.toLowerCase() === "female" ? 40 : 0), 2);
+        }, A = function(M) {
+          for (var _ = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", H = "ABCDEFGHIJABCDEFGHIJKLMNOPQRSTUVWXYZ", z = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", J = "BAKPLCQDREVOSFTGUHMINJWZYX", K = 0, V = 0; V < 15; V++)
+            V % 2 !== 0 ? K += z.indexOf(H[_.indexOf(M[V])]) : K += J.indexOf(H[_.indexOf(M[V])]);
+          return z[K % 26];
         };
-        return A = A.concat(d(s, !0), d(i), I(h, a, this), M.toUpperCase().split("")).join(""), A += y(A.toUpperCase()), A.toUpperCase();
+        return v = v.concat(m(s, !0), m(i), T(d, a, this), S.toUpperCase().split("")).join(""), v += A(v.toUpperCase()), v.toUpperCase();
       }, r.prototype.pl_pesel = function() {
         for (var e = this.natural({ min: 1, max: 9999999999 }), a = this.pad(e, 10).split(""), i = 0; i < a.length; i++)
           a[i] = parseInt(a[i]);
@@ -1111,6 +1125,11 @@ function ve() {
           a[i] = parseInt(a[i]);
         var s = (8 * a[0] + 9 * a[1] + 2 * a[2] + 3 * a[3] + 4 * a[4] + 5 * a[5] + 6 * a[6] + 7 * a[7]) % 11;
         return s === 10 && (s = 0), a.join("") + s;
+      }, r.prototype.music_genre = function(e = "general") {
+        if (!(e.toLowerCase() in C.music_genres))
+          throw new Error(`Unsupported genre: ${e}`);
+        const a = C.music_genres[e.toLowerCase()], i = this.integer({ min: 0, max: a.length - 1 });
+        return a[i];
       }, r.prototype.note = function(e) {
         e = o(e, { notes: "flatKey" });
         var a = {
@@ -1141,20 +1160,20 @@ function ve() {
       }, r.prototype.coin = function() {
         return this.bool() ? "heads" : "tails";
       };
-      function f(e) {
+      function h(e) {
         return function() {
           return this.natural(e);
         };
       }
-      r.prototype.d4 = f({ min: 1, max: 4 }), r.prototype.d6 = f({ min: 1, max: 6 }), r.prototype.d8 = f({ min: 1, max: 8 }), r.prototype.d10 = f({ min: 1, max: 10 }), r.prototype.d12 = f({ min: 1, max: 12 }), r.prototype.d20 = f({ min: 1, max: 20 }), r.prototype.d30 = f({ min: 1, max: 30 }), r.prototype.d100 = f({ min: 1, max: 100 }), r.prototype.rpg = function(e, a) {
+      r.prototype.d4 = h({ min: 1, max: 4 }), r.prototype.d6 = h({ min: 1, max: 6 }), r.prototype.d8 = h({ min: 1, max: 8 }), r.prototype.d10 = h({ min: 1, max: 10 }), r.prototype.d12 = h({ min: 1, max: 12 }), r.prototype.d20 = h({ min: 1, max: 20 }), r.prototype.d30 = h({ min: 1, max: 30 }), r.prototype.d100 = h({ min: 1, max: 100 }), r.prototype.rpg = function(e, a) {
         if (a = o(a), e) {
           var i = e.toLowerCase().split("d"), s = [];
           if (i.length !== 2 || !parseInt(i[0], 10) || !parseInt(i[1], 10))
             throw new Error("Chance: Invalid format provided. Please provide #d# where the first # is the number of dice to roll, the second # is the max of each die");
-          for (var h = i[0]; h > 0; h--)
-            s[h - 1] = this.natural({ min: 1, max: i[1] });
-          return typeof a.sum < "u" && a.sum ? s.reduce(function(M, A) {
-            return M + A;
+          for (var d = i[0]; d > 0; d--)
+            s[d - 1] = this.natural({ min: 1, max: i[1] });
+          return typeof a.sum < "u" && a.sum ? s.reduce(function(S, v) {
+            return S + v;
           }) : s;
         } else
           throw new RangeError("Chance: A type of die roll must be included");
@@ -1166,14 +1185,14 @@ function ve() {
         return s;
       }, r.prototype.hash = function(e) {
         e = o(e, { length: 40, casing: "lower" });
-        var a = e.casing === "upper" ? g.toUpperCase() : g;
+        var a = e.casing === "upper" ? p.toUpperCase() : p;
         return this.string({ pool: a, length: e.length });
       }, r.prototype.luhn_check = function(e) {
         var a = e.toString(), i = +a.substring(a.length - 1);
         return i === this.luhn_calculate(+a.substring(0, a.length - 1));
       }, r.prototype.luhn_calculate = function(e) {
-        for (var a = e.toString().split("").reverse(), i = 0, s, h = 0, M = a.length; M > h; ++h)
-          s = +a[h], h % 2 === 0 && (s *= 2, s > 9 && (s -= 9)), i += s;
+        for (var a = e.toString().split("").reverse(), i = 0, s, d = 0, S = a.length; S > d; ++d)
+          s = +a[d], d % 2 === 0 && (s *= 2, s > 9 && (s -= 9)), i += s;
         return i * 9 % 10;
       }, r.prototype.md5 = function(e) {
         var a = { str: "", key: null, raw: !1 };
@@ -1191,25 +1210,25 @@ function ve() {
           throw new Error("A parameter is required to return an md5 hash.");
         return this.bimd5.md5(a.str, a.key, a.raw);
       }, r.prototype.file = function(e) {
-        var a = e || {}, i = "fileExtension", s = Object.keys(this.get("fileExtension")), h, M;
-        if (h = this.word({ length: a.length }), a.extension)
-          return M = a.extension, h + "." + M;
+        var a = e || {}, i = "fileExtension", s = Object.keys(this.get("fileExtension")), d, S;
+        if (d = this.word({ length: a.length }), a.extension)
+          return S = a.extension, d + "." + S;
         if (a.extensions) {
           if (Array.isArray(a.extensions))
-            return M = this.pickone(a.extensions), h + "." + M;
+            return S = this.pickone(a.extensions), d + "." + S;
           if (a.extensions.constructor === Object) {
-            var A = a.extensions, d = Object.keys(A);
-            return M = this.pickone(A[this.pickone(d)]), h + "." + M;
+            var v = a.extensions, m = Object.keys(v);
+            return S = this.pickone(v[this.pickone(m)]), d + "." + S;
           }
           throw new Error("Chance: Extensions must be an Array or Object");
         }
         if (a.fileType) {
-          var I = a.fileType;
-          if (s.indexOf(I) !== -1)
-            return M = this.pickone(this.get(i)[I]), h + "." + M;
+          var T = a.fileType;
+          if (s.indexOf(T) !== -1)
+            return S = this.pickone(this.get(i)[T]), d + "." + S;
           throw new RangeError("Chance: Expect file type value to be 'raster', 'vector', '3d' or 'document'");
         }
-        return M = this.pickone(this.get(i)[this.pickone(s)]), h + "." + M;
+        return S = this.pickone(this.get(i)[this.pickone(s)]), d + "." + S;
       }, r.prototype.fileWithContent = function(e) {
         var a = e || {}, i = "fileName" in a ? a.fileName : this.file().split(".")[0];
         if (i += "." + ("fileExtension" in a ? a.fileExtension : this.file().split(".")[1]), typeof a.fileSize != "number")
@@ -1220,7 +1239,7 @@ function ve() {
         };
         return s;
       };
-      var v = {
+      var C = {
         firstNames: {
           male: {
             en: ["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Charles", "Thomas", "Christopher", "Daniel", "Matthew", "George", "Donald", "Anthony", "Paul", "Mark", "Edward", "Steven", "Kenneth", "Andrew", "Brian", "Joshua", "Kevin", "Ronald", "Timothy", "Jason", "Jeffrey", "Frank", "Gary", "Ryan", "Nicholas", "Eric", "Stephen", "Jacob", "Larry", "Jonathan", "Scott", "Raymond", "Justin", "Brandon", "Gregory", "Samuel", "Benjamin", "Patrick", "Jack", "Henry", "Walter", "Dennis", "Jerry", "Alexander", "Peter", "Tyler", "Douglas", "Harold", "Aaron", "Jose", "Adam", "Arthur", "Zachary", "Carl", "Nathan", "Albert", "Kyle", "Lawrence", "Joe", "Willie", "Gerald", "Roger", "Keith", "Jeremy", "Terry", "Harry", "Ralph", "Sean", "Jesse", "Roy", "Louis", "Billy", "Austin", "Bruce", "Eugene", "Christian", "Bryan", "Wayne", "Russell", "Howard", "Fred", "Ethan", "Jordan", "Philip", "Alan", "Juan", "Randy", "Vincent", "Bobby", "Dylan", "Johnny", "Phillip", "Victor", "Clarence", "Ernest", "Martin", "Craig", "Stanley", "Shawn", "Travis", "Bradley", "Leonard", "Earl", "Gabriel", "Jimmy", "Francis", "Todd", "Noah", "Danny", "Dale", "Cody", "Carlos", "Allen", "Frederick", "Logan", "Curtis", "Alex", "Joel", "Luis", "Norman", "Marvin", "Glenn", "Tony", "Nathaniel", "Rodney", "Melvin", "Alfred", "Steve", "Cameron", "Chad", "Edwin", "Caleb", "Evan", "Antonio", "Lee", "Herbert", "Jeffery", "Isaac", "Derek", "Ricky", "Marcus", "Theodore", "Elijah", "Luke", "Jesus", "Eddie", "Troy", "Mike", "Dustin", "Ray", "Adrian", "Bernard", "Leroy", "Angel", "Randall", "Wesley", "Ian", "Jared", "Mason", "Hunter", "Calvin", "Oscar", "Clifford", "Jay", "Shane", "Ronnie", "Barry", "Lucas", "Corey", "Manuel", "Leo", "Tommy", "Warren", "Jackson", "Isaiah", "Connor", "Don", "Dean", "Jon", "Julian", "Miguel", "Bill", "Lloyd", "Charlie", "Mitchell", "Leon", "Jerome", "Darrell", "Jeremiah", "Alvin", "Brett", "Seth", "Floyd", "Jim", "Blake", "Micheal", "Gordon", "Trevor", "Lewis", "Erik", "Edgar", "Vernon", "Devin", "Gavin", "Jayden", "Chris", "Clyde", "Tom", "Derrick", "Mario", "Brent", "Marc", "Herman", "Chase", "Dominic", "Ricardo", "Franklin", "Maurice", "Max", "Aiden", "Owen", "Lester", "Gilbert", "Elmer", "Gene", "Francisco", "Glen", "Cory", "Garrett", "Clayton", "Sam", "Jorge", "Chester", "Alejandro", "Jeff", "Harvey", "Milton", "Cole", "Ivan", "Andre", "Duane", "Landon"],
@@ -1260,8 +1279,8 @@ function ve() {
         },
         // Data taken from http://geoportal.statistics.gov.uk/datasets/ons-postcode-directory-latest-centroids
         postcodeAreas: [{ code: "AB" }, { code: "AL" }, { code: "B" }, { code: "BA" }, { code: "BB" }, { code: "BD" }, { code: "BH" }, { code: "BL" }, { code: "BN" }, { code: "BR" }, { code: "BS" }, { code: "BT" }, { code: "CA" }, { code: "CB" }, { code: "CF" }, { code: "CH" }, { code: "CM" }, { code: "CO" }, { code: "CR" }, { code: "CT" }, { code: "CV" }, { code: "CW" }, { code: "DA" }, { code: "DD" }, { code: "DE" }, { code: "DG" }, { code: "DH" }, { code: "DL" }, { code: "DN" }, { code: "DT" }, { code: "DY" }, { code: "E" }, { code: "EC" }, { code: "EH" }, { code: "EN" }, { code: "EX" }, { code: "FK" }, { code: "FY" }, { code: "G" }, { code: "GL" }, { code: "GU" }, { code: "GY" }, { code: "HA" }, { code: "HD" }, { code: "HG" }, { code: "HP" }, { code: "HR" }, { code: "HS" }, { code: "HU" }, { code: "HX" }, { code: "IG" }, { code: "IM" }, { code: "IP" }, { code: "IV" }, { code: "JE" }, { code: "KA" }, { code: "KT" }, { code: "KW" }, { code: "KY" }, { code: "L" }, { code: "LA" }, { code: "LD" }, { code: "LE" }, { code: "LL" }, { code: "LN" }, { code: "LS" }, { code: "LU" }, { code: "M" }, { code: "ME" }, { code: "MK" }, { code: "ML" }, { code: "N" }, { code: "NE" }, { code: "NG" }, { code: "NN" }, { code: "NP" }, { code: "NR" }, { code: "NW" }, { code: "OL" }, { code: "OX" }, { code: "PA" }, { code: "PE" }, { code: "PH" }, { code: "PL" }, { code: "PO" }, { code: "PR" }, { code: "RG" }, { code: "RH" }, { code: "RM" }, { code: "S" }, { code: "SA" }, { code: "SE" }, { code: "SG" }, { code: "SK" }, { code: "SL" }, { code: "SM" }, { code: "SN" }, { code: "SO" }, { code: "SP" }, { code: "SR" }, { code: "SS" }, { code: "ST" }, { code: "SW" }, { code: "SY" }, { code: "TA" }, { code: "TD" }, { code: "TF" }, { code: "TN" }, { code: "TQ" }, { code: "TR" }, { code: "TS" }, { code: "TW" }, { code: "UB" }, { code: "W" }, { code: "WA" }, { code: "WC" }, { code: "WD" }, { code: "WF" }, { code: "WN" }, { code: "WR" }, { code: "WS" }, { code: "WV" }, { code: "YO" }, { code: "ZE" }],
-        // Data taken from https://github.com/umpirsky/country-list/blob/master/data/en_US/country.json
-        countries: [{ name: "Afghanistan", abbreviation: "AF" }, { name: "\xC5land Islands", abbreviation: "AX" }, { name: "Albania", abbreviation: "AL" }, { name: "Algeria", abbreviation: "DZ" }, { name: "American Samoa", abbreviation: "AS" }, { name: "Andorra", abbreviation: "AD" }, { name: "Angola", abbreviation: "AO" }, { name: "Anguilla", abbreviation: "AI" }, { name: "Antarctica", abbreviation: "AQ" }, { name: "Antigua & Barbuda", abbreviation: "AG" }, { name: "Argentina", abbreviation: "AR" }, { name: "Armenia", abbreviation: "AM" }, { name: "Aruba", abbreviation: "AW" }, { name: "Ascension Island", abbreviation: "AC" }, { name: "Australia", abbreviation: "AU" }, { name: "Austria", abbreviation: "AT" }, { name: "Azerbaijan", abbreviation: "AZ" }, { name: "Bahamas", abbreviation: "BS" }, { name: "Bahrain", abbreviation: "BH" }, { name: "Bangladesh", abbreviation: "BD" }, { name: "Barbados", abbreviation: "BB" }, { name: "Belarus", abbreviation: "BY" }, { name: "Belgium", abbreviation: "BE" }, { name: "Belize", abbreviation: "BZ" }, { name: "Benin", abbreviation: "BJ" }, { name: "Bermuda", abbreviation: "BM" }, { name: "Bhutan", abbreviation: "BT" }, { name: "Bolivia", abbreviation: "BO" }, { name: "Bosnia & Herzegovina", abbreviation: "BA" }, { name: "Botswana", abbreviation: "BW" }, { name: "Brazil", abbreviation: "BR" }, { name: "British Indian Ocean Territory", abbreviation: "IO" }, { name: "British Virgin Islands", abbreviation: "VG" }, { name: "Brunei", abbreviation: "BN" }, { name: "Bulgaria", abbreviation: "BG" }, { name: "Burkina Faso", abbreviation: "BF" }, { name: "Burundi", abbreviation: "BI" }, { name: "Cambodia", abbreviation: "KH" }, { name: "Cameroon", abbreviation: "CM" }, { name: "Canada", abbreviation: "CA" }, { name: "Canary Islands", abbreviation: "IC" }, { name: "Cape Verde", abbreviation: "CV" }, { name: "Caribbean Netherlands", abbreviation: "BQ" }, { name: "Cayman Islands", abbreviation: "KY" }, { name: "Central African Republic", abbreviation: "CF" }, { name: "Ceuta & Melilla", abbreviation: "EA" }, { name: "Chad", abbreviation: "TD" }, { name: "Chile", abbreviation: "CL" }, { name: "China", abbreviation: "CN" }, { name: "Christmas Island", abbreviation: "CX" }, { name: "Cocos (Keeling) Islands", abbreviation: "CC" }, { name: "Colombia", abbreviation: "CO" }, { name: "Comoros", abbreviation: "KM" }, { name: "Congo - Brazzaville", abbreviation: "CG" }, { name: "Congo - Kinshasa", abbreviation: "CD" }, { name: "Cook Islands", abbreviation: "CK" }, { name: "Costa Rica", abbreviation: "CR" }, { name: "C\xF4te d'Ivoire", abbreviation: "CI" }, { name: "Croatia", abbreviation: "HR" }, { name: "Cuba", abbreviation: "CU" }, { name: "Cura\xE7ao", abbreviation: "CW" }, { name: "Cyprus", abbreviation: "CY" }, { name: "Czech Republic", abbreviation: "CZ" }, { name: "Denmark", abbreviation: "DK" }, { name: "Diego Garcia", abbreviation: "DG" }, { name: "Djibouti", abbreviation: "DJ" }, { name: "Dominica", abbreviation: "DM" }, { name: "Dominican Republic", abbreviation: "DO" }, { name: "Ecuador", abbreviation: "EC" }, { name: "Egypt", abbreviation: "EG" }, { name: "El Salvador", abbreviation: "SV" }, { name: "Equatorial Guinea", abbreviation: "GQ" }, { name: "Eritrea", abbreviation: "ER" }, { name: "Estonia", abbreviation: "EE" }, { name: "Ethiopia", abbreviation: "ET" }, { name: "Falkland Islands", abbreviation: "FK" }, { name: "Faroe Islands", abbreviation: "FO" }, { name: "Fiji", abbreviation: "FJ" }, { name: "Finland", abbreviation: "FI" }, { name: "France", abbreviation: "FR" }, { name: "French Guiana", abbreviation: "GF" }, { name: "French Polynesia", abbreviation: "PF" }, { name: "French Southern Territories", abbreviation: "TF" }, { name: "Gabon", abbreviation: "GA" }, { name: "Gambia", abbreviation: "GM" }, { name: "Georgia", abbreviation: "GE" }, { name: "Germany", abbreviation: "DE" }, { name: "Ghana", abbreviation: "GH" }, { name: "Gibraltar", abbreviation: "GI" }, { name: "Greece", abbreviation: "GR" }, { name: "Greenland", abbreviation: "GL" }, { name: "Grenada", abbreviation: "GD" }, { name: "Guadeloupe", abbreviation: "GP" }, { name: "Guam", abbreviation: "GU" }, { name: "Guatemala", abbreviation: "GT" }, { name: "Guernsey", abbreviation: "GG" }, { name: "Guinea", abbreviation: "GN" }, { name: "Guinea-Bissau", abbreviation: "GW" }, { name: "Guyana", abbreviation: "GY" }, { name: "Haiti", abbreviation: "HT" }, { name: "Honduras", abbreviation: "HN" }, { name: "Hong Kong SAR China", abbreviation: "HK" }, { name: "Hungary", abbreviation: "HU" }, { name: "Iceland", abbreviation: "IS" }, { name: "India", abbreviation: "IN" }, { name: "Indonesia", abbreviation: "ID" }, { name: "Iran", abbreviation: "IR" }, { name: "Iraq", abbreviation: "IQ" }, { name: "Ireland", abbreviation: "IE" }, { name: "Isle of Man", abbreviation: "IM" }, { name: "Israel", abbreviation: "IL" }, { name: "Italy", abbreviation: "IT" }, { name: "Jamaica", abbreviation: "JM" }, { name: "Japan", abbreviation: "JP" }, { name: "Jersey", abbreviation: "JE" }, { name: "Jordan", abbreviation: "JO" }, { name: "Kazakhstan", abbreviation: "KZ" }, { name: "Kenya", abbreviation: "KE" }, { name: "Kiribati", abbreviation: "KI" }, { name: "Kosovo", abbreviation: "XK" }, { name: "Kuwait", abbreviation: "KW" }, { name: "Kyrgyzstan", abbreviation: "KG" }, { name: "Laos", abbreviation: "LA" }, { name: "Latvia", abbreviation: "LV" }, { name: "Lebanon", abbreviation: "LB" }, { name: "Lesotho", abbreviation: "LS" }, { name: "Liberia", abbreviation: "LR" }, { name: "Libya", abbreviation: "LY" }, { name: "Liechtenstein", abbreviation: "LI" }, { name: "Lithuania", abbreviation: "LT" }, { name: "Luxembourg", abbreviation: "LU" }, { name: "Macau SAR China", abbreviation: "MO" }, { name: "Macedonia", abbreviation: "MK" }, { name: "Madagascar", abbreviation: "MG" }, { name: "Malawi", abbreviation: "MW" }, { name: "Malaysia", abbreviation: "MY" }, { name: "Maldives", abbreviation: "MV" }, { name: "Mali", abbreviation: "ML" }, { name: "Malta", abbreviation: "MT" }, { name: "Marshall Islands", abbreviation: "MH" }, { name: "Martinique", abbreviation: "MQ" }, { name: "Mauritania", abbreviation: "MR" }, { name: "Mauritius", abbreviation: "MU" }, { name: "Mayotte", abbreviation: "YT" }, { name: "Mexico", abbreviation: "MX" }, { name: "Micronesia", abbreviation: "FM" }, { name: "Moldova", abbreviation: "MD" }, { name: "Monaco", abbreviation: "MC" }, { name: "Mongolia", abbreviation: "MN" }, { name: "Montenegro", abbreviation: "ME" }, { name: "Montserrat", abbreviation: "MS" }, { name: "Morocco", abbreviation: "MA" }, { name: "Mozambique", abbreviation: "MZ" }, { name: "Myanmar (Burma)", abbreviation: "MM" }, { name: "Namibia", abbreviation: "NA" }, { name: "Nauru", abbreviation: "NR" }, { name: "Nepal", abbreviation: "NP" }, { name: "Netherlands", abbreviation: "NL" }, { name: "New Caledonia", abbreviation: "NC" }, { name: "New Zealand", abbreviation: "NZ" }, { name: "Nicaragua", abbreviation: "NI" }, { name: "Niger", abbreviation: "NE" }, { name: "Nigeria", abbreviation: "NG" }, { name: "Niue", abbreviation: "NU" }, { name: "Norfolk Island", abbreviation: "NF" }, { name: "North Korea", abbreviation: "KP" }, { name: "Northern Mariana Islands", abbreviation: "MP" }, { name: "Norway", abbreviation: "NO" }, { name: "Oman", abbreviation: "OM" }, { name: "Pakistan", abbreviation: "PK" }, { name: "Palau", abbreviation: "PW" }, { name: "Palestinian Territories", abbreviation: "PS" }, { name: "Panama", abbreviation: "PA" }, { name: "Papua New Guinea", abbreviation: "PG" }, { name: "Paraguay", abbreviation: "PY" }, { name: "Peru", abbreviation: "PE" }, { name: "Philippines", abbreviation: "PH" }, { name: "Pitcairn Islands", abbreviation: "PN" }, { name: "Poland", abbreviation: "PL" }, { name: "Portugal", abbreviation: "PT" }, { name: "Puerto Rico", abbreviation: "PR" }, { name: "Qatar", abbreviation: "QA" }, { name: "R\xE9union", abbreviation: "RE" }, { name: "Romania", abbreviation: "RO" }, { name: "Russia", abbreviation: "RU" }, { name: "Rwanda", abbreviation: "RW" }, { name: "Samoa", abbreviation: "WS" }, { name: "San Marino", abbreviation: "SM" }, { name: "S\xE3o Tom\xE9 and Pr\xEDncipe", abbreviation: "ST" }, { name: "Saudi Arabia", abbreviation: "SA" }, { name: "Senegal", abbreviation: "SN" }, { name: "Serbia", abbreviation: "RS" }, { name: "Seychelles", abbreviation: "SC" }, { name: "Sierra Leone", abbreviation: "SL" }, { name: "Singapore", abbreviation: "SG" }, { name: "Sint Maarten", abbreviation: "SX" }, { name: "Slovakia", abbreviation: "SK" }, { name: "Slovenia", abbreviation: "SI" }, { name: "Solomon Islands", abbreviation: "SB" }, { name: "Somalia", abbreviation: "SO" }, { name: "South Africa", abbreviation: "ZA" }, { name: "South Georgia & South Sandwich Islands", abbreviation: "GS" }, { name: "South Korea", abbreviation: "KR" }, { name: "South Sudan", abbreviation: "SS" }, { name: "Spain", abbreviation: "ES" }, { name: "Sri Lanka", abbreviation: "LK" }, { name: "St. Barth\xE9lemy", abbreviation: "BL" }, { name: "St. Helena", abbreviation: "SH" }, { name: "St. Kitts & Nevis", abbreviation: "KN" }, { name: "St. Lucia", abbreviation: "LC" }, { name: "St. Martin", abbreviation: "MF" }, { name: "St. Pierre & Miquelon", abbreviation: "PM" }, { name: "St. Vincent & Grenadines", abbreviation: "VC" }, { name: "Sudan", abbreviation: "SD" }, { name: "Suriname", abbreviation: "SR" }, { name: "Svalbard & Jan Mayen", abbreviation: "SJ" }, { name: "Swaziland", abbreviation: "SZ" }, { name: "Sweden", abbreviation: "SE" }, { name: "Switzerland", abbreviation: "CH" }, { name: "Syria", abbreviation: "SY" }, { name: "Taiwan", abbreviation: "TW" }, { name: "Tajikistan", abbreviation: "TJ" }, { name: "Tanzania", abbreviation: "TZ" }, { name: "Thailand", abbreviation: "TH" }, { name: "Timor-Leste", abbreviation: "TL" }, { name: "Togo", abbreviation: "TG" }, { name: "Tokelau", abbreviation: "TK" }, { name: "Tonga", abbreviation: "TO" }, { name: "Trinidad & Tobago", abbreviation: "TT" }, { name: "Tristan da Cunha", abbreviation: "TA" }, { name: "Tunisia", abbreviation: "TN" }, { name: "Turkey", abbreviation: "TR" }, { name: "Turkmenistan", abbreviation: "TM" }, { name: "Turks & Caicos Islands", abbreviation: "TC" }, { name: "Tuvalu", abbreviation: "TV" }, { name: "U.S. Outlying Islands", abbreviation: "UM" }, { name: "U.S. Virgin Islands", abbreviation: "VI" }, { name: "Uganda", abbreviation: "UG" }, { name: "Ukraine", abbreviation: "UA" }, { name: "United Arab Emirates", abbreviation: "AE" }, { name: "United Kingdom", abbreviation: "GB" }, { name: "United States", abbreviation: "US" }, { name: "Uruguay", abbreviation: "UY" }, { name: "Uzbekistan", abbreviation: "UZ" }, { name: "Vanuatu", abbreviation: "VU" }, { name: "Vatican City", abbreviation: "VA" }, { name: "Venezuela", abbreviation: "VE" }, { name: "Vietnam", abbreviation: "VN" }, { name: "Wallis & Futuna", abbreviation: "WF" }, { name: "Western Sahara", abbreviation: "EH" }, { name: "Yemen", abbreviation: "YE" }, { name: "Zambia", abbreviation: "ZM" }, { name: "Zimbabwe", abbreviation: "ZW" }],
+        // Data taken from https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+        countries: [{ name: "Afghanistan", abbreviation: "AF" }, { name: "\xC5land Islands", abbreviation: "AX" }, { name: "Albania", abbreviation: "AL" }, { name: "Algeria", abbreviation: "DZ" }, { name: "American Samoa", abbreviation: "AS" }, { name: "Andorra", abbreviation: "AD" }, { name: "Angola", abbreviation: "AO" }, { name: "Anguilla", abbreviation: "AI" }, { name: "Antarctica", abbreviation: "AQ" }, { name: "Antigua and Barbuda", abbreviation: "AG" }, { name: "Argentina", abbreviation: "AR" }, { name: "Armenia", abbreviation: "AM" }, { name: "Aruba", abbreviation: "AW" }, { name: "Australia", abbreviation: "AU" }, { name: "Austria", abbreviation: "AT" }, { name: "Azerbaijan", abbreviation: "AZ" }, { name: "Bahamas", abbreviation: "BS" }, { name: "Bahrain", abbreviation: "BH" }, { name: "Bangladesh", abbreviation: "BD" }, { name: "Barbados", abbreviation: "BB" }, { name: "Belarus", abbreviation: "BY" }, { name: "Belgium", abbreviation: "BE" }, { name: "Belize", abbreviation: "BZ" }, { name: "Benin", abbreviation: "BJ" }, { name: "Bermuda", abbreviation: "BM" }, { name: "Bhutan", abbreviation: "BT" }, { name: "Plurinational State of Bolivia", abbreviation: "BO" }, { name: "Bonaire, Sint Eustatius and Saba", abbreviation: "BQ" }, { name: "Bosnia and Herzegovina", abbreviation: "BA" }, { name: "Botswana", abbreviation: "BW" }, { name: "Bouvet Island", abbreviation: "BV" }, { name: "Brazil", abbreviation: "BR" }, { name: "British Indian Ocean Territory", abbreviation: "IO" }, { name: "Brunei Darussalam", abbreviation: "BN" }, { name: "Bulgaria", abbreviation: "BG" }, { name: "Burkina Faso", abbreviation: "BF" }, { name: "Burundi", abbreviation: "BI" }, { name: "Cabo Verde", abbreviation: "CV" }, { name: "Cambodia", abbreviation: "KH" }, { name: "Cameroon", abbreviation: "CM" }, { name: "Canada", abbreviation: "CA" }, { name: "Cayman Islands", abbreviation: "KY" }, { name: "Central African Republic", abbreviation: "CF" }, { name: "Chad", abbreviation: "TD" }, { name: "Chile", abbreviation: "CL" }, { name: "China", abbreviation: "CN" }, { name: "Christmas Island", abbreviation: "CX" }, { name: "Cocos (Keeling) Islands", abbreviation: "CC" }, { name: "Colombia", abbreviation: "CO" }, { name: "Comoros", abbreviation: "KM" }, { name: "Congo", abbreviation: "CG" }, { name: "Democratic Republic of the Congo", abbreviation: "CD" }, { name: "Cook Islands", abbreviation: "CK" }, { name: "Costa Rica", abbreviation: "CR" }, { name: "C\xF4te d'Ivoire", abbreviation: "CI" }, { name: "Croatia", abbreviation: "HR" }, { name: "Cuba", abbreviation: "CU" }, { name: "Cura\xE7ao", abbreviation: "CW" }, { name: "Cyprus", abbreviation: "CY" }, { name: "Czechia", abbreviation: "CZ" }, { name: "Denmark", abbreviation: "DK" }, { name: "Djibouti", abbreviation: "DJ" }, { name: "Dominica", abbreviation: "DM" }, { name: "Dominican Republic", abbreviation: "DO" }, { name: "Ecuador", abbreviation: "EC" }, { name: "Egypt", abbreviation: "EG" }, { name: "El Salvador", abbreviation: "SV" }, { name: "Equatorial Guinea", abbreviation: "GQ" }, { name: "Eritrea", abbreviation: "ER" }, { name: "Estonia", abbreviation: "EE" }, { name: "Eswatini", abbreviation: "SZ" }, { name: "Ethiopia", abbreviation: "ET" }, { name: "Falkland Islands (Malvinas)", abbreviation: "FK" }, { name: "Faroe Islands", abbreviation: "FO" }, { name: "Fiji", abbreviation: "FJ" }, { name: "Finland", abbreviation: "FI" }, { name: "France", abbreviation: "FR" }, { name: "French Guiana", abbreviation: "GF" }, { name: "French Polynesia", abbreviation: "PF" }, { name: "French Southern Territories", abbreviation: "TF" }, { name: "Gabon", abbreviation: "GA" }, { name: "Gambia", abbreviation: "GM" }, { name: "Georgia", abbreviation: "GE" }, { name: "Germany", abbreviation: "DE" }, { name: "Ghana", abbreviation: "GH" }, { name: "Gibraltar", abbreviation: "GI" }, { name: "Greece", abbreviation: "GR" }, { name: "Greenland", abbreviation: "GL" }, { name: "Grenada", abbreviation: "GD" }, { name: "Guadeloupe", abbreviation: "GP" }, { name: "Guam", abbreviation: "GU" }, { name: "Guatemala", abbreviation: "GT" }, { name: "Guernsey", abbreviation: "GG" }, { name: "Guinea", abbreviation: "GN" }, { name: "Guinea-Bissau", abbreviation: "GW" }, { name: "Guyana", abbreviation: "GY" }, { name: "Haiti", abbreviation: "HT" }, { name: "Heard Island and McDonald Islands", abbreviation: "HM" }, { name: "Holy See", abbreviation: "VA" }, { name: "Honduras", abbreviation: "HN" }, { name: "Hong Kong", abbreviation: "HK" }, { name: "Hungary", abbreviation: "HU" }, { name: "Iceland", abbreviation: "IS" }, { name: "India", abbreviation: "IN" }, { name: "Indonesia", abbreviation: "ID" }, { name: "Islamic Republic of Iran", abbreviation: "IR" }, { name: "Iraq", abbreviation: "IQ" }, { name: "Ireland", abbreviation: "IE" }, { name: "Isle of Man", abbreviation: "IM" }, { name: "Israel", abbreviation: "IL" }, { name: "Italy", abbreviation: "IT" }, { name: "Jamaica", abbreviation: "JM" }, { name: "Japan", abbreviation: "JP" }, { name: "Jersey", abbreviation: "JE" }, { name: "Jordan", abbreviation: "JO" }, { name: "Kazakhstan", abbreviation: "KZ" }, { name: "Kenya", abbreviation: "KE" }, { name: "Kiribati", abbreviation: "KI" }, { name: "Democratic People's Republic of Korea", abbreviation: "KP" }, { name: "Republic of Korea", abbreviation: "KR" }, { name: "Kuwait", abbreviation: "KW" }, { name: "Kyrgyzstan", abbreviation: "KG" }, { name: "Lao People's Democratic Republic", abbreviation: "LA" }, { name: "Latvia", abbreviation: "LV" }, { name: "Lebanon", abbreviation: "LB" }, { name: "Lesotho", abbreviation: "LS" }, { name: "Liberia", abbreviation: "LR" }, { name: "Libya", abbreviation: "LY" }, { name: "Liechtenstein", abbreviation: "LI" }, { name: "Lithuania", abbreviation: "LT" }, { name: "Luxembourg", abbreviation: "LU" }, { name: "Macao", abbreviation: "MO" }, { name: "Madagascar", abbreviation: "MG" }, { name: "Malawi", abbreviation: "MW" }, { name: "Malaysia", abbreviation: "MY" }, { name: "Maldives", abbreviation: "MV" }, { name: "Mali", abbreviation: "ML" }, { name: "Malta", abbreviation: "MT" }, { name: "Marshall Islands", abbreviation: "MH" }, { name: "Martinique", abbreviation: "MQ" }, { name: "Mauritania", abbreviation: "MR" }, { name: "Mauritius", abbreviation: "MU" }, { name: "Mayotte", abbreviation: "YT" }, { name: "Mexico", abbreviation: "MX" }, { name: "Federated States of Micronesia", abbreviation: "FM" }, { name: "Republic of Moldova", abbreviation: "MD" }, { name: "Monaco", abbreviation: "MC" }, { name: "Mongolia", abbreviation: "MN" }, { name: "Montenegro", abbreviation: "ME" }, { name: "Montserrat", abbreviation: "MS" }, { name: "Morocco", abbreviation: "MA" }, { name: "Mozambique", abbreviation: "MZ" }, { name: "Myanmar", abbreviation: "MM" }, { name: "Namibia", abbreviation: "NA" }, { name: "Nauru", abbreviation: "NR" }, { name: "Nepal", abbreviation: "NP" }, { name: "Kingdom of the Netherlands", abbreviation: "NL" }, { name: "New Caledonia", abbreviation: "NC" }, { name: "New Zealand", abbreviation: "NZ" }, { name: "Nicaragua", abbreviation: "NI" }, { name: "Niger", abbreviation: "NE" }, { name: "Nigeria", abbreviation: "NG" }, { name: "Niue", abbreviation: "NU" }, { name: "Norfolk Island", abbreviation: "NF" }, { name: "North Macedonia", abbreviation: "MK" }, { name: "Northern Mariana Islands", abbreviation: "MP" }, { name: "Norway", abbreviation: "NO" }, { name: "Oman", abbreviation: "OM" }, { name: "Pakistan", abbreviation: "PK" }, { name: "Palau", abbreviation: "PW" }, { name: "State of Palestine", abbreviation: "PS" }, { name: "Panama", abbreviation: "PA" }, { name: "Papua New Guinea", abbreviation: "PG" }, { name: "Paraguay", abbreviation: "PY" }, { name: "Peru", abbreviation: "PE" }, { name: "Philippines", abbreviation: "PH" }, { name: "Pitcairn", abbreviation: "PN" }, { name: "Poland", abbreviation: "PL" }, { name: "Portugal", abbreviation: "PT" }, { name: "Puerto Rico", abbreviation: "PR" }, { name: "Qatar", abbreviation: "QA" }, { name: "R\xE9union", abbreviation: "RE" }, { name: "Romania", abbreviation: "RO" }, { name: "Russian Federation", abbreviation: "RU" }, { name: "Rwanda", abbreviation: "RW" }, { name: "Saint Barth\xE9lemy", abbreviation: "BL" }, { name: "Saint Helena, Ascension and Tristan da Cunha", abbreviation: "SH" }, { name: "Saint Kitts and Nevis", abbreviation: "KN" }, { name: "Saint Lucia", abbreviation: "LC" }, { name: "Saint Martin (French part)", abbreviation: "MF" }, { name: "Saint Pierre and Miquelon", abbreviation: "PM" }, { name: "Saint Vincent and the Grenadines", abbreviation: "VC" }, { name: "Samoa", abbreviation: "WS" }, { name: "San Marino", abbreviation: "SM" }, { name: "Sao Tome and Principe", abbreviation: "ST" }, { name: "Saudi Arabia", abbreviation: "SA" }, { name: "Senegal", abbreviation: "SN" }, { name: "Serbia", abbreviation: "RS" }, { name: "Seychelles", abbreviation: "SC" }, { name: "Sierra Leone", abbreviation: "SL" }, { name: "Singapore", abbreviation: "SG" }, { name: "Sint Maarten (Dutch part)", abbreviation: "SX" }, { name: "Slovakia", abbreviation: "SK" }, { name: "Slovenia", abbreviation: "SI" }, { name: "Solomon Islands", abbreviation: "SB" }, { name: "Somalia", abbreviation: "SO" }, { name: "South Africa", abbreviation: "ZA" }, { name: "South Georgia and the South Sandwich Islands", abbreviation: "GS" }, { name: "South Sudan", abbreviation: "SS" }, { name: "Spain", abbreviation: "ES" }, { name: "Sri Lanka", abbreviation: "LK" }, { name: "Sudan", abbreviation: "SD" }, { name: "Suriname", abbreviation: "SR" }, { name: "Svalbard and Jan Mayen", abbreviation: "SJ" }, { name: "Sweden", abbreviation: "SE" }, { name: "Switzerland", abbreviation: "CH" }, { name: "Syrian Arab Republic", abbreviation: "SY" }, { name: "Taiwan, Province of China", abbreviation: "TW" }, { name: "Tajikistan", abbreviation: "TJ" }, { name: "United Republic of Tanzania", abbreviation: "TZ" }, { name: "Thailand", abbreviation: "TH" }, { name: "Timor-Leste", abbreviation: "TL" }, { name: "Togo", abbreviation: "TG" }, { name: "Tokelau", abbreviation: "TK" }, { name: "Tonga", abbreviation: "TO" }, { name: "Trinidad and Tobago", abbreviation: "TT" }, { name: "Tunisia", abbreviation: "TN" }, { name: "T\xFCrkiye", abbreviation: "TR" }, { name: "Turkmenistan", abbreviation: "TM" }, { name: "Turks and Caicos Islands", abbreviation: "TC" }, { name: "Tuvalu", abbreviation: "TV" }, { name: "Uganda", abbreviation: "UG" }, { name: "Ukraine", abbreviation: "UA" }, { name: "United Arab Emirates", abbreviation: "AE" }, { name: "United Kingdom of Great Britain and Northern Ireland", abbreviation: "GB" }, { name: "United States Minor Outlying Islands", abbreviation: "UM" }, { name: "United States of America", abbreviation: "US" }, { name: "Uruguay", abbreviation: "UY" }, { name: "Uzbekistan", abbreviation: "UZ" }, { name: "Vanuatu", abbreviation: "VU" }, { name: "Bolivarian Republic of Venezuela", abbreviation: "VE" }, { name: "Viet Nam", abbreviation: "VN" }, { name: "Virgin Islands (British)", abbreviation: "VG" }, { name: "Virgin Islands (U.S.)", abbreviation: "VI" }, { name: "Wallis and Futuna", abbreviation: "WF" }, { name: "Western Sahara", abbreviation: "EH" }, { name: "Yemen", abbreviation: "YE" }, { name: "Zambia", abbreviation: "ZM" }, { name: "Zimbabwe", abbreviation: "ZW" }],
         counties: {
           // Data taken from http://www.downloadexcelfiles.com/gb_en/download-excel-file-list-counties-uk
           uk: [
@@ -7030,48 +7049,3769 @@ function ve() {
           "anger",
           "sadness",
           "fear"
-        ]
-      }, P = Object.prototype.hasOwnProperty, N = Object.keys || function(e) {
+        ],
+        music_genres: {
+          general: [
+            "Rock",
+            "Pop",
+            "Hip-Hop",
+            "Jazz",
+            "Classical",
+            "Electronic",
+            "Country",
+            "R&B",
+            "Reggae",
+            "Blues",
+            "Metal",
+            "Folk",
+            "Alternative",
+            "Punk",
+            "Disco",
+            "Funk",
+            "Techno",
+            "Indie",
+            "Gospel",
+            "Dance",
+            "Children's",
+            "World"
+          ],
+          alternative: [
+            "Art Punk",
+            "Alternative Rock",
+            "Britpunk",
+            "College Rock",
+            "Crossover Thrash",
+            "Crust Punk",
+            "Emo / Emocore",
+            "Experimental Rock",
+            "Folk Punk",
+            "Goth / Gothic Rock",
+            "Grunge",
+            "Hardcore Punk",
+            "Hard Rock",
+            "Indie Rock",
+            "Lo-fi",
+            "Musique Concr\xE8te",
+            "New Wave",
+            "Progressive Rock",
+            "Punk",
+            "Shoegaze",
+            "Steampunk"
+          ],
+          blues: [
+            "Acoustic Blues",
+            "African Blues",
+            "Blues Rock",
+            "Blues Shouter",
+            "British Blues",
+            "Canadian Blues",
+            "Chicago Blues",
+            "Classic Blues",
+            "Classic Female Blues",
+            "Contemporary Blues",
+            "Country Blues",
+            "Dark Blues",
+            "Delta Blues",
+            "Detroit Blues",
+            "Doom Blues",
+            "Electric Blues",
+            "Folk Blues",
+            "Gospel Blues",
+            "Harmonica Blues",
+            "Hill Country Blues",
+            "Hokum Blues",
+            "Jazz Blues",
+            "Jump Blues",
+            "Kansas City Blues",
+            "Louisiana Blues",
+            "Memphis Blues",
+            "Modern Blues",
+            "New Orlean Blues",
+            "NY Blues",
+            "Piano Blues",
+            "Piedmont Blues",
+            "Punk Blues",
+            "Ragtime Blues",
+            "Rhythm Blues",
+            "Soul Blues",
+            "St.Louis Blues",
+            "Soul Blues",
+            "Swamp Blues",
+            "Texas Blues",
+            "Urban Blues",
+            "Vandeville",
+            "West Coast Blues"
+          ],
+          "children's": [
+            "Lullabies",
+            "Sing - Along",
+            "Stories"
+          ],
+          classical: [
+            "Avant-Garde",
+            "Ballet",
+            "Baroque",
+            "Cantata",
+            "Chamber Music",
+            "String Quartet",
+            "Chant",
+            "Choral",
+            "Classical Crossover",
+            "Concerto",
+            "Concerto Grosso",
+            "Contemporary Classical",
+            "Early Music",
+            "Expressionist",
+            "High Classical",
+            "Impressionist",
+            "Mass Requiem",
+            "Medieval",
+            "Minimalism",
+            "Modern Composition",
+            "Modern Classical",
+            "Opera",
+            "Oratorio",
+            "Orchestral",
+            "Organum",
+            "Renaissance",
+            "Romantic (early period)",
+            "Romantic (later period)",
+            "Sonata",
+            "Symphonic",
+            "Symphony",
+            "Twelve-tone",
+            "Wedding Music"
+          ],
+          country: [
+            "Alternative Country",
+            "Americana",
+            "Australian Country",
+            "Bakersfield Sound",
+            "Bluegrass",
+            "Blues Country",
+            "Cajun Fiddle Tunes",
+            "Christian Country",
+            "Classic Country",
+            "Close Harmony",
+            "Contemporary Bluegrass",
+            "Contemporary Country",
+            "Country Gospel",
+            "Country Pop",
+            "Country Rap",
+            "Country Rock",
+            "Country Soul",
+            "Cowboy / Western",
+            "Cowpunk",
+            "Dansband",
+            "Honky Tonk",
+            "Franco-Country",
+            "Gulf and Western",
+            "Hellbilly Music",
+            "Honky Tonk",
+            "Instrumental Country",
+            "Lubbock Sound",
+            "Nashville Sound",
+            "Neotraditional Country",
+            "Outlaw Country",
+            "Progressive",
+            "Psychobilly / Punkabilly",
+            "Red Dirt",
+            "Sertanejo",
+            "Texas County",
+            "Traditional Bluegrass",
+            "Traditional Country",
+            "Truck-Driving Country",
+            "Urban Cowboy",
+            "Western Swing"
+          ],
+          dance: [
+            "Club / Club Dance",
+            "Breakcore",
+            "Breakbeat / Breakstep",
+            "Chillstep",
+            "Deep House",
+            "Dubstep",
+            "Dancehall",
+            "Electro House",
+            "Electroswing",
+            "Exercise",
+            "Future Garage",
+            "Garage",
+            "Glitch Hop",
+            "Glitch Pop",
+            "Grime",
+            "Hardcore",
+            "Hard Dance",
+            "Hi-NRG / Eurodance",
+            "Horrorcore",
+            "House",
+            "Jackin House",
+            "Jungle / Drum n bass",
+            "Liquid Dub",
+            "Regstep",
+            "Speedcore",
+            "Techno",
+            "Trance",
+            "Trap"
+          ],
+          electronic: [
+            "2-Step",
+            "8bit",
+            "Ambient",
+            "Asian Underground",
+            "Bassline",
+            "Chillwave",
+            "Chiptune",
+            "Crunk",
+            "Downtempo",
+            "Drum & Bass",
+            "Hard Step",
+            "Electro",
+            "Electro-swing",
+            "Electroacoustic",
+            "Electronica",
+            "Electronic Rock",
+            "Eurodance",
+            "Hardstyle",
+            "Hi-Nrg",
+            "IDM/Experimental",
+            "Industrial",
+            "Trip Hop",
+            "Vaporwave",
+            "UK Garage",
+            "House",
+            "Dubstep",
+            "Deep House",
+            "EDM",
+            "Future Bass",
+            "Psychedelic trance"
+          ],
+          jazz: [
+            "Acid Jazz",
+            "Afro-Cuban Jazz",
+            "Avant-Garde Jazz",
+            "Bebop",
+            "Big Band",
+            "Blue Note",
+            "British Dance Band (Jazz)",
+            "Cape Jazz",
+            "Chamber Jazz",
+            "Contemporary Jazz",
+            "Continental Jazz",
+            "Cool Jazz",
+            "Crossover Jazz",
+            "Dark Jazz",
+            "Dixieland",
+            "Early Jazz",
+            "Electro Swing (Jazz)",
+            "Ethio-jazz",
+            "Ethno-Jazz",
+            "European Free Jazz",
+            "Free Funk (Avant-Garde / Funk Jazz)",
+            "Free Jazz",
+            "Fusion",
+            "Gypsy Jazz",
+            "Hard Bop",
+            "Indo Jazz",
+            "Jazz Blues",
+            "Jazz-Funk (see Free Funk)",
+            "Jazz-Fusion",
+            "Jazz Rap",
+            "Jazz Rock",
+            "Kansas City Jazz",
+            "Latin Jazz",
+            "M-Base Jazz",
+            "Mainstream Jazz",
+            "Modal Jazz",
+            "Neo-Bop",
+            "Neo-Swing",
+            "Nu Jazz",
+            "Orchestral Jazz",
+            "Post-Bop",
+            "Punk Jazz",
+            "Ragtime",
+            "Ska Jazz",
+            "Skiffle (also Folk)",
+            "Smooth Jazz",
+            "Soul Jazz",
+            "Swing Jazz",
+            "Straight-Ahead Jazz",
+            "Trad Jazz",
+            "Third Stream",
+            "Jazz-Funk",
+            "Free Jazz",
+            "West Coast Jazz"
+          ],
+          metal: [
+            "Heavy Metal",
+            "Speed Metal",
+            "Thrash Metal",
+            "Power Metal",
+            "Death Metal",
+            "Black Metal",
+            "Pagan Metal",
+            "Viking Metal",
+            "Folk Metal",
+            "Symphonic Metal",
+            "Gothic Metal",
+            "Glam Metal",
+            "Hair Metal",
+            "Doom Metal",
+            "Groove Metal",
+            "Industrial Metal",
+            "Modern Metal",
+            "Neoclassical Metal",
+            "New Wave Of British Heavy Metal",
+            "Post Metal",
+            "Progressive Metal",
+            "Avantgarde Metal",
+            "Sludge",
+            "Djent",
+            "Drone",
+            "Kawaii Metal",
+            "Pirate Metal",
+            "Nu Metal",
+            "Neue Deutsche H\xE4rte",
+            "Math Metal",
+            "Crossover",
+            "Grindcore",
+            "Hardcore",
+            "Metalcore",
+            "Deathcore",
+            "Post Hardcore",
+            "Mathcore"
+          ],
+          folk: [
+            "American Folk Revival",
+            "Anti - Folk",
+            "British Folk Revival",
+            "Contemporary Folk",
+            "Filk Music",
+            "Freak Folk",
+            "Indie Folk",
+            "Industrial Folk",
+            "Neofolk",
+            "Progressive Folk",
+            "Psychedelic Folk",
+            "Sung Poetry",
+            "Techno - Folk",
+            "Folk Rock",
+            "Old-time Music",
+            "Bluegrass",
+            "Appalachian",
+            "Roots Revival",
+            "Celtic",
+            "Indie Folk"
+          ],
+          pop: [
+            "Adult Contemporary",
+            "Arab Pop",
+            "Baroque",
+            "Britpop",
+            "Bubblegum Pop",
+            "Chamber Pop",
+            "Chanson",
+            "Christian Pop",
+            "Classical Crossover",
+            "Europop",
+            "Austropop",
+            "Balkan Pop",
+            "French Pop",
+            "Korean Pop",
+            "Japanese Pop",
+            "Chinese Pop",
+            "Latin Pop",
+            "La\xEFk\xF3",
+            "Nederpop",
+            "Russian Pop",
+            "Dance Pop",
+            "Dream Pop",
+            "Electro Pop",
+            "Iranian Pop",
+            "Jangle Pop",
+            "Latin Ballad",
+            "Levenslied",
+            "Louisiana Swamp Pop",
+            "Mexican Pop",
+            "Motorpop",
+            "New Romanticism",
+            "Orchestral Pop",
+            "Pop Rap",
+            "Popera",
+            "Pop / Rock",
+            "Pop Punk",
+            "Power Pop",
+            "Psychedelic Pop",
+            "Russian Pop",
+            "Schlager",
+            "Soft Rock",
+            "Sophisti - Pop",
+            "Space Age Pop",
+            "Sunshine Pop",
+            "Surf Pop",
+            "Synthpop",
+            "Teen Pop",
+            "Traditional Pop Music",
+            "Turkish Pop",
+            "Vispop",
+            "Wonky Pop"
+          ],
+          "r&b": [
+            "(Carolina) Beach Music",
+            "Contemporary R & B",
+            "Disco",
+            "Doo Wop",
+            "Funk",
+            "Modern Soul",
+            "Motown",
+            "Neo - Soul",
+            "Northern Soul",
+            "Psychedelic Soul",
+            "Quiet Storm",
+            "Soul",
+            "Soul Blues",
+            "Southern Soul"
+          ],
+          reggae: [
+            "2 - Tone",
+            "Dub",
+            "Roots Reggae",
+            "Reggae Fusion",
+            "Reggae en Espa\xF1ol",
+            "Spanish Reggae",
+            "Reggae 110",
+            "Reggae Bultr\xF3n",
+            "Romantic Flow",
+            "Lovers Rock",
+            "Raggamuffin",
+            "Ragga",
+            "Dancehall",
+            "Ska"
+          ],
+          rock: [
+            "Acid Rock",
+            "Adult - Oriented Rock",
+            "Afro Punk",
+            "Adult Alternative",
+            "Alternative Rock",
+            "American Traditional Rock",
+            "Anatolian Rock",
+            "Arena Rock",
+            "Art Rock",
+            "Blues - Rock",
+            "British Invasion",
+            "Cock Rock",
+            "Death Metal / Black Metal",
+            "Doom Metal",
+            "Glam Rock",
+            "Gothic Metal",
+            "Grind Core",
+            "Hair Metal",
+            "Hard Rock",
+            "Math Metal",
+            "Math Rock",
+            "Metal",
+            "Metal Core",
+            "Noise Rock",
+            "Jam Bands",
+            "Post Punk",
+            "Post Rock",
+            "Prog - Rock / Art Rock",
+            "Progressive Metal",
+            "Psychedelic",
+            "Rock & Roll",
+            "Rockabilly",
+            "Roots Rock",
+            "Singer / Songwriter",
+            "Southern Rock",
+            "Spazzcore",
+            "Stoner Metal",
+            "Surf",
+            "Technical Death Metal",
+            "Tex - Mex",
+            "Thrash Metal",
+            "Time Lord Rock(Trock)",
+            "Trip - hop",
+            "Yacht Rock",
+            "School House Rock"
+          ],
+          "hip-hop": [
+            "Alternative Rap",
+            "Avant - Garde",
+            "Bounce",
+            "Chap Hop",
+            "Christian Hip Hop",
+            "Conscious Hip Hop",
+            "Country - Rap",
+            "Grunk",
+            "Crunkcore",
+            "Cumbia Rap",
+            "Dirty South",
+            "East Coast",
+            "Brick City Club",
+            "Hardcore Hip Hop",
+            "Mafioso Rap",
+            "New Jersey Hip Hop",
+            "Freestyle Rap",
+            "G - Funk",
+            "Gangsta Rap",
+            "Golden Age",
+            "Grime",
+            "Hardcore Rap",
+            "Hip - Hop",
+            "Hip Pop",
+            "Horrorcore",
+            "Hyphy",
+            "Industrial Hip Hop",
+            "Instrumental Hip Hop",
+            "Jazz Rap",
+            "Latin Rap",
+            "Low Bap",
+            "Lyrical Hip Hop",
+            "Merenrap",
+            "Midwest Hip Hop",
+            "Chicago Hip Hop",
+            "Detroit Hip Hop",
+            "Horrorcore",
+            "St.Louis Hip Hop",
+            "Twin Cities Hip Hop",
+            "Motswako",
+            "Nerdcore",
+            "New Jack Swing",
+            "New School Hip Hop",
+            "Old School Rap",
+            "Rap",
+            "Trap",
+            "Turntablism",
+            "Underground Rap",
+            "West Coast Rap",
+            "East Coast Rap",
+            "Trap",
+            "UK Grime",
+            "Hyphy",
+            "Emo-rap",
+            "Cloud rap",
+            "G-funk",
+            "Boom Bap",
+            "Mumble",
+            "Drill",
+            "UK Drill",
+            "Soundcloud Rap",
+            "Lo-fi"
+          ],
+          punk: [
+            "Afro-punk",
+            "Anarcho punk",
+            "Art punk",
+            "Christian punk",
+            "Crust punk",
+            "Deathrock",
+            "Egg punk",
+            "Garage punk",
+            "Glam punk",
+            "Hardcore punk",
+            "Horror punk",
+            "Incelcore/e-punk",
+            "Oi!",
+            "Peace punk",
+            "Punk pathetique",
+            "Queercore",
+            "Riot Grrrl",
+            "Skate punk",
+            "Street punk",
+            "Taqwacore",
+            "Trallpunk"
+          ],
+          disco: [
+            "Nu-disco",
+            "Disco-funk",
+            "Hi-NRG",
+            "Italo Disco",
+            "Eurodisco",
+            "Boogie",
+            "Space Disco",
+            "Post-disco",
+            "Electro Disco",
+            "Disco House",
+            "Disco Pop",
+            "Soulful House"
+          ],
+          funk: [
+            "Funk Rock",
+            "P-Funk (Parliament-Funkadelic)",
+            "Psychedelic Funk",
+            "Funk Metal",
+            "Electro-Funk",
+            "Go-go",
+            "Boogie-Funk",
+            "Jazz-Funk",
+            "Soul-Funk",
+            "Funky Disco",
+            "Nu-Funk",
+            "Afrobeat",
+            "Latin Funk",
+            "G-Funk",
+            "Acid Jazz",
+            "Funktronica",
+            "Folk-Funk",
+            "Space Funk",
+            "Ambient Funk",
+            "Hard Funk",
+            "Fusion Funk"
+          ],
+          techno: [
+            "Acid Techno",
+            "Ambient Techno",
+            "Detroit Techno",
+            "Dub Techno",
+            "Minimal Techno",
+            "Industrial Techno",
+            "Hard Techno",
+            "Trance",
+            "Progressive Techno",
+            "Tech House",
+            "Electronica",
+            "Breakbeat Techno",
+            "Electro Techno",
+            "Melodic Techno",
+            "Experimental Techno",
+            "Dark Techno",
+            "Ebm",
+            "Hypnotic Techno",
+            "Psychedelic Techno",
+            "Rave Techno",
+            "Techno-Pop"
+          ],
+          indie: [
+            "Indie Rock",
+            "Indie Pop",
+            "Indie Folk",
+            "Indie Electronic",
+            "Indie Punk",
+            "Indie Hip-Hop",
+            "Dream Pop",
+            "Shoegaze",
+            "Lo-fi",
+            "Chillwave",
+            "Freak Folk",
+            "Noise Pop",
+            "Math Rock",
+            "Post-Punk",
+            "Garage Rock",
+            "Experimental Indie",
+            "Surf Rock",
+            "Alternative Country",
+            "Indie Soul",
+            "Art Rock",
+            "Indie R&B",
+            "Indietronica",
+            "Emo",
+            "Post-Rock",
+            "Indie Pop-Rock",
+            "Indie Synthpop",
+            "Noise Rock",
+            "Psych Folk",
+            "Indie Blues"
+          ],
+          gospel: [
+            "Traditional Gospel",
+            "Contemporary Gospel",
+            "Southern Gospel",
+            "Black Gospel",
+            "Urban Contemporary Gospel",
+            "Gospel Blues",
+            "Bluegrass Gospel",
+            "Country Gospel",
+            "Praise and Worship",
+            "Christian Hip-Hop",
+            "Gospel Jazz",
+            "Reggae Gospel",
+            "African Gospel",
+            "Latin Gospel",
+            "R&B Gospel",
+            "Gospel Choir",
+            "Acappella Gospel",
+            "Instrumental Gospel",
+            "Gospel Rap"
+          ],
+          world: [
+            "African",
+            "Arabic",
+            "Asian",
+            "Caribbean",
+            "Celtic",
+            "European",
+            "Latin American",
+            "Middle Eastern",
+            "Native American",
+            "Polynesian",
+            "Reggae",
+            "Ska",
+            "Salsa",
+            "Flamenco",
+            "Bossa Nova",
+            "Tango",
+            "Fado",
+            "Klezmer",
+            "Balkan",
+            "Afrobeat",
+            "Mongolian Throat Singing",
+            "Indian Classical",
+            "Gamelan",
+            "Sufi Music",
+            "Zydeco",
+            "Kora Music",
+            "Andean Music",
+            "Irish Traditional",
+            "Gypsy Jazz",
+            "Bollywood",
+            "Bhangra",
+            "Jawaiian",
+            "Hawaiian Slack Key Guitar",
+            "Calypso",
+            "Cuban Son",
+            "Taiko Drumming",
+            "African Highlife",
+            "Merengue",
+            "Tuvan Throat Singing"
+          ]
+        },
+        // Data sourced from https://unicode.org/emoji/charts/full-emoji-list.html
+        emojis: {
+          smileys_and_emotion: [
+            "0x1f600",
+            "0x1f603",
+            "0x1f604",
+            "0x1f601",
+            "0x1f606",
+            "0x1f605",
+            "0x1f923",
+            "0x1f602",
+            "0x1f642",
+            "0x1f643",
+            "0x1fae0",
+            "0x1f609",
+            "0x1f60a",
+            "0x1f607",
+            "0x1f970",
+            "0x1f60d",
+            "0x1f929",
+            "0x1f618",
+            "0x1f617",
+            "0x263a",
+            "0x1f61a",
+            "0x1f619",
+            "0x1f972",
+            "0x1f60b",
+            "0x1f61b",
+            "0x1f61c",
+            "0x1f92a",
+            "0x1f61d",
+            "0x1f911",
+            "0x1f917",
+            "0x1f92d",
+            "0x1fae2",
+            "0x1fae3",
+            "0x1f92b",
+            "0x1f914",
+            "0x1fae1",
+            "0x1f910",
+            "0x1f928",
+            "0x1f610",
+            "0x1f611",
+            "0x1f636",
+            "0x1fae5",
+            "0x1f636",
+            "0x200d",
+            "0x1f32b",
+            "0xfe0f",
+            "0x1f60f",
+            "0x1f612",
+            "0x1f644",
+            "0x1f62c",
+            "0x1f62e",
+            "0x200d",
+            "0x1f4a8",
+            "0x1f925",
+            "0x1fae8",
+            "0x1f642",
+            "0x200d",
+            "0x2194",
+            "0xfe0f",
+            "0x1f642",
+            "0x200d",
+            "0x2195",
+            "0xfe0f",
+            "0x1f60c",
+            "0x1f614",
+            "0x1f62a",
+            "0x1f924",
+            "0x1f634",
+            "0x1f637",
+            "0x1f912",
+            "0x1f915",
+            "0x1f922",
+            "0x1f92e",
+            "0x1f927",
+            "0x1f975",
+            "0x1f976",
+            "0x1f974",
+            "0x1f635",
+            "0x1f635",
+            "0x200d",
+            "0x1f4ab",
+            "0x1f92f",
+            "0x1f920",
+            "0x1f973",
+            "0x1f978",
+            "0x1f60e",
+            "0x1f913",
+            "0x1f9d0",
+            "0x1f615",
+            "0x1fae4",
+            "0x1f61f",
+            "0x1f641",
+            "0x2639",
+            "0x1f62e",
+            "0x1f62f",
+            "0x1f632",
+            "0x1f633",
+            "0x1f97a",
+            "0x1f979",
+            "0x1f626",
+            "0x1f627",
+            "0x1f628",
+            "0x1f630",
+            "0x1f625",
+            "0x1f622",
+            "0x1f62d",
+            "0x1f631",
+            "0x1f616",
+            "0x1f623",
+            "0x1f61e",
+            "0x1f613",
+            "0x1f629",
+            "0x1f62b",
+            "0x1f971",
+            "0x1f624",
+            "0x1f621",
+            "0x1f620",
+            "0x1f92c",
+            "0x1f608",
+            "0x1f47f",
+            "0x1f480",
+            "0x2620",
+            "0x1f4a9",
+            "0x1f921",
+            "0x1f479",
+            "0x1f47a",
+            "0x1f47b",
+            "0x1f47d",
+            "0x1f47e",
+            "0x1f916",
+            "0x1f63a",
+            "0x1f638",
+            "0x1f639",
+            "0x1f63b",
+            "0x1f63c",
+            "0x1f63d",
+            "0x1f640",
+            "0x1f63f",
+            "0x1f63e",
+            "0x1f648",
+            "0x1f649",
+            "0x1f64a",
+            "0x1f48c",
+            "0x1f498",
+            "0x1f49d",
+            "0x1f496",
+            "0x1f497",
+            "0x1f493",
+            "0x1f49e",
+            "0x1f495",
+            "0x1f49f",
+            "0x2763",
+            "0x1f494",
+            "0x2764",
+            "0xfe0f",
+            "0x200d",
+            "0x1f525",
+            "0x2764",
+            "0xfe0f",
+            "0x200d",
+            "0x1fa79",
+            "0x2764",
+            "0x1fa77",
+            "0x1f9e1",
+            "0x1f49b",
+            "0x1f49a",
+            "0x1f499",
+            "0x1fa75",
+            "0x1f49c",
+            "0x1f90e",
+            "0x1f5a4",
+            "0x1fa76",
+            "0x1f90d",
+            "0x1f48b",
+            "0x1f4af",
+            "0x1f4a2",
+            "0x1f4a5",
+            "0x1f4ab",
+            "0x1f4a6",
+            "0x1f4a8",
+            "0x1f573",
+            "0x1f4ac",
+            "0x1f441",
+            "0xfe0f",
+            "0x200d",
+            "0x1f5e8",
+            "0xfe0f",
+            "0x1f5e8",
+            "0x1f5ef",
+            "0x1f4ad",
+            "0x1f4a4"
+          ],
+          people_and_body: [
+            "0x1f44b",
+            "0x1f91a",
+            "0x1f590",
+            "0x270b",
+            "0x1f596",
+            "0x1faf1",
+            "0x1faf2",
+            "0x1faf3",
+            "0x1faf4",
+            "0x1faf7",
+            "0x1faf8",
+            "0x1f44c",
+            "0x1f90c",
+            "0x1f90f",
+            "0x270c",
+            "0x1f91e",
+            "0x1faf0",
+            "0x1f91f",
+            "0x1f918",
+            "0x1f919",
+            "0x1f448",
+            "0x1f449",
+            "0x1f446",
+            "0x1f595",
+            "0x1f447",
+            "0x261d",
+            "0x1faf5",
+            "0x1f44d",
+            "0x1f44e",
+            "0x270a",
+            "0x1f44a",
+            "0x1f91b",
+            "0x1f91c",
+            "0x1f44f",
+            "0x1f64c",
+            "0x1faf6",
+            "0x1f450",
+            "0x1f932",
+            "0x1f91d",
+            "0x1f64f",
+            "0x270d",
+            "0x1f485",
+            "0x1f933",
+            "0x1f4aa",
+            "0x1f9be",
+            "0x1f9bf",
+            "0x1f9b5",
+            "0x1f9b6",
+            "0x1f442",
+            "0x1f9bb",
+            "0x1f443",
+            "0x1f9e0",
+            "0x1fac0",
+            "0x1fac1",
+            "0x1f9b7",
+            "0x1f9b4",
+            "0x1f440",
+            "0x1f441",
+            "0x1f445",
+            "0x1f444",
+            "0x1fae6",
+            "0x1f476",
+            "0x1f9d2",
+            "0x1f466",
+            "0x1f467",
+            "0x1f9d1",
+            "0x1f471",
+            "0x1f468",
+            "0x1f9d4",
+            "0x1f9d4",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9d4",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f468",
+            "0x200d",
+            "0x1f9b0",
+            "0x1f468",
+            "0x200d",
+            "0x1f9b1",
+            "0x1f468",
+            "0x200d",
+            "0x1f9b3",
+            "0x1f468",
+            "0x200d",
+            "0x1f9b2",
+            "0x1f469",
+            "0x1f469",
+            "0x200d",
+            "0x1f9b0",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9b0",
+            "0x1f469",
+            "0x200d",
+            "0x1f9b1",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9b1",
+            "0x1f469",
+            "0x200d",
+            "0x1f9b3",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9b3",
+            "0x1f469",
+            "0x200d",
+            "0x1f9b2",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9b2",
+            "0x1f471",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f471",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9d3",
+            "0x1f474",
+            "0x1f475",
+            "0x1f64d",
+            "0x1f64d",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f64d",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f64e",
+            "0x1f64e",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f64e",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f645",
+            "0x1f645",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f645",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f646",
+            "0x1f646",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f646",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f481",
+            "0x1f481",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f481",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f64b",
+            "0x1f64b",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f64b",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9cf",
+            "0x1f9cf",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9cf",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f647",
+            "0x1f647",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f647",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f926",
+            "0x1f926",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f926",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f937",
+            "0x1f937",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f937",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9d1",
+            "0x200d",
+            "0x2695",
+            "0xfe0f",
+            "0x1f468",
+            "0x200d",
+            "0x2695",
+            "0xfe0f",
+            "0x1f469",
+            "0x200d",
+            "0x2695",
+            "0xfe0f",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f393",
+            "0x1f468",
+            "0x200d",
+            "0x1f393",
+            "0x1f469",
+            "0x200d",
+            "0x1f393",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f3eb",
+            "0x1f468",
+            "0x200d",
+            "0x1f3eb",
+            "0x1f469",
+            "0x200d",
+            "0x1f3eb",
+            "0x1f9d1",
+            "0x200d",
+            "0x2696",
+            "0xfe0f",
+            "0x1f468",
+            "0x200d",
+            "0x2696",
+            "0xfe0f",
+            "0x1f469",
+            "0x200d",
+            "0x2696",
+            "0xfe0f",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f33e",
+            "0x1f468",
+            "0x200d",
+            "0x1f33e",
+            "0x1f469",
+            "0x200d",
+            "0x1f33e",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f373",
+            "0x1f468",
+            "0x200d",
+            "0x1f373",
+            "0x1f469",
+            "0x200d",
+            "0x1f373",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f527",
+            "0x1f468",
+            "0x200d",
+            "0x1f527",
+            "0x1f469",
+            "0x200d",
+            "0x1f527",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f3ed",
+            "0x1f468",
+            "0x200d",
+            "0x1f3ed",
+            "0x1f469",
+            "0x200d",
+            "0x1f3ed",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f4bc",
+            "0x1f468",
+            "0x200d",
+            "0x1f4bc",
+            "0x1f469",
+            "0x200d",
+            "0x1f4bc",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f52c",
+            "0x1f468",
+            "0x200d",
+            "0x1f52c",
+            "0x1f469",
+            "0x200d",
+            "0x1f52c",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f4bb",
+            "0x1f468",
+            "0x200d",
+            "0x1f4bb",
+            "0x1f469",
+            "0x200d",
+            "0x1f4bb",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f3a4",
+            "0x1f468",
+            "0x200d",
+            "0x1f3a4",
+            "0x1f469",
+            "0x200d",
+            "0x1f3a4",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f3a8",
+            "0x1f468",
+            "0x200d",
+            "0x1f3a8",
+            "0x1f469",
+            "0x200d",
+            "0x1f3a8",
+            "0x1f9d1",
+            "0x200d",
+            "0x2708",
+            "0xfe0f",
+            "0x1f468",
+            "0x200d",
+            "0x2708",
+            "0xfe0f",
+            "0x1f469",
+            "0x200d",
+            "0x2708",
+            "0xfe0f",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f680",
+            "0x1f468",
+            "0x200d",
+            "0x1f680",
+            "0x1f469",
+            "0x200d",
+            "0x1f680",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f692",
+            "0x1f468",
+            "0x200d",
+            "0x1f692",
+            "0x1f469",
+            "0x200d",
+            "0x1f692",
+            "0x1f46e",
+            "0x1f46e",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f46e",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f575",
+            "0x1f575",
+            "0xfe0f",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f575",
+            "0xfe0f",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f482",
+            "0x1f482",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f482",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f977",
+            "0x1f477",
+            "0x1f477",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f477",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1fac5",
+            "0x1f934",
+            "0x1f478",
+            "0x1f473",
+            "0x1f473",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f473",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f472",
+            "0x1f9d5",
+            "0x1f935",
+            "0x1f935",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f935",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f470",
+            "0x1f470",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f470",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f930",
+            "0x1fac3",
+            "0x1fac4",
+            "0x1f931",
+            "0x1f469",
+            "0x200d",
+            "0x1f37c",
+            "0x1f468",
+            "0x200d",
+            "0x1f37c",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f37c",
+            "0x1f47c",
+            "0x1f385",
+            "0x1f936",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f384",
+            "0x1f9b8",
+            "0x1f9b8",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9b8",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9b9",
+            "0x1f9b9",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9b9",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9d9",
+            "0x1f9d9",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9d9",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9da",
+            "0x1f9da",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9da",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9db",
+            "0x1f9db",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9db",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9dc",
+            "0x1f9dc",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9dc",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9dd",
+            "0x1f9dd",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9dd",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9de",
+            "0x1f9de",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9de",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9df",
+            "0x1f9df",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9df",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9cc",
+            "0x1f486",
+            "0x1f486",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f486",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f487",
+            "0x1f487",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f487",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f6b6",
+            "0x1f6b6",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f6b6",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f6b6",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f6b6",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f6b6",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f9cd",
+            "0x1f9cd",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9cd",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9ce",
+            "0x1f9ce",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9ce",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9ce",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f9ce",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f9ce",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9af",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9af",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f468",
+            "0x200d",
+            "0x1f9af",
+            "0x1f468",
+            "0x200d",
+            "0x1f9af",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f469",
+            "0x200d",
+            "0x1f9af",
+            "0x1f469",
+            "0x200d",
+            "0x1f9af",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9bc",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9bc",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f468",
+            "0x200d",
+            "0x1f9bc",
+            "0x1f468",
+            "0x200d",
+            "0x1f9bc",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f469",
+            "0x200d",
+            "0x1f9bc",
+            "0x1f469",
+            "0x200d",
+            "0x1f9bc",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9bd",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9bd",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f468",
+            "0x200d",
+            "0x1f9bd",
+            "0x1f468",
+            "0x200d",
+            "0x1f9bd",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f469",
+            "0x200d",
+            "0x1f9bd",
+            "0x1f469",
+            "0x200d",
+            "0x1f9bd",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f3c3",
+            "0x1f3c3",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f3c3",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f3c3",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f3c3",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f3c3",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x200d",
+            "0x27a1",
+            "0xfe0f",
+            "0x1f483",
+            "0x1f57a",
+            "0x1f574",
+            "0x1f46f",
+            "0x1f46f",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f46f",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9d6",
+            "0x1f9d6",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9d6",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9d7",
+            "0x1f9d7",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9d7",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f93a",
+            "0x1f3c7",
+            "0x26f7",
+            "0x1f3c2",
+            "0x1f3cc",
+            "0x1f3cc",
+            "0xfe0f",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f3cc",
+            "0xfe0f",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f3c4",
+            "0x1f3c4",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f3c4",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f6a3",
+            "0x1f6a3",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f6a3",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f3ca",
+            "0x1f3ca",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f3ca",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x26f9",
+            "0x26f9",
+            "0xfe0f",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x26f9",
+            "0xfe0f",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f3cb",
+            "0x1f3cb",
+            "0xfe0f",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f3cb",
+            "0xfe0f",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f6b4",
+            "0x1f6b4",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f6b4",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f6b5",
+            "0x1f6b5",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f6b5",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f938",
+            "0x1f938",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f938",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f93c",
+            "0x1f93c",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f93c",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f93d",
+            "0x1f93d",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f93d",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f93e",
+            "0x1f93e",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f93e",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f939",
+            "0x1f939",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f939",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f9d8",
+            "0x1f9d8",
+            "0x200d",
+            "0x2642",
+            "0xfe0f",
+            "0x1f9d8",
+            "0x200d",
+            "0x2640",
+            "0xfe0f",
+            "0x1f6c0",
+            "0x1f6cc",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f91d",
+            "0x200d",
+            "0x1f9d1",
+            "0x1f46d",
+            "0x1f46b",
+            "0x1f46c",
+            "0x1f48f",
+            "0x1f469",
+            "0x200d",
+            "0x2764",
+            "0xfe0f",
+            "0x200d",
+            "0x1f48b",
+            "0x200d",
+            "0x1f468",
+            "0x1f468",
+            "0x200d",
+            "0x2764",
+            "0xfe0f",
+            "0x200d",
+            "0x1f48b",
+            "0x200d",
+            "0x1f468",
+            "0x1f469",
+            "0x200d",
+            "0x2764",
+            "0xfe0f",
+            "0x200d",
+            "0x1f48b",
+            "0x200d",
+            "0x1f469",
+            "0x1f491",
+            "0x1f469",
+            "0x200d",
+            "0x2764",
+            "0xfe0f",
+            "0x200d",
+            "0x1f468",
+            "0x1f468",
+            "0x200d",
+            "0x2764",
+            "0xfe0f",
+            "0x200d",
+            "0x1f468",
+            "0x1f469",
+            "0x200d",
+            "0x2764",
+            "0xfe0f",
+            "0x200d",
+            "0x1f469",
+            "0x1f468",
+            "0x200d",
+            "0x1f469",
+            "0x200d",
+            "0x1f466",
+            "0x1f468",
+            "0x200d",
+            "0x1f469",
+            "0x200d",
+            "0x1f467",
+            "0x1f468",
+            "0x200d",
+            "0x1f469",
+            "0x200d",
+            "0x1f467",
+            "0x200d",
+            "0x1f466",
+            "0x1f468",
+            "0x200d",
+            "0x1f469",
+            "0x200d",
+            "0x1f466",
+            "0x200d",
+            "0x1f466",
+            "0x1f468",
+            "0x200d",
+            "0x1f469",
+            "0x200d",
+            "0x1f467",
+            "0x200d",
+            "0x1f467",
+            "0x1f468",
+            "0x200d",
+            "0x1f468",
+            "0x200d",
+            "0x1f466",
+            "0x1f468",
+            "0x200d",
+            "0x1f468",
+            "0x200d",
+            "0x1f467",
+            "0x1f468",
+            "0x200d",
+            "0x1f468",
+            "0x200d",
+            "0x1f467",
+            "0x200d",
+            "0x1f466",
+            "0x1f468",
+            "0x200d",
+            "0x1f468",
+            "0x200d",
+            "0x1f466",
+            "0x200d",
+            "0x1f466",
+            "0x1f468",
+            "0x200d",
+            "0x1f468",
+            "0x200d",
+            "0x1f467",
+            "0x200d",
+            "0x1f467",
+            "0x1f469",
+            "0x200d",
+            "0x1f469",
+            "0x200d",
+            "0x1f466",
+            "0x1f469",
+            "0x200d",
+            "0x1f469",
+            "0x200d",
+            "0x1f467",
+            "0x1f469",
+            "0x200d",
+            "0x1f469",
+            "0x200d",
+            "0x1f467",
+            "0x200d",
+            "0x1f466",
+            "0x1f469",
+            "0x200d",
+            "0x1f469",
+            "0x200d",
+            "0x1f466",
+            "0x200d",
+            "0x1f466",
+            "0x1f469",
+            "0x200d",
+            "0x1f469",
+            "0x200d",
+            "0x1f467",
+            "0x200d",
+            "0x1f467",
+            "0x1f468",
+            "0x200d",
+            "0x1f466",
+            "0x1f468",
+            "0x200d",
+            "0x1f466",
+            "0x200d",
+            "0x1f466",
+            "0x1f468",
+            "0x200d",
+            "0x1f467",
+            "0x1f468",
+            "0x200d",
+            "0x1f467",
+            "0x200d",
+            "0x1f466",
+            "0x1f468",
+            "0x200d",
+            "0x1f467",
+            "0x200d",
+            "0x1f467",
+            "0x1f469",
+            "0x200d",
+            "0x1f466",
+            "0x1f469",
+            "0x200d",
+            "0x1f466",
+            "0x200d",
+            "0x1f466",
+            "0x1f469",
+            "0x200d",
+            "0x1f467",
+            "0x1f469",
+            "0x200d",
+            "0x1f467",
+            "0x200d",
+            "0x1f466",
+            "0x1f469",
+            "0x200d",
+            "0x1f467",
+            "0x200d",
+            "0x1f467",
+            "0x1f5e3",
+            "0x1f464",
+            "0x1f465",
+            "0x1fac2",
+            "0x1f46a",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9d2",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9d2",
+            "0x200d",
+            "0x1f9d2",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9d2",
+            "0x1f9d1",
+            "0x200d",
+            "0x1f9d2",
+            "0x200d",
+            "0x1f9d2",
+            "0x1f463"
+          ],
+          animals_and_nature: [
+            "0x1f435",
+            "0x1f412",
+            "0x1f98d",
+            "0x1f9a7",
+            "0x1f436",
+            "0x1f415",
+            "0x1f9ae",
+            "0x1f415",
+            "0x200d",
+            "0x1f9ba",
+            "0x1f429",
+            "0x1f43a",
+            "0x1f98a",
+            "0x1f99d",
+            "0x1f431",
+            "0x1f408",
+            "0x1f408",
+            "0x200d",
+            "0x2b1b",
+            "0x1f981",
+            "0x1f42f",
+            "0x1f405",
+            "0x1f406",
+            "0x1f434",
+            "0x1face",
+            "0x1facf",
+            "0x1f40e",
+            "0x1f984",
+            "0x1f993",
+            "0x1f98c",
+            "0x1f9ac",
+            "0x1f42e",
+            "0x1f402",
+            "0x1f403",
+            "0x1f404",
+            "0x1f437",
+            "0x1f416",
+            "0x1f417",
+            "0x1f43d",
+            "0x1f40f",
+            "0x1f411",
+            "0x1f410",
+            "0x1f42a",
+            "0x1f42b",
+            "0x1f999",
+            "0x1f992",
+            "0x1f418",
+            "0x1f9a3",
+            "0x1f98f",
+            "0x1f99b",
+            "0x1f42d",
+            "0x1f401",
+            "0x1f400",
+            "0x1f439",
+            "0x1f430",
+            "0x1f407",
+            "0x1f43f",
+            "0x1f9ab",
+            "0x1f994",
+            "0x1f987",
+            "0x1f43b",
+            "0x1f43b",
+            "0x200d",
+            "0x2744",
+            "0xfe0f",
+            "0x1f428",
+            "0x1f43c",
+            "0x1f9a5",
+            "0x1f9a6",
+            "0x1f9a8",
+            "0x1f998",
+            "0x1f9a1",
+            "0x1f43e",
+            "0x1f983",
+            "0x1f414",
+            "0x1f413",
+            "0x1f423",
+            "0x1f424",
+            "0x1f425",
+            "0x1f426",
+            "0x1f427",
+            "0x1f54a",
+            "0x1f985",
+            "0x1f986",
+            "0x1f9a2",
+            "0x1f989",
+            "0x1f9a4",
+            "0x1fab6",
+            "0x1f9a9",
+            "0x1f99a",
+            "0x1f99c",
+            "0x1fabd",
+            "0x1f426",
+            "0x200d",
+            "0x2b1b",
+            "0x1fabf",
+            "0x1f426",
+            "0x200d",
+            "0x1f525",
+            "0x1f438",
+            "0x1f40a",
+            "0x1f422",
+            "0x1f98e",
+            "0x1f40d",
+            "0x1f432",
+            "0x1f409",
+            "0x1f995",
+            "0x1f996",
+            "0x1f433",
+            "0x1f40b",
+            "0x1f42c",
+            "0x1f9ad",
+            "0x1f41f",
+            "0x1f420",
+            "0x1f421",
+            "0x1f988",
+            "0x1f419",
+            "0x1f41a",
+            "0x1fab8",
+            "0x1fabc",
+            "0x1f40c",
+            "0x1f98b",
+            "0x1f41b",
+            "0x1f41c",
+            "0x1f41d",
+            "0x1fab2",
+            "0x1f41e",
+            "0x1f997",
+            "0x1fab3",
+            "0x1f577",
+            "0x1f578",
+            "0x1f982",
+            "0x1f99f",
+            "0x1fab0",
+            "0x1fab1",
+            "0x1f9a0",
+            "0x1f490",
+            "0x1f338",
+            "0x1f4ae",
+            "0x1fab7",
+            "0x1f3f5",
+            "0x1f339",
+            "0x1f940",
+            "0x1f33a",
+            "0x1f33b",
+            "0x1f33c",
+            "0x1f337",
+            "0x1fabb",
+            "0x1f331",
+            "0x1fab4",
+            "0x1f332",
+            "0x1f333",
+            "0x1f334",
+            "0x1f335",
+            "0x1f33e",
+            "0x1f33f",
+            "0x2618",
+            "0x1f340",
+            "0x1f341",
+            "0x1f342",
+            "0x1f343",
+            "0x1fab9",
+            "0x1faba",
+            "0x1f344"
+          ],
+          food_and_drink: [
+            "0x1f347",
+            "0x1f348",
+            "0x1f349",
+            "0x1f34a",
+            "0x1f34b",
+            "0x1f34b",
+            "0x200d",
+            "0x1f7e9",
+            "0x1f34c",
+            "0x1f34d",
+            "0x1f96d",
+            "0x1f34e",
+            "0x1f34f",
+            "0x1f350",
+            "0x1f351",
+            "0x1f352",
+            "0x1f353",
+            "0x1fad0",
+            "0x1f95d",
+            "0x1f345",
+            "0x1fad2",
+            "0x1f965",
+            "0x1f951",
+            "0x1f346",
+            "0x1f954",
+            "0x1f955",
+            "0x1f33d",
+            "0x1f336",
+            "0x1fad1",
+            "0x1f952",
+            "0x1f96c",
+            "0x1f966",
+            "0x1f9c4",
+            "0x1f9c5",
+            "0x1f95c",
+            "0x1fad8",
+            "0x1f330",
+            "0x1fada",
+            "0x1fadb",
+            "0x1f344",
+            "0x200d",
+            "0x1f7eb",
+            "0x1f35e",
+            "0x1f950",
+            "0x1f956",
+            "0x1fad3",
+            "0x1f968",
+            "0x1f96f",
+            "0x1f95e",
+            "0x1f9c7",
+            "0x1f9c0",
+            "0x1f356",
+            "0x1f357",
+            "0x1f969",
+            "0x1f953",
+            "0x1f354",
+            "0x1f35f",
+            "0x1f355",
+            "0x1f32d",
+            "0x1f96a",
+            "0x1f32e",
+            "0x1f32f",
+            "0x1fad4",
+            "0x1f959",
+            "0x1f9c6",
+            "0x1f95a",
+            "0x1f373",
+            "0x1f958",
+            "0x1f372",
+            "0x1fad5",
+            "0x1f963",
+            "0x1f957",
+            "0x1f37f",
+            "0x1f9c8",
+            "0x1f9c2",
+            "0x1f96b",
+            "0x1f371",
+            "0x1f358",
+            "0x1f359",
+            "0x1f35a",
+            "0x1f35b",
+            "0x1f35c",
+            "0x1f35d",
+            "0x1f360",
+            "0x1f362",
+            "0x1f363",
+            "0x1f364",
+            "0x1f365",
+            "0x1f96e",
+            "0x1f361",
+            "0x1f95f",
+            "0x1f960",
+            "0x1f961",
+            "0x1f980",
+            "0x1f99e",
+            "0x1f990",
+            "0x1f991",
+            "0x1f9aa",
+            "0x1f366",
+            "0x1f367",
+            "0x1f368",
+            "0x1f369",
+            "0x1f36a",
+            "0x1f382",
+            "0x1f370",
+            "0x1f9c1",
+            "0x1f967",
+            "0x1f36b",
+            "0x1f36c",
+            "0x1f36d",
+            "0x1f36e",
+            "0x1f36f",
+            "0x1f37c",
+            "0x1f95b",
+            "0x2615",
+            "0x1fad6",
+            "0x1f375",
+            "0x1f376",
+            "0x1f37e",
+            "0x1f377",
+            "0x1f378",
+            "0x1f379",
+            "0x1f37a",
+            "0x1f37b",
+            "0x1f942",
+            "0x1f943",
+            "0x1fad7",
+            "0x1f964",
+            "0x1f9cb",
+            "0x1f9c3",
+            "0x1f9c9",
+            "0x1f9ca",
+            "0x1f962",
+            "0x1f37d",
+            "0x1f374",
+            "0x1f944",
+            "0x1f52a",
+            "0x1fad9",
+            "0x1f3fa"
+          ],
+          travel_and_places: [
+            "0x1f30d",
+            "0x1f30e",
+            "0x1f30f",
+            "0x1f310",
+            "0x1f5fa",
+            "0x1f5fe",
+            "0x1f9ed",
+            "0x1f3d4",
+            "0x26f0",
+            "0x1f30b",
+            "0x1f5fb",
+            "0x1f3d5",
+            "0x1f3d6",
+            "0x1f3dc",
+            "0x1f3dd",
+            "0x1f3de",
+            "0x1f3df",
+            "0x1f3db",
+            "0x1f3d7",
+            "0x1f9f1",
+            "0x1faa8",
+            "0x1fab5",
+            "0x1f6d6",
+            "0x1f3d8",
+            "0x1f3da",
+            "0x1f3e0",
+            "0x1f3e1",
+            "0x1f3e2",
+            "0x1f3e3",
+            "0x1f3e4",
+            "0x1f3e5",
+            "0x1f3e6",
+            "0x1f3e8",
+            "0x1f3e9",
+            "0x1f3ea",
+            "0x1f3eb",
+            "0x1f3ec",
+            "0x1f3ed",
+            "0x1f3ef",
+            "0x1f3f0",
+            "0x1f492",
+            "0x1f5fc",
+            "0x1f5fd",
+            "0x26ea",
+            "0x1f54c",
+            "0x1f6d5",
+            "0x1f54d",
+            "0x26e9",
+            "0x1f54b",
+            "0x26f2",
+            "0x26fa",
+            "0x1f301",
+            "0x1f303",
+            "0x1f3d9",
+            "0x1f304",
+            "0x1f305",
+            "0x1f306",
+            "0x1f307",
+            "0x1f309",
+            "0x2668",
+            "0x1f3a0",
+            "0x1f6dd",
+            "0x1f3a1",
+            "0x1f3a2",
+            "0x1f488",
+            "0x1f3aa",
+            "0x1f682",
+            "0x1f683",
+            "0x1f684",
+            "0x1f685",
+            "0x1f686",
+            "0x1f687",
+            "0x1f688",
+            "0x1f689",
+            "0x1f68a",
+            "0x1f69d",
+            "0x1f69e",
+            "0x1f68b",
+            "0x1f68c",
+            "0x1f68d",
+            "0x1f68e",
+            "0x1f690",
+            "0x1f691",
+            "0x1f692",
+            "0x1f693",
+            "0x1f694",
+            "0x1f695",
+            "0x1f696",
+            "0x1f697",
+            "0x1f698",
+            "0x1f699",
+            "0x1f6fb",
+            "0x1f69a",
+            "0x1f69b",
+            "0x1f69c",
+            "0x1f3ce",
+            "0x1f3cd",
+            "0x1f6f5",
+            "0x1f9bd",
+            "0x1f9bc",
+            "0x1f6fa",
+            "0x1f6b2",
+            "0x1f6f4",
+            "0x1f6f9",
+            "0x1f6fc",
+            "0x1f68f",
+            "0x1f6e3",
+            "0x1f6e4",
+            "0x1f6e2",
+            "0x26fd",
+            "0x1f6de",
+            "0x1f6a8",
+            "0x1f6a5",
+            "0x1f6a6",
+            "0x1f6d1",
+            "0x1f6a7",
+            "0x2693",
+            "0x1f6df",
+            "0x26f5",
+            "0x1f6f6",
+            "0x1f6a4",
+            "0x1f6f3",
+            "0x26f4",
+            "0x1f6e5",
+            "0x1f6a2",
+            "0x2708",
+            "0x1f6e9",
+            "0x1f6eb",
+            "0x1f6ec",
+            "0x1fa82",
+            "0x1f4ba",
+            "0x1f681",
+            "0x1f69f",
+            "0x1f6a0",
+            "0x1f6a1",
+            "0x1f6f0",
+            "0x1f680",
+            "0x1f6f8",
+            "0x1f6ce",
+            "0x1f9f3",
+            "0x231b",
+            "0x23f3",
+            "0x231a",
+            "0x23f0",
+            "0x23f1",
+            "0x23f2",
+            "0x1f570",
+            "0x1f55b",
+            "0x1f567",
+            "0x1f550",
+            "0x1f55c",
+            "0x1f551",
+            "0x1f55d",
+            "0x1f552",
+            "0x1f55e",
+            "0x1f553",
+            "0x1f55f",
+            "0x1f554",
+            "0x1f560",
+            "0x1f555",
+            "0x1f561",
+            "0x1f556",
+            "0x1f562",
+            "0x1f557",
+            "0x1f563",
+            "0x1f558",
+            "0x1f564",
+            "0x1f559",
+            "0x1f565",
+            "0x1f55a",
+            "0x1f566",
+            "0x1f311",
+            "0x1f312",
+            "0x1f313",
+            "0x1f314",
+            "0x1f315",
+            "0x1f316",
+            "0x1f317",
+            "0x1f318",
+            "0x1f319",
+            "0x1f31a",
+            "0x1f31b",
+            "0x1f31c",
+            "0x1f321",
+            "0x2600",
+            "0x1f31d",
+            "0x1f31e",
+            "0x1fa90",
+            "0x2b50",
+            "0x1f31f",
+            "0x1f320",
+            "0x1f30c",
+            "0x2601",
+            "0x26c5",
+            "0x26c8",
+            "0x1f324",
+            "0x1f325",
+            "0x1f326",
+            "0x1f327",
+            "0x1f328",
+            "0x1f329",
+            "0x1f32a",
+            "0x1f32b",
+            "0x1f32c",
+            "0x1f300",
+            "0x1f308",
+            "0x1f302",
+            "0x2602",
+            "0x2614",
+            "0x26f1",
+            "0x26a1",
+            "0x2744",
+            "0x2603",
+            "0x26c4",
+            "0x2604",
+            "0x1f525",
+            "0x1f4a7",
+            "0x1f30a"
+          ],
+          activities: [
+            "0x1f383",
+            "0x1f384",
+            "0x1f386",
+            "0x1f387",
+            "0x1f9e8",
+            "0x2728",
+            "0x1f388",
+            "0x1f389",
+            "0x1f38a",
+            "0x1f38b",
+            "0x1f38d",
+            "0x1f38e",
+            "0x1f38f",
+            "0x1f390",
+            "0x1f391",
+            "0x1f9e7",
+            "0x1f380",
+            "0x1f381",
+            "0x1f397",
+            "0x1f39f",
+            "0x1f3ab",
+            "0x1f396",
+            "0x1f3c6",
+            "0x1f3c5",
+            "0x1f947",
+            "0x1f948",
+            "0x1f949",
+            "0x26bd",
+            "0x26be",
+            "0x1f94e",
+            "0x1f3c0",
+            "0x1f3d0",
+            "0x1f3c8",
+            "0x1f3c9",
+            "0x1f3be",
+            "0x1f94f",
+            "0x1f3b3",
+            "0x1f3cf",
+            "0x1f3d1",
+            "0x1f3d2",
+            "0x1f94d",
+            "0x1f3d3",
+            "0x1f3f8",
+            "0x1f94a",
+            "0x1f94b",
+            "0x1f945",
+            "0x26f3",
+            "0x26f8",
+            "0x1f3a3",
+            "0x1f93f",
+            "0x1f3bd",
+            "0x1f3bf",
+            "0x1f6f7",
+            "0x1f94c",
+            "0x1f3af",
+            "0x1fa80",
+            "0x1fa81",
+            "0x1f52b",
+            "0x1f3b1",
+            "0x1f52e",
+            "0x1fa84",
+            "0x1f3ae",
+            "0x1f579",
+            "0x1f3b0",
+            "0x1f3b2",
+            "0x1f9e9",
+            "0x1f9f8",
+            "0x1fa85",
+            "0x1faa9",
+            "0x1fa86",
+            "0x2660",
+            "0x2665",
+            "0x2666",
+            "0x2663",
+            "0x265f",
+            "0x1f0cf",
+            "0x1f004",
+            "0x1f3b4",
+            "0x1f3ad",
+            "0x1f5bc",
+            "0x1f3a8",
+            "0x1f9f5",
+            "0x1faa1",
+            "0x1f9f6",
+            "0x1faa2"
+          ],
+          objects: [
+            "0x1f453",
+            "0x1f576",
+            "0x1f97d",
+            "0x1f97c",
+            "0x1f9ba",
+            "0x1f454",
+            "0x1f455",
+            "0x1f456",
+            "0x1f9e3",
+            "0x1f9e4",
+            "0x1f9e5",
+            "0x1f9e6",
+            "0x1f457",
+            "0x1f458",
+            "0x1f97b",
+            "0x1fa71",
+            "0x1fa72",
+            "0x1fa73",
+            "0x1f459",
+            "0x1f45a",
+            "0x1faad",
+            "0x1f45b",
+            "0x1f45c",
+            "0x1f45d",
+            "0x1f6cd",
+            "0x1f392",
+            "0x1fa74",
+            "0x1f45e",
+            "0x1f45f",
+            "0x1f97e",
+            "0x1f97f",
+            "0x1f460",
+            "0x1f461",
+            "0x1fa70",
+            "0x1f462",
+            "0x1faae",
+            "0x1f451",
+            "0x1f452",
+            "0x1f3a9",
+            "0x1f393",
+            "0x1f9e2",
+            "0x1fa96",
+            "0x26d1",
+            "0x1f4ff",
+            "0x1f484",
+            "0x1f48d",
+            "0x1f48e",
+            "0x1f507",
+            "0x1f508",
+            "0x1f509",
+            "0x1f50a",
+            "0x1f4e2",
+            "0x1f4e3",
+            "0x1f4ef",
+            "0x1f514",
+            "0x1f515",
+            "0x1f3bc",
+            "0x1f3b5",
+            "0x1f3b6",
+            "0x1f399",
+            "0x1f39a",
+            "0x1f39b",
+            "0x1f3a4",
+            "0x1f3a7",
+            "0x1f4fb",
+            "0x1f3b7",
+            "0x1fa97",
+            "0x1f3b8",
+            "0x1f3b9",
+            "0x1f3ba",
+            "0x1f3bb",
+            "0x1fa95",
+            "0x1f941",
+            "0x1fa98",
+            "0x1fa87",
+            "0x1fa88",
+            "0x1f4f1",
+            "0x1f4f2",
+            "0x260e",
+            "0x1f4de",
+            "0x1f4df",
+            "0x1f4e0",
+            "0x1f50b",
+            "0x1faab",
+            "0x1f50c",
+            "0x1f4bb",
+            "0x1f5a5",
+            "0x1f5a8",
+            "0x2328",
+            "0x1f5b1",
+            "0x1f5b2",
+            "0x1f4bd",
+            "0x1f4be",
+            "0x1f4bf",
+            "0x1f4c0",
+            "0x1f9ee",
+            "0x1f3a5",
+            "0x1f39e",
+            "0x1f4fd",
+            "0x1f3ac",
+            "0x1f4fa",
+            "0x1f4f7",
+            "0x1f4f8",
+            "0x1f4f9",
+            "0x1f4fc",
+            "0x1f50d",
+            "0x1f50e",
+            "0x1f56f",
+            "0x1f4a1",
+            "0x1f526",
+            "0x1f3ee",
+            "0x1fa94",
+            "0x1f4d4",
+            "0x1f4d5",
+            "0x1f4d6",
+            "0x1f4d7",
+            "0x1f4d8",
+            "0x1f4d9",
+            "0x1f4da",
+            "0x1f4d3",
+            "0x1f4d2",
+            "0x1f4c3",
+            "0x1f4dc",
+            "0x1f4c4",
+            "0x1f4f0",
+            "0x1f5de",
+            "0x1f4d1",
+            "0x1f516",
+            "0x1f3f7",
+            "0x1f4b0",
+            "0x1fa99",
+            "0x1f4b4",
+            "0x1f4b5",
+            "0x1f4b6",
+            "0x1f4b7",
+            "0x1f4b8",
+            "0x1f4b3",
+            "0x1f9fe",
+            "0x1f4b9",
+            "0x2709",
+            "0x1f4e7",
+            "0x1f4e8",
+            "0x1f4e9",
+            "0x1f4e4",
+            "0x1f4e5",
+            "0x1f4e6",
+            "0x1f4eb",
+            "0x1f4ea",
+            "0x1f4ec",
+            "0x1f4ed",
+            "0x1f4ee",
+            "0x1f5f3",
+            "0x270f",
+            "0x2712",
+            "0x1f58b",
+            "0x1f58a",
+            "0x1f58c",
+            "0x1f58d",
+            "0x1f4dd",
+            "0x1f4bc",
+            "0x1f4c1",
+            "0x1f4c2",
+            "0x1f5c2",
+            "0x1f4c5",
+            "0x1f4c6",
+            "0x1f5d2",
+            "0x1f5d3",
+            "0x1f4c7",
+            "0x1f4c8",
+            "0x1f4c9",
+            "0x1f4ca",
+            "0x1f4cb",
+            "0x1f4cc",
+            "0x1f4cd",
+            "0x1f4ce",
+            "0x1f587",
+            "0x1f4cf",
+            "0x1f4d0",
+            "0x2702",
+            "0x1f5c3",
+            "0x1f5c4",
+            "0x1f5d1",
+            "0x1f512",
+            "0x1f513",
+            "0x1f50f",
+            "0x1f510",
+            "0x1f511",
+            "0x1f5dd",
+            "0x1f528",
+            "0x1fa93",
+            "0x26cf",
+            "0x2692",
+            "0x1f6e0",
+            "0x1f5e1",
+            "0x2694",
+            "0x1f4a3",
+            "0x1fa83",
+            "0x1f3f9",
+            "0x1f6e1",
+            "0x1fa9a",
+            "0x1f527",
+            "0x1fa9b",
+            "0x1f529",
+            "0x2699",
+            "0x1f5dc",
+            "0x2696",
+            "0x1f9af",
+            "0x1f517",
+            "0x26d3",
+            "0xfe0f",
+            "0x200d",
+            "0x1f4a5",
+            "0x26d3",
+            "0x1fa9d",
+            "0x1f9f0",
+            "0x1f9f2",
+            "0x1fa9c",
+            "0x2697",
+            "0x1f9ea",
+            "0x1f9eb",
+            "0x1f9ec",
+            "0x1f52c",
+            "0x1f52d",
+            "0x1f4e1",
+            "0x1f489",
+            "0x1fa78",
+            "0x1f48a",
+            "0x1fa79",
+            "0x1fa7c",
+            "0x1fa7a",
+            "0x1fa7b",
+            "0x1f6aa",
+            "0x1f6d7",
+            "0x1fa9e",
+            "0x1fa9f",
+            "0x1f6cf",
+            "0x1f6cb",
+            "0x1fa91",
+            "0x1f6bd",
+            "0x1faa0",
+            "0x1f6bf",
+            "0x1f6c1",
+            "0x1faa4",
+            "0x1fa92",
+            "0x1f9f4",
+            "0x1f9f7",
+            "0x1f9f9",
+            "0x1f9fa",
+            "0x1f9fb",
+            "0x1faa3",
+            "0x1f9fc",
+            "0x1fae7",
+            "0x1faa5",
+            "0x1f9fd",
+            "0x1f9ef",
+            "0x1f6d2",
+            "0x1f6ac",
+            "0x26b0",
+            "0x1faa6",
+            "0x26b1",
+            "0x1f9ff",
+            "0x1faac",
+            "0x1f5ff",
+            "0x1faa7",
+            "0x1faaa"
+          ],
+          symbols: [
+            "0x1f3e7",
+            "0x1f6ae",
+            "0x1f6b0",
+            "0x267f",
+            "0x1f6b9",
+            "0x1f6ba",
+            "0x1f6bb",
+            "0x1f6bc",
+            "0x1f6be",
+            "0x1f6c2",
+            "0x1f6c3",
+            "0x1f6c4",
+            "0x1f6c5",
+            "0x26a0",
+            "0x1f6b8",
+            "0x26d4",
+            "0x1f6ab",
+            "0x1f6b3",
+            "0x1f6ad",
+            "0x1f6af",
+            "0x1f6b1",
+            "0x1f6b7",
+            "0x1f4f5",
+            "0x1f51e",
+            "0x2622",
+            "0x2623",
+            "0x2b06",
+            "0x2197",
+            "0x27a1",
+            "0x2198",
+            "0x2b07",
+            "0x2199",
+            "0x2b05",
+            "0x2196",
+            "0x2195",
+            "0x2194",
+            "0x21a9",
+            "0x21aa",
+            "0x2934",
+            "0x2935",
+            "0x1f503",
+            "0x1f504",
+            "0x1f519",
+            "0x1f51a",
+            "0x1f51b",
+            "0x1f51c",
+            "0x1f51d",
+            "0x1f6d0",
+            "0x269b",
+            "0x1f549",
+            "0x2721",
+            "0x2638",
+            "0x262f",
+            "0x271d",
+            "0x2626",
+            "0x262a",
+            "0x262e",
+            "0x1f54e",
+            "0x1f52f",
+            "0x1faaf",
+            "0x2648",
+            "0x2649",
+            "0x264a",
+            "0x264b",
+            "0x264c",
+            "0x264d",
+            "0x264e",
+            "0x264f",
+            "0x2650",
+            "0x2651",
+            "0x2652",
+            "0x2653",
+            "0x26ce",
+            "0x1f500",
+            "0x1f501",
+            "0x1f502",
+            "0x25b6",
+            "0x23e9",
+            "0x23ed",
+            "0x23ef",
+            "0x25c0",
+            "0x23ea",
+            "0x23ee",
+            "0x1f53c",
+            "0x23eb",
+            "0x1f53d",
+            "0x23ec",
+            "0x23f8",
+            "0x23f9",
+            "0x23fa",
+            "0x23cf",
+            "0x1f3a6",
+            "0x1f505",
+            "0x1f506",
+            "0x1f4f6",
+            "0x1f6dc",
+            "0x1f4f3",
+            "0x1f4f4",
+            "0x2640",
+            "0x2642",
+            "0x26a7",
+            "0x2716",
+            "0x2795",
+            "0x2796",
+            "0x2797",
+            "0x1f7f0",
+            "0x267e",
+            "0x203c",
+            "0x2049",
+            "0x2753",
+            "0x2754",
+            "0x2755",
+            "0x2757",
+            "0x3030",
+            "0x1f4b1",
+            "0x1f4b2",
+            "0x2695",
+            "0x267b",
+            "0x269c",
+            "0x1f531",
+            "0x1f4db",
+            "0x1f530",
+            "0x2b55",
+            "0x2705",
+            "0x2611",
+            "0x2714",
+            "0x274c",
+            "0x274e",
+            "0x27b0",
+            "0x27bf",
+            "0x303d",
+            "0x2733",
+            "0x2734",
+            "0x2747",
+            "0x00a9",
+            "0x00ae",
+            "0x2122",
+            "0x0023",
+            "0xfe0f",
+            "0x20e3",
+            "0x002a",
+            "0xfe0f",
+            "0x20e3",
+            "0x0030",
+            "0xfe0f",
+            "0x20e3",
+            "0x0031",
+            "0xfe0f",
+            "0x20e3",
+            "0x0032",
+            "0xfe0f",
+            "0x20e3",
+            "0x0033",
+            "0xfe0f",
+            "0x20e3",
+            "0x0034",
+            "0xfe0f",
+            "0x20e3",
+            "0x0035",
+            "0xfe0f",
+            "0x20e3",
+            "0x0036",
+            "0xfe0f",
+            "0x20e3",
+            "0x0037",
+            "0xfe0f",
+            "0x20e3",
+            "0x0038",
+            "0xfe0f",
+            "0x20e3",
+            "0x0039",
+            "0xfe0f",
+            "0x20e3",
+            "0x1f51f",
+            "0x1f520",
+            "0x1f521",
+            "0x1f522",
+            "0x1f523",
+            "0x1f524",
+            "0x1f170",
+            "0x1f18e",
+            "0x1f171",
+            "0x1f191",
+            "0x1f192",
+            "0x1f193",
+            "0x2139",
+            "0x1f194",
+            "0x24c2",
+            "0x1f195",
+            "0x1f196",
+            "0x1f17e",
+            "0x1f197",
+            "0x1f17f",
+            "0x1f198",
+            "0x1f199",
+            "0x1f19a",
+            "0x1f201",
+            "0x1f202",
+            "0x1f237",
+            "0x1f236",
+            "0x1f22f",
+            "0x1f250",
+            "0x1f239",
+            "0x1f21a",
+            "0x1f232",
+            "0x1f251",
+            "0x1f238",
+            "0x1f234",
+            "0x1f233",
+            "0x3297",
+            "0x3299",
+            "0x1f23a",
+            "0x1f235",
+            "0x1f534",
+            "0x1f7e0",
+            "0x1f7e1",
+            "0x1f7e2",
+            "0x1f535",
+            "0x1f7e3",
+            "0x1f7e4",
+            "0x26ab",
+            "0x26aa",
+            "0x1f7e5",
+            "0x1f7e7",
+            "0x1f7e8",
+            "0x1f7e9",
+            "0x1f7e6",
+            "0x1f7ea",
+            "0x1f7eb",
+            "0x2b1b",
+            "0x2b1c",
+            "0x25fc",
+            "0x25fb",
+            "0x25fe",
+            "0x25fd",
+            "0x25aa",
+            "0x25ab",
+            "0x1f536",
+            "0x1f537",
+            "0x1f538",
+            "0x1f539",
+            "0x1f53a",
+            "0x1f53b",
+            "0x1f4a0",
+            "0x1f518",
+            "0x1f533",
+            "0x1f532"
+          ],
+          flags: [
+            "0x1f3c1",
+            "0x1f6a9",
+            "0x1f38c",
+            "0x1f3f4",
+            "0x1f3f3",
+            "0x1f3f3",
+            "0xfe0f",
+            "0x200d",
+            "0x1f308",
+            "0x1f3f3",
+            "0xfe0f",
+            "0x200d",
+            "0x26a7",
+            "0xfe0f",
+            "0x1f3f4",
+            "0x200d",
+            "0x2620",
+            "0xfe0f",
+            "0x1f1e6",
+            "0x1f1e8",
+            "0x1f1e6",
+            "0x1f1e9",
+            "0x1f1e6",
+            "0x1f1ea",
+            "0x1f1e6",
+            "0x1f1eb",
+            "0x1f1e6",
+            "0x1f1ec",
+            "0x1f1e6",
+            "0x1f1ee",
+            "0x1f1e6",
+            "0x1f1f1",
+            "0x1f1e6",
+            "0x1f1f2",
+            "0x1f1e6",
+            "0x1f1f4",
+            "0x1f1e6",
+            "0x1f1f6",
+            "0x1f1e6",
+            "0x1f1f7",
+            "0x1f1e6",
+            "0x1f1f8",
+            "0x1f1e6",
+            "0x1f1f9",
+            "0x1f1e6",
+            "0x1f1fa",
+            "0x1f1e6",
+            "0x1f1fc",
+            "0x1f1e6",
+            "0x1f1fd",
+            "0x1f1e6",
+            "0x1f1ff",
+            "0x1f1e7",
+            "0x1f1e6",
+            "0x1f1e7",
+            "0x1f1e7",
+            "0x1f1e7",
+            "0x1f1e9",
+            "0x1f1e7",
+            "0x1f1ea",
+            "0x1f1e7",
+            "0x1f1eb",
+            "0x1f1e7",
+            "0x1f1ec",
+            "0x1f1e7",
+            "0x1f1ed",
+            "0x1f1e7",
+            "0x1f1ee",
+            "0x1f1e7",
+            "0x1f1ef",
+            "0x1f1e7",
+            "0x1f1f1",
+            "0x1f1e7",
+            "0x1f1f2",
+            "0x1f1e7",
+            "0x1f1f3",
+            "0x1f1e7",
+            "0x1f1f4",
+            "0x1f1e7",
+            "0x1f1f6",
+            "0x1f1e7",
+            "0x1f1f7",
+            "0x1f1e7",
+            "0x1f1f8",
+            "0x1f1e7",
+            "0x1f1f9",
+            "0x1f1e7",
+            "0x1f1fb",
+            "0x1f1e7",
+            "0x1f1fc",
+            "0x1f1e7",
+            "0x1f1fe",
+            "0x1f1e7",
+            "0x1f1ff",
+            "0x1f1e8",
+            "0x1f1e6",
+            "0x1f1e8",
+            "0x1f1e8",
+            "0x1f1e8",
+            "0x1f1e9",
+            "0x1f1e8",
+            "0x1f1eb",
+            "0x1f1e8",
+            "0x1f1ec",
+            "0x1f1e8",
+            "0x1f1ed",
+            "0x1f1e8",
+            "0x1f1ee",
+            "0x1f1e8",
+            "0x1f1f0",
+            "0x1f1e8",
+            "0x1f1f1",
+            "0x1f1e8",
+            "0x1f1f2",
+            "0x1f1e8",
+            "0x1f1f3",
+            "0x1f1e8",
+            "0x1f1f4",
+            "0x1f1e8",
+            "0x1f1f5",
+            "0x1f1e8",
+            "0x1f1f7",
+            "0x1f1e8",
+            "0x1f1fa",
+            "0x1f1e8",
+            "0x1f1fb",
+            "0x1f1e8",
+            "0x1f1fc",
+            "0x1f1e8",
+            "0x1f1fd",
+            "0x1f1e8",
+            "0x1f1fe",
+            "0x1f1e8",
+            "0x1f1ff",
+            "0x1f1e9",
+            "0x1f1ea",
+            "0x1f1e9",
+            "0x1f1ec",
+            "0x1f1e9",
+            "0x1f1ef",
+            "0x1f1e9",
+            "0x1f1f0",
+            "0x1f1e9",
+            "0x1f1f2",
+            "0x1f1e9",
+            "0x1f1f4",
+            "0x1f1e9",
+            "0x1f1ff",
+            "0x1f1ea",
+            "0x1f1e6",
+            "0x1f1ea",
+            "0x1f1e8",
+            "0x1f1ea",
+            "0x1f1ea",
+            "0x1f1ea",
+            "0x1f1ec",
+            "0x1f1ea",
+            "0x1f1ed",
+            "0x1f1ea",
+            "0x1f1f7",
+            "0x1f1ea",
+            "0x1f1f8",
+            "0x1f1ea",
+            "0x1f1f9",
+            "0x1f1ea",
+            "0x1f1fa",
+            "0x1f1eb",
+            "0x1f1ee",
+            "0x1f1eb",
+            "0x1f1ef",
+            "0x1f1eb",
+            "0x1f1f0",
+            "0x1f1eb",
+            "0x1f1f2",
+            "0x1f1eb",
+            "0x1f1f4",
+            "0x1f1eb",
+            "0x1f1f7",
+            "0x1f1ec",
+            "0x1f1e6",
+            "0x1f1ec",
+            "0x1f1e7",
+            "0x1f1ec",
+            "0x1f1e9",
+            "0x1f1ec",
+            "0x1f1ea",
+            "0x1f1ec",
+            "0x1f1eb",
+            "0x1f1ec",
+            "0x1f1ec",
+            "0x1f1ec",
+            "0x1f1ed",
+            "0x1f1ec",
+            "0x1f1ee",
+            "0x1f1ec",
+            "0x1f1f1",
+            "0x1f1ec",
+            "0x1f1f2",
+            "0x1f1ec",
+            "0x1f1f3",
+            "0x1f1ec",
+            "0x1f1f5",
+            "0x1f1ec",
+            "0x1f1f6",
+            "0x1f1ec",
+            "0x1f1f7",
+            "0x1f1ec",
+            "0x1f1f8",
+            "0x1f1ec",
+            "0x1f1f9",
+            "0x1f1ec",
+            "0x1f1fa",
+            "0x1f1ec",
+            "0x1f1fc",
+            "0x1f1ec",
+            "0x1f1fe",
+            "0x1f1ed",
+            "0x1f1f0",
+            "0x1f1ed",
+            "0x1f1f2",
+            "0x1f1ed",
+            "0x1f1f3",
+            "0x1f1ed",
+            "0x1f1f7",
+            "0x1f1ed",
+            "0x1f1f9",
+            "0x1f1ed",
+            "0x1f1fa",
+            "0x1f1ee",
+            "0x1f1e8",
+            "0x1f1ee",
+            "0x1f1e9",
+            "0x1f1ee",
+            "0x1f1ea",
+            "0x1f1ee",
+            "0x1f1f1",
+            "0x1f1ee",
+            "0x1f1f2",
+            "0x1f1ee",
+            "0x1f1f3",
+            "0x1f1ee",
+            "0x1f1f4",
+            "0x1f1ee",
+            "0x1f1f6",
+            "0x1f1ee",
+            "0x1f1f7",
+            "0x1f1ee",
+            "0x1f1f8",
+            "0x1f1ee",
+            "0x1f1f9",
+            "0x1f1ef",
+            "0x1f1ea",
+            "0x1f1ef",
+            "0x1f1f2",
+            "0x1f1ef",
+            "0x1f1f4",
+            "0x1f1ef",
+            "0x1f1f5",
+            "0x1f1f0",
+            "0x1f1ea",
+            "0x1f1f0",
+            "0x1f1ec",
+            "0x1f1f0",
+            "0x1f1ed",
+            "0x1f1f0",
+            "0x1f1ee",
+            "0x1f1f0",
+            "0x1f1f2",
+            "0x1f1f0",
+            "0x1f1f3",
+            "0x1f1f0",
+            "0x1f1f5",
+            "0x1f1f0",
+            "0x1f1f7",
+            "0x1f1f0",
+            "0x1f1fc",
+            "0x1f1f0",
+            "0x1f1fe",
+            "0x1f1f0",
+            "0x1f1ff",
+            "0x1f1f1",
+            "0x1f1e6",
+            "0x1f1f1",
+            "0x1f1e7",
+            "0x1f1f1",
+            "0x1f1e8",
+            "0x1f1f1",
+            "0x1f1ee",
+            "0x1f1f1",
+            "0x1f1f0",
+            "0x1f1f1",
+            "0x1f1f7",
+            "0x1f1f1",
+            "0x1f1f8",
+            "0x1f1f1",
+            "0x1f1f9",
+            "0x1f1f1",
+            "0x1f1fa",
+            "0x1f1f1",
+            "0x1f1fb",
+            "0x1f1f1",
+            "0x1f1fe",
+            "0x1f1f2",
+            "0x1f1e6",
+            "0x1f1f2",
+            "0x1f1e8",
+            "0x1f1f2",
+            "0x1f1e9",
+            "0x1f1f2",
+            "0x1f1ea",
+            "0x1f1f2",
+            "0x1f1eb",
+            "0x1f1f2",
+            "0x1f1ec",
+            "0x1f1f2",
+            "0x1f1ed",
+            "0x1f1f2",
+            "0x1f1f0",
+            "0x1f1f2",
+            "0x1f1f1",
+            "0x1f1f2",
+            "0x1f1f2",
+            "0x1f1f2",
+            "0x1f1f3",
+            "0x1f1f2",
+            "0x1f1f4",
+            "0x1f1f2",
+            "0x1f1f5",
+            "0x1f1f2",
+            "0x1f1f6",
+            "0x1f1f2",
+            "0x1f1f7",
+            "0x1f1f2",
+            "0x1f1f8",
+            "0x1f1f2",
+            "0x1f1f9",
+            "0x1f1f2",
+            "0x1f1fa",
+            "0x1f1f2",
+            "0x1f1fb",
+            "0x1f1f2",
+            "0x1f1fc",
+            "0x1f1f2",
+            "0x1f1fd",
+            "0x1f1f2",
+            "0x1f1fe",
+            "0x1f1f2",
+            "0x1f1ff",
+            "0x1f1f3",
+            "0x1f1e6",
+            "0x1f1f3",
+            "0x1f1e8",
+            "0x1f1f3",
+            "0x1f1ea",
+            "0x1f1f3",
+            "0x1f1eb",
+            "0x1f1f3",
+            "0x1f1ec",
+            "0x1f1f3",
+            "0x1f1ee",
+            "0x1f1f3",
+            "0x1f1f1",
+            "0x1f1f3",
+            "0x1f1f4",
+            "0x1f1f3",
+            "0x1f1f5",
+            "0x1f1f3",
+            "0x1f1f7",
+            "0x1f1f3",
+            "0x1f1fa",
+            "0x1f1f3",
+            "0x1f1ff",
+            "0x1f1f4",
+            "0x1f1f2",
+            "0x1f1f5",
+            "0x1f1e6",
+            "0x1f1f5",
+            "0x1f1ea",
+            "0x1f1f5",
+            "0x1f1eb",
+            "0x1f1f5",
+            "0x1f1ec",
+            "0x1f1f5",
+            "0x1f1ed",
+            "0x1f1f5",
+            "0x1f1f0",
+            "0x1f1f5",
+            "0x1f1f1",
+            "0x1f1f5",
+            "0x1f1f2",
+            "0x1f1f5",
+            "0x1f1f3",
+            "0x1f1f5",
+            "0x1f1f7",
+            "0x1f1f5",
+            "0x1f1f8",
+            "0x1f1f5",
+            "0x1f1f9",
+            "0x1f1f5",
+            "0x1f1fc",
+            "0x1f1f5",
+            "0x1f1fe",
+            "0x1f1f6",
+            "0x1f1e6",
+            "0x1f1f7",
+            "0x1f1ea",
+            "0x1f1f7",
+            "0x1f1f4",
+            "0x1f1f7",
+            "0x1f1f8",
+            "0x1f1f7",
+            "0x1f1fa",
+            "0x1f1f7",
+            "0x1f1fc",
+            "0x1f1f8",
+            "0x1f1e6",
+            "0x1f1f8",
+            "0x1f1e7",
+            "0x1f1f8",
+            "0x1f1e8",
+            "0x1f1f8",
+            "0x1f1e9",
+            "0x1f1f8",
+            "0x1f1ea",
+            "0x1f1f8",
+            "0x1f1ec",
+            "0x1f1f8",
+            "0x1f1ed",
+            "0x1f1f8",
+            "0x1f1ee",
+            "0x1f1f8",
+            "0x1f1ef",
+            "0x1f1f8",
+            "0x1f1f0",
+            "0x1f1f8",
+            "0x1f1f1",
+            "0x1f1f8",
+            "0x1f1f2",
+            "0x1f1f8",
+            "0x1f1f3",
+            "0x1f1f8",
+            "0x1f1f4",
+            "0x1f1f8",
+            "0x1f1f7",
+            "0x1f1f8",
+            "0x1f1f8",
+            "0x1f1f8",
+            "0x1f1f9",
+            "0x1f1f8",
+            "0x1f1fb",
+            "0x1f1f8",
+            "0x1f1fd",
+            "0x1f1f8",
+            "0x1f1fe",
+            "0x1f1f8",
+            "0x1f1ff",
+            "0x1f1f9",
+            "0x1f1e6",
+            "0x1f1f9",
+            "0x1f1e8",
+            "0x1f1f9",
+            "0x1f1e9",
+            "0x1f1f9",
+            "0x1f1eb",
+            "0x1f1f9",
+            "0x1f1ec",
+            "0x1f1f9",
+            "0x1f1ed",
+            "0x1f1f9",
+            "0x1f1ef",
+            "0x1f1f9",
+            "0x1f1f0",
+            "0x1f1f9",
+            "0x1f1f1",
+            "0x1f1f9",
+            "0x1f1f2",
+            "0x1f1f9",
+            "0x1f1f3",
+            "0x1f1f9",
+            "0x1f1f4",
+            "0x1f1f9",
+            "0x1f1f7",
+            "0x1f1f9",
+            "0x1f1f9",
+            "0x1f1f9",
+            "0x1f1fb",
+            "0x1f1f9",
+            "0x1f1fc",
+            "0x1f1f9",
+            "0x1f1ff",
+            "0x1f1fa",
+            "0x1f1e6",
+            "0x1f1fa",
+            "0x1f1ec",
+            "0x1f1fa",
+            "0x1f1f2",
+            "0x1f1fa",
+            "0x1f1f3",
+            "0x1f1fa",
+            "0x1f1f8",
+            "0x1f1fa",
+            "0x1f1fe",
+            "0x1f1fa",
+            "0x1f1ff",
+            "0x1f1fb",
+            "0x1f1e6",
+            "0x1f1fb",
+            "0x1f1e8",
+            "0x1f1fb",
+            "0x1f1ea",
+            "0x1f1fb",
+            "0x1f1ec",
+            "0x1f1fb",
+            "0x1f1ee",
+            "0x1f1fb",
+            "0x1f1f3",
+            "0x1f1fb",
+            "0x1f1fa",
+            "0x1f1fc",
+            "0x1f1eb",
+            "0x1f1fc",
+            "0x1f1f8",
+            "0x1f1fd",
+            "0x1f1f0",
+            "0x1f1fe",
+            "0x1f1ea",
+            "0x1f1fe",
+            "0x1f1f9",
+            "0x1f1ff",
+            "0x1f1e6",
+            "0x1f1ff",
+            "0x1f1f2",
+            "0x1f1ff",
+            "0x1f1fc",
+            "0x1f3f4",
+            "0xe0067",
+            "0xe0062",
+            "0xe0065",
+            "0xe006e",
+            "0xe0067",
+            "0xe007f",
+            "0x1f3f4",
+            "0xe0067",
+            "0xe0062",
+            "0xe0073",
+            "0xe0063",
+            "0xe0074",
+            "0xe007f",
+            "0x1f3f4",
+            "0xe0067",
+            "0xe0062",
+            "0xe0077",
+            "0xe006c",
+            "0xe0073",
+            "0xe007f"
+          ]
+        }
+      }, B = Object.prototype.hasOwnProperty, L = Object.keys || function(e) {
         var a = [];
         for (var i in e)
-          P.call(e, i) && a.push(i);
+          B.call(e, i) && a.push(i);
         return a;
       };
       function R(e, a) {
-        for (var i = N(e), s, h = 0, M = i.length; h < M; h++)
-          s = i[h], a[s] = e[s] || a[s];
+        for (var i = L(e), s, d = 0, S = i.length; d < S; d++)
+          s = i[d], a[s] = e[s] || a[s];
       }
       function w(e, a) {
         for (var i = 0, s = e.length; i < s; i++)
           a[i] = e[i];
       }
-      function O(e, a) {
+      function F(e, a) {
         var i = Array.isArray(e), s = a || (i ? new Array(e.length) : {});
         return i ? w(e, s) : R(e, s), s;
       }
       r.prototype.get = function(e) {
-        return O(v[e]);
+        return F(C[e]);
       }, r.prototype.mac_address = function(e) {
         e = o(e), e.separator || (e.separator = e.networkVersion ? "." : ":");
         var a = "ABCDEF1234567890", i = "";
         return e.networkVersion ? i = this.n(this.string, 3, { pool: a, length: 4 }).join(e.separator) : i = this.n(this.string, 6, { pool: a, length: 2 }).join(e.separator), i;
       }, r.prototype.normal = function(e) {
-        if (e = o(e, { mean: 0, dev: 1, pool: [] }), b(
+        if (e = o(e, { mean: 0, dev: 1, pool: [] }), x(
           e.pool.constructor !== Array,
           "Chance: The pool option must be a valid array."
-        ), b(
+        ), x(
           typeof e.mean != "number",
           "Chance: Mean (mean) must be a number"
-        ), b(
+        ), x(
           typeof e.dev != "number",
           "Chance: Standard deviation (dev) must be a number"
         ), e.pool.length > 0)
           return this.normal_pool(e);
-        var a, i, s, h, M = e.mean, A = e.dev;
+        var a, i, s, d, S = e.mean, v = e.dev;
         do
           i = this.random() * 2 - 1, s = this.random() * 2 - 1, a = i * i + s * s;
         while (a >= 1);
-        return h = i * Math.sqrt(-2 * Math.log(a) / a), A * h + M;
+        return d = i * Math.sqrt(-2 * Math.log(a) / a), v * d + S;
       }, r.prototype.normal_pool = function(e) {
         var a = 0;
         do {
@@ -7099,7 +10839,7 @@ function ve() {
         }
         return a + this.character({ alpha: !0, casing: "upper" }) + this.character({ alpha: !0, casing: "upper" }) + this.character({ alpha: !0, casing: "upper" });
       }, r.prototype.set = function(e, a) {
-        typeof e == "string" ? v[e] = a : v = O(e, v);
+        typeof e == "string" ? C[e] = a : C = F(e, C);
       }, r.prototype.tv = function(e) {
         return this.radio(e);
       }, r.prototype.cnpj = function() {
@@ -7110,24 +10850,24 @@ function ve() {
       }, r.prototype.emotion = function() {
         return this.pick(this.get("emotions"));
       }, r.prototype.mersenne_twister = function(e) {
-        return new F(e);
+        return new O(e);
       }, r.prototype.blueimp_md5 = function() {
-        return new L();
+        return new E();
       };
-      var F = function(e) {
+      var O = function(e) {
         e === void 0 && (e = Math.floor(Math.random() * Math.pow(10, 13))), this.N = 624, this.M = 397, this.MATRIX_A = 2567483615, this.UPPER_MASK = 2147483648, this.LOWER_MASK = 2147483647, this.mt = new Array(this.N), this.mti = this.N + 1, this.init_genrand(e);
       };
-      F.prototype.init_genrand = function(e) {
+      O.prototype.init_genrand = function(e) {
         for (this.mt[0] = e >>> 0, this.mti = 1; this.mti < this.N; this.mti++)
           e = this.mt[this.mti - 1] ^ this.mt[this.mti - 1] >>> 30, this.mt[this.mti] = (((e & 4294901760) >>> 16) * 1812433253 << 16) + (e & 65535) * 1812433253 + this.mti, this.mt[this.mti] >>>= 0;
-      }, F.prototype.init_by_array = function(e, a) {
-        var i = 1, s = 0, h, M;
-        for (this.init_genrand(19650218), h = this.N > a ? this.N : a; h; h--)
-          M = this.mt[i - 1] ^ this.mt[i - 1] >>> 30, this.mt[i] = (this.mt[i] ^ (((M & 4294901760) >>> 16) * 1664525 << 16) + (M & 65535) * 1664525) + e[s] + s, this.mt[i] >>>= 0, i++, s++, i >= this.N && (this.mt[0] = this.mt[this.N - 1], i = 1), s >= a && (s = 0);
-        for (h = this.N - 1; h; h--)
-          M = this.mt[i - 1] ^ this.mt[i - 1] >>> 30, this.mt[i] = (this.mt[i] ^ (((M & 4294901760) >>> 16) * 1566083941 << 16) + (M & 65535) * 1566083941) - i, this.mt[i] >>>= 0, i++, i >= this.N && (this.mt[0] = this.mt[this.N - 1], i = 1);
+      }, O.prototype.init_by_array = function(e, a) {
+        var i = 1, s = 0, d, S;
+        for (this.init_genrand(19650218), d = this.N > a ? this.N : a; d; d--)
+          S = this.mt[i - 1] ^ this.mt[i - 1] >>> 30, this.mt[i] = (this.mt[i] ^ (((S & 4294901760) >>> 16) * 1664525 << 16) + (S & 65535) * 1664525) + e[s] + s, this.mt[i] >>>= 0, i++, s++, i >= this.N && (this.mt[0] = this.mt[this.N - 1], i = 1), s >= a && (s = 0);
+        for (d = this.N - 1; d; d--)
+          S = this.mt[i - 1] ^ this.mt[i - 1] >>> 30, this.mt[i] = (this.mt[i] ^ (((S & 4294901760) >>> 16) * 1566083941 << 16) + (S & 65535) * 1566083941) - i, this.mt[i] >>>= 0, i++, i >= this.N && (this.mt[0] = this.mt[this.N - 1], i = 1);
         this.mt[0] = 2147483648;
-      }, F.prototype.genrand_int32 = function() {
+      }, O.prototype.genrand_int32 = function() {
         var e, a = new Array(0, this.MATRIX_A);
         if (this.mti >= this.N) {
           var i;
@@ -7138,102 +10878,102 @@ function ve() {
           e = this.mt[this.N - 1] & this.UPPER_MASK | this.mt[0] & this.LOWER_MASK, this.mt[this.N - 1] = this.mt[this.M - 1] ^ e >>> 1 ^ a[e & 1], this.mti = 0;
         }
         return e = this.mt[this.mti++], e ^= e >>> 11, e ^= e << 7 & 2636928640, e ^= e << 15 & 4022730752, e ^= e >>> 18, e >>> 0;
-      }, F.prototype.genrand_int31 = function() {
+      }, O.prototype.genrand_int31 = function() {
         return this.genrand_int32() >>> 1;
-      }, F.prototype.genrand_real1 = function() {
+      }, O.prototype.genrand_real1 = function() {
         return this.genrand_int32() * (1 / 4294967295);
-      }, F.prototype.random = function() {
+      }, O.prototype.random = function() {
         return this.genrand_int32() * (1 / 4294967296);
-      }, F.prototype.genrand_real3 = function() {
+      }, O.prototype.genrand_real3 = function() {
         return (this.genrand_int32() + 0.5) * (1 / 4294967296);
-      }, F.prototype.genrand_res53 = function() {
+      }, O.prototype.genrand_res53 = function() {
         var e = this.genrand_int32() >>> 5, a = this.genrand_int32() >>> 6;
         return (e * 67108864 + a) * (1 / 9007199254740992);
       };
-      var L = function() {
+      var E = function() {
       };
-      L.prototype.VERSION = "1.0.1", L.prototype.safe_add = function(a, i) {
-        var s = (a & 65535) + (i & 65535), h = (a >> 16) + (i >> 16) + (s >> 16);
-        return h << 16 | s & 65535;
-      }, L.prototype.bit_roll = function(e, a) {
+      E.prototype.VERSION = "1.0.1", E.prototype.safe_add = function(a, i) {
+        var s = (a & 65535) + (i & 65535), d = (a >> 16) + (i >> 16) + (s >> 16);
+        return d << 16 | s & 65535;
+      }, E.prototype.bit_roll = function(e, a) {
         return e << a | e >>> 32 - a;
-      }, L.prototype.md5_cmn = function(e, a, i, s, h, M) {
-        return this.safe_add(this.bit_roll(this.safe_add(this.safe_add(a, e), this.safe_add(s, M)), h), i);
-      }, L.prototype.md5_ff = function(e, a, i, s, h, M, A) {
-        return this.md5_cmn(a & i | ~a & s, e, a, h, M, A);
-      }, L.prototype.md5_gg = function(e, a, i, s, h, M, A) {
-        return this.md5_cmn(a & s | i & ~s, e, a, h, M, A);
-      }, L.prototype.md5_hh = function(e, a, i, s, h, M, A) {
-        return this.md5_cmn(a ^ i ^ s, e, a, h, M, A);
-      }, L.prototype.md5_ii = function(e, a, i, s, h, M, A) {
-        return this.md5_cmn(i ^ (a | ~s), e, a, h, M, A);
-      }, L.prototype.binl_md5 = function(e, a) {
+      }, E.prototype.md5_cmn = function(e, a, i, s, d, S) {
+        return this.safe_add(this.bit_roll(this.safe_add(this.safe_add(a, e), this.safe_add(s, S)), d), i);
+      }, E.prototype.md5_ff = function(e, a, i, s, d, S, v) {
+        return this.md5_cmn(a & i | ~a & s, e, a, d, S, v);
+      }, E.prototype.md5_gg = function(e, a, i, s, d, S, v) {
+        return this.md5_cmn(a & s | i & ~s, e, a, d, S, v);
+      }, E.prototype.md5_hh = function(e, a, i, s, d, S, v) {
+        return this.md5_cmn(a ^ i ^ s, e, a, d, S, v);
+      }, E.prototype.md5_ii = function(e, a, i, s, d, S, v) {
+        return this.md5_cmn(i ^ (a | ~s), e, a, d, S, v);
+      }, E.prototype.binl_md5 = function(e, a) {
         e[a >> 5] |= 128 << a % 32, e[(a + 64 >>> 9 << 4) + 14] = a;
-        var i, s, h, M, A, d = 1732584193, I = -271733879, y = -1732584194, T = 271733878;
+        var i, s, d, S, v, m = 1732584193, T = -271733879, A = -1732584194, M = 271733878;
         for (i = 0; i < e.length; i += 16)
-          s = d, h = I, M = y, A = T, d = this.md5_ff(d, I, y, T, e[i], 7, -680876936), T = this.md5_ff(T, d, I, y, e[i + 1], 12, -389564586), y = this.md5_ff(y, T, d, I, e[i + 2], 17, 606105819), I = this.md5_ff(I, y, T, d, e[i + 3], 22, -1044525330), d = this.md5_ff(d, I, y, T, e[i + 4], 7, -176418897), T = this.md5_ff(T, d, I, y, e[i + 5], 12, 1200080426), y = this.md5_ff(y, T, d, I, e[i + 6], 17, -1473231341), I = this.md5_ff(I, y, T, d, e[i + 7], 22, -45705983), d = this.md5_ff(d, I, y, T, e[i + 8], 7, 1770035416), T = this.md5_ff(T, d, I, y, e[i + 9], 12, -1958414417), y = this.md5_ff(y, T, d, I, e[i + 10], 17, -42063), I = this.md5_ff(I, y, T, d, e[i + 11], 22, -1990404162), d = this.md5_ff(d, I, y, T, e[i + 12], 7, 1804603682), T = this.md5_ff(T, d, I, y, e[i + 13], 12, -40341101), y = this.md5_ff(y, T, d, I, e[i + 14], 17, -1502002290), I = this.md5_ff(I, y, T, d, e[i + 15], 22, 1236535329), d = this.md5_gg(d, I, y, T, e[i + 1], 5, -165796510), T = this.md5_gg(T, d, I, y, e[i + 6], 9, -1069501632), y = this.md5_gg(y, T, d, I, e[i + 11], 14, 643717713), I = this.md5_gg(I, y, T, d, e[i], 20, -373897302), d = this.md5_gg(d, I, y, T, e[i + 5], 5, -701558691), T = this.md5_gg(T, d, I, y, e[i + 10], 9, 38016083), y = this.md5_gg(y, T, d, I, e[i + 15], 14, -660478335), I = this.md5_gg(I, y, T, d, e[i + 4], 20, -405537848), d = this.md5_gg(d, I, y, T, e[i + 9], 5, 568446438), T = this.md5_gg(T, d, I, y, e[i + 14], 9, -1019803690), y = this.md5_gg(y, T, d, I, e[i + 3], 14, -187363961), I = this.md5_gg(I, y, T, d, e[i + 8], 20, 1163531501), d = this.md5_gg(d, I, y, T, e[i + 13], 5, -1444681467), T = this.md5_gg(T, d, I, y, e[i + 2], 9, -51403784), y = this.md5_gg(y, T, d, I, e[i + 7], 14, 1735328473), I = this.md5_gg(I, y, T, d, e[i + 12], 20, -1926607734), d = this.md5_hh(d, I, y, T, e[i + 5], 4, -378558), T = this.md5_hh(T, d, I, y, e[i + 8], 11, -2022574463), y = this.md5_hh(y, T, d, I, e[i + 11], 16, 1839030562), I = this.md5_hh(I, y, T, d, e[i + 14], 23, -35309556), d = this.md5_hh(d, I, y, T, e[i + 1], 4, -1530992060), T = this.md5_hh(T, d, I, y, e[i + 4], 11, 1272893353), y = this.md5_hh(y, T, d, I, e[i + 7], 16, -155497632), I = this.md5_hh(I, y, T, d, e[i + 10], 23, -1094730640), d = this.md5_hh(d, I, y, T, e[i + 13], 4, 681279174), T = this.md5_hh(T, d, I, y, e[i], 11, -358537222), y = this.md5_hh(y, T, d, I, e[i + 3], 16, -722521979), I = this.md5_hh(I, y, T, d, e[i + 6], 23, 76029189), d = this.md5_hh(d, I, y, T, e[i + 9], 4, -640364487), T = this.md5_hh(T, d, I, y, e[i + 12], 11, -421815835), y = this.md5_hh(y, T, d, I, e[i + 15], 16, 530742520), I = this.md5_hh(I, y, T, d, e[i + 2], 23, -995338651), d = this.md5_ii(d, I, y, T, e[i], 6, -198630844), T = this.md5_ii(T, d, I, y, e[i + 7], 10, 1126891415), y = this.md5_ii(y, T, d, I, e[i + 14], 15, -1416354905), I = this.md5_ii(I, y, T, d, e[i + 5], 21, -57434055), d = this.md5_ii(d, I, y, T, e[i + 12], 6, 1700485571), T = this.md5_ii(T, d, I, y, e[i + 3], 10, -1894986606), y = this.md5_ii(y, T, d, I, e[i + 10], 15, -1051523), I = this.md5_ii(I, y, T, d, e[i + 1], 21, -2054922799), d = this.md5_ii(d, I, y, T, e[i + 8], 6, 1873313359), T = this.md5_ii(T, d, I, y, e[i + 15], 10, -30611744), y = this.md5_ii(y, T, d, I, e[i + 6], 15, -1560198380), I = this.md5_ii(I, y, T, d, e[i + 13], 21, 1309151649), d = this.md5_ii(d, I, y, T, e[i + 4], 6, -145523070), T = this.md5_ii(T, d, I, y, e[i + 11], 10, -1120210379), y = this.md5_ii(y, T, d, I, e[i + 2], 15, 718787259), I = this.md5_ii(I, y, T, d, e[i + 9], 21, -343485551), d = this.safe_add(d, s), I = this.safe_add(I, h), y = this.safe_add(y, M), T = this.safe_add(T, A);
-        return [d, I, y, T];
-      }, L.prototype.binl2rstr = function(e) {
+          s = m, d = T, S = A, v = M, m = this.md5_ff(m, T, A, M, e[i], 7, -680876936), M = this.md5_ff(M, m, T, A, e[i + 1], 12, -389564586), A = this.md5_ff(A, M, m, T, e[i + 2], 17, 606105819), T = this.md5_ff(T, A, M, m, e[i + 3], 22, -1044525330), m = this.md5_ff(m, T, A, M, e[i + 4], 7, -176418897), M = this.md5_ff(M, m, T, A, e[i + 5], 12, 1200080426), A = this.md5_ff(A, M, m, T, e[i + 6], 17, -1473231341), T = this.md5_ff(T, A, M, m, e[i + 7], 22, -45705983), m = this.md5_ff(m, T, A, M, e[i + 8], 7, 1770035416), M = this.md5_ff(M, m, T, A, e[i + 9], 12, -1958414417), A = this.md5_ff(A, M, m, T, e[i + 10], 17, -42063), T = this.md5_ff(T, A, M, m, e[i + 11], 22, -1990404162), m = this.md5_ff(m, T, A, M, e[i + 12], 7, 1804603682), M = this.md5_ff(M, m, T, A, e[i + 13], 12, -40341101), A = this.md5_ff(A, M, m, T, e[i + 14], 17, -1502002290), T = this.md5_ff(T, A, M, m, e[i + 15], 22, 1236535329), m = this.md5_gg(m, T, A, M, e[i + 1], 5, -165796510), M = this.md5_gg(M, m, T, A, e[i + 6], 9, -1069501632), A = this.md5_gg(A, M, m, T, e[i + 11], 14, 643717713), T = this.md5_gg(T, A, M, m, e[i], 20, -373897302), m = this.md5_gg(m, T, A, M, e[i + 5], 5, -701558691), M = this.md5_gg(M, m, T, A, e[i + 10], 9, 38016083), A = this.md5_gg(A, M, m, T, e[i + 15], 14, -660478335), T = this.md5_gg(T, A, M, m, e[i + 4], 20, -405537848), m = this.md5_gg(m, T, A, M, e[i + 9], 5, 568446438), M = this.md5_gg(M, m, T, A, e[i + 14], 9, -1019803690), A = this.md5_gg(A, M, m, T, e[i + 3], 14, -187363961), T = this.md5_gg(T, A, M, m, e[i + 8], 20, 1163531501), m = this.md5_gg(m, T, A, M, e[i + 13], 5, -1444681467), M = this.md5_gg(M, m, T, A, e[i + 2], 9, -51403784), A = this.md5_gg(A, M, m, T, e[i + 7], 14, 1735328473), T = this.md5_gg(T, A, M, m, e[i + 12], 20, -1926607734), m = this.md5_hh(m, T, A, M, e[i + 5], 4, -378558), M = this.md5_hh(M, m, T, A, e[i + 8], 11, -2022574463), A = this.md5_hh(A, M, m, T, e[i + 11], 16, 1839030562), T = this.md5_hh(T, A, M, m, e[i + 14], 23, -35309556), m = this.md5_hh(m, T, A, M, e[i + 1], 4, -1530992060), M = this.md5_hh(M, m, T, A, e[i + 4], 11, 1272893353), A = this.md5_hh(A, M, m, T, e[i + 7], 16, -155497632), T = this.md5_hh(T, A, M, m, e[i + 10], 23, -1094730640), m = this.md5_hh(m, T, A, M, e[i + 13], 4, 681279174), M = this.md5_hh(M, m, T, A, e[i], 11, -358537222), A = this.md5_hh(A, M, m, T, e[i + 3], 16, -722521979), T = this.md5_hh(T, A, M, m, e[i + 6], 23, 76029189), m = this.md5_hh(m, T, A, M, e[i + 9], 4, -640364487), M = this.md5_hh(M, m, T, A, e[i + 12], 11, -421815835), A = this.md5_hh(A, M, m, T, e[i + 15], 16, 530742520), T = this.md5_hh(T, A, M, m, e[i + 2], 23, -995338651), m = this.md5_ii(m, T, A, M, e[i], 6, -198630844), M = this.md5_ii(M, m, T, A, e[i + 7], 10, 1126891415), A = this.md5_ii(A, M, m, T, e[i + 14], 15, -1416354905), T = this.md5_ii(T, A, M, m, e[i + 5], 21, -57434055), m = this.md5_ii(m, T, A, M, e[i + 12], 6, 1700485571), M = this.md5_ii(M, m, T, A, e[i + 3], 10, -1894986606), A = this.md5_ii(A, M, m, T, e[i + 10], 15, -1051523), T = this.md5_ii(T, A, M, m, e[i + 1], 21, -2054922799), m = this.md5_ii(m, T, A, M, e[i + 8], 6, 1873313359), M = this.md5_ii(M, m, T, A, e[i + 15], 10, -30611744), A = this.md5_ii(A, M, m, T, e[i + 6], 15, -1560198380), T = this.md5_ii(T, A, M, m, e[i + 13], 21, 1309151649), m = this.md5_ii(m, T, A, M, e[i + 4], 6, -145523070), M = this.md5_ii(M, m, T, A, e[i + 11], 10, -1120210379), A = this.md5_ii(A, M, m, T, e[i + 2], 15, 718787259), T = this.md5_ii(T, A, M, m, e[i + 9], 21, -343485551), m = this.safe_add(m, s), T = this.safe_add(T, d), A = this.safe_add(A, S), M = this.safe_add(M, v);
+        return [m, T, A, M];
+      }, E.prototype.binl2rstr = function(e) {
         var a, i = "";
         for (a = 0; a < e.length * 32; a += 8)
           i += String.fromCharCode(e[a >> 5] >>> a % 32 & 255);
         return i;
-      }, L.prototype.rstr2binl = function(e) {
+      }, E.prototype.rstr2binl = function(e) {
         var a, i = [];
         for (i[(e.length >> 2) - 1] = void 0, a = 0; a < i.length; a += 1)
           i[a] = 0;
         for (a = 0; a < e.length * 8; a += 8)
           i[a >> 5] |= (e.charCodeAt(a / 8) & 255) << a % 32;
         return i;
-      }, L.prototype.rstr_md5 = function(e) {
+      }, E.prototype.rstr_md5 = function(e) {
         return this.binl2rstr(this.binl_md5(this.rstr2binl(e), e.length * 8));
-      }, L.prototype.rstr_hmac_md5 = function(e, a) {
-        var i, s = this.rstr2binl(e), h = [], M = [], A;
-        for (h[15] = M[15] = void 0, s.length > 16 && (s = this.binl_md5(s, e.length * 8)), i = 0; i < 16; i += 1)
-          h[i] = s[i] ^ 909522486, M[i] = s[i] ^ 1549556828;
-        return A = this.binl_md5(h.concat(this.rstr2binl(a)), 512 + a.length * 8), this.binl2rstr(this.binl_md5(M.concat(A), 640));
-      }, L.prototype.rstr2hex = function(e) {
-        var a = "0123456789abcdef", i = "", s, h;
-        for (h = 0; h < e.length; h += 1)
-          s = e.charCodeAt(h), i += a.charAt(s >>> 4 & 15) + a.charAt(s & 15);
+      }, E.prototype.rstr_hmac_md5 = function(e, a) {
+        var i, s = this.rstr2binl(e), d = [], S = [], v;
+        for (d[15] = S[15] = void 0, s.length > 16 && (s = this.binl_md5(s, e.length * 8)), i = 0; i < 16; i += 1)
+          d[i] = s[i] ^ 909522486, S[i] = s[i] ^ 1549556828;
+        return v = this.binl_md5(d.concat(this.rstr2binl(a)), 512 + a.length * 8), this.binl2rstr(this.binl_md5(S.concat(v), 640));
+      }, E.prototype.rstr2hex = function(e) {
+        var a = "0123456789abcdef", i = "", s, d;
+        for (d = 0; d < e.length; d += 1)
+          s = e.charCodeAt(d), i += a.charAt(s >>> 4 & 15) + a.charAt(s & 15);
         return i;
-      }, L.prototype.str2rstr_utf8 = function(e) {
+      }, E.prototype.str2rstr_utf8 = function(e) {
         return unescape(encodeURIComponent(e));
-      }, L.prototype.raw_md5 = function(e) {
+      }, E.prototype.raw_md5 = function(e) {
         return this.rstr_md5(this.str2rstr_utf8(e));
-      }, L.prototype.hex_md5 = function(e) {
+      }, E.prototype.hex_md5 = function(e) {
         return this.rstr2hex(this.raw_md5(e));
-      }, L.prototype.raw_hmac_md5 = function(e, a) {
+      }, E.prototype.raw_hmac_md5 = function(e, a) {
         return this.rstr_hmac_md5(this.str2rstr_utf8(e), this.str2rstr_utf8(a));
-      }, L.prototype.hex_hmac_md5 = function(e, a) {
+      }, E.prototype.hex_hmac_md5 = function(e, a) {
         return this.rstr2hex(this.raw_hmac_md5(e, a));
-      }, L.prototype.md5 = function(e, a, i) {
+      }, E.prototype.md5 = function(e, a, i) {
         return a ? i ? this.raw_hmac_md5(a, e) : this.hex_hmac_md5(a, e) : i ? this.raw_md5(e) : this.hex_md5(e);
-      }, c.exports && (u = c.exports = r), u.Chance = r, typeof importScripts < "u" && (chance = new r(), self.Chance = r), typeof window == "object" && typeof window.document == "object" && (window.Chance = r, window.chance = new r());
+      }, f.exports && (c = f.exports = r), c.Chance = r, typeof importScripts < "u" && (chance = new r(), self.Chance = r), typeof window == "object" && typeof window.document == "object" && (window.Chance = r, window.chance = new r());
     })();
   })(ee, ee.exports)), ee.exports;
 }
-var Ae = ve();
-const ye = /* @__PURE__ */ Ce(Ae);
+var ve = Ce();
+const Ae = /* @__PURE__ */ ge(ve);
 var re = /* @__PURE__ */ (function() {
-  function c(u, D) {
-    for (var G = [], E = "", x = 0; x < u.length; x++) {
-      for (var C = u.charAt(x), g = G.length, B = 0; B < D.length; B++) {
-        var k = D.charAt(B);
-        if (C == k) {
-          0 < E.length && G.push(E), G.push(C), E = "";
+  function f(c, D) {
+    for (var G = [], P = "", N = 0; N < c.length; N++) {
+      for (var g = c.charAt(N), p = G.length, I = 0; I < D.length; I++) {
+        var k = D.charAt(I);
+        if (g == k) {
+          0 < P.length && G.push(P), G.push(g), P = "";
           continue;
         }
       }
-      g == G.length && (E = E + C);
+      p == G.length && (P = P + g);
     }
-    return 0 < E.length && G.push(E), G;
+    return 0 < P.length && G.push(P), G;
   }
-  return c;
+  return f;
 })(), Z = /* @__PURE__ */ (function() {
-  function c(E, x, C, g, B, k) {
-    this.type = g, this.value = E, this.begin = x, this.end = C, this.line = B, this.col = k, this.toString = function() {
-      return "{type:" + g + ",value:" + E + "}";
+  function f(P, N, g, p, I, k) {
+    this.type = p, this.value = P, this.begin = N, this.end = g, this.line = I, this.col = k, this.toString = function() {
+      return "{type:" + p + ",value:" + P + "}";
     }, this.getValue = function() {
       return this.value == null || this.value.length < 2 ? this.value : (this.value.charAt(0) == "`" && this.value.substring(1, this.value.length - 1), this.value);
     }, this.isStandardLiteral = function() {
@@ -7271,18 +11011,18 @@ var re = /* @__PURE__ */ (function() {
       return o == "<" ? ">" : o == "[" ? "]" : o == "{" ? "}" : o == "(" ? ")" : o;
     }
   }
-  function u(E, x, C) {
-    for (var g = [], B = `(){}[]^-|!*+.><='",;:%@?/\\#~` + C, k = ` 
+  function c(P, N, g) {
+    for (var p = [], I = `(){}[]^-|!*+.><='",;:%@?/\\#~` + g, k = ` 
 \r	`, r = re(
-      E,
+      P,
       //".*-+/|><=()\'\", \n\r\t"
-      B + k
-    ), o = 0, p = 0, b = 0, l = 0; l < r.length; l++) {
+      I + k
+    ), o = 0, b = 0, x = 0, l = 0; l < r.length; l++) {
       var n = r[l], t = null;
-      if (g.length > 0 && (t = g[g.length - 1]), n == `
-` ? (p++, b = 0) : l > 0 && r[l - 1] !== `
-` ? b = b + r[l - 1].length : b = 0, o += n.length, t != null && t.type == "comment" && (t.value.lastIndexOf("*/") != t.value.length - 2 || t.value == "/*/")) {
-        n == "*" || n == "/" ? t.value = t.value + n : t.value = "/* ... ", t.end = o, t != null && t.type == "comment" && t.value.lastIndexOf("*/") == t.value.length - 2 && t.value != "/*/" && (t.value = E.substring(t.begin, t.end));
+      if (p.length > 0 && (t = p[p.length - 1]), n == `
+` ? (b++, x = 0) : l > 0 && r[l - 1] !== `
+` ? x = x + r[l - 1].length : x = 0, o += n.length, t != null && t.type == "comment" && (t.value.lastIndexOf("*/") != t.value.length - 2 || t.value == "/*/")) {
+        n == "*" || n == "/" ? t.value = t.value + n : t.value = "/* ... ", t.end = o, t != null && t.type == "comment" && t.value.lastIndexOf("*/") == t.value.length - 2 && t.value != "/*/" && (t.value = P.substring(t.begin, t.end));
         continue;
       }
       if (t != null && (t.type == "line-comment" || t.type == "dbtools-command") && n != `
@@ -7297,12 +11037,12 @@ var re = /* @__PURE__ */ (function() {
       }
       if (!(t != null && t.type == "dquoted-string" && n != '"' && !(t.value.endsWith('"') && t.value.length > 1))) {
         if (t != null && t.type == "dquoted-string" && n == '"') {
-          t.end = o, t.value = E.substring(t.begin, t.end);
+          t.end = o, t.value = P.substring(t.begin, t.end);
           continue;
         }
         if (!(t != null && t.type == "bquoted-string" && n != "`" && !(t.value.endsWith("`") && t.value.length > 1))) {
           if (t != null && t.type == "bquoted-string" && n == "`") {
-            t.end = o, t.value = E.substring(t.begin, t.end);
+            t.end = o, t.value = P.substring(t.begin, t.end);
             continue;
           }
           if (n == "*" && t != null && t.value == "/") {
@@ -7320,73 +11060,73 @@ var re = /* @__PURE__ */ (function() {
           }
           if (t != null && t.type == "identifier" && t.end == -11 && t.value.indexOf("@") == 0 && (n == `
 ` || n == "\r")) {
-            t.end = o - 1, g.push(new c(n, o - 1, o, "ws", p, b));
+            t.end = o - 1, p.push(new f(n, o - 1, o, "ws", b, x));
             continue;
           }
-          if (x && n == "'") {
-            t != null && (t.value.toUpperCase() == "Q" || t.value.toUpperCase() == "N" || t.value.toUpperCase() == "U" || t.value.toUpperCase() == "NQ") ? (t.value += n, t.type = "quoted-string") : g.push(new c(n, o - 1, -10, "quoted-string", p, b));
+          if (N && n == "'") {
+            t != null && (t.value.toUpperCase() == "Q" || t.value.toUpperCase() == "N" || t.value.toUpperCase() == "U" || t.value.toUpperCase() == "NQ") ? (t.value += n, t.type = "quoted-string") : p.push(new f(n, o - 1, -10, "quoted-string", b, x));
             continue;
           }
-          if (x && n == '"') {
-            g.push(new c(n, o - 1, -11, "dquoted-string", p, b));
+          if (N && n == '"') {
+            p.push(new f(n, o - 1, -11, "dquoted-string", b, x));
             continue;
           }
-          if (n == "`" && 0 <= B.indexOf("`")) {
-            g.push(new c(n, o - 1, -11, "bquoted-string", p, b));
+          if (n == "`" && 0 <= I.indexOf("`")) {
+            p.push(new f(n, o - 1, -11, "bquoted-string", b, x));
             continue;
           }
-          if (n.length == 1 && 0 <= B.indexOf(n)) {
-            g.push(new c(n, o - 1, o, "operation", p, b));
+          if (n.length == 1 && 0 <= I.indexOf(n)) {
+            p.push(new f(n, o - 1, o, "operation", b, x));
             continue;
           }
           if (n.length == 1 && 0 <= k.indexOf(n)) {
-            g.push(new c(n, o - 1, o, "ws", p, b));
+            p.push(new f(n, o - 1, o, "ws", b, x));
             continue;
           }
           if ("0" <= n.charAt(0) && n.charAt(0) <= "9") {
-            D(n, g, o - n.length, p) || (n.charAt(n.length - 1) == "K" || n.charAt(n.length - 1) == "k" || n.charAt(n.length - 1) == "M" || n.charAt(n.length - 1) == "m" || n.charAt(n.length - 1) == "G" || n.charAt(n.length - 1) == "g" || n.charAt(n.length - 1) == "T" || n.charAt(n.length - 1) == "t" || n.charAt(n.length - 1) == "P" || n.charAt(n.length - 1) == "p" || n.charAt(n.length - 1) == "E" || n.charAt(n.length - 1) == "e" ? (g.push(new c(n.substring(0, n.length - 1), o - n.length, o - 1, "constant.numeric", p, b)), g.push(new c(n.substring(n.length - 1), o - 1, o, "constant.numeric", p, b))) : g.push(new c(n, o - n.length, o, "constant.numeric", p, b)));
+            D(n, p, o - n.length, b) || (n.charAt(n.length - 1) == "K" || n.charAt(n.length - 1) == "k" || n.charAt(n.length - 1) == "M" || n.charAt(n.length - 1) == "m" || n.charAt(n.length - 1) == "G" || n.charAt(n.length - 1) == "g" || n.charAt(n.length - 1) == "T" || n.charAt(n.length - 1) == "t" || n.charAt(n.length - 1) == "P" || n.charAt(n.length - 1) == "p" || n.charAt(n.length - 1) == "E" || n.charAt(n.length - 1) == "e" ? (p.push(new f(n.substring(0, n.length - 1), o - n.length, o - 1, "constant.numeric", b, x)), p.push(new f(n.substring(n.length - 1), o - 1, o, "constant.numeric", b, x))) : p.push(new f(n, o - n.length, o, "constant.numeric", b, x)));
             continue;
           }
-          var m = "identifier";
-          l + 1 < r.length && r[l + 1], g.push(new c(n, o - n.length, o, m, p, b));
+          var u = "identifier";
+          l + 1 < r.length && r[l + 1], p.push(new f(n, o - n.length, o, u, b, x));
         }
       }
     }
-    if (g.length > 0) {
-      var t = g[g.length - 1];
-      t.end = E.length;
+    if (p.length > 0) {
+      var t = p[p.length - 1];
+      t.end = P.length;
     }
-    return g;
+    return p;
   }
-  function D(E, x, C, g) {
-    if (0 > E.indexOf("e") && 0 > E.indexOf("f") && 0 > E.indexOf("d"))
+  function D(P, N, g, p) {
+    if (0 > P.indexOf("e") && 0 > P.indexOf("f") && 0 > P.indexOf("d"))
       return !1;
-    0 <= E.indexOf("e"), 0 <= E.indexOf("e"), !(0 <= E.indexOf("e")) && 0 <= E.indexOf("f");
-    for (var B = re(E, "efd"), k = 0; k < B.length; k++) {
-      var r = B[k];
-      C += r.length, "0" <= r.charAt(0) && r.charAt(0) <= "9" ? x.push(new c(r, C - r.length, C, "constant.numeric", g)) : x.push(new c(r, C - r.length, C, "identifier", g));
+    0 <= P.indexOf("e"), 0 <= P.indexOf("e"), !(0 <= P.indexOf("e")) && 0 <= P.indexOf("f");
+    for (var I = re(P, "efd"), k = 0; k < I.length; k++) {
+      var r = I[k];
+      g += r.length, "0" <= r.charAt(0) && r.charAt(0) <= "9" ? N.push(new f(r, g - r.length, g, "constant.numeric", p)) : N.push(new f(r, g - r.length, g, "identifier", p));
     }
     return !0;
   }
-  function G(E, x, C, g) {
-    for (var B = [], k = u(E, C, g), r = null, o = 0; o < k.length; o++) {
-      var p = k[o];
-      if (p.type == "quoted-string") {
+  function G(P, N, g, p) {
+    for (var I = [], k = c(P, g, p), r = null, o = 0; o < k.length; o++) {
+      var b = k[o];
+      if (b.type == "quoted-string") {
         if (r != null && r.type == "quoted-string") {
-          r.value = r.value + p.value, r.end = p.end;
+          r.value = r.value + b.value, r.end = b.end;
           continue;
         }
-        if (r != null && r.type == "identifier" && r.value.toUpperCase() == "N" && r.end == p.begin) {
-          r.begin = p.begin, r.end = p.end, r.type = p.type, r.value = p.value;
+        if (r != null && r.type == "identifier" && r.value.toUpperCase() == "N" && r.end == b.begin) {
+          r.begin = b.begin, r.end = b.end, r.type = b.type, r.value = b.value;
           continue;
         }
       }
-      if (p.value.indexOf("@") == 0 && (p.end = p.begin + p.value.length), p.value == "#" && r != null && r.type == "identifier") {
+      if (b.value.indexOf("@") == 0 && (b.end = b.begin + b.value.length), b.value == "#" && r != null && r.type == "identifier") {
         r.end += 1, r.value += "#";
         continue;
       }
-      if ((p.type === "identifier" || p.type === "constant.numeric") && r !== null && r.value[r.value.length - 1] === "#" && r.type === "identifier") {
-        r.end += p.value.length, r.value += p.value;
+      if ((b.type === "identifier" || b.type === "constant.numeric") && r !== null && r.value[r.value.length - 1] === "#" && r.type === "identifier") {
+        r.end += b.value.length, r.value += b.value;
         continue;
       }
       /*17607445: can just drop preprocessor directives
@@ -7395,77 +11135,77 @@ var re = /* @__PURE__ */ (function() {
           || token.value.equals("$ELSE")
           || token.value.equals("$THEN")
           ||*/
-      p.value.indexOf("$$") == 0 && (p.value = "$$VAR"), (x || p.type != "ws" && p.type != "comment" && p.type != "line-comment") && B.push(p), r = p;
+      b.value.indexOf("$$") == 0 && (b.value = "$$VAR"), (N || b.type != "ws" && b.type != "comment" && b.type != "line-comment") && I.push(b), r = b;
     }
-    return B;
+    return I;
   }
   return G;
 })();
-function ce(c, u, D, G) {
-  var E = new ye(te);
-  let x = D.toUpperCase(), C = c.toUpperCase(), g = u.toUpperCase();
+function fe(f, c, D, G) {
+  var P = new Ae(te++);
+  let N = D.toUpperCase(), g = f.toUpperCase(), p = c.toUpperCase();
   if (G != null && 0 < G.length) {
-    let o = 0, p = G.length, b = G[Math.floor(X() * (p - o)) + o];
-    return !x.startsWith("INTEGER") && !x.startsWith("NUMBER") && !x.startsWith("DATE") && (!b.toLowerCase || b.toLowerCase() != "null") && (!b.charAt || b.charAt(0) != "q" && b.charAt(1) != "'") && (b.charAt && b.charAt(0) == "'" && (b = b.substring(1, b.length - 1)), b = b.replaceAll("'", "''"), b = "'" + b + "'"), b;
+    let o = 0, b = G.length, x = G[Math.floor(X() * (b - o)) + o];
+    return !N.startsWith("INTEGER") && !N.startsWith("NUMBER") && !N.startsWith("DATE") && (!x.toLowerCase || x.toLowerCase() != "null") && (!x.charAt || x.charAt(0) != "q" && x.charAt(1) != "'") && (x.charAt && x.charAt(0) == "'" && (x = x.substring(1, x.length - 1)), x = x.replaceAll("'", "''"), x = "'" + x + "'"), x;
   }
-  if (g == "NAME" && 0 <= C.indexOf("DEPARTMENT")) {
-    var B = ["Sales", "Finance", "Delivery", "Manufacturing"];
-    let o = 0, p = B.length;
-    return "'" + B[Math.floor(X() * (p - o)) + o] + "'";
+  if (p == "NAME" && 0 <= g.indexOf("DEPARTMENT")) {
+    var I = ["Sales", "Finance", "Delivery", "Manufacturing"];
+    let o = 0, b = I.length;
+    return "'" + I[Math.floor(X() * (b - o)) + o] + "'";
   }
-  if (E[g.toLowerCase()] != null && g.indexOf("NAME") < 0)
-    return "'" + E[g.toLowerCase()]() + "'";
-  if (g == "FIRST_NAME")
-    return "'" + E.first() + "'";
-  if (g == "LAST_NAME")
-    return "'" + E.last() + "'";
-  if (0 <= g.indexOf("NAME"))
-    return "'" + E.name() + "'";
-  if (0 < g.indexOf("ADDRESS"))
-    return "'" + E.address() + "'";
-  if (g == "LOCATION")
-    return "'" + E.city() + "'";
-  if (g == "DESCRIPTION") {
-    let o = E.paragraph({ sentences: 2 }), p = Z(D, !1, !0, ""), b = 400, l = -1;
-    for (let n = 0; n < p.length; n++) {
-      const t = p[n].value;
+  if (P[p.toLowerCase()] != null && p.indexOf("NAME") < 0)
+    return "'" + P[p.toLowerCase()]() + "'";
+  if (p == "FIRST_NAME")
+    return "'" + P.first() + "'";
+  if (p == "LAST_NAME")
+    return "'" + P.last() + "'";
+  if (0 <= p.indexOf("NAME"))
+    return "'" + P.name() + "'";
+  if (0 < p.indexOf("ADDRESS"))
+    return "'" + P.address() + "'";
+  if (p == "LOCATION")
+    return "'" + P.city() + "'";
+  if (p == "DESCRIPTION") {
+    let o = P.paragraph({ sentences: 2 }), b = Z(D, !1, !0, ""), x = 400, l = -1;
+    for (let n = 0; n < b.length; n++) {
+      const t = b[n].value;
       if (t == "(") {
         l = n + 1;
         continue;
       }
       if (0 < l && t == ")") {
-        b = parseInt(p[l].value);
+        x = parseInt(b[l].value);
         break;
       }
     }
-    return b < o.length && (o = o.substring(0, b)), "'" + o + "'";
+    return x < o.length && (o = o.substring(0, x)), "'" + o + "'";
   }
-  if (g == "JOB") {
+  if (p == "JOB") {
     var k = ["Engineer", "Consultant", "Architect", "Manager", "Analyst", "Specialist", "Evangelist", "Salesman"];
-    let o = 0, p = k.length;
-    return "'" + k[Math.floor(X() * (p - o)) + o] + "'";
+    let o = 0, b = k.length;
+    return "'" + k[Math.floor(X() * (b - o)) + o] + "'";
   }
-  if (x.startsWith("INTEGER") || x.startsWith("NUMBER")) {
+  if (N.startsWith("INTEGER") || N.startsWith("NUMBER")) {
     let o = 0;
     return Math.floor(X() * (100 - o)) + o;
   }
-  if (x.startsWith("DATE") || x.startsWith("TIMESTAMP")) {
+  if (N.startsWith("DATE") || N.startsWith("TIMESTAMP")) {
     let o = 0;
     var r = Math.floor(X() * (100 - o)) + o;
     return "sysdate-" + r;
   }
-  return x == "BLOB" || x == "LONG" ? "null" : "'N/A'";
+  return N == "BLOB" || N == "LONG" ? "null" : "'N/A'";
 }
 var te = 1;
-function Se() {
+function ye() {
   te = 1;
 }
 function X() {
-  var c = Math.sin(te++) * 1e4;
-  return c - Math.floor(c);
+  var f = Math.sin(te++) * 1e4;
+  return f - Math.floor(f);
 }
-function ue(c) {
-  const u = {
+function ce(f) {
+  const c = {
     ACCESS: "N",
     ADD: "N",
     ALL: "Y",
@@ -7576,13 +11316,13 @@ function ue(c) {
     WHERE: "Y",
     WITH: "Y"
   };
-  let D = c.toUpperCase();
-  return u[D] != null ? "the_" + c : c;
+  let D = f.toUpperCase();
+  return c[D] != null ? "the_" + f : f;
 }
-let me = (function() {
-  let c, u = "    ";
-  const D = ["string", "varchar2", "varchar", "vc", "char"], G = ["yn", "boolean", "bool"], E = ["vect", "vector"];
-  let x = [
+let ue = (function() {
+  let f, c = "    ";
+  const D = ["string", "varchar2", "varchar", "vc", "char"], G = ["yn", "boolean", "bool"], P = ["vect", "vector"];
+  let N = [
     "integer",
     "number",
     "num",
@@ -7598,8 +11338,8 @@ let me = (function() {
     "tswltz",
     "ts"
   ];
-  x = x.concat(D), x = x.concat(G), x = x.concat(E);
-  function C(k, r, o) {
+  N = N.concat(D), N = N.concat(G), N = N.concat(P);
+  function g(k, r, o) {
     this.line = k, this.parent = o, this.children = [], o?.children.push(this), this.fks = null, this.findChild = function(l) {
       for (var n = 0; n < this.children.length; n++)
         if (this.children[n].parseName() == l)
@@ -7613,35 +11353,35 @@ let me = (function() {
       return l;
     }, this.maxChildNameLen = function() {
       var l = 2;
-      if ((c.optionEQvalue("rowkey", !0) || this.isOption("rowkey")) && (l = 7), (c.optionEQvalue("Row Version Number", "yes") || this.isOption("rowversion")) && (l = 11), c.optionEQvalue("Audit Columns", "yes") || this.isOption("auditcols") || this.isOption("audit", "col") || this.isOption("audit", "cols") || this.isOption("audit", "columns")) {
-        let f = c.getOptionValue("createdcol").length;
-        l < f && (l = f), f = c.getOptionValue("createdbycol").length, l < f && (l = f), f = c.getOptionValue("updatedcol").length, l < f && (l = f), f = c.getOptionValue("updatedbycol").length, l < f && (l = f);
+      if ((f.optionEQvalue("rowkey", !0) || this.isOption("rowkey")) && (l = 7), (f.optionEQvalue("Row Version Number", "yes") || this.isOption("rowversion")) && (l = 11), f.optionEQvalue("Audit Columns", "yes") || this.isOption("auditcols") || this.isOption("audit", "col") || this.isOption("audit", "cols") || this.isOption("audit", "columns")) {
+        let h = f.getOptionValue("createdcol").length;
+        l < h && (l = h), h = f.getOptionValue("createdbycol").length, l < h && (l = h), h = f.getOptionValue("updatedcol").length, l < h && (l = h), h = f.getOptionValue("updatedbycol").length, l < h && (l = h);
       }
       if (this.fks != null)
         for (var n in this.fks) {
           var t = n.length;
-          let f = c.find(n);
-          f != null && f.isMany2One() && (t += 3), l < t && (l = t);
+          let h = f.find(n);
+          h != null && h.isMany2One() && (t += 3), l < t && (l = t);
         }
-      for (var m = 0; m < this.children.length; m++) {
-        let f = this.children[m];
-        if (0 < f.children.length)
+      for (var u = 0; u < this.children.length; u++) {
+        let h = this.children[u];
+        if (0 < h.children.length)
           continue;
-        let v = f.parseName().length;
-        0 < f.indexOf("file") && (v += 9), l < v && (l = v);
+        let C = h.parseName().length;
+        0 < h.indexOf("file") && (C += 9), l < C && (l = C);
       }
-      var S = c.additionalColumns();
-      for (let f in S) {
-        let v = f.length;
-        l < v && (l = v);
+      var y = f.additionalColumns();
+      for (let h in y) {
+        let C = h.length;
+        l < C && (l = C);
       }
       return l;
     };
-    function p(l) {
+    function b(l) {
       let n = l;
       return n = n.replace(/ timestamp with local time zone/gi, " tswltz"), n = n.replace(/ timestamp with time zone/gi, " tswtz"), n = n.replace(/ timestamp/gi, " ts"), n;
     }
-    this.content = p(r), this.comment, this.indexOf = function(l, n) {
+    this.content = b(r), this.comment, this.indexOf = function(l, n) {
       for (let t = 0; t < this.src.length; t++) {
         if (n && this.src[t].value.toLowerCase().indexOf(l.toLowerCase()) == 0)
           return t;
@@ -7663,53 +11403,53 @@ let me = (function() {
       if (n < 2 || this.src[n - 1].value != "/")
         return null;
       let t = "";
-      for (let m = n + 1; m < this.src.length && this.src[m].value != "/" && this.src[m].value != "["; m++)
-        t += this.src[m].value;
+      for (let u = n + 1; u < this.src.length && this.src[u].value != "/" && this.src[u].value != "["; u++)
+        t += this.src[u].value;
       return t;
     }, this.sugarcoatName = function(l, n) {
       let t = "";
       this.children.length == 0 && this.parent != null && this.parent.colprefix != null && (t = this.parent.colprefix + "_");
-      let m = "", S = "_";
-      for (let v = l; v < n; v++) {
-        const P = this.src[v].value, N = '"' + P + '"';
-        if (this.src[v].type != "constant.numeric" && P != Q(N))
-          return m = this.content.substring(this.src[l].begin, this.src[n - 1].end), this.parsedName = t + ue(Q(m)), this.parsedName;
+      let u = "", y = "_";
+      for (let C = l; C < n; C++) {
+        const B = this.src[C].value, L = '"' + B + '"';
+        if (this.src[C].type != "constant.numeric" && B != Q(L))
+          return u = this.content.substring(this.src[l].begin, this.src[n - 1].end), this.parsedName = t + ce(Q(u)), this.parsedName;
       }
-      for (let v = l; v < n; v++)
-        l < v && (m += S), m += this.src[v].value;
-      var f = m.charAt(0);
-      return f >= "0" && f <= "9" && (m = "x" + m), this.parsedName = t + ue(Q(m)), this.parsedName;
+      for (let C = l; C < n; C++)
+        l < C && (u += y), u += this.src[C].value;
+      var h = u.charAt(0);
+      return h >= "0" && h <= "9" && (u = "x" + u), this.parsedName = t + ce(Q(u)), this.parsedName;
     }, this.src = Z(this.content, !1, !0, "`");
-    const b = this.getOptionValue("colprefix");
-    b != null && (this.colprefix = b), this.parsedName = null, this.parseName = function() {
+    const x = this.getOptionValue("colprefix");
+    x != null && (this.colprefix = x), this.parsedName = null, this.parseName = function() {
       if (this.parsedName != null)
         return this.parsedName;
       let l = 0, n = this.src[0].value;
       (n == ">" || n == "<") && (n = this.src[1].value, l = 1);
-      const t = n.indexOf('"'), m = n.indexOf('"', t + 1);
-      if (0 <= t && t < m)
-        return n.substring(t, m + 1);
+      const t = n.indexOf('"'), u = n.indexOf('"', t + 1);
+      if (0 <= t && t < u)
+        return n.substring(t, u + 1);
       if (this.src[0].value == "view")
         return this.src[1].value;
       if (1 < this.src.length && this.src[1].value == "=")
         return this.src[0].value;
-      let S = this.src.length, f = this.indexOf("/");
-      0 < f && (S = f), f = this.indexOf("["), 0 < f && (S = f);
-      for (let v = 0; v < x.length; v++) {
-        let P = this.indexOf(x[v]);
-        if (P < 0 && (P = this.indexOf(x[v], !0)), 0 < P && P < S)
-          return S = P, this.sugarcoatName(l, S);
+      let y = this.src.length, h = this.indexOf("/");
+      0 < h && (y = h), h = this.indexOf("["), 0 < h && (y = h);
+      for (let C = 0; C < N.length; C++) {
+        let B = this.indexOf(N[C]);
+        if (B < 0 && (B = this.indexOf(N[C], !0)), 0 < B && B < y)
+          return y = B, this.sugarcoatName(l, y);
       }
-      for (let v = l; v < S; v++) {
-        const P = this.src[v].value.toLowerCase();
-        if (P.charAt(0) == "v" && P.charAt(1) == "c") {
-          if (P.charAt(2) == "(")
-            return this.sugarcoatName(l, v);
-          if (0 <= P.charAt(2) && P.charAt(2) <= "9")
-            return this.sugarcoatName(l, v);
+      for (let C = l; C < y; C++) {
+        const B = this.src[C].value.toLowerCase();
+        if (B.charAt(0) == "v" && B.charAt(1) == "c") {
+          if (B.charAt(2) == "(")
+            return this.sugarcoatName(l, C);
+          if (0 <= B.charAt(2) && B.charAt(2) <= "9")
+            return this.sugarcoatName(l, C);
         }
       }
-      return this.sugarcoatName(l, S);
+      return this.sugarcoatName(l, y);
     }, this.parseType = function(l) {
       if (this.children != null && 0 < this.children.length)
         return "table";
@@ -7718,85 +11458,85 @@ let me = (function() {
         return "view";
       if (this.parent == null)
         return "table";
-      var t = c.semantics(), m = 4e3;
-      (n[0].value.endsWith("_name") || n[0].value.startsWith("name") || n[0].value.startsWith("email")) && (m = c.getOptionValue("namelen"));
-      const S = this.indexOf("vc", !0);
-      if (0 < S) {
-        n[S].begin, n[S].end;
-        let L = n[S].value.substring(2);
-        L == "" && this.indexOf("(") == S + 1 && (L = n[S + 2].value), L != "" && (m = parseInt(L)), n[S].value.endsWith("k") && (m < 32 ? m = m * 1024 : m = m * 1024 - 1);
+      var t = f.semantics(), u = 4e3;
+      (n[0].value.endsWith("_name") || n[0].value.startsWith("name") || n[0].value.startsWith("email")) && (u = f.getOptionValue("namelen"));
+      const y = this.indexOf("vc", !0);
+      if (0 < y) {
+        n[y].begin, n[y].end;
+        let E = n[y].value.substring(2);
+        E == "" && this.indexOf("(") == y + 1 && (E = n[y + 2].value), E != "" && (u = parseInt(E)), n[y].value.endsWith("k") && (u < 32 ? u = u * 1024 : u = u * 1024 - 1);
       }
-      var f = "varchar2(" + m + t + ")";
-      l == "plsql" && (f = "varchar2"), n[0].value.endsWith("_id") && S < 0 && this.indexOf("date") < 0 && (f = "number"), n[1] && n[1].value == "id" && (f = "number"), n[0].value == "quantity" && (f = "number"), n[0].value.endsWith("_number") && (f = "number"), n[0].value.endsWith("id") && S < 0 && this.indexOf("/") + 1 == this.indexOf("pk") && (f = "number"), this.occursBeforeOption("int", !0) && (f = "integer"), 0 < S && (f = "varchar2(" + m + t + ")", l == "plsql" && (f = "varchar2"));
-      const v = this.vectorType("vector");
-      if (v != null)
-        f = v;
+      var h = "varchar2(" + u + t + ")";
+      l == "plsql" && (h = "varchar2"), n[0].value.endsWith("_id") && y < 0 && this.indexOf("date") < 0 && (h = "number"), n[1] && n[1].value == "id" && (h = "number"), n[0].value == "quantity" && (h = "number"), n[0].value.endsWith("_number") && (h = "number"), n[0].value.endsWith("id") && y < 0 && this.indexOf("/") + 1 == this.indexOf("pk") && (h = "number"), this.occursBeforeOption("int", !0) && (h = "integer"), 0 < y && (h = "varchar2(" + u + t + ")", l == "plsql" && (h = "varchar2"));
+      const C = this.vectorType("vector");
+      if (C != null)
+        h = C;
       else {
-        const L = this.vectorType("vect");
-        L != null && (f = L);
+        const E = this.vectorType("vect");
+        E != null && (h = E);
       }
-      const P = U(o.parseName(), "_", this.parseName());
+      const B = U(o.parseName(), "_", this.parseName());
       this.isOption("default");
-      let N = "";
-      (n[0].value.endsWith("_yn") || n[0].value.startsWith("is_")) && (f = "varchar2(1" + c.semantics() + ")", N = `
-` + u + u + " ".repeat(o.maxChildNameLen()) + "constraint " + U(c.objPrefix(), P) + " check (" + this.parseName() + " in ('Y','N'))");
-      for (let L in G)
-        if (0 < this.indexOf(G[L])) {
-          f = "varchar2(1" + c.semantics() + ")", N = `
-` + u + u + " ".repeat(o.maxChildNameLen()) + "constraint " + U(c.objPrefix(), P) + " check (" + this.parseName() + " in ('Y','N'))";
+      let L = "";
+      (n[0].value.endsWith("_yn") || n[0].value.startsWith("is_")) && (h = "varchar2(1" + f.semantics() + ")", L = `
+` + c + c + " ".repeat(o.maxChildNameLen()) + "constraint " + U(f.objPrefix(), B) + " check (" + this.parseName() + " in ('Y','N'))");
+      for (let E in G)
+        if (0 < this.indexOf(G[E])) {
+          h = "varchar2(1" + f.semantics() + ")", L = `
+` + c + c + " ".repeat(o.maxChildNameLen()) + "constraint " + U(f.objPrefix(), B) + " check (" + this.parseName() + " in ('Y','N'))";
           break;
         }
-      const R = c.getOptionValue("db");
-      N != "" && (c.getOptionValue("boolean") == "native" || c.getOptionValue("boolean") != "yn" && 0 < R.length && 23 <= ge(R)) && (N = "", f = "boolean"), this.indexOf("phone_number") == 0 && (f = "number");
+      const R = f.getOptionValue("db");
+      L != "" && (f.getOptionValue("boolean") == "native" || f.getOptionValue("boolean") != "yn" && 0 < R.length && 23 <= pe(R)) && (L = "", h = "boolean"), this.indexOf("phone_number") == 0 && (h = "number");
       let w = this.indexOf("num", !0);
-      0 < w && (f = "number");
-      let O = this.indexOf(")");
-      if (0 < w && 0 < O && (f += this.content.toLowerCase().substring(n[w + 1].begin, n[O].end)), (0 <= this.indexOf("date") || this.indexOf("hiredate") == 0 || n[0].value.endsWith("_date") || n[0].value.startsWith("date_of_") || 1 < n.length && n[1].value == "d" || n[0].value.startsWith("created") || n[0].value.startsWith("updated")) && (f = c.getOptionValue("Date Data Type").toLowerCase()), S < 0 && (this.occursBeforeOption("clob") && (f = "clob"), (this.occursBeforeOption("blob") || this.occursBeforeOption("file")) && (f = "blob"), this.occursBeforeOption("json") && (f = "clob check (" + this.parseName() + " is json)")), this.occursBeforeOption("tswltz") && this.indexOf("/") ? f = "TIMESTAMP WITH LOCAL TIME ZONE".toLowerCase() : this.occursBeforeOption("tswtz") || this.occursBeforeOption("tstz") ? f = "TIMESTAMP WITH TIME ZONE".toLowerCase() : this.occursBeforeOption("ts") && (f = "TIMESTAMP".toLowerCase()), l) {
+      0 < w && (h = "number");
+      let F = this.indexOf(")");
+      if (0 < w && 0 < F && (h += this.content.toLowerCase().substring(n[w + 1].begin, n[F].end)), (0 <= this.indexOf("date") || this.indexOf("hiredate") == 0 || n[0].value.endsWith("_date") || n[0].value.startsWith("date_of_") || 1 < n.length && n[1].value == "d" || n[0].value.startsWith("created") || n[0].value.startsWith("updated")) && (h = f.getOptionValue("Date Data Type").toLowerCase()), y < 0 && (this.occursBeforeOption("clob") && (h = "clob"), (this.occursBeforeOption("blob") || this.occursBeforeOption("file")) && (h = "blob"), this.occursBeforeOption("json") && (h = "clob check (" + this.parseName() + " is json)")), this.occursBeforeOption("tswltz") && this.indexOf("/") ? h = "TIMESTAMP WITH LOCAL TIME ZONE".toLowerCase() : this.occursBeforeOption("tswtz") || this.occursBeforeOption("tstz") ? h = "TIMESTAMP WITH TIME ZONE".toLowerCase() : this.occursBeforeOption("ts") && (h = "TIMESTAMP".toLowerCase()), l) {
         if (this.isOption("fk") || 0 < this.indexOf("reference", !0)) {
-          const L = this.refId();
+          const E = this.refId();
           let e = "number";
-          f == "integer" && (e = f);
-          let a = c.find(L);
+          h == "integer" && (e = h);
+          let a = f.find(E);
           return a != null && a.getExplicitPkName() != null && (e = a.getPkType()), e;
         }
-        return f;
+        return h;
       }
-      (this.isOption("unique") || this.isOption("uk")) && (f += `
-`, f += u + u + " ".repeat(o.maxChildNameLen()) + "constraint " + U(c.objPrefix(), P, "_unq") + " unique");
-      var F = "'";
-      if ((f.startsWith("integer") || f.startsWith("number") || f.startsWith("date")) && (F = ""), this.isOption("default")) {
-        let L = "";
+      (this.isOption("unique") || this.isOption("uk")) && (h += `
+`, h += c + c + " ".repeat(o.maxChildNameLen()) + "constraint " + U(f.objPrefix(), B, "_unq") + " unique");
+      var O = "'";
+      if ((h.startsWith("integer") || h.startsWith("number") || h.startsWith("date")) && (O = ""), this.isOption("default")) {
+        let E = "";
         for (let e = this.indexOf("default") + 1; e < n.length; e++) {
           const a = n[e].getValue();
           if (a == "/" || a == "-" || a == "[")
             break;
-          L += n[e].getValue();
+          E += n[e].getValue();
         }
-        f += " default on null " + F + L + F;
+        h += " default on null " + O + E + O;
       }
-      if ((this.isOption("nn") || this.indexOf("not") + 1 == this.indexOf("null")) && this.indexOf("pk") < 0 && (f += " not null"), (this.isOption("hidden") || this.isOption("invincible")) && (f += " invisible"), f += this.genConstraint(F), f += N, this.isOption("between")) {
-        const L = this.indexOf("between"), e = n[L + 1].getValue() + " and " + n[L + 3].getValue();
-        f += " constraint " + U(P, "_bet") + `
-`, f += "           check (" + this.parseName() + " between " + e + ")";
+      if ((this.isOption("nn") || this.indexOf("not") + 1 == this.indexOf("null")) && this.indexOf("pk") < 0 && (h += " not null"), (this.isOption("hidden") || this.isOption("invincible")) && (h += " invisible"), h += this.genConstraint(O), h += L, this.isOption("between")) {
+        const E = this.indexOf("between"), e = n[E + 1].getValue() + " and " + n[E + 3].getValue();
+        h += " constraint " + U(B, "_bet") + `
+`, h += "           check (" + this.parseName() + " between " + e + ")";
       }
       if (this.isOption("pk")) {
-        let L = " not null";
-        f.startsWith("number") && c.optionEQvalue("pk", "identityDataType") && (L = " GENERATED BY DEFAULT ON NULL AS IDENTITY".toLowerCase()), f.startsWith("number") && c.optionEQvalue("pk", "seq") && (L = " default on null " + (c.objPrefix() + this.parent.parseName()) + "_seq.NEXTVAL ".toLowerCase()), f.startsWith("number") && c.optionEQvalue("pk", "guid") && (L = " default on null to_number(sys_guid(), 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX') "), f += L + `
-`, f += u + u + " ".repeat(o.maxChildNameLen()) + "constraint " + U(c.objPrefix(), P, "_pk") + " primary key";
+        let E = " not null";
+        h.startsWith("number") && f.optionEQvalue("pk", "identityDataType") && (E = " GENERATED BY DEFAULT ON NULL AS IDENTITY".toLowerCase()), h.startsWith("number") && f.optionEQvalue("pk", "seq") && (E = " default on null " + (f.objPrefix() + this.parent.parseName()) + "_seq.NEXTVAL ".toLowerCase()), h.startsWith("number") && f.optionEQvalue("pk", "guid") && (E = " default on null to_number(sys_guid(), 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX') "), h += E + `
+`, h += c + c + " ".repeat(o.maxChildNameLen()) + "constraint " + U(f.objPrefix(), B, "_pk") + " primary key";
       }
-      return f;
+      return h;
     }, this.vectorType = function(l) {
       const n = this.indexOf(l, !0), t = this.src;
       if (0 < n) {
         t[n].begin, t[n].end;
-        let m = t[n].value.substring(l.length);
-        m == "" && this.indexOf("(") == m + 1 && (m = t[m + 2].value);
-        let S = "*";
-        if (m != "") {
-          let f = 1;
-          m.endsWith("k") && (f = 1024), m = m.substring(0, m.length - 1), S = parseInt(m) * f;
+        let u = t[n].value.substring(l.length);
+        u == "" && this.indexOf("(") == u + 1 && (u = t[u + 2].value);
+        let y = "*";
+        if (u != "") {
+          let h = 1;
+          u.endsWith("k") && (h = 1024), u = u.substring(0, u.length - 1), y = parseInt(u) * h;
         }
-        return "vector(" + S + ",*,*)";
+        return "vector(" + y + ",*,*)";
       }
       return null;
     }, this.genConstraint = function(l) {
@@ -7804,17 +11544,17 @@ let me = (function() {
       if (this.isOption("check")) {
         let t = "";
         o != null && (t = U(o.parseName(), "_"));
-        const m = U(t, this.parseName());
-        let S = u;
-        o != null && (S = " ".repeat(o.maxChildNameLen()));
-        let f = this.getGeneralConstraint();
-        if (f != null)
-          return this.children != null && 0 < this.children.length ? (n += u + "constraint " + U(c.objPrefix(), m, "_ck"), n += "  check " + f + `,
-`) : (n += " constraint " + U(c.objPrefix(), m, "_ck") + `
-`, n += u + u + S + "check " + f), n;
-        const v = this.getValues("check");
-        n += " constraint " + U(c.objPrefix(), m, "_ck") + `
-`, n += u + u + S + "check (" + this.parseName() + " in (" + v + "))";
+        const u = U(t, this.parseName());
+        let y = c;
+        o != null && (y = " ".repeat(o.maxChildNameLen()));
+        let h = this.getGeneralConstraint();
+        if (h != null)
+          return this.children != null && 0 < this.children.length ? (n += c + "constraint " + U(f.objPrefix(), u, "_ck"), n += "  check " + h + `,
+`) : (n += " constraint " + U(f.objPrefix(), u, "_ck") + `
+`, n += c + c + y + "check " + h), n;
+        const C = this.getValues("check");
+        n += " constraint " + U(f.objPrefix(), u, "_ck") + `
+`, n += c + c + y + "check (" + this.parseName() + " in (" + C + "))";
       }
       return n;
     }, this.isMany2One = function() {
@@ -7837,7 +11577,7 @@ let me = (function() {
       var n = l.indexOf(" id ");
       if (n < 0 && n == l.length - 3 && (n = l.indexOf(" id")), n < 0 && (n = l.indexOf(" id"), n != l.length - 3 && (n = -1)), n < 0 && (n = l.indexOf("_id "), n != l.length - 4 && (n = -1)), n < 0 && (n = l.indexOf("_id"), n != l.length - 3 && (n = -1)), n < 0 && (n = l.indexOf("Id "), n != l.length - 3 && (n = -1)), 0 < n) {
         let t = l.substr(0, n) + "s";
-        if (c.find(t) != null || (t = l.substr(0, n), c.find(t) != null))
+        if (f.find(t) != null || (t = l.substr(0, n), f.find(t) != null))
           return t;
       }
       return n = l.indexOf("/fk"), 0 < n ? (l = l.substr(n + 3).trim(), n = l.indexOf("/"), 0 < n && (l = l.substring(0, n).trim()), n = l.indexOf("["), 0 < n && (l = l.substring(0, n).trim()), l.replace(" ", "_")) : (n = l.indexOf("/reference"), 0 < n ? (l = l.substr(n + 10).trim(), l.indexOf("s") == 0 && (l = l.substring(1).trim()), n = l.indexOf("/"), 0 < n && (l = l.substring(0, n).trim()), n = l.indexOf("["), 0 < n && (l = l.substring(0, n).trim()), l.replace(" ", "_")) : null);
@@ -7852,37 +11592,37 @@ let me = (function() {
       }
       return null;
     }, this.listValues = function(l) {
-      let n = [], t = this.indexOf(l), m = " ";
-      for (let v = t + 1; v < this.src.length && this.src[v].value != "/" && this.src[v].value != "["; v++)
-        if (this.src[v].value == ",") {
-          m = ",";
+      let n = [], t = this.indexOf(l), u = " ";
+      for (let C = t + 1; C < this.src.length && this.src[C].value != "/" && this.src[C].value != "["; C++)
+        if (this.src[C].value == ",") {
+          u = ",";
           break;
-        } else if (this.src[v].value.toLowerCase && this.src[v].value.toLowerCase() == "and") {
-          m = this.src[v].value;
+        } else if (this.src[C].value.toLowerCase && this.src[C].value.toLowerCase() == "and") {
+          u = this.src[C].value;
           break;
         }
-      if (m == " ") {
-        for (let v = t + 1; v < this.src.length && this.src[v].value != "/" && this.src[v].value != "["; v++) {
-          let P = this.src[v].value;
-          this.src[v].type == "identifier" && P != "null" && (P = "'" + P + "'"), P.charAt(0) == "`" && (P = P.substring(1, P.length - 1)), n.push(P);
+      if (u == " ") {
+        for (let C = t + 1; C < this.src.length && this.src[C].value != "/" && this.src[C].value != "["; C++) {
+          let B = this.src[C].value;
+          this.src[C].type == "identifier" && B != "null" && (B = "'" + B + "'"), B.charAt(0) == "`" && (B = B.substring(1, B.length - 1)), n.push(B);
         }
         return n;
       }
-      let S = null, f = null;
-      for (let v = t + 1; v < this.src.length && this.src[v].value != "/" && this.src[v].value != "["; v++) {
-        let P = this.src[v].value, N = this.content.substring(this.src[v - 1].end, this.src[v].begin);
-        if (P == m) {
-          f == "identifier" && S != "null" && (S = "'" + S + "'"), n.push(S), S = null, f = null;
+      let y = null, h = null;
+      for (let C = t + 1; C < this.src.length && this.src[C].value != "/" && this.src[C].value != "["; C++) {
+        let B = this.src[C].value, L = this.content.substring(this.src[C - 1].end, this.src[C].begin);
+        if (B == u) {
+          h == "identifier" && y != "null" && (y = "'" + y + "'"), n.push(y), y = null, h = null;
           continue;
         }
-        P != "(" && P != ")" && (P.charAt(0) == "`" ? P = P.substring(1, P.length - 1) : this.src[v].type == "identifier" && (f = "identifier"), S == null ? S = P : S += N + P);
+        B != "(" && B != ")" && (B.charAt(0) == "`" ? B = B.substring(1, B.length - 1) : this.src[C].type == "identifier" && (h = "identifier"), y == null ? y = B : y += L + B);
       }
-      return f == "identifier" && (S = "'" + S + "'"), n.push(S), n;
+      return h == "identifier" && (y = "'" + y + "'"), n.push(y), n;
     }, this.getValues = function(l) {
       let n = "";
       const t = this.listValues(l);
-      for (let m = 0; m < t.length; m++)
-        0 < m && (n += ","), n += t[m];
+      for (let u = 0; u < t.length; u++)
+        0 < u && (n += ","), n += t[u];
       return n;
     }, this.parseValues = function() {
       var l;
@@ -7899,12 +11639,12 @@ let me = (function() {
     }, this.apparentDepth = function() {
       let l = this.content.split(/ |\t/), n = 0;
       for (var t = 0; t < l.length; t++) {
-        var m = l[t];
-        if (m == "	") {
+        var u = l[t];
+        if (u == "	") {
           n += this.tab;
           continue;
         }
-        if (m == "") {
+        if (u == "") {
           n++;
           continue;
         }
@@ -7918,9 +11658,9 @@ let me = (function() {
     }, this.getGenIdColName = function() {
       if (this.parseType() != "table" || this.getExplicitPkName() != null)
         return null;
-      if (c.optionEQvalue("Auto Primary Key", "yes")) {
+      if (f.optionEQvalue("Auto Primary Key", "yes")) {
         let l = "";
-        return this.colprefix != null && (l = this.colprefix + "_"), c.optionEQvalue("prefixPKwithTname", "yes") && (l = z(this.parseName()) + "_"), l + "id";
+        return this.colprefix != null && (l = this.colprefix + "_"), f.optionEQvalue("prefixPKwithTname", "yes") && (l = W(this.parseName()) + "_"), l + "id";
       }
       return null;
     }, this.getPkName = function() {
@@ -7934,50 +11674,50 @@ let me = (function() {
       return "number";
     }, this.lateInitFks = function() {
       if (this.fks == null && (this.fks = []), !this.isMany2One()) {
-        this.parent != null && this.parseType() == "table" && (this.parent.getPkName().indexOf(",") < 0 ? this.fks[z(this.parent.parseName()) + "_id"] = this.parent.parseName() : this.fks[z(this.parent.getPkName())] = this.parent.parseName());
+        this.parent != null && this.parseType() == "table" && (this.parent.getPkName().indexOf(",") < 0 ? this.fks[W(this.parent.parseName()) + "_id"] = this.parent.parseName() : this.fks[W(this.parent.getPkName())] = this.parent.parseName());
         for (let l = 0; l < this.children.length; l++)
           this.children[l].refId() != null && (this.fks[this.children[l].parseName()] = this.children[l].refId());
       }
     }, this.singleDDL = function() {
       if (this.children.length == 0 && 0 < this.apparentDepth()) {
-        let e = u;
+        let e = c;
         return this.parent != null && (e += " ".repeat(this.parent.maxChildNameLen() - this.parseName().length)), this.parseName() + e + this.parseType();
       }
       this.lateInitFks();
       var l = "";
-      const n = c.objPrefix() + this.parseName();
-      c.optionEQvalue("pk", "SEQ") && c.optionEQvalue("genpk", !0) && (l = l + "create sequence  " + n + `_seq;
+      const n = f.objPrefix() + this.parseName();
+      f.optionEQvalue("pk", "SEQ") && f.optionEQvalue("genpk", !0) && (l = l + "create sequence  " + n + `_seq;
 
 `), l = l + "create table " + n + ` (
 `;
-      var t = u + " ".repeat(this.maxChildNameLen() - 2);
-      let m = this.getGenIdColName();
-      if (m != null && !this.isOption("pk")) {
+      var t = c + " ".repeat(this.maxChildNameLen() - 2);
+      let u = this.getGenIdColName();
+      if (u != null && !this.isOption("pk")) {
         let e = "not null";
-        c.optionEQvalue("pk", "identityDataType") && (e = "GENERATED BY DEFAULT ON NULL AS IDENTITY".toLowerCase()), c.optionEQvalue("pk", "seq") && (e = "default on null " + n + "_seq.NEXTVAL ".toLowerCase()), c.optionEQvalue("pk", "guid") && (e = "default on null to_number(sys_guid(), 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX') "), l += u + m + t + "number " + e + `
+        f.optionEQvalue("pk", "identityDataType") && (e = "GENERATED BY DEFAULT ON NULL AS IDENTITY".toLowerCase()), f.optionEQvalue("pk", "seq") && (e = "default on null " + n + "_seq.NEXTVAL ".toLowerCase()), f.optionEQvalue("pk", "guid") && (e = "default on null to_number(sys_guid(), 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX') "), l += c + u + t + "number " + e + `
 `;
-        const a = U(c.objPrefix("no schema") + this.parseName(), "_", m);
-        l += u + u + " ".repeat(this.maxChildNameLen()) + "constraint " + U(a, "_pk") + ` primary key,
+        const a = U(f.objPrefix("no schema") + this.parseName(), "_", u);
+        l += c + c + " ".repeat(this.maxChildNameLen()) + "constraint " + U(a, "_pk") + ` primary key,
 `;
       } else {
         let e = this.getExplicitPkName();
         if (e != null && e.indexOf(",") < 0) {
-          let a = u + " ".repeat(this.maxChildNameLen() - e.length), i = "number";
+          let a = c + " ".repeat(this.maxChildNameLen() - e.length), i = "number";
           const s = this.findChild(e);
-          s != null && (i = s.parseType()), l += u + e + a + i + `,
+          s != null && (i = s.parseType()), l += c + e + a + i + `,
 `;
         }
       }
       for (let e in this.fks) {
         let a = this.fks[e];
         if (0 < e.indexOf(",")) {
-          let A = c.find(a);
-          for (var S = re(e, ", "), f = 0; f < S.length; f++) {
-            var v = S[f];
-            if (v == ",")
+          let v = f.find(a);
+          for (var y = re(e, ", "), h = 0; h < y.length; h++) {
+            var C = y[h];
+            if (C == ",")
               continue;
-            const d = A.findChild(v);
-            t = u + " ".repeat(this.maxChildNameLen() - v.length), l += u + v + t + d.parseType((I) => !0) + `,
+            const m = v.findChild(C);
+            t = c + " ".repeat(this.maxChildNameLen() - C.length), l += c + C + t + m.parseType((T) => !0) + `,
 `;
           }
           continue;
@@ -7985,86 +11725,86 @@ let me = (function() {
         let i = "number";
         const s = this.findChild(e);
         s != null && (i = s.parseType("fk"));
-        let h = c.find(a), M = "";
-        if (h != null) {
-          const A = h.getExplicitPkName();
-          A != null && A.indexOf(",") < 0 && (i = h.getPkType());
+        let d = f.find(a), S = "";
+        if (d != null) {
+          const v = d.getExplicitPkName();
+          v != null && v.indexOf(",") < 0 && (i = d.getPkType());
         } else
-          h = c.find(e), h.isMany2One() & !e.endsWith("_id") && (a = e, e = z(e), M = "_id");
-        if (t = u + " ".repeat(this.maxChildNameLen() - e.length), l += u + e + M + t + i, h.line < this.line || h.isMany2One()) {
-          l += u + u + " ".repeat(this.maxChildNameLen()) + "constraint " + n + "_" + e + `_fk
+          d = f.find(e), d.isMany2One() & !e.endsWith("_id") && (a = e, e = W(e), S = "_id");
+        if (t = c + " ".repeat(this.maxChildNameLen() - e.length), l += c + e + S + t + i, d.line < this.line || d.isMany2One()) {
+          l += c + c + " ".repeat(this.maxChildNameLen()) + "constraint " + n + "_" + e + `_fk
 `;
-          let A = "";
-          this.isOption("cascade") ? A = " on delete cascade" : this.isOption("setnull") && (A = " on delete set null");
-          let d = "";
-          for (let I in this.children) {
-            let y = this.children[I];
-            if (e == y.parseName()) {
-              (y.isOption("nn") || y.isOption("notnull")) && (d = " NOT NULL".toLowerCase()), y.isOption("cascade") ? A = " on delete cascade" : this.isOption("setnull") && (A = " on delete set null");
+          let v = "";
+          this.isOption("cascade") ? v = " on delete cascade" : this.isOption("setnull") && (v = " on delete set null");
+          let m = "";
+          for (let T in this.children) {
+            let A = this.children[T];
+            if (e == A.parseName()) {
+              (A.isOption("nn") || A.isOption("notnull")) && (m = " NOT NULL".toLowerCase()), A.isOption("cascade") ? v = " on delete cascade" : this.isOption("setnull") && (v = " on delete set null");
               break;
             }
           }
-          l += u + u + " ".repeat(this.maxChildNameLen()) + "references " + c.objPrefix() + a + A + d + `,
+          l += c + c + " ".repeat(this.maxChildNameLen()) + "references " + f.objPrefix() + a + v + m + `,
 `;
         } else {
           l += `,
 `;
-          const A = "alter table " + n + " add constraint " + n + "_" + e + "_fk foreign key (" + e + ") references " + c.objPrefix() + a + `;
+          const v = "alter table " + n + " add constraint " + n + "_" + e + "_fk foreign key (" + e + ") references " + f.objPrefix() + a + `;
 `;
-          c.postponedAlters.includes(A) || c.postponedAlters.push(A);
+          f.postponedAlters.includes(v) || f.postponedAlters.push(v);
         }
       }
-      if (c.optionEQvalue("rowkey", !0) || this.isOption("rowkey")) {
-        let e = u + " ".repeat(this.maxChildNameLen() - 7);
-        l += u + "row_key" + e + "varchar2(30" + c.semantics() + `)
-`, l += u + u + " ".repeat(this.maxChildNameLen()) + "constraint " + n + `_row_key_unq unique not null,
+      if (f.optionEQvalue("rowkey", !0) || this.isOption("rowkey")) {
+        let e = c + " ".repeat(this.maxChildNameLen() - 7);
+        l += c + "row_key" + e + "varchar2(30" + f.semantics() + `)
+`, l += c + c + " ".repeat(this.maxChildNameLen()) + "constraint " + n + `_row_key_unq unique not null,
 `;
       }
       for (let e = 0; e < this.children.length; e++) {
         let a = this.children[e];
-        if (!(m != null && a.parseName() == "id") && !(0 < a.children.length) && a.refId() == null) {
+        if (!(u != null && a.parseName() == "id") && !(0 < a.children.length) && a.refId() == null) {
           if (a.parseName() == this.getExplicitPkName())
             continue;
-          if (l += u + a.singleDDL() + `,
+          if (l += c + a.singleDDL() + `,
 `, 0 < a.indexOf("file")) {
             const i = a.parseName().toUpperCase();
-            let s = i + "_FILENAME", h = u + " ".repeat(this.maxChildNameLen() - s.length);
-            l += u + s.toLowerCase() + h + "varchar2(255" + c.semantics() + `),
-`, s = i + "_MIMETYPE", h = u + " ".repeat(this.maxChildNameLen() - s.length), l += u + s.toLowerCase() + h + "varchar2(255" + c.semantics() + `),
-`, s = i + "_CHARSET", h = u + " ".repeat(this.maxChildNameLen() - s.length), l += u + s.toLowerCase() + h + "varchar2(255" + c.semantics() + `),
-`, s = i + "_LASTUPD", h = u + " ".repeat(this.maxChildNameLen() - s.length), l += u + s.toLowerCase() + h + c.getOptionValue("Date Data Type").toLowerCase() + `,
+            let s = i + "_FILENAME", d = c + " ".repeat(this.maxChildNameLen() - s.length);
+            l += c + s.toLowerCase() + d + "varchar2(255" + f.semantics() + `),
+`, s = i + "_MIMETYPE", d = c + " ".repeat(this.maxChildNameLen() - s.length), l += c + s.toLowerCase() + d + "varchar2(255" + f.semantics() + `),
+`, s = i + "_CHARSET", d = c + " ".repeat(this.maxChildNameLen() - s.length), l += c + s.toLowerCase() + d + "varchar2(255" + f.semantics() + `),
+`, s = i + "_LASTUPD", d = c + " ".repeat(this.maxChildNameLen() - s.length), l += c + s.toLowerCase() + d + f.getOptionValue("Date Data Type").toLowerCase() + `,
 `;
           }
         }
       }
-      if (c.optionEQvalue("rowVersion", "yes") || this.isOption("rowversion")) {
-        let e = u + " ".repeat(this.maxChildNameLen() - 11);
-        l += u + "row_version" + e + `integer not null,
+      if (f.optionEQvalue("rowVersion", "yes") || this.isOption("rowversion")) {
+        let e = c + " ".repeat(this.maxChildNameLen() - 11);
+        l += c + "row_version" + e + `integer not null,
 `;
       }
-      if (c.optionEQvalue("Audit Columns", "yes") || this.isOption("auditcols") || this.isOption("audit", "col") || this.isOption("audit", "cols") || this.isOption("audit", "columns")) {
-        let e = c.getOptionValue("createdcol"), a = u + " ".repeat(this.maxChildNameLen() - e.length);
-        l += u + e + a + c.getOptionValue("Date Data Type").toLowerCase() + ` not null,
+      if (f.optionEQvalue("Audit Columns", "yes") || this.isOption("auditcols") || this.isOption("audit", "col") || this.isOption("audit", "cols") || this.isOption("audit", "columns")) {
+        let e = f.getOptionValue("createdcol"), a = c + " ".repeat(this.maxChildNameLen() - e.length);
+        l += c + e + a + f.getOptionValue("Date Data Type").toLowerCase() + ` not null,
 `;
-        let i = c.getOptionValue("createdbycol");
-        a = u + " ".repeat(this.maxChildNameLen() - i.length), l += u + i + a + "varchar2(255" + c.semantics() + `) not null,
+        let i = f.getOptionValue("createdbycol");
+        a = c + " ".repeat(this.maxChildNameLen() - i.length), l += c + i + a + "varchar2(255" + f.semantics() + `) not null,
 `;
-        let s = c.getOptionValue("updatedcol");
-        a = u + " ".repeat(this.maxChildNameLen() - s.length), l += u + s + a + c.getOptionValue("Date Data Type").toLowerCase() + ` not null,
+        let s = f.getOptionValue("updatedcol");
+        a = c + " ".repeat(this.maxChildNameLen() - s.length), l += c + s + a + f.getOptionValue("Date Data Type").toLowerCase() + ` not null,
 `;
-        let h = c.getOptionValue("updatedbycol");
-        a = u + " ".repeat(this.maxChildNameLen() - h.length), l += u + h + a + "varchar2(255" + c.semantics() + `) not null,
+        let d = f.getOptionValue("updatedbycol");
+        a = c + " ".repeat(this.maxChildNameLen() - d.length), l += c + d + a + "varchar2(255" + f.semantics() + `) not null,
 `;
       }
-      var P = c.additionalColumns();
-      for (let e in P) {
-        var N = P[e];
-        t = u + " ".repeat(this.maxChildNameLen() - e.length), l += u + e.toUpperCase() + t + N + ` not null,
+      var B = f.additionalColumns();
+      for (let e in B) {
+        var L = B[e];
+        t = c + " ".repeat(this.maxChildNameLen() - e.length), l += c + e.toUpperCase() + t + L + ` not null,
 `;
       }
       l += this.genConstraint(), l.lastIndexOf(`,
 `) == l.length - 2 && (l = l.substring(0, l.length - 2) + `
-`), l += ")" + (c.optionEQvalue("compress", "yes") || this.isOption("compress") ? " compress" : "") + `;
+`), l += ")" + (f.optionEQvalue("compress", "yes") || this.isOption("compress") ? " compress" : "") + `;
 
 `, this.isOption("audit") && !this.isOption("auditcols") && !this.isOption("audit", "col") && !this.isOption("audit", "cols") && !this.isOption("audit", "columns") && (l += "audit all on " + n + `;
 
@@ -8079,22 +11819,22 @@ let me = (function() {
       let w = 1;
       for (let e in this.fks)
         if (!this.isMany2One()) {
-          var R = this.fks[e], O = R, v = e;
-          v == null && (v = z(O) + "_id"), w == 1 && (l += `-- table index
-`), l += "create index " + n + "_i" + w++ + " on " + n + " (" + v + `);
+          var R = this.fks[e], F = R, C = e;
+          C == null && (C = W(F) + "_id"), w == 1 && (l += `-- table index
+`), l += "create index " + n + "_i" + w++ + " on " + n + " (" + C + `);
 
 `;
         }
-      let F = this.getOptionValue("pk");
-      F && (l += "alter table " + n + " add constraint " + n + "_pk primary key (" + F + `);
+      let O = this.getOptionValue("pk");
+      O && (l += "alter table " + n + " add constraint " + n + "_pk primary key (" + O + `);
 
-`), F = this.getOptionValue("unique"), F == null && (F = this.getOptionValue("uk")), F != null && (l += "alter table " + n + " add constraint " + n + "_uk unique (" + F + `);
+`), O = this.getOptionValue("unique"), O == null && (O = this.getOptionValue("uk")), O != null && (l += "alter table " + n + " add constraint " + n + "_uk unique (" + O + `);
 
 `);
       for (let e = 0; e < this.children.length; e++) {
-        var L = this.children[e];
-        (L.isOption("idx") || L.isOption("index")) && (w == 1 && (l += `-- table index
-`), l += "create index " + n + "_i" + w++ + " on " + n + " (" + L.parseName() + `);
+        var E = this.children[e];
+        (E.isOption("idx") || E.isOption("index")) && (w == 1 && (l += `-- table index
+`), l += "create index " + n + "_i" + w++ + " on " + n + " (" + E.parseName() + `);
 `);
       }
       this.comment != null && (l += "comment on table " + n + " is '" + this.comment + `';
@@ -8117,8 +11857,8 @@ let me = (function() {
     }, this.orderedTableNodes = function() {
       var l = [this];
       const n = this.descendants();
-      for (let m = 1; m < n.length; m++) {
-        var t = n[m];
+      for (let u = 1; u < n.length; u++) {
+        var t = n[u];
         t.children.length != 0 && (t.isMany2One() ? t.isContainedIn(l) || l.unshift(t) : t.isContainedIn(l) || l.push(t));
       }
       return l;
@@ -8128,86 +11868,86 @@ let me = (function() {
           return !0;
       return !1;
     }, this.generateDrop = function() {
-      let l = c.objPrefix() + this.parseName(), n = "";
+      let l = f.objPrefix() + this.parseName(), n = "";
       return this.parseType() == "view" && (n = "drop view " + l + `;
 `), this.parseType() == "table" && (n = "drop table " + l + ` cascade constraints;
-`, c.optionEQvalue("api", "yes") && (n += "drop package " + l + `_api;
-`), c.optionEQvalue("pk", "SEQ") && (n += "drop sequence " + l + `_seq;
+`, f.optionEQvalue("api", "yes") && (n += "drop package " + l + `_api;
+`), f.optionEQvalue("pk", "SEQ") && (n += "drop sequence " + l + `_seq;
 `)), n.toLowerCase();
     }, this.generateView = function() {
       if (this.parseType() != "view" && this.parseType() != "dv")
         return "";
-      if (c.optionEQvalue("Duality View", "yes") || this.parseType() == "dv")
+      if (f.optionEQvalue("Duality View", "yes") || this.parseType() == "dv")
         try {
           return this.generateDualityView();
-        } catch (A) {
-          if (A.message == this.one2many2oneUnsupoported)
+        } catch (v) {
+          if (v.message == this.one2many2oneUnsupoported)
             return "";
-          throw A;
+          throw v;
         }
-      let l = c.objPrefix() + this.parseName();
+      let l = f.objPrefix() + this.parseName();
       var n = this.src, t = "create or replace view " + l + ` as
 `;
       t += `select
 `;
-      for (var m = 0, S = 2; S < n.length; S++) {
-        let A = c.find(n[S].value);
-        if (A == null)
+      for (var u = 0, y = 2; y < n.length; y++) {
+        let v = f.find(n[y].value);
+        if (v == null)
           return "";
-        var f = (n[S].value + ".id").length;
-        m < f && (m = f);
-        for (var v = 0; v < A.children.length; v++) {
-          var P = A.children[v];
-          f = (n[S].value + "." + P.parseName()).length, m < f && (m = f);
+        var h = (n[y].value + ".id").length;
+        u < h && (u = h);
+        for (var C = 0; C < v.children.length; C++) {
+          var B = v.children[C];
+          h = (n[y].value + "." + B.parseName()).length, u < h && (u = h);
         }
       }
-      var N = {};
-      for (let A = 2; A < n.length; A++) {
-        let d = c.find(n[A].value);
-        if (d != null)
-          for (let I = 0; I < d.children.length; I++) {
-            var R = d.children[I].parseName(), w = N[R];
-            w == null && (w = 0), N[R] = w + 1;
+      var L = {};
+      for (let v = 2; v < n.length; v++) {
+        let m = f.find(n[v].value);
+        if (m != null)
+          for (let T = 0; T < m.children.length; T++) {
+            var R = m.children[T].parseName(), w = L[R];
+            w == null && (w = 0), L[R] = w + 1;
           }
       }
-      for (let A = 2; A < n.length; A++) {
-        let d = c.find(n[A].value);
-        if (d == null)
+      for (let v = 2; v < n.length; v++) {
+        let m = f.find(n[v].value);
+        if (m == null)
           continue;
-        let I = " ".repeat(m - (n[A].value + ".id").length);
-        t += u + n[A].value + ".id" + u + I + z(n[A].value) + `_id,
+        let T = " ".repeat(u - (n[v].value + ".id").length);
+        t += c + n[v].value + ".id" + c + T + W(n[v].value) + `_id,
 `;
-        for (let y = 0; y < d.children.length; y++) {
-          let T = d.children[y];
-          if (T.children.length == 0) {
-            I = " ".repeat(m - (n[A].value + "." + T.parseName()).length);
-            var O = "";
-            1 < N[T.parseName()] && (O = z(n[A].value) + "_"), t += u + n[A].value + "." + T.parseName() + u + I + O + T.parseName() + `,
+        for (let A = 0; A < m.children.length; A++) {
+          let M = m.children[A];
+          if (M.children.length == 0) {
+            T = " ".repeat(u - (n[v].value + "." + M.parseName()).length);
+            var F = "";
+            1 < L[M.parseName()] && (F = W(n[v].value) + "_"), t += c + n[v].value + "." + M.parseName() + c + T + F + M.parseName() + `,
 `;
           }
         }
-        if (c.optionEQvalue("rowVersion", "yes") || d.isOption("rowversion")) {
-          let y = u + " ".repeat(d.maxChildNameLen() - 11);
-          t += u + n[A].value + ".row_version" + z(y + n[A].value) + `_row_version,
+        if (f.optionEQvalue("rowVersion", "yes") || m.isOption("rowversion")) {
+          let A = c + " ".repeat(m.maxChildNameLen() - 11);
+          t += c + n[v].value + ".row_version" + W(A + n[v].value) + `_row_version,
 `;
         }
-        if (c.optionEQvalue("rowkey", "yes") || d.isOption("rowkey")) {
-          let y = u + " ".repeat(d.maxChildNameLen() - 7);
-          t += u + n[A].value + ".ROW_KEY" + z(y + n[A].value) + `_ROW_KEY,
+        if (f.optionEQvalue("rowkey", "yes") || m.isOption("rowkey")) {
+          let A = c + " ".repeat(m.maxChildNameLen() - 7);
+          t += c + n[v].value + ".ROW_KEY" + W(A + n[v].value) + `_ROW_KEY,
 `;
         }
-        if (c.optionEQvalue("Audit Columns", "yes") || d.isOption("auditcols") || d.isOption("audit", "col") || d.isOption("audit", "cols") || d.isOption("audit", "columns")) {
-          let y = c.getOptionValue("createdcol"), T = u + " ".repeat(d.maxChildNameLen() - y.length);
-          t += u + n[A].value + "." + y + z(T + n[A].value) + "_" + y + `,
+        if (f.optionEQvalue("Audit Columns", "yes") || m.isOption("auditcols") || m.isOption("audit", "col") || m.isOption("audit", "cols") || m.isOption("audit", "columns")) {
+          let A = f.getOptionValue("createdcol"), M = c + " ".repeat(m.maxChildNameLen() - A.length);
+          t += c + n[v].value + "." + A + W(M + n[v].value) + "_" + A + `,
 `;
-          let H = c.getOptionValue("createdbycol");
-          T = u + " ".repeat(d.maxChildNameLen() - H.length), t += u + n[A].value + "." + H + z(T + n[A].value) + "_" + H + `,
+          let _ = f.getOptionValue("createdbycol");
+          M = c + " ".repeat(m.maxChildNameLen() - _.length), t += c + n[v].value + "." + _ + W(M + n[v].value) + "_" + _ + `,
 `;
-          let _ = c.getOptionValue("updatedcol");
-          T = u + " ".repeat(d.maxChildNameLen() - _.length), t += u + n[A].value + "." + _ + z(T + n[A].value) + "_" + _ + `,
+          let H = f.getOptionValue("updatedcol");
+          M = c + " ".repeat(m.maxChildNameLen() - H.length), t += c + n[v].value + "." + H + W(M + n[v].value) + "_" + H + `,
 `;
-          let W = c.getOptionValue("updatedbycol");
-          T = u + " ".repeat(d.maxChildNameLen() - W.length), t += u + n[A].value + "." + W + z(T + n[A].value) + "_" + W + `,
+          let z = f.getOptionValue("updatedbycol");
+          M = c + " ".repeat(m.maxChildNameLen() - z.length), t += c + n[v].value + "." + z + W(M + n[v].value) + "_" + z + `,
 `;
         }
       }
@@ -8215,35 +11955,35 @@ let me = (function() {
 `) == t.length - 2 && (t = t.substr(0, t.length - 2) + `
 `), t += `from
 `;
-      for (let A = 2; A < n.length; A++) {
-        let d = " ".repeat(m - n[A].length);
-        var F = n[A].value;
-        c.objPrefix() != null && c.objPrefix() != "" && (F = c.objPrefix() + n[A].value + d + n[A].value), t += u + F + `,
+      for (let v = 2; v < n.length; v++) {
+        let m = " ".repeat(u - n[v].length);
+        var O = n[v].value;
+        f.objPrefix() != null && f.objPrefix() != "" && (O = f.objPrefix() + n[v].value + m + n[v].value), t += c + O + `,
 `;
       }
       t.lastIndexOf(`,
 `) == t.length - 2 && (t = t.substr(0, t.length - 2) + `
 `), t += `where
 `;
-      for (let A = 2; A < n.length; A++)
-        for (let d = 2; d < n.length; d++)
-          if (d != A) {
-            var L = n[A].value, e = n[d].value, a = c.find(L);
+      for (let v = 2; v < n.length; v++)
+        for (let m = 2; m < n.length; m++)
+          if (m != v) {
+            var E = n[v].value, e = n[m].value, a = f.find(E);
             if (a != null) {
-              var i = c.find(e);
+              var i = f.find(e);
               if (i != null)
                 for (var s in a.fks) {
-                  var h = a.fks[s];
-                  h == e && (t += u + L + "." + z(h) + "_id(+) = " + e + `.id and
+                  var d = a.fks[s];
+                  d == e && (t += c + E + "." + W(d) + "_id(+) = " + e + `.id and
 `);
                 }
             }
           }
       t = t.toLowerCase();
-      let M = `where
+      let S = `where
 `;
-      return 0 < t.indexOf(M) && t.indexOf(M) == t.length - M.length && (t = t.substring(0, t.length - M.length).trim()), M = `and
-`, 0 < t.indexOf(M) && t.indexOf(M) == t.length - M.length && (t = t.substring(0, t.length - M.length).trim()), t.endsWith(`
+      return 0 < t.indexOf(S) && t.indexOf(S) == t.length - S.length && (t = t.substring(0, t.length - S.length).trim()), S = `and
+`, 0 < t.indexOf(S) && t.indexOf(S) == t.length - S.length && (t = t.substring(0, t.length - S.length).trim()), t.endsWith(`
 `) || (t += `
 `), t += `/
 `, t.toLowerCase();
@@ -8252,9 +11992,9 @@ let me = (function() {
         return "";
       let l = this.parseName();
       const n = l.indexOf('"') == 0;
-      let t = c.objPrefix() + l;
-      return n ? t = c.objPrefix() + l.substring(1, l.length - 1) : t = (c.objPrefix() + l).toUpperCase(), `begin
-` + u + "ords.enable_object(p_enabled=>TRUE, p_object=>'" + t + `');
+      let t = f.objPrefix() + l;
+      return n ? t = f.objPrefix() + l.substring(1, l.length - 1) : t = (f.objPrefix() + l).toUpperCase(), `begin
+` + c + "ords.enable_object(p_enabled=>TRUE, p_object=>'" + t + `');
 end;
 /
 `;
@@ -8262,14 +12002,14 @@ end;
       if (this.parseType() != "table")
         return "";
       let l = "";
-      c.optionEQvalue("editionable", "yes") && (l = " editionable");
-      let n = c.objPrefix() + this.parseName();
+      f.optionEQvalue("editionable", "yes") && (l = " editionable");
+      let n = f.objPrefix() + this.parseName();
       var t = "create or replace" + l + " trigger " + n.toLowerCase() + `_BIU
 `.toLowerCase();
       t += `    before insert or update
 `, t += "    on " + n.toLowerCase() + `
 `, t += `    for each row
-`, (c.optionEQvalue("rowkey", "yes") || this.isOption("rowkey")) && (t += `declare
+`, (f.optionEQvalue("rowkey", "yes") || this.isOption("rowkey")) && (t += `declare
     function compress_int (n in integer ) return varchar2
     as
         ret       varchar2(30);
@@ -8294,39 +12034,39 @@ end;
     end compress_int;
 `), t += `begin
 `;
-      var m = !1, S = "user";
-      c.optionEQvalue("apex", "yes") && (S = "coalesce(sys_context('APEX$SESSION','APP_USER'),user)"), (c.optionEQvalue("rowkey", "yes") || this.isOption("rowkey")) && (t += `    if inserting then
+      var u = !1, y = "user";
+      f.optionEQvalue("apex", "yes") && (y = "coalesce(sys_context('APEX$SESSION','APP_USER'),user)"), (f.optionEQvalue("rowkey", "yes") || this.isOption("rowkey")) && (t += `    if inserting then
 `, t += `        :new.row_key := compress_int(row_key_seq.nextval);
 `, t += `    end if;
-`, m = !0);
-      for (var f = 0; f < this.children.length; f++) {
-        var v = this.children[f];
+`, u = !0);
+      for (var h = 0; h < this.children.length; h++) {
+        var C = this.children[h];
         let w = null;
-        0 < v.content.indexOf("/lower") ? w = "LOWER".toLowerCase() : 0 < v.content.indexOf("/upper") && (w = "UPPER".toLowerCase()), w != null && (t += "    :new." + v.parseName().toLowerCase() + " := " + w + "(:new." + v.parseName().toLowerCase() + `);
-`, m = !0);
+        0 < C.content.indexOf("/lower") ? w = "LOWER".toLowerCase() : 0 < C.content.indexOf("/upper") && (w = "UPPER".toLowerCase()), w != null && (t += "    :new." + C.parseName().toLowerCase() + " := " + w + "(:new." + C.parseName().toLowerCase() + `);
+`, u = !0);
       }
-      (c.optionEQvalue("Row Version Number", "yes") || this.isOption("rowversion")) && (t += `    if inserting then
+      (f.optionEQvalue("Row Version Number", "yes") || this.isOption("rowversion")) && (t += `    if inserting then
 `, t += `        :new.row_version := 1;
 `, t += `    elsif updating then
 `, t += `        :new.row_version := NVL(:old.row_version, 0) + 1;
 `, t += `    end if;
-`, m = !0), (c.optionEQvalue("Audit Columns", "yes") || this.isOption("auditcols") || this.isOption("audit", "col") || this.isOption("audit", "cols") || this.isOption("audit", "columns")) && (t += `    if inserting then
-`, t += "        :new." + c.getOptionValue("createdcol") + ` := SYSDATE;
-`.toLowerCase(), t += "        :new." + c.getOptionValue("createdbycol") + " := " + S + `;
+`, u = !0), (f.optionEQvalue("Audit Columns", "yes") || this.isOption("auditcols") || this.isOption("audit", "col") || this.isOption("audit", "cols") || this.isOption("audit", "columns")) && (t += `    if inserting then
+`, t += "        :new." + f.getOptionValue("createdcol") + ` := SYSDATE;
+`.toLowerCase(), t += "        :new." + f.getOptionValue("createdbycol") + " := " + y + `;
 `.toLowerCase(), t += `    end if;
-`, t += "    :new." + c.getOptionValue("updatedcol") + ` := SYSDATE;
-`.toLowerCase(), t += "    :new." + c.getOptionValue("updatedbycol") + " := " + S + `;
-`.toLowerCase(), m = !0);
-      var P = c.additionalColumns();
-      for (var N in P) {
-        var R = P[N];
-        t += "    if :new." + N + ` is null then
-`, R.startsWith("INT") ? t += "        " + N + ` := 0;
-` : t += "        " + N + ` := 'N/A';
+`, t += "    :new." + f.getOptionValue("updatedcol") + ` := SYSDATE;
+`.toLowerCase(), t += "    :new." + f.getOptionValue("updatedbycol") + " := " + y + `;
+`.toLowerCase(), u = !0);
+      var B = f.additionalColumns();
+      for (var L in B) {
+        var R = B[L];
+        t += "    if :new." + L + ` is null then
+`, R.startsWith("INT") ? t += "        " + L + ` := 0;
+` : t += "        " + L + ` := 'N/A';
 `, t += `    end if;
-`, m = !0;
+`, u = !0;
       }
-      return m ? (t += "end " + n.toLowerCase() + `_BIU;
+      return u ? (t += "end " + n.toLowerCase() + `_BIU;
 /
 
 `.toLowerCase(), t) : "";
@@ -8335,77 +12075,77 @@ end;
       l != "get" && (n = " default null");
       let t = "out";
       l != "get" && (t = " in");
-      let m = u + "procedure " + l + `_row (
-`, S = this.getGenIdColName();
-      S == null && (S = this.getExplicitPkName()), m += u + u + "p_" + S + "        in  number" + n;
-      for (var f in this.fks) {
-        let P = this.fks[f], N = "number", R = c.find(P);
-        R != null && R.getExplicitPkName() != null && (N = R.getPkType()), m += `,
-`, m += u + u + "P_" + f + "   " + t + "  " + N + n;
+      let u = c + "procedure " + l + `_row (
+`, y = this.getGenIdColName();
+      y == null && (y = this.getExplicitPkName()), u += c + c + "p_" + y + "        in  number" + n;
+      for (var h in this.fks) {
+        let B = this.fks[h], L = "number", R = f.find(B);
+        R != null && R.getExplicitPkName() != null && (L = R.getPkType()), u += `,
+`, u += c + c + "P_" + h + "   " + t + "  " + L + n;
       }
-      for (let P = 0; P < this.children.length; P++) {
-        var v = this.children[P];
-        v.refId() == null && v.children.length == 0 && (m += `,
-`, m += u + u + "P_" + v.parseName() + "   " + t + "  " + v.parseType("plsql") + n);
+      for (let B = 0; B < this.children.length; B++) {
+        var C = this.children[B];
+        C.refId() == null && C.children.length == 0 && (u += `,
+`, u += c + c + "P_" + C.parseName() + "   " + t + "  " + C.parseType("plsql") + n);
       }
-      return m += `
-    )`, m;
+      return u += `
+    )`, u;
     }, this.procBody = function(l) {
       let n = this.getGenIdColName();
       n == null && (n = this.getExplicitPkName());
-      let t = c.objPrefix() + this.parseName(), m = u + `is 
+      let t = f.objPrefix() + this.parseName(), u = c + `is 
 `;
-      m += u + `begin 
+      u += c + `begin 
 `;
-      let S = u + u + "for c1 in (select * from " + t + " where " + n + " = p_" + n + `) loop 
+      let y = c + c + "for c1 in (select * from " + t + " where " + n + " = p_" + n + `) loop 
 `;
-      l == "insert" && (S = u + u + "insert into " + t + ` ( 
-`, S += u + u + u + n), l == "update" && (S = u + u + "update  " + t + ` set 
-`, S += u + u + u + n + " = p_" + n), m += S;
-      for (let N in this.fks) {
-        let R = this.fks[N], w = c.find(R);
-        w != null && w.getExplicitPkName() != null && w.getPkType(), (l == "insert" || l == "update") && (m += `,
+      l == "insert" && (y = c + c + "insert into " + t + ` ( 
+`, y += c + c + c + n), l == "update" && (y = c + c + "update  " + t + ` set 
+`, y += c + c + c + n + " = p_" + n), u += y;
+      for (let L in this.fks) {
+        let R = this.fks[L], w = f.find(R);
+        w != null && w.getExplicitPkName() != null && w.getPkType(), (l == "insert" || l == "update") && (u += `,
 `);
-        let O = u + u + u + "P_" + N + " := c1." + N + `;
+        let F = c + c + c + "P_" + L + " := c1." + L + `;
 `;
-        l == "insert" && (O = u + u + u + N), l == "update" && (O = u + u + u + N + " = P_" + N), m += O;
+        l == "insert" && (F = c + c + c + L), l == "update" && (F = c + c + c + L + " = P_" + L), u += F;
       }
-      for (var f = 0; f < this.children.length; f++) {
-        var v = this.children[f];
-        if (v.refId() != null || v.children.length != 0)
+      for (var h = 0; h < this.children.length; h++) {
+        var C = this.children[h];
+        if (C.refId() != null || C.children.length != 0)
           continue;
-        (l == "insert" || l == "update") && (m += `,
+        (l == "insert" || l == "update") && (u += `,
 `);
-        let N = u + u + u + "P_" + v.parseName().toLowerCase() + " := c1." + v.parseName().toLowerCase() + `;
+        let L = c + c + c + "P_" + C.parseName().toLowerCase() + " := c1." + C.parseName().toLowerCase() + `;
 `;
-        l == "insert" && (N = u + u + u + v.parseName().toLowerCase()), l == "update" && (N = u + u + u + v.parseName().toLowerCase() + " = P_" + v.parseName().toLowerCase()), m += N;
+        l == "insert" && (L = c + c + c + C.parseName().toLowerCase()), l == "update" && (L = c + c + c + C.parseName().toLowerCase() + " = P_" + C.parseName().toLowerCase()), u += L;
       }
       if (l == "insert") {
-        m += `
-` + u + u + `) values ( 
-`, m += u + u + u + "p_" + n;
-        for (let N in this.fks)
-          m += `,
-`, m += u + u + u + "p_" + N;
-        for (let N = 0; N < this.children.length; N++) {
-          let R = this.children[N];
-          R.refId() == null && R.children.length == 0 && (m += `,
-`, m += u + u + u + "p_" + R.parseName());
+        u += `
+` + c + c + `) values ( 
+`, u += c + c + c + "p_" + n;
+        for (let L in this.fks)
+          u += `,
+`, u += c + c + c + "p_" + L;
+        for (let L = 0; L < this.children.length; L++) {
+          let R = this.children[L];
+          R.refId() == null && R.children.length == 0 && (u += `,
+`, u += c + c + c + "p_" + R.parseName());
         }
       }
-      let P = `
+      let B = `
         end loop;
 `;
-      return l == "insert" && (P = `
-` + u + u + ");"), l == "update" && (P = `
-` + u + u + "where " + n + " = p_" + n + ";"), m += P, m += `
-` + u + "end " + l + `_row;
- `, m += `
- `, m;
+      return l == "insert" && (B = `
+` + c + c + ");"), l == "update" && (B = `
+` + c + c + "where " + n + " = p_" + n + ";"), u += B, u += `
+` + c + "end " + l + `_row;
+ `, u += `
+ `, u;
     }, this.generateTAPI = function() {
       if (this.children.length == 0)
         return "";
-      let l = c.objPrefix() + this.parseName();
+      let l = f.objPrefix() + this.parseName();
       var n = "create or replace package " + l.toLowerCase() + `_API
 is
 
@@ -8444,132 +12184,132 @@ is
       if (0 < this.isOption("insert")) {
         const n = this.indexOf("insert");
         let t = parseInt(this.src[n + 1].value);
-        const m = c.getOptionValue("datalimit");
-        return m < t && (t = m), t;
+        const u = f.getOptionValue("datalimit");
+        return u < t && (t = u), t;
       }
       return 0;
     }, this.generateData = function(l) {
-      if (Se(), c.optionEQvalue("inserts", !1))
+      if (ye(), f.optionEQvalue("inserts", !1))
         return "";
       const n = this.inserts4tbl(l), t = this.orderedTableNodes();
-      let m = "";
-      for (let S = 0; S < t.length; S++) {
-        const f = c.objPrefix() + t[S].parseName(), v = n[f];
-        v != null && (m += v);
+      let u = "";
+      for (let y = 0; y < t.length; y++) {
+        const h = f.objPrefix() + t[y].parseName(), C = n[h];
+        C != null && (u += C);
       }
-      return m;
+      return u;
     }, this.inserts4tbl = function(l) {
       let n = {};
-      if (c.optionEQvalue("inserts", !1))
+      if (f.optionEQvalue("inserts", !1))
         return "";
-      const t = c.objPrefix() + this.parseName();
-      let m = "", S = null, f = null;
-      for (let P = 0; P < this.cardinality(); P++) {
-        let N = null;
+      const t = f.objPrefix() + this.parseName();
+      let u = "", y = null, h = null;
+      for (let B = 0; B < this.cardinality(); B++) {
+        let L = null;
         if (l != null) {
           const w = l[t];
-          w != null && Array.isArray(w) && (N = w[P]);
+          w != null && Array.isArray(w) && (L = w[B]);
         }
-        m += "insert into " + t + ` (
+        u += "insert into " + t + ` (
 `;
         let R = this.getGenIdColName();
         if (R != null)
-          S = R, m += u + S + `,
+          y = R, u += c + y + `,
 `;
         else {
           let w = this.getExplicitPkName();
-          w != null && (m += u + w + `,
+          w != null && (u += c + w + `,
 `);
         }
         for (let w in this.fks) {
-          let O = this.fks[w], F = c.find(O), L = "";
-          F == null && (F = c.find(w), F.isMany2One() & !w.endsWith("_id") && (O = w, w = z(w), L = "_id")), m += u + w + L + `,
+          let F = this.fks[w], O = f.find(F), E = "";
+          O == null && (O = f.find(w), O.isMany2One() & !w.endsWith("_id") && (F = w, w = W(w), E = "_id")), u += c + w + E + `,
 `;
         }
         for (let w = 0; w < this.children.length; w++) {
-          let O = this.children[w];
-          if (!(R != null && O.parseName() == "id") && O.refId() == null) {
-            if (O.isOption("pk"))
+          let F = this.children[w];
+          if (!(R != null && F.parseName() == "id") && F.refId() == null) {
+            if (F.isOption("pk"))
               continue;
-            O.children.length == 0 && (m += u + O.parseName() + `,
+            F.children.length == 0 && (u += c + F.parseName() + `,
 `);
           }
         }
-        if (m.lastIndexOf(`,
-`) == m.length - 2 && (m = m.substring(0, m.length - 2) + `
-`), m += `) values (
+        if (u.lastIndexOf(`,
+`) == u.length - 2 && (u = u.substring(0, u.length - 2) + `
+`), u += `) values (
 `, R != null)
-          f = P + 1, m += u + f + `,
+          h = B + 1, u += c + h + `,
 `;
         else {
           let w = this.getExplicitPkName();
           if (w != null) {
-            const O = w;
-            let F = B(c.data, null, O, this.parseName()), L = -1;
-            N != null && (L = N[O]), F != null && F[P] != null && (L = F[P]), L.replaceAll && (L = "'" + L + "'"), f = L != -1 ? L : P + 1, m += u + f + `,
+            const F = w;
+            let O = I(f.data, null, F, this.parseName()), E = -1;
+            L != null && (E = L[F]), O != null && O[B] != null && (E = O[B]), E.replaceAll && (E = "'" + E + "'"), h = E != -1 ? E : B + 1, u += c + h + `,
 `;
           }
         }
         for (let w in this.fks) {
-          let O = this.fks[w], F = c.find(O), L = [], e = "INTEGER";
-          for (let a = 1; a <= F.cardinality(); a++)
-            L.push(a);
-          if (N != null) {
-            let a = N[w];
+          let F = this.fks[w], O = f.find(F), E = [], e = "INTEGER";
+          for (let a = 1; a <= O.cardinality(); a++)
+            E.push(a);
+          if (L != null) {
+            let a = L[w];
             if (a != null)
-              typeof a == "string" && (e = "STRING"), L = [], L[0] = a;
+              typeof a == "string" && (e = "STRING"), E = [], E[0] = a;
             else {
-              const i = t + "_" + O, s = c.data[i];
+              const i = t + "_" + F, s = f.data[i];
               if (s != null) {
-                for (const h in s)
-                  if (s[h][t + "_id"] == f) {
-                    const M = s[h][w];
-                    M != null && (typeof M == "string" && (e = "STRING"), L = [], L[0] = M);
+                for (const d in s)
+                  if (s[d][t + "_id"] == h) {
+                    const S = s[d][w];
+                    S != null && (typeof S == "string" && (e = "STRING"), E = [], E[0] = S);
                     break;
                   }
               } else {
-                let h = F.getPkName(), M = N[h];
-                M != null && (typeof M == "string" && (e = "STRING"), L = [], L[0] = M);
+                let d = O.getPkName(), S = L[d];
+                S != null && (typeof S == "string" && (e = "STRING"), E = [], E[0] = S);
               }
             }
           }
-          m += u + le(c.getOptionValue("Data Language"), ce(t, z(O) + "_id", e, L)) + `,
+          u += c + le(f.getOptionValue("Data Language"), fe(t, W(F) + "_id", e, E)) + `,
 `;
         }
         for (let w = 0; w < this.children.length; w++) {
-          let O = this.children[w];
-          if (!(R != null && O.parseName() == "id") && O.refId() == null) {
-            if (O.parseName() == this.getExplicitPkName())
+          let F = this.children[w];
+          if (!(R != null && F.parseName() == "id") && F.refId() == null) {
+            if (F.parseName() == this.getExplicitPkName())
               continue;
-            if (O.children.length == 0) {
-              let F = O.parseValues(), L = O.parseName();
-              if (N != null) {
-                let a = N[L];
-                a != null && (F = [], F[0] = a);
+            if (F.children.length == 0) {
+              let O = F.parseValues(), E = F.parseName();
+              if (L != null) {
+                let a = L[E];
+                a != null && (O = [], O[0] = a);
               }
-              let e = ce(t, L, O.parseType((a) => !0), F);
-              m += u + le(c.getOptionValue("Data Language"), e) + `,
+              let e = fe(t, E, F.parseType((a) => !0), O);
+              u += c + le(f.getOptionValue("Data Language"), e) + `,
 `;
             }
           }
         }
-        m.lastIndexOf(`,
-`) == m.length - 2 && (m = m.substring(0, m.length - 2) + `
-`), m += `);
+        u.lastIndexOf(`,
+`) == u.length - 2 && (u = u.substring(0, u.length - 2) + `
+`), u += `);
 `;
       }
-      m != "" && (m += `
+      u != "" && (u += `
 commit;
 
 `);
-      let v = this.getGenIdColName();
-      v != null && 1 < this.cardinality() && !c.optionEQvalue("pk", "guid") && (m += "alter table " + t + `
-modify ` + v + " generated always  as identity restart start with " + (this.cardinality() + 1) + `;
+      let C = this.getGenIdColName();
+      C != null && 1 < this.cardinality() && !f.optionEQvalue("pk", "guid") && (u += "alter table " + t + `
+modify ` + C + " generated always  as identity restart start with " + (this.cardinality() + 1) + `;
 
-`), n[t] = m;
-      for (let P = 0; P < this.children.length; P++) {
-        const N = this.children[P];
-        0 < N.children.length && (n = { ...n, ...N.inserts4tbl(l) });
+`), n[t] = u;
+      for (let B = 0; B < this.children.length; B++) {
+        const L = this.children[B];
+        0 < L.children.length && (n = { ...n, ...L.inserts4tbl(l) });
       }
       return n;
     }, this.isArray = function() {
@@ -8583,126 +12323,126 @@ modify ` + v + " generated always  as identity restart start with " + (this.card
       return "/* not supported yet*/";
     };
   }
-  function g(k) {
-    c = k;
+  function p(k) {
+    f = k;
     const r = k.input;
-    let o = [], p = [];
-    const b = Z(r + `
+    let o = [], b = [];
+    const x = Z(r + `
 `, !0, !0, "`");
-    c.data = null;
+    f.data = null;
     let l = null, n = "";
-    e: for (let t = 0; t < b.length; t++) {
-      const m = b[t];
-      if (m.value == `
+    e: for (let t = 0; t < x.length; t++) {
+      const u = x[t];
+      if (u.value == `
 ` && l == null) {
         if (n = n.replace(/\r/g, ""), n.replace(/\r/g, "").replace(/ /g, "") == "") {
           n = "";
           continue;
         }
-        let f = new C(m.line - 1, n, null), v = !1;
-        for (let P = 0; P < o.length; P++) {
-          let N = o[P];
-          if (f.apparentDepth() <= N.apparentDepth())
-            if (0 < P) {
-              let R = o[P - 1];
-              f = new C(m.line - 1, n, R), o[P] = f, o = o.slice(0, P + 1), v = !0;
+        let h = new g(u.line - 1, n, null), C = !1;
+        for (let B = 0; B < o.length; B++) {
+          let L = o[B];
+          if (h.apparentDepth() <= L.apparentDepth())
+            if (0 < B) {
+              let R = o[B - 1];
+              h = new g(u.line - 1, n, R), o[B] = h, o = o.slice(0, B + 1), C = !0;
               break;
             } else
-              o[0] = f, o = o.slice(0, 1), p.push(f), v = !0;
+              o[0] = h, o = o.slice(0, 1), b.push(h), C = !0;
         }
-        if (!v) {
+        if (!C) {
           if (0 < o.length) {
-            let P = o[o.length - 1];
-            f = new C(m.line - 1, n, P);
+            let B = o[o.length - 1];
+            h = new g(u.line - 1, n, B);
           }
-          o.push(f), f.apparentDepth() == 0 && p.push(f);
+          o.push(h), h.apparentDepth() == 0 && b.push(h);
         }
-        if (f.isMany2One()) {
-          const P = f.parent;
-          P.fks == null && (P.fks = []);
-          let N = f.refId();
-          N == null && (N = f.parseName()), P.fks[f.parseName() + "_id"] = N;
+        if (h.isMany2One()) {
+          const B = h.parent;
+          B.fks == null && (B.fks = []);
+          let L = h.refId();
+          L == null && (L = h.parseName()), B.fks[h.parseName() + "_id"] = L;
         }
         n = "";
         continue;
       }
-      if (l == null && m.value == "#") {
+      if (l == null && u.value == "#") {
         l = "";
         continue;
       }
       if (l != null) {
-        if (l += m.value, m.value != `
-` && m.value != "}")
+        if (l += u.value, u.value != `
+` && u.value != "}")
           continue;
-        const S = Z(l, !1, !0, "");
-        if (S.length % 4 == 3 && S[1].value == ":") {
+        const y = Z(l, !1, !0, "");
+        if (y.length % 4 == 3 && y[1].value == ":") {
           k.setOptions(l), l = null, n = "";
           continue;
         }
-        let f = null, v = null;
-        for (let P in S) {
-          const N = S[P];
-          if (f == null && N.value == "flattened") {
-            f = "";
+        let h = null, C = null;
+        for (let B in y) {
+          const L = y[B];
+          if (h == null && L.value == "flattened") {
+            h = "";
             continue;
           }
-          if (f != null) {
-            if (f += N.value, f == "=" || f.charAt(f.length - 1) != "}")
+          if (h != null) {
+            if (h += L.value, h == "=" || h.charAt(h.length - 1) != "}")
               continue;
-            let R = f.substring(1);
+            let R = h.substring(1);
             try {
-              c.data = JSON.parse(R), l = null, n = "";
+              f.data = JSON.parse(R), l = null, n = "";
               continue e;
             } catch {
             }
           }
-          if (v == null && N.value == "settings") {
-            v = "";
+          if (C == null && L.value == "settings") {
+            C = "";
             continue;
           }
-          if (v != null) {
-            v += N.value, v.substring(1);
+          if (C != null) {
+            C += L.value, C.substring(1);
             try {
-              k.setOptions(v), l = null, n = "";
+              k.setOptions(C), l = null, n = "";
               continue e;
             } catch {
             }
           }
         }
       }
-      if (m.type != "comment") {
-        if (m.type == "line-comment") {
-          0 < n.trim().length && (n += m.value);
+      if (u.type != "comment") {
+        if (u.type == "line-comment") {
+          0 < n.trim().length && (n += u.value);
           continue;
         }
-        n += m.value;
+        n += u.value;
       }
-    }
-    return p;
-  }
-  function B(k, r, o, p) {
-    let b = [];
-    if (k == null || typeof k != "object")
-      return null;
-    let l = k[o];
-    l != null && r == p && b.push(l);
-    for (var n in k) {
-      let t = k[n];
-      l = B(t, n, o, p), l != null && (b = b.concat(l));
     }
     return b;
   }
-  return g;
+  function I(k, r, o, b) {
+    let x = [];
+    if (k == null || typeof k != "object")
+      return null;
+    let l = k[o];
+    l != null && r == b && x.push(l);
+    for (var n in k) {
+      let t = k[n];
+      l = I(t, n, o, b), l != null && (x = x.concat(l));
+    }
+    return x;
+  }
+  return p;
 })();
-var Me = /* @__PURE__ */ (function() {
-  function c(r) {
-    for (var o = "", p = 0; p < r; p++)
+var Se = /* @__PURE__ */ (function() {
+  function f(r) {
+    for (var o = "", b = 0; b < r; b++)
       o = o + "   ";
     return o;
   }
-  function u(r, o) {
-    for (const p in r)
-      if (JSON.stringify(r[p]) == JSON.stringify(o))
+  function c(r, o) {
+    for (const b in r)
+      if (JSON.stringify(r[b]) == JSON.stringify(o))
         return !0;
     return !1;
   }
@@ -8710,10 +12450,10 @@ var Me = /* @__PURE__ */ (function() {
     let o = ["_id", "Id"];
     if (r.id != null)
       return { key: "id", value: r.id };
-    for (let p = 0; p < o.length; p++) {
-      const b = o[p];
+    for (let b = 0; b < o.length; b++) {
+      const x = o[b];
       for (let l in r)
-        if (l.endsWith(b))
+        if (l.endsWith(x))
           return { key: l, value: r[l] };
     }
   }
@@ -8723,49 +12463,49 @@ var Me = /* @__PURE__ */ (function() {
         return !0;
     return !1;
   }
-  function E(r) {
+  function P(r) {
     let o = null;
-    e: for (const p in r)
-      if (p == 0)
-        for (const b in r[p]) {
-          o = b;
+    e: for (const b in r)
+      if (b == 0)
+        for (const x in r[b]) {
+          o = x;
           break e;
         }
       else {
-        o = p;
+        o = b;
         break e;
       }
     return o.toLowerCase() == "id" ? null : o.toLowerCase().endsWith("_id") ? o.substring(0, o.length - 3) : o.endsWith("Id") ? o.substring(0, o.length - 2) : null;
   }
-  function x(r, o, p) {
-    let b = !1, l = !1;
+  function N(r, o, b) {
+    let x = !1, l = !1;
     for (const t in r)
       for (var n = 0; n < t; n++)
-        if (r[t][o] == r[n][o] && r[t][p] != r[n][p] ? b = !0 : r[t][o] != r[n][o] && r[t][p] == r[n][p] && (l = !0), b && l)
+        if (r[t][o] == r[n][o] && r[t][b] != r[n][b] ? x = !0 : r[t][o] != r[n][o] && r[t][b] == r[n][b] && (l = !0), x && l)
           return !0;
     return !1;
   }
-  function C(r) {
+  function g(r) {
     if (r == null || typeof r != "object")
       return "";
     let o = "(";
-    for (let p in r) {
-      if (p == 0)
-        return C(r[p]);
-      r[p] != null && typeof r[p] == "object" || (o += p + ",");
+    for (let b in r) {
+      if (b == 0)
+        return g(r[b]);
+      r[b] != null && typeof r[b] == "object" || (o += b + ",");
     }
     return o.lastIndexOf(",") == o.length - 1 && (o = o.substring(0, o.length - 1)), o + ")";
   }
-  function g(r, o) {
-    let p = r.indexOf("(");
-    return 0 < p && (r = r.substring(0, p)), p = o.indexOf("("), 0 < p && (o = o.substring(0, p)), r + "_" + o + "(" + r + "_id," + o + "_id)";
+  function p(r, o) {
+    let b = r.indexOf("(");
+    return 0 < b && (r = r.substring(0, b)), b = o.indexOf("("), 0 < b && (o = o.substring(0, b)), r + "_" + o + "(" + r + "_id," + o + "_id)";
   }
-  function B(r, o) {
-    const p = JSON.parse(r), b = E(p);
-    b != null && (o = b), o == null && (o = "root_tbl");
+  function I(r, o) {
+    const b = JSON.parse(r), x = P(b);
+    x != null && (o = x), o == null && (o = "root_tbl");
     const l = new k();
-    l.duplicatesAndParents(o + C(p), p), l.flatten(o + C(p), p);
-    let n = l.output(o + C(p), p, 0);
+    l.duplicatesAndParents(o + g(b), b), l.flatten(o + g(b), b);
+    let n = l.output(o + g(b), b, 0);
     n += `
 
 #settings = { genpk: false, drop: true, pk: identityDataType, semantics: char }`, n += `
@@ -8773,109 +12513,109 @@ var Me = /* @__PURE__ */ (function() {
 #flattened = 
 `;
     const t = {};
-    for (const m in l.tableContent)
-      t[l.tableName(m)] = l.tableContent[m];
+    for (const u in l.tableContent)
+      t[l.tableName(u)] = l.tableContent[u];
     return n += JSON.stringify(t, null, 3), n += `
 `, n += `
 
 -- Generated by json2qsql.js ${oe()} ` + (/* @__PURE__ */ new Date()).toLocaleString() + `
 
 `, n += `#document = 
-`, n += JSON.stringify(p, null, 3), n += `
+`, n += JSON.stringify(b, null, 3), n += `
 `, n;
   }
   function k() {
-    this.tableContent = {}, this.notNormalized = [], this.tableSignatures = [], this.child2parent = {}, this.objCounts = {}, this.output = function(r, o, p, b) {
-      if (b != !1 && this.notNormalized.includes(r)) {
-        const t = g(this.parent(r), r), m = this.tableContent[t];
-        if (m != null) {
-          let S = `
-` + c(p) + this.tableName(t) + " /insert " + m.length;
-          if (m[0], x(m, this.refIdName(this.parent(r)), this.refIdName(r)))
-            return S += this.output(r, o, p + 1, !1), S;
+    this.tableContent = {}, this.notNormalized = [], this.tableSignatures = [], this.child2parent = {}, this.objCounts = {}, this.output = function(r, o, b, x) {
+      if (x != !1 && this.notNormalized.includes(r)) {
+        const t = p(this.parent(r), r), u = this.tableContent[t];
+        if (u != null) {
+          let y = `
+` + f(b) + this.tableName(t) + " /insert " + u.length;
+          if (u[0], N(u, this.refIdName(this.parent(r)), this.refIdName(r)))
+            return y += this.output(r, o, b + 1, !1), y;
         }
       }
       let l = "";
       this.notNormalized.includes(r) && (l = ">");
       let n = `
-` + c(p) + l + this.tableName(r);
+` + f(b) + l + this.tableName(r);
       if (typeof o == "number" && (n += " num", r.endsWith("_id") || r.endsWith("Id")))
         return n += " /pk", n;
       if (r == "id")
         return `
-` + c(p) + "id vc32 /pk";
+` + f(b) + "id vc32 /pk";
       e: if (o != null && typeof o == "object") {
         if (Array.isArray(o))
-          for (const m in o) {
-            1 <= m && console.log("1 <= property !");
-            const S = o[m];
-            n = this.output(r, S, p, b);
+          for (const u in o) {
+            1 <= u && console.log("1 <= property !");
+            const y = o[u];
+            n = this.output(r, y, b, x);
             break e;
           }
         else
           r != "" && (this.tableContent[r] == null && console.log(), n += "  /insert " + this.tableContent[r].length);
         let t = "";
-        this.tableSignatures.includes(r) || (n = "", p--);
-        for (let m in o) {
-          const S = o[m];
-          if (m != null) {
-            const v = z(r), P = m.toLowerCase();
-            if (r != null && v + "_id" == P && 0 < p && (t = m), v + "_id" == P || !isNaN(m) && !Array.isArray(o))
+        this.tableSignatures.includes(r) || (n = "", b--);
+        for (let u in o) {
+          const y = o[u];
+          if (u != null) {
+            const C = W(r), B = u.toLowerCase();
+            if (r != null && C + "_id" == B && 0 < b && (t = u), C + "_id" == B || !isNaN(u) && !Array.isArray(o))
               continue;
           }
-          const f = this.output(m + C(S), S, p + 1);
-          n += f;
+          const h = this.output(u + g(y), y, b + 1);
+          n += h;
         }
         t != "" && (n += `
-` + c(p) + t);
+` + f(b) + t);
       }
       return n;
-    }, this.idSeq = 1, this.flatten = function(r, o, p) {
-      let b = {};
+    }, this.idSeq = 1, this.flatten = function(r, o, b) {
+      let x = {};
       for (let t in o)
         if (o[t] != null && typeof o[t] == "object") {
-          let m = r, S = p;
+          let u = r, y = b;
           if (isNaN(t)) {
-            m = t + C(o[t]);
-            const f = D(b);
-            f != null && (S = f);
+            u = t + g(o[t]);
+            const h = D(x);
+            h != null && (y = h);
           }
-          this.flatten(m, o[t], S);
+          this.flatten(u, o[t], y);
         } else
-          b[t] = o[t];
-      !this.notNormalized.includes(r) && p != null && Object.keys(b).length && (b[p.key] = p.value);
-      const l = 0 < Object.keys(b).length;
+          x[t] = o[t];
+      !this.notNormalized.includes(r) && b != null && Object.keys(x).length && (x[b.key] = b.value);
+      const l = 0 < Object.keys(x).length;
       let n = this.tableContent[r];
       if (l) {
-        if (n == null && (n = []), u(n, b) || n.push(b), this.notNormalized.includes(r)) {
+        if (n == null && (n = []), c(n, x) || n.push(x), this.notNormalized.includes(r)) {
           const t = this.parent(r);
           if (t != null) {
-            const m = g(t, r);
-            let S = this.tableContent[m];
-            S == null && (S = []);
-            const f = {};
-            f[this.refIdName(t)] = p.value;
-            let v = D(b);
-            v == null && (b.id = this.idSeq++, v = D(b)), f[this.refIdName(r)] = v.value, S.push(f), this.tableContent[m] = S;
+            const u = p(t, r);
+            let y = this.tableContent[u];
+            y == null && (y = []);
+            const h = {};
+            h[this.refIdName(t)] = b.value;
+            let C = D(x);
+            C == null && (x.id = this.idSeq++, C = D(x)), h[this.refIdName(r)] = C.value, y.push(h), this.tableContent[u] = y;
           }
         }
         this.tableContent[r] = n;
       } else n == null && (this.tableContent[r] = []);
     }, this.duplicatesAndParents = function(r, o) {
-      const p = '"' + r + '":' + JSON.stringify(o);
-      let b = this.objCounts[p];
-      b == null && (b = 0);
+      const b = '"' + r + '":' + JSON.stringify(o);
+      let x = this.objCounts[b];
+      x == null && (x = 0);
       let l = !1;
       for (let t in o)
         if (o[t] != null && typeof o[t] == "object") {
-          let m = r;
+          let u = r;
           if (isNaN(t))
-            m = t + C(o[t]);
+            u = t + g(o[t]);
           else if (!Array.isArray(o))
             continue;
-          m != r && (this.child2parent[m] = r), this.duplicatesAndParents(m, o[t]), l = !0;
+          u != r && (this.child2parent[u] = r), this.duplicatesAndParents(u, o[t]), l = !0;
         }
-      G(o) && !this.tableSignatures.includes(r) && this.tableSignatures.push(r), l || (this.objCounts[p] = b + 1), 1 < this.objCounts[p] && !this.notNormalized.includes(r) && this.notNormalized.push(r);
+      G(o) && !this.tableSignatures.includes(r) && this.tableSignatures.push(r), l || (this.objCounts[b] = x + 1), 1 < this.objCounts[b] && !this.notNormalized.includes(r) && this.notNormalized.push(r);
     }, this.parent = function(r) {
       let o = this.child2parent[r];
       return o != null && !this.tableSignatures.includes(o) ? this.parent(o) : o;
@@ -8883,122 +12623,122 @@ var Me = /* @__PURE__ */ (function() {
       const o = r.indexOf("(");
       if (o < 0)
         return r;
-      let p = r.substring(0, o), b = 0, l = -1;
+      let b = r.substring(0, o), x = 0, l = -1;
       for (const n in this.tableSignatures) {
         const t = this.tableSignatures[n];
-        t.substring(0, t.indexOf("(")) == p && b++, t == r && (l = b);
+        t.substring(0, t.indexOf("(")) == b && x++, t == r && (l = x);
       }
-      return b < 2 ? p : p + l;
+      return x < 2 ? b : b + l;
     }, this.refIdName = function(r) {
-      return z(this.tableName(r)) + "_id";
+      return W(this.tableName(r)) + "_id";
     };
   }
-  return B;
+  return I;
 })();
-const Te = /* @__PURE__ */ (function() {
-  function c(g, B, k, r) {
-    this.from = B, this.to = k, k == null && (this.to = new u(B.line, B.depth + 1)), this.message = g, this.severity = r, r == null && (this.severity = "error");
+const Me = /* @__PURE__ */ (function() {
+  function f(p, I, k, r) {
+    this.from = I, this.to = k, k == null && (this.to = new c(I.line, I.depth + 1)), this.message = p, this.severity = r, r == null && (this.severity = "error");
   }
-  function u(g, B) {
-    this.line = g, this.depth = B;
+  function c(p, I) {
+    this.line = p, this.depth = I;
   }
-  function D(g) {
-    const B = g, k = g.input;
+  function D(p) {
+    const I = p, k = p.input;
     let r = [];
     k.split(`
 `);
     let o = [];
-    for (var p = 0; p < g.forest.length; p++)
-      g.forest[p].parseType() == "table" && (o = o.concat(g.forest[p].descendants()));
-    r = r.concat(C(o));
-    const b = B.descendants();
-    for (let l = 0; l < b.length; l++) {
-      const n = b[l];
-      if (B.optionEQvalue("genpk", !0) && b[l].parseName() == "id") {
-        const S = n.content.toLowerCase().indexOf("id");
-        r.push(new c(Y.duplicateId, new u(n.line, S), new u(n.line, S + 2)));
+    for (var b = 0; b < p.forest.length; b++)
+      p.forest[b].parseType() == "table" && (o = o.concat(p.forest[b].descendants()));
+    r = r.concat(g(o));
+    const x = I.descendants();
+    for (let l = 0; l < x.length; l++) {
+      const n = x[l];
+      if (I.optionEQvalue("genpk", !0) && x[l].parseName() == "id") {
+        const y = n.content.toLowerCase().indexOf("id");
+        r.push(new f(j.duplicateId, new c(n.line, y), new c(n.line, y + 2)));
         continue;
       }
       const t = n.src[2];
       if (2 < n.src.length && t.value == "-") {
-        const S = t.begin;
-        r.push(new c(Y.invalidDatatype, new u(n.line, S), new u(n.line, S + 2)));
+        const y = t.begin;
+        r.push(new f(j.invalidDatatype, new c(n.line, y), new c(n.line, y + 2)));
         continue;
       }
-      const m = n.src[1];
-      if (1 < n.src.length && m.value == "vc0") {
-        const S = m.begin;
-        r.push(new c(Y.invalidDatatype, new u(n.line, S)));
+      const u = n.src[1];
+      if (1 < n.src.length && u.value == "vc0") {
+        const y = u.begin;
+        r.push(new f(j.invalidDatatype, new c(n.line, y)));
         continue;
       }
-      r = r.concat(E(B, n)), r = r.concat(x(B, n)), r = r.concat(G(B, n));
+      r = r.concat(P(I, n)), r = r.concat(N(I, n)), r = r.concat(G(I, n));
     }
     return r;
   }
-  function G(g, B) {
-    const k = B.parseType() == "table";
-    for (var r = [], o = B.src, p = !1, b = 1; b < o.length; b++) {
-      if (o[b].value == "/") {
-        p = !0;
+  function G(p, I) {
+    const k = I.parseType() == "table";
+    for (var r = [], o = I.src, b = !1, x = 1; x < o.length; x++) {
+      if (o[x].value == "/") {
+        b = !0;
         continue;
       }
-      if (p) {
-        p = !1, k && Ie.indexOf(o[b].value.toLowerCase()) < 0 && r.push(new c(
-          Y.tableDirectiveTypo,
-          new u(B.line, o[b].begin),
-          new u(B.line, o[b].begin + o[b].value.length)
-        )), !k && Be.indexOf(o[b].value.toLowerCase()) < 0 && r.push(new c(
-          Y.columnDirectiveTypo,
-          new u(B.line, o[b].begin),
-          new u(B.line, o[b].begin + o[b].value.length)
+      if (b) {
+        b = !1, k && Te.indexOf(o[x].value.toLowerCase()) < 0 && r.push(new f(
+          j.tableDirectiveTypo,
+          new c(I.line, o[x].begin),
+          new c(I.line, o[x].begin + o[x].value.length)
+        )), !k && Ie.indexOf(o[x].value.toLowerCase()) < 0 && r.push(new f(
+          j.columnDirectiveTypo,
+          new c(I.line, o[x].begin),
+          new c(I.line, o[x].begin + o[x].value.length)
         ));
         continue;
       }
     }
     return r;
   }
-  function E(g, B) {
+  function P(p, I) {
     var k = [];
-    if (B.parseType() == "view")
-      for (var r = B.src, o = 2; o < r.length; o++) {
-        var p = g.find(r[o].value);
-        p == null && k.push(new c(
-          Y.undefinedObject + r[o].value,
-          new u(B.line, r[o].begin),
-          new u(B.line, r[o].begin + r[o].value.length)
+    if (I.parseType() == "view")
+      for (var r = I.src, o = 2; o < r.length; o++) {
+        var b = p.find(r[o].value);
+        b == null && k.push(new f(
+          j.undefinedObject + r[o].value,
+          new c(I.line, r[o].begin),
+          new c(I.line, r[o].begin + r[o].value.length)
         ));
       }
     return k;
   }
-  function x(g, B) {
+  function N(p, I) {
     var k = [];
-    if (B.isOption("fk") || 0 < B.indexOf("reference", !0)) {
-      let o = B.indexOf("fk");
-      if (o < 0 && (o = B.indexOf("reference")), o++, B.src.length - 1 < o || B.src[o].value == "/")
+    if (I.isOption("fk") || 0 < I.indexOf("reference", !0)) {
+      let o = I.indexOf("fk");
+      if (o < 0 && (o = I.indexOf("reference")), o++, I.src.length - 1 < o || I.src[o].value == "/")
         return k;
-      var r = g.find(B.src[o].value);
-      r == null && k.push(new c(
-        Y.undefinedObject + B.src[o].value,
-        new u(B.line, B.src[o].begin),
-        new u(B.line, B.src[o].begin + B.src[o].value.length)
+      var r = p.find(I.src[o].value);
+      r == null && k.push(new f(
+        j.undefinedObject + I.src[o].value,
+        new c(I.line, I.src[o].begin),
+        new c(I.line, I.src[o].begin + I.src[o].value.length)
       ));
     }
     return k;
   }
-  function C(g) {
-    for (var B = [], k = Pe(g), r = 1; r < g.length; r++) {
-      var o = g[r], p = be(o);
-      p % k != 0 && B.push(
-        new c(
-          Y.misalignedAttribute + k,
-          new u(o.line, p)
+  function g(p) {
+    for (var I = [], k = Be(p), r = 1; r < p.length; r++) {
+      var o = p[r], b = xe(o);
+      b % k != 0 && I.push(
+        new f(
+          j.misalignedAttribute + k,
+          new c(o.line, b)
         )
       );
     }
-    return B;
+    return I;
   }
   return D;
-})(), Ie = [
+})(), Te = [
   "api",
   "audit",
   "auditcols",
@@ -9015,7 +12755,7 @@ const Te = /* @__PURE__ */ (function() {
   "cascade",
   "setnull"
   //'set null'
-], Be = [
+], Ie = [
   "idx",
   "index",
   "indexed",
@@ -9037,43 +12777,43 @@ const Te = /* @__PURE__ */ (function() {
   "fk",
   "pk"
 ];
-function Pe(c) {
-  let u = [];
-  for (var D = 0; D < c.length; D++) {
-    var G = c[D];
-    u[D] = be(G);
+function Be(f) {
+  let c = [];
+  for (var D = 0; D < f.length; D++) {
+    var G = f[D];
+    c[D] = xe(G);
   }
-  let E = [];
-  for (let C = 0; C < u.length; C++) {
-    let g = ke(u, C);
-    if (g != null) {
-      let B = E[u[C] - u[g]];
-      B == null && (B = 0), E[u[C] - u[g]] = B + 1;
+  let P = [];
+  for (let g = 0; g < c.length; g++) {
+    let p = ke(c, g);
+    if (p != null) {
+      let I = P[c[g] - c[p]];
+      I == null && (I = 0), P[c[g] - c[p]] = I + 1;
     }
   }
-  let x = null;
-  for (let C in E)
-    (x == null || E[x] <= E[C]) && (x = parseInt(C));
-  return x;
+  let N = null;
+  for (let g in P)
+    (N == null || P[N] <= P[g]) && (N = parseInt(g));
+  return N;
 }
-function be(c) {
-  return c.src[0].begin;
+function xe(f) {
+  return f.src[0].begin;
 }
-function ke(c, u) {
-  for (let D = u; 0 <= D; D--)
-    if (c[D] < c[u])
+function ke(f, c) {
+  for (let D = c; 0 <= D; D--)
+    if (f[D] < f[c])
       return D;
   return null;
 }
-const Y = {
+const j = {
   duplicateId: "Explicit ID column conflicts with genpk",
   invalidDatatype: "Invalid Datatype",
   undefinedObject: "Undefined Object: ",
   misalignedAttribute: "Misaligned Table or Column; apparent indent = ",
   tableDirectiveTypo: "Unknown Table directive",
   columnDirectiveTypo: "Unknown Column directive"
-}, Ee = { findErrors: Te, messages: Y }, he = "identityDataType", ie = "guid", de = "Timestamp with time zone", fe = "Timestamp with local time zone", j = /* @__PURE__ */ (function() {
-  const c = {
+}, Pe = { findErrors: Me, messages: j }, de = "identityDataType", ie = "guid", me = "Timestamp with time zone", he = "Timestamp with local time zone", Y = /* @__PURE__ */ (function() {
+  const f = {
     apex: { label: "APEX", value: "no", check: ["yes", "no"] },
     auditcols: { label: "Audit Columns", value: "no", check: ["yes", "no"] },
     createdcol: { label: "Created Column Name", value: "created" },
@@ -9085,7 +12825,7 @@ const Y = {
     semantics: { label: "Character Strings", value: "CHAR", check: ["BYTE", "CHAR", "Default"] },
     language: { label: "Data Language", value: "EN", check: ["EN", "JP", "KO"] },
     datalimit: { label: "Data Limit Rows", value: 1e4 },
-    date: { label: "Date Data Type", value: "DATE", check: ["DATE", "TIMESTAMP", de, fe] },
+    date: { label: "Date Data Type", value: "DATE", check: ["DATE", "TIMESTAMP", me, he] },
     db: { label: "Database Version", value: "not set" },
     dv: { label: "Duality View", value: "no", check: ["yes", "no"] },
     // switched default to 'no' until thorough development&testig
@@ -9098,7 +12838,7 @@ const Y = {
     overridesettings: { label: "Ignore toDDL() second parameter", value: "no", check: ["yes", "no"] },
     prefix: { label: "Object Prefix", value: "" },
     //ondelete: {label: 'On Delete', value:'Cascade',check:['restrict','cascade','set null']},
-    pk: { label: "Primary Key Maintenance", value: ie, check: [he, ie, "SEQ", "NONE"] },
+    pk: { label: "Primary Key Maintenance", value: ie, check: [de, ie, "SEQ", "NONE"] },
     prefixpkwithtname: { label: "Prefix primary keys with table name", value: "no", check: ["yes", "no"] },
     rowkey: { label: "Alphanumeric Row Identifier", value: "no", check: ["yes", "no"] },
     rowversion: { label: "Row Version Number", value: "no", check: ["yes", "no"] },
@@ -9108,300 +12848,300 @@ const Y = {
     //"Auxiliary Columns": {label: "Auxiliary Columns", value:''}, // e.g. security_group_id integer
     //namecase: {label: 'Object and Field name convention', value:'canonic',check:['canonic','json']},
   };
-  function u(G) {
+  function c(G) {
     if (G == null)
       return null;
-    let E = G;
-    return typeof E == "string" && (E = E.toLowerCase()), E == "yes" ? !0 : E == "no" ? !1 : E == "y" ? !0 : E == "n" ? !1 : E == "true" ? !0 : E == "false" ? !1 : E == he.toLowerCase() ? "identity" : E == ie.toLowerCase() ? "guid" : E == de.toLowerCase() ? "tswtz" : E == fe.toLowerCase() ? "tswltz" : E;
+    let P = G;
+    return typeof P == "string" && (P = P.toLowerCase()), P == "yes" ? !0 : P == "no" ? !1 : P == "y" ? !0 : P == "n" ? !1 : P == "true" ? !0 : P == "false" ? !1 : P == de.toLowerCase() ? "identity" : P == ie.toLowerCase() ? "guid" : P == me.toLowerCase() ? "tswtz" : P == he.toLowerCase() ? "tswltz" : P;
   }
-  function D(G, E) {
-    this.ddl = null, this.erd = null, this.errors = null, this.options = JSON.parse(JSON.stringify(c)), this.input = G, this.postponedAlters = [], this.getOptionValue = function(C) {
-      const g = C.toLowerCase();
-      let B = this.options[g];
-      if (!(g in this.options))
+  function D(G, P) {
+    this.ddl = null, this.erd = null, this.errors = null, this.options = JSON.parse(JSON.stringify(f)), this.input = G, this.postponedAlters = [], this.getOptionValue = function(g) {
+      const p = g.toLowerCase();
+      let I = this.options[p];
+      if (!(p in this.options))
         for (let k in this.options) {
           const r = this.options[k].label;
           if (r == null)
             continue;
-          r.toLowerCase() == g && (B = this.options[k]);
+          r.toLowerCase() == p && (I = this.options[k]);
         }
-      return B == null ? null : B.value;
-    }, this.optionEQvalue = function(C, g) {
-      var B = this.getOptionValue(C);
-      return u(B) == u(g);
+      return I == null ? null : I.value;
+    }, this.optionEQvalue = function(g, p) {
+      var I = this.getOptionValue(g);
+      return c(I) == c(p);
     }, this.nonDefaultOptions = function() {
-      let C = {};
-      for (let g in this.options)
-        c[g] && !this.optionEQvalue(g, c[g].value) && (C[g] = this.options[g].value);
-      return C;
+      let g = {};
+      for (let p in this.options)
+        f[p] && !this.optionEQvalue(p, f[p].value) && (g[p] = this.options[p].value);
+      return g;
     }, this.unknownOptions = function() {
-      let C = [];
-      for (let g in this.options)
-        c[g] == null && C.push(g);
-      return C;
-    }, this.setOptionValue = function(C, g) {
-      let B = C.toLowerCase();
-      if (!(B in this.options)) {
+      let g = [];
+      for (let p in this.options)
+        f[p] == null && g.push(p);
+      return g;
+    }, this.setOptionValue = function(g, p) {
+      let I = g.toLowerCase();
+      if (!(I in this.options)) {
         for (let r in this.options)
-          if (this.options[r].label == C) {
-            this.options[r].value = g;
+          if (this.options[r].label == g) {
+            this.options[r].value = p;
             return;
           }
       }
-      g == null && (g = "");
-      let k = this.options[B];
-      k == null && (k = {}, this.options[B] = k), k.value = g;
+      p == null && (p = "");
+      let k = this.options[I];
+      k == null && (k = {}, this.options[I] = k), k.value = p;
     }, this.semantics = function() {
-      var C = "";
-      return this.optionEQvalue("semantics", "CHAR") ? C = " char" : this.optionEQvalue("semantics", "BYTE") && (C = " byte"), C;
-    }, this.name2node = null, this.find = function(C) {
+      var g = "";
+      return this.optionEQvalue("semantics", "CHAR") ? g = " char" : this.optionEQvalue("semantics", "BYTE") && (g = " byte"), g;
+    }, this.name2node = null, this.find = function(g) {
       if (this.name2node != null)
-        return this.name2node[Q(C)];
+        return this.name2node[Q(g)];
       this.name2node = {};
-      for (var g = 0; g < this.forest.length; g++)
-        for (var B = this.forest[g].descendants(), k = 0; k < B.length; k++) {
-          var r = B[k];
+      for (var p = 0; p < this.forest.length; p++)
+        for (var I = this.forest[p].descendants(), k = 0; k < I.length; k++) {
+          var r = I[k];
           this.name2node[r.parseName()] = r;
         }
-      return this.name2node[Q(C)];
-    }, this.setOptions = function(C) {
-      C = C.trim(), C.startsWith("#") && (C = C.substring(1).trim());
-      const g = C.indexOf("=");
-      let B = C.substring(g + 1).trim();
-      B.indexOf("{") < 0 && (B = "{" + C + "}");
-      let k = "", r = Z(B, !0, !0, "");
-      for (let p in r) {
-        let b = r[p];
-        b.type == "identifier" && b.value != "true" && b.value != "false" && b.value != "null" ? k += '"' + b.value + '"' : k += b.value;
+      return this.name2node[Q(g)];
+    }, this.setOptions = function(g) {
+      g = g.trim(), g.startsWith("#") && (g = g.substring(1).trim());
+      const p = g.indexOf("=");
+      let I = g.substring(p + 1).trim();
+      I.indexOf("{") < 0 && (I = "{" + g + "}");
+      let k = "", r = Z(I, !0, !0, "");
+      for (let b in r) {
+        let x = r[b];
+        x.type == "identifier" && x.value != "true" && x.value != "false" && x.value != "null" ? k += '"' + x.value + '"' : k += x.value;
       }
       let o = JSON.parse(k);
-      for (let p in o)
-        this.setOptionValue(p.toLowerCase(), o[p]);
+      for (let b in o)
+        this.setOptionValue(b.toLowerCase(), o[b]);
     }, this.descendants = function() {
-      for (var C = [], g = 0; g < this.forest.length; g++)
-        C = C.concat(this.forest[g].descendants());
-      return C;
+      for (var g = [], p = 0; p < this.forest.length; p++)
+        g = g.concat(this.forest[p].descendants());
+      return g;
     }, this.additionalColumns = function() {
-      var C = [], g = this.getOptionValue("Auxiliary Columns");
-      if (g == null)
-        return C;
-      for (var B = g.split(","), k = 0; k < B.length; k++) {
-        var r = B[k].trim(), o = "VARCHAR2(4000)", p = r.indexOf(" ");
-        0 < p && (o = r.substring(p + 1).toUpperCase(), r = r.substring(0, p)), C[r] = o;
+      var g = [], p = this.getOptionValue("Auxiliary Columns");
+      if (p == null)
+        return g;
+      for (var I = p.split(","), k = 0; k < I.length; k++) {
+        var r = I[k].trim(), o = "VARCHAR2(4000)", b = r.indexOf(" ");
+        0 < b && (o = r.substring(b + 1).toUpperCase(), r = r.substring(0, b)), g[r] = o;
       }
-      return C;
-    }, this.objPrefix = function(C) {
-      var g = this.getOptionValue("schema");
-      g == null && (g = ""), g != "" && C == null ? g = g + "." : g = "";
-      var B = "";
-      return this.getOptionValue("prefix") != null && (B = this.getOptionValue("prefix")), g = g + B, B != "" && !B.endsWith("_") && (g = g + "_"), g.toLowerCase();
+      return g;
+    }, this.objPrefix = function(g) {
+      var p = this.getOptionValue("schema");
+      p == null && (p = ""), p != "" && g == null ? p = p + "." : p = "";
+      var I = "";
+      return this.getOptionValue("prefix") != null && (I = this.getOptionValue("prefix")), p = p + I, I != "" && !I.endsWith("_") && (p = p + "_"), p.toLowerCase();
     };
-    let x = "";
-    0 < G.toLowerCase().indexOf("overridesettings") && me(this), E != null && this.optionEQvalue("overrideSettings", !1) && (x = "# settings = " + E + `
+    let N = "";
+    0 < G.toLowerCase().indexOf("overridesettings") && ue(this), P != null && this.optionEQvalue("overrideSettings", !1) && (N = "# settings = " + P + `
 
-`), this.input = x + G, this.forest = me(this), this.getERD = function() {
+`), this.input = N + G, this.forest = ue(this), this.getERD = function() {
       if (this.erd != null)
         return this.erd;
-      let C = this.descendants(), g = { items: [] };
-      for (let b = 0; b < C.length; b++) {
-        if (C[b].parseType() != "table")
+      let g = this.descendants(), p = { items: [] };
+      for (let x = 0; x < g.length; x++) {
+        if (g[x].parseType() != "table")
           continue;
-        let l = { name: this.objPrefix("no schema") + C[b].parseName("") }, n = this.getOptionValue("schema");
-        n == "" && (n = null), l.schema = n, l.columns = [], g.items.push(l);
-        let t = C[b].getGenIdColName();
-        if (t != null && !C[b].isOption("pk"))
+        let l = { name: this.objPrefix("no schema") + g[x].parseName("") }, n = this.getOptionValue("schema");
+        n == "" && (n = null), l.schema = n, l.columns = [], p.items.push(l);
+        let t = g[x].getGenIdColName();
+        if (t != null && !g[x].isOption("pk"))
           l.columns.push({ name: t, datatype: "number" });
         else {
-          let S = C[b].getExplicitPkName();
-          if (S != null && S.indexOf(",") < 0) {
-            let f = "number";
-            const v = C[b].findChild(S);
-            v != null && (f = v.parseType()), l.columns.push({ name: S, datatype: f });
+          let y = g[x].getExplicitPkName();
+          if (y != null && y.indexOf(",") < 0) {
+            let h = "number";
+            const C = g[x].findChild(y);
+            C != null && (h = C.parseType()), l.columns.push({ name: y, datatype: h });
           }
         }
-        C[b].lateInitFks();
-        for (let S in C[b].fks) {
-          let f = C[b].fks[S];
-          if (0 < S.indexOf(",")) {
-            let R = this.find(f);
-            for (var B = split_str(S, ", "), k = 0; k < B.length; k++) {
-              var r = B[k];
+        g[x].lateInitFks();
+        for (let y in g[x].fks) {
+          let h = g[x].fks[y];
+          if (0 < y.indexOf(",")) {
+            let R = this.find(h);
+            for (var I = split_str(y, ", "), k = 0; k < I.length; k++) {
+              var r = I[k];
               if (r == ",")
                 continue;
               const w = R.findChild(r);
-              l.columns.push({ name: r, datatype: w.parseType((O) => !0) });
+              l.columns.push({ name: r, datatype: w.parseType((F) => !0) });
             }
             continue;
           }
-          let v = "number";
-          const P = C[b].findChild(S);
-          P != null && (v = P.parseType("fk"));
-          let N = this.find(f);
-          if (N != null) {
-            const R = N.getExplicitPkName();
-            R != null && R.indexOf(",") < 0 && (v = N.getPkType());
+          let C = "number";
+          const B = g[x].findChild(y);
+          B != null && (C = B.parseType("fk"));
+          let L = this.find(h);
+          if (L != null) {
+            const R = L.getExplicitPkName();
+            R != null && R.indexOf(",") < 0 && (C = L.getPkType());
           } else
-            N = this.find(S), N.isMany2One() & !S.endsWith("_id") && (f = S, S = singular(S));
-          l.columns.push({ name: S, datatype: v });
+            L = this.find(y), L.isMany2One() & !y.endsWith("_id") && (h = y, y = singular(y));
+          l.columns.push({ name: y, datatype: C });
         }
-        for (let S = 0; S < C[b].children.length; S++) {
-          let f = C[b].children[S];
-          if (f.parseType() != "table" && f.refId() == null && (l.columns.push({ name: f.parseName(""), datatype: f.parseType((v) => !0) }), 0 < f.indexOf("file"))) {
-            const v = f.parseName();
-            l.columns.push({ name: v + "_filename", datatype: "varchar2(255" + this.semantics() + ")" }), l.columns.push({ name: v + "_mimetype", datatype: "varchar2(255" + this.semantics() + ")" }), l.columns.push({ name: v + "_charset", datatype: "varchar2(255" + this.semantics() + ")" }), l.columns.push({ name: v + "_lastupd", datatype: "date" });
+        for (let y = 0; y < g[x].children.length; y++) {
+          let h = g[x].children[y];
+          if (h.parseType() != "table" && h.refId() == null && (l.columns.push({ name: h.parseName(""), datatype: h.parseType((C) => !0) }), 0 < h.indexOf("file"))) {
+            const C = h.parseName();
+            l.columns.push({ name: C + "_filename", datatype: "varchar2(255" + this.semantics() + ")" }), l.columns.push({ name: C + "_mimetype", datatype: "varchar2(255" + this.semantics() + ")" }), l.columns.push({ name: C + "_charset", datatype: "varchar2(255" + this.semantics() + ")" }), l.columns.push({ name: C + "_lastupd", datatype: "date" });
           }
         }
-        const m = C[b].trimmedContent().toUpperCase();
-        if ((this.optionEQvalue("rowkey", !0) || 0 < m.indexOf("/ROWKEY")) && l.columns.push({ name: "row_key", datatype: "varchar2(30" + this.semantics() + ")" }), (this.optionEQvalue("rowVersion", "yes") || 0 < m.indexOf("/ROWVERSION")) && l.columns.push({ name: "row_version", datatype: "integer" }), this.optionEQvalue("Audit Columns", "yes") || 0 < m.indexOf("/AUDITCOLS")) {
-          let S = this.getOptionValue("createdcol");
-          l.columns.push({ name: S, datatype: this.getOptionValue("Date Data Type").toLowerCase() });
-          let f = this.getOptionValue("createdbycol");
-          l.columns.push({ name: f, datatype: "varchar2(255" + this.semantics() + ")" });
-          let v = this.getOptionValue("updatedcol");
-          l.columns.push({ name: v, datatype: this.getOptionValue("Date Data Type").toLowerCase() });
-          let P = this.getOptionValue("updatedbycol");
-          l.columns.push({ name: P, datatype: "varchar2(255" + this.semantics() + ")" });
+        const u = g[x].trimmedContent().toUpperCase();
+        if ((this.optionEQvalue("rowkey", !0) || 0 < u.indexOf("/ROWKEY")) && l.columns.push({ name: "row_key", datatype: "varchar2(30" + this.semantics() + ")" }), (this.optionEQvalue("rowVersion", "yes") || 0 < u.indexOf("/ROWVERSION")) && l.columns.push({ name: "row_version", datatype: "integer" }), this.optionEQvalue("Audit Columns", "yes") || 0 < u.indexOf("/AUDITCOLS")) {
+          let y = this.getOptionValue("createdcol");
+          l.columns.push({ name: y, datatype: this.getOptionValue("Date Data Type").toLowerCase() });
+          let h = this.getOptionValue("createdbycol");
+          l.columns.push({ name: h, datatype: "varchar2(255" + this.semantics() + ")" });
+          let C = this.getOptionValue("updatedcol");
+          l.columns.push({ name: C, datatype: this.getOptionValue("Date Data Type").toLowerCase() });
+          let B = this.getOptionValue("updatedbycol");
+          l.columns.push({ name: B, datatype: "varchar2(255" + this.semantics() + ")" });
         }
         var o = this.additionalColumns();
-        for (let S in o) {
-          var p = o[S];
-          pad = tab + " ".repeat(this.maxChildNameLen() - S.length), ret += tab + S.toUpperCase() + pad + p + ` not null,
+        for (let y in o) {
+          var b = o[y];
+          pad = tab + " ".repeat(this.maxChildNameLen() - y.length), ret += tab + y.toUpperCase() + pad + b + ` not null,
 `;
         }
       }
-      g.links = [];
-      for (let b = 0; b < C.length; b++)
-        if (C[b].parseType() == "table") {
-          C[b].toDDL();
-          for (let l in C[b].fks) {
-            let n = C[b].fks[l], t = this.find(n);
+      p.links = [];
+      for (let x = 0; x < g.length; x++)
+        if (g[x].parseType() == "table") {
+          g[x].toDDL();
+          for (let l in g[x].fks) {
+            let n = g[x].fks[l], t = this.find(n);
             if (t == null)
               continue;
-            let m = "id";
-            t.getExplicitPkName() != null && (m = t.getExplicitPkName()), g.links.push({
+            let u = "id";
+            t.getExplicitPkName() != null && (u = t.getExplicitPkName()), p.links.push({
               source: this.objPrefix() + n,
-              source_id: m,
-              target: this.objPrefix() + C[b].parseName(""),
+              source_id: u,
+              target: this.objPrefix() + g[x].parseName(""),
               target_id: l
             });
           }
         }
-      return this.erd = g, g;
+      return this.erd = p, p;
     }, this.getDDL = function() {
       if (this.ddl != null)
         return this.ddl;
-      var C = "", g = this.descendants();
+      var g = "", p = this.descendants();
       if (this.optionEQvalue("Include Drops", "yes"))
-        for (let r = 0; r < g.length; r++) {
-          let o = g[r].generateDrop();
-          o != "" && (C += o);
+        for (let r = 0; r < p.length; r++) {
+          let o = p[r].generateDrop();
+          o != "" && (g += o);
         }
       if (this.optionEQvalue("rowkey", !0))
-        C += `create sequence  row_key_seq;
+        g += `create sequence  row_key_seq;
 
 `;
       else for (let r = 0; r < this.forest.length; r++)
         if (0 < this.forest[r].trimmedContent().toUpperCase().indexOf("/ROWKEY")) {
-          C += `create sequence  row_key_seq;
+          g += `create sequence  row_key_seq;
 
 `;
           break;
         }
-      C += `-- create tables
+      g += `-- create tables
 
 `;
       for (let r = 0; r < this.forest.length; r++)
-        C += this.forest[r].toDDL() + `
+        g += this.forest[r].toDDL() + `
 `;
       for (let r = 0; r < this.postponedAlters.length; r++)
-        C += this.postponedAlters[r] + `
+        g += this.postponedAlters[r] + `
 `;
-      let B = 0;
-      for (let r = 0; r < g.length; r++) {
-        let o = g[r].generateTrigger();
-        o != "" && (B++ == 0 && (C += `-- triggers
-`), C += o + `
+      let I = 0;
+      for (let r = 0; r < p.length; r++) {
+        let o = p[r].generateTrigger();
+        o != "" && (I++ == 0 && (g += `-- triggers
+`), g += o + `
 `);
       }
-      B = 0;
-      for (let r = 0; r < g.length; r++) {
-        let o = g[r].restEnable();
-        o != "" && (C += o + `
+      I = 0;
+      for (let r = 0; r < p.length; r++) {
+        let o = p[r].restEnable();
+        o != "" && (g += o + `
 `);
       }
-      B = 0;
-      for (let r = 0; r < g.length; r++) {
-        if (this.optionEQvalue("api", !1) && g[r].trimmedContent().toLowerCase().indexOf("/api") < 0)
+      I = 0;
+      for (let r = 0; r < p.length; r++) {
+        if (this.optionEQvalue("api", !1) && p[r].trimmedContent().toLowerCase().indexOf("/api") < 0)
           continue;
-        let o = g[r].generateTAPI();
-        o != "" && (B++ == 0 && (C += `-- APIs
-`), C += o + `
+        let o = p[r].generateTAPI();
+        o != "" && (I++ == 0 && (g += `-- APIs
+`), g += o + `
 `);
       }
-      B = 0;
+      I = 0;
       for (let r = 0; r < this.forest.length; r++) {
         let o = this.forest[r].generateView();
-        o != "" && (B++ == 0 && (C += `-- create views
-`), C += o + `
+        o != "" && (I++ == 0 && (g += `-- create views
+`), g += o + `
 `);
       }
-      B = 0;
+      I = 0;
       for (let r = 0; r < this.forest.length; r++) {
         let o = this.forest[r].generateData(this.data);
-        o != "" && (B++ == 0 && (C += `-- load data
+        o != "" && (I++ == 0 && (g += `-- load data
 
-`), C += o + `
+`), g += o + `
 `);
       }
-      B = 0, C += `-- Generated by Quick SQL ${this.version()} ` + (/* @__PURE__ */ new Date()).toLocaleString() + `
+      I = 0, g += `-- Generated by Quick SQL ${this.version()} ` + (/* @__PURE__ */ new Date()).toLocaleString() + `
 
-`, C += `/*
+`, g += `/*
 `;
       let k = G;
       k = k.replace(/#.+/g, `
-`), k = k.replace(/\/\*/g, "--<--"), k = k.replace(/\*\//g, "-->--"), k = k.replace(/\/* Non-default options:/g, ""), C += k, C += `
+`), k = k.replace(/\/\*/g, "--<--"), k = k.replace(/\*\//g, "-->--"), k = k.replace(/\/* Non-default options:/g, ""), g += k, g += `
 `;
       for (let r = 0; r < this.unknownOptions().length; r++)
-        C += "*** Unknown setting: " + this.unknownOptions()[r] + `
+        g += "*** Unknown setting: " + this.unknownOptions()[r] + `
 `;
-      return C += `
+      return g += `
  Non-default options:
 # settings = ` + JSON.stringify(this.nonDefaultOptions()) + `
-`, C += `
-*/`, this.ddl = C, C;
+`, g += `
+*/`, this.ddl = g, g;
     }, this.getErrors = function() {
-      return this.errors != null ? this.errors : (this.errors = Ee.findErrors(this, this.fullInput), this.errors);
+      return this.errors != null ? this.errors : (this.errors = Pe.findErrors(this, this.fullInput), this.errors);
     }, this.version = oe;
   }
   return D;
 })();
-function Le(c, u) {
-  return Me(c, u);
+function Ee(f, c) {
+  return Se(f, c);
 }
-function Ne(c, u) {
-  return new j(c, u).getERD();
+function Le(f, c) {
+  return new Y(f, c).getERD();
 }
-function xe(c, u) {
-  return new j(c, u).getDDL();
+function Ne(f, c) {
+  return new Y(f, c).getDDL();
 }
-function we(c, u) {
-  return new j(c, u).getErrors();
+function we(f, c) {
+  return new Y(f, c).getErrors();
 }
 function oe() {
-  return "1.2.14";
+  return "1.2.15";
 }
-j.version = oe;
-j.toDDL = xe;
-j.toERD = Ne;
-j.toErrors = we;
-j.fromJSON = Le;
-j.lexer = Z;
+Y.version = oe;
+Y.toDDL = Ne;
+Y.toERD = Le;
+Y.toErrors = we;
+Y.fromJSON = Ee;
+Y.lexer = Z;
 export {
-  j as default,
-  Le as fromJSON,
+  Y as default,
+  Ee as fromJSON,
   oe as qsql_version,
-  j as quicksql,
-  xe as toDDL,
-  Ne as toERD,
+  Y as quicksql,
+  Ne as toDDL,
+  Le as toERD,
   we as toErrors
 };

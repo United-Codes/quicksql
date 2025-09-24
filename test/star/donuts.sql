@@ -116,15 +116,15 @@ insert into donut_batters (
     batters_id,
     donut_id
 ) values (
-    1,
+    2,
     2
 );
 insert into donut_batters (
     batters_id,
     donut_id
 ) values (
-    2,
-    2
+    1,
+    1
 );
 
 commit;
@@ -133,21 +133,21 @@ insert into donut_toppings (
     toppings_id,
     donut_id
 ) values (
+    1,
+    1
+);
+insert into donut_toppings (
+    toppings_id,
+    donut_id
+) values (
+    1,
+    1
+);
+insert into donut_toppings (
+    toppings_id,
+    donut_id
+) values (
     2,
-    2
-);
-insert into donut_toppings (
-    toppings_id,
-    donut_id
-) values (
-    1,
-    2
-);
-insert into donut_toppings (
-    toppings_id,
-    donut_id
-) values (
-    1,
     1
 );
 
