@@ -3,7 +3,7 @@ import lexer from './lexer.js';
 
 
 export function generateSample( lTable, lColumn, lType, values ) {
-    var chance = new Chance(seed);
+    var chance = new Chance(seed++);
     let type = lType.toUpperCase();
     let table = lTable.toUpperCase();
     let column = lColumn.toUpperCase();

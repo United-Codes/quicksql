@@ -3,13 +3,19 @@ import  {quicksql,fromJSON} from "../src/ddl.js";
 import {checkNoError} from './error_msg_tests.js'
 
 import fs from "fs";
-  
+
+import Chance from 'chance';
+
+
 try {
+    //var chance = new Chance(15555);
+    //console.log(chance.address());
+
     let file = '//bugs/Bug35063257.quicksql';
     //file = '//experimental/food_product.json';
     file = '//erd/Bug35814250/1-3.qsql';
     file = '//apex/project_management.quicksql';
-    file = '//bugs/84.qsql';
+    file = '//star/sales_product_customers.qsql';
 
     let args = process.argv.slice(2);
     if( 0 < args.length )

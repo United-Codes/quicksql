@@ -66,6 +66,9 @@ A comment can appear between any keywords, parameters, or punctuation marks in a
 | char, vc, varchar, varchar2, string         | VARCHAR2(4000)                |
 | vcNNN,vc(NNN)                               | VARCHAR2(NNN)                 |
 | vc32k                                       | VARCHAR2(32767)               |
+| vect, vector                                | VECTOR(*,*,*)                 |
+| vectNNN,vect(NNN)                           | VECTOR(NNN,*,*)               |
+| vcNk                                        | VARCHAR2(N*1024)              |
 | clob                                        | CLOB                          |
 | blob                                        | BLOB                          |
 | json                                        | CLOB CHECK (&lt;COLUMN_NAME&gt; IS JSON) |

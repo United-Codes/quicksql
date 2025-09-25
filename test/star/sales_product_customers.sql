@@ -44,7 +44,7 @@ insert into customers (
     first_name
 ) values (
     1,
-    'Aaron'
+    'Myrtie'
 );
 
 commit;
@@ -54,7 +54,7 @@ insert into product (
     name
 ) values (
     1,
-    'Aaron Erickson'
+    'Christine Marshall'
 );
 
 commit;
@@ -68,7 +68,7 @@ insert into sales (
     1,
     1,
     1,
-    20
+    84
 );
 insert into sales (
     id,
@@ -79,7 +79,7 @@ insert into sales (
     2,
     1,
     1,
-    84
+    27
 );
 
 commit;

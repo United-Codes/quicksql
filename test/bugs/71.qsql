@@ -1,0 +1,7 @@
+data_feed_vectors
+    e1  vect10k
+    EMBED_VECTOR vect
+    EMBED vector
+    E2  vector123    
+  
+# genpk: false

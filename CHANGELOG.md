@@ -57,4 +57,14 @@ Error diagnostic fixes
 Misindented error diagnostics, one more time
 Table and column directive syntax check
 
+## [1.2.14] - 2024-9-22
+
+#65 
+#67
+#84 
+
+## [1.2.15] - 2024-9-24
+
+#71
+#78
 
