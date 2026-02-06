@@ -134,7 +134,7 @@ let tree = (function(){
 
         this.getAnnotationValue = function( key ) {
             if( this.annotations == null ) return null;
-            var regex = new RegExp(key + "\\s+'([^']*)'", 'i');
+            var regex = new RegExp(key + "\\s+['\"]([^'\"]*)['\"]", 'i');
             var match = this.annotations.match(regex);
             return match ? match[1] : null;
         };

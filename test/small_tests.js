@@ -892,6 +892,14 @@ view dept_v dept {Purpose 'reporting', Classification 'HR'}`).getDDL();
     assert( "0 < output.indexOf('annotations (DESCRIPTION')" );
     assert( "0 < output.indexOf('Classification')" );
 
+    // DESCRIPTION annotation with double quotes
+    output = new quicksql(`projects {DESCRIPTION "Projects table"}
+    start_date date {DESCRIPTION "Start date of the project"}`).getDDL();
+    assert( "0 < output.indexOf('comment on table projects')" );
+    assert( "0 < output.indexOf('Projects table')" );
+    assert( "0 < output.indexOf('comment on column projects.start_date')" );
+    assert( "0 < output.indexOf('Start date of the project')" );
+
     // /trans column directive - single table with one /trans column
     output = new quicksql(`knowledge_type
     knowledge_type vc(1024) /nn /trans
