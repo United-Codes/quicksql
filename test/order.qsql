@@ -5,9 +5,13 @@ emp
 dept 
   dname /trans
 
-user
-  username /trans
-  description clob /trans
+user {DESCRIPTION "User table"}
+  username /trans {
+    DESCRIPTION "Username column"
+  }
+  description clob /trans {
+    DESCRIPTION "Description column"
+  }
 
 #pk: identityDataType
 #prefix: abc
