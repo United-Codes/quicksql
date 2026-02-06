@@ -9,6 +9,10 @@
 - [Views](#views)
     - [View Syntax](#view-syntax)
     - [View Example](#view-example)
+- [Annotations](#annotations)
+    - [Annotation Syntax](#annotation-syntax)
+    - [DESCRIPTION Annotation](#description-annotation)
+    - [Annotation Examples](#annotation-examples)
 - [Settings](#settings)
     - [apex](#apex)
     - [api](#api)
@@ -92,6 +96,7 @@ A comment can appear between any keywords, parameters, or punctuation marks in a
 | /rest                                   | Generate REST enablement of the table using Oracle REST Data Services (ORDS) |
 | /unique, /uk                            | Generate table level unique constraint |
 | /pk                                     | Generate primary key constraint (on table level it is usually a composite key) |
+| {annotations}                           | Oracle SQL annotations on the table. See [Annotations](#annotations). A `DESCRIPTION` annotation automatically generates a `COMMENT ON TABLE` statement. |
 <!-- markdownlint-enable MD013 -->
 
 ### Star/Snowflake schema relationship direction indicators
@@ -138,6 +143,7 @@ and is usually omitted from QSQL schema definition.
 | /pk                            | Identifies column as the primary key of the table. It is recommended not manually specify primary keys and let this app create primary key columns automatically. |
 | /trans, /translation, /translations | Marks a column for multi-lingual translation support. Generates a shared `language` table, a `<table>_trans` table with translated column variants, and a `<table>_resolved` view that joins them using `sys_context` for the current language. See the `transcontext` setting. |
 | --, [comments]                 |  Enclose comments using square brackets or using dash dash syntax |
+| {annotations}                  | Oracle SQL annotations on the column. See [Annotations](#annotations). A `DESCRIPTION` annotation automatically generates a `COMMENT ON COLUMN` statement. |
 <!-- markdownlint-enable MD013 -->
 
 ## Views
@@ -166,6 +172,61 @@ view dept_emp emp dept
 
 This syntax restricts views to conjunctive queries (i.e. containing equijoin
 predicates) only.
+
+## Annotations
+
+Oracle SQL annotations can be added to tables, columns, and views using curly braces `{...}`. Annotations are included in the generated DDL as `ANNOTATIONS (...)` clauses.
+
+### Annotation Syntax
+
+```quicksql
+table_name {Key 'value', AnotherKey 'value', FlagKey}
+    column_name {Key 'value'}
+```
+
+- Key-value annotations: `Key 'value'`
+- Flag annotations (no value): `FlagKey`
+- Multiple annotations are comma-separated
+
+### DESCRIPTION Annotation
+
+When an annotation has the key `DESCRIPTION`, a `COMMENT ON` statement is automatically generated from its value. This applies to both tables and columns. If a node has both a `DESCRIPTION` annotation and an explicit comment (`[...]` or `--`), the `DESCRIPTION` annotation takes precedence.
+
+```quicksql
+departments {DESCRIPTION 'Main HR departments table', Classification 'HR'}
+    name {DESCRIPTION 'The department name'}
+```
+
+Generates:
+
+```sql
+create table departments (
+    ...
+)
+annotations (DESCRIPTION 'Main HR departments table', Classification 'HR');
+
+comment on table departments is 'Main HR departments table';
+comment on column departments.name is 'The department name';
+```
+
+### Annotation Examples
+
+```quicksql
+-- Table-level annotation
+departments {UI_Display 'Departments', Classification 'HR'}
+    name
+
+-- Column-level annotation
+departments
+    name {UI_Display 'Department Name'}
+
+-- Annotations combined with directives
+departments
+    name /nn {Format 'text'}
+
+-- View annotation
+view dept_v dept {UI_Display 'Department View'}
+```
 
 ## Settings
 
@@ -463,7 +524,7 @@ stmt::= tree
       |  'settings' '=' '{' individual_setting ( ',' individual_setting )* '}'
       |  'document' '=' JSON
 
-view::= 'view' view_name table_name+
+view::= 'view' view_name table_name+ annotation?
        | view_name '=' table_name+
 
 view_name::= identifier
@@ -474,8 +535,8 @@ tree::= node+
 
 node::= tableNode | columnNode
 
-tableNode::= indentation relationship? tableName tableDirective*
-columnNode::= indentation columnName columnDirective* datatype*
+tableNode::= indentation relationship? tableName tableDirective* annotation?
+columnNode::= indentation columnName columnDirective* datatype* annotation?
 
 indentation::= INDENT | DEDENT | SAMELEVEL
 
@@ -512,6 +573,11 @@ columnDirective::= '/'
       |'pk'
       |'trans'|'translation'|'translations'
       )
+
+annotation::= '{' annotationEntry ( ',' annotationEntry )* '}'
+
+annotationEntry::= identifier string_literal
+                  | identifier
 
 datatype::=
        'num'|'number'
