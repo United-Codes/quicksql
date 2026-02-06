@@ -11389,7 +11389,7 @@ let ue = (function() {
     }
     this.getAnnotationValue = function(i) {
       if (this.annotations == null) return null;
-      var o = new RegExp(i + "\\s+'([^']*)'", "i"), l = this.annotations.match(o);
+      var o = new RegExp(i + `\\s+['"]([^'"]*)['"]`, "i"), l = this.annotations.match(o);
       return l ? l[1] : null;
     }, this.indexOf = function(i, o) {
       for (let l = 0; l < this.src.length; l++) {
