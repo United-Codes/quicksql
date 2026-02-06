@@ -671,6 +671,25 @@ students
     assert( "0 < output.indexOf('finished_yn    boolean,')" );
     assert( "0 < output.indexOf('ok             boolean,')" );
     assert( "0 < output.indexOf('yes            boolean')" );
+    // 26ai db version
+    output = new quicksql(`boolvalues
+    is_legal
+    finished_yn
+    ok   bool
+    yes  boolean
+    #db:"26ai"`).getDDL();
+
+    assert( "0 < output.indexOf('is_legal       boolean,')" );
+    assert( "0 < output.indexOf('finished_yn    boolean,')" );
+    assert( "0 < output.indexOf('ok             boolean,')" );
+    assert( "0 < output.indexOf('yes            boolean')" );
+
+    output = new quicksql(`boolvalues
+    ok   bool
+    #boolean:yn
+    #db:"26ai"`).getDDL();
+    assert( "output.indexOf('ok    boolean') < 0" );
+
     // https://github.com/oracle/quicksql/issues/51
     output = new quicksql(`boolvalues
         ok   bool

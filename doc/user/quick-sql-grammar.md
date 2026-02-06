@@ -277,10 +277,10 @@ setting to override this default.
 
 ### db
 
-**Possible Values**: `11g`, `12c`, `19c`, `21c`, `23c`
+**Possible Values**: `11g`, `12c`, `19c`, `21c`, `23c`, `26ai`
 **Default Value**: `19c`
 
-Specifies the database version the syntax should be compatible with. The version string is reduced to major version number.  Therefore, 23, 23c, 23ai, and 23.1.1 are all legitimate values equivalent to 21.
+Specifies the database version the syntax should be compatible with. The version string is reduced to major version number.  Therefore, 23, 23c, 23ai, and 23.1.1 are all legitimate values equivalent to 23.
 
 ### drop
 
