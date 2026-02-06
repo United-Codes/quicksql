@@ -132,11 +132,18 @@ let tree = (function(){
             }
         }
 
+        this.getAnnotationValue = function( key ) {
+            if( this.annotations == null ) return null;
+            var regex = new RegExp(key + "\\s+'([^']*)'", 'i');
+            var match = this.annotations.match(regex);
+            return match ? match[1] : null;
+        };
+
         /**
          * More robust way to parse the tree node content
          * @param {*} token     to look up
-         * @param {*} isPrefix  is prefix match 
-         * @returns 
+         * @param {*} isPrefix  is prefix match
+         * @returns
          */
         this.indexOf = function( token, isPrefix ) {
             for( let i = 0; i < this.src.length; i++ ) {
@@ -1046,12 +1053,14 @@ let tree = (function(){
                 }
             }
             
-            if( this.comment != null )
-                ret += 'comment on table '+objName+' is \''+this.comment+'\';\n';
+            var tableComment = this.getAnnotationValue('DESCRIPTION') || this.comment;
+            if( tableComment != null )
+                ret += 'comment on table '+objName+' is \''+tableComment+'\';\n';
             for( let i = 0; i < this.children.length; i++ ) {
                 let child = this.children[i];
-                if( child.comment != null && child.children.length == 0 )
-                    ret += 'comment on column '+objName+'.'+child.parseName()+' is \''+child.comment+'\';\n';
+                var colComment = child.getAnnotationValue('DESCRIPTION') || child.comment;
+                if( colComment != null && child.children.length == 0 )
+                    ret += 'comment on column '+objName+'.'+child.parseName()+' is \''+colComment+'\';\n';
             }
             ret += '\n';
             
