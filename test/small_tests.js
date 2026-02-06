@@ -864,6 +864,34 @@ view dept_v dept {Purpose 'reporting', Classification 'HR'}`).getDDL();
     assert( "0 < output.indexOf('classification')" );
     assert( "0 < output.indexOf(' as')" );
 
+    // DESCRIPTION annotation generates comment on table
+    output = new quicksql(`departments {DESCRIPTION 'Main HR departments table'}
+    name`).getDDL();
+    assert( "0 < output.indexOf('comment on table departments')" );
+    assert( "0 < output.indexOf('Main HR departments table')" );
+    assert( "0 < output.indexOf('annotations (DESCRIPTION')" );
+
+    // DESCRIPTION annotation generates comment on column
+    output = new quicksql(`departments
+    name {DESCRIPTION 'The department name'}`).getDDL();
+    assert( "0 < output.indexOf('comment on column departments.name')" );
+    assert( "0 < output.indexOf('The department name')" );
+
+    // DESCRIPTION annotation with explicit comment - DESCRIPTION wins
+    output = new quicksql(`departments [Explicit comment] {DESCRIPTION 'Annotation description'}
+    name`).getDDL();
+    assert( "0 < output.indexOf('comment on table departments')" );
+    assert( "0 < output.indexOf(\"is 'Annotation description'\")" );
+    assert( "0 > output.indexOf(\"is 'Explicit comment'\")" );
+
+    // DESCRIPTION annotation mixed with other annotations
+    output = new quicksql(`departments {DESCRIPTION 'HR table', Classification 'HR'}
+    name`).getDDL();
+    assert( "0 < output.indexOf('comment on table departments')" );
+    assert( "0 < output.indexOf('HR table')" );
+    assert( "0 < output.indexOf('annotations (DESCRIPTION')" );
+    assert( "0 < output.indexOf('Classification')" );
+
     // /trans column directive - single table with one /trans column
     output = new quicksql(`knowledge_type
     knowledge_type vc(1024) /nn /trans
