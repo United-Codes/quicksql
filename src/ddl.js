@@ -44,6 +44,7 @@ export const quicksql = (function () {
         schema: {label: 'Schema', value:'', },
         api: {label: 'Table API', value:'no',check:['yes','no']},
         compress: {label: 'Table Compression', value:'no',check:['yes','no']},
+        transcontext: {label: 'Translation Context', value: "sys_context('APP_CTX','LANG')"},
         //"Auxiliary Columns": {label: "Auxiliary Columns", value:''}, // e.g. security_group_id integer
 
         //namecase: {label: 'Object and Field name convention', value:'canonic',check:['canonic','json']},
@@ -423,6 +424,34 @@ export const quicksql = (function () {
                 output += this.postponedAlters[i]+'\n';
             }
 
+            // translation tables
+            let hasTransCols = false;
+            for( let i = 0; i < descendants.length; i++ ) {
+                if( descendants[i].getTransColumns && descendants[i].getTransColumns().length > 0 ) {
+                    hasTransCols = true;
+                    break;
+                }
+            }
+            if( hasTransCols ) {
+                let char = this.semantics();
+                output += '-- translation support\n\n';
+                output += 'create table ' + this.objPrefix() + 'language (\n';
+                output += '    code           varchar2(5' + char + ') not null\n';
+                output += '                   constraint ' + this.objPrefix() + 'language_code_pk primary key,\n';
+                output += '    locale         varchar2(28' + char + ') not null\n';
+                output += '                   constraint ' + this.objPrefix() + 'language_locale_unq unique,\n';
+                output += '    name           varchar2(1024' + char + '),\n';
+                output += '    native_name    varchar2(1024' + char + ')\n';
+                output += ');\n\n';
+                output += 'create index ' + this.objPrefix() + 'language_i1 on ' + this.objPrefix() + 'language (locale);\n\n';
+
+                for( let i = 0; i < descendants.length; i++ ) {
+                    let transTable = descendants[i].generateTransTable();
+                    if( transTable != '' )
+                        output += transTable;
+                }
+            }
+
             let j = 0;
             for( let i = 0; i < descendants.length; i++ ) {
                 let trigger = descendants[i].generateTrigger();
@@ -461,6 +490,15 @@ export const quicksql = (function () {
                     if( j++ == 0)
                         output += '-- create views\n';
                     output += view +'\n';
+                }
+            }
+
+            for( let i = 0; i < descendants.length; i++ ) {
+                let resolvedView = descendants[i].generateResolvedView();
+                if( resolvedView != '' ) {
+                    if( j++ == 0)
+                        output += '-- create views\n';
+                    output += resolvedView;
                 }
             }
 

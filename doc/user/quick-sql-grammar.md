@@ -14,6 +14,7 @@
     - [api](#api)
     - [auditcols](#auditcols)
     - [compress](#compress)
+    - [transcontext](#transcontext)
     - [createdByCol](#createdbycol)
     - [createdCol](#createdcol)
     - [date](#date)
@@ -135,6 +136,7 @@ and is usually omitted from QSQL schema definition.
 | /cascade                       | on delete cascade                          |
 | /setnull                       | on delete set null                         |
 | /pk                            | Identifies column as the primary key of the table. It is recommended not manually specify primary keys and let this app create primary key columns automatically. |
+| /trans, /translation, /translations | Marks a column for multi-lingual translation support. Generates a shared `language` table, a `<table>_trans` table with translated column variants, and a `<table>_resolved` view that joins them using `sys_context` for the current language. See the `transcontext` setting. |
 | --, [comments]                 |  Enclose comments using square brackets or using dash dash syntax |
 <!-- markdownlint-enable MD013 -->
 
@@ -250,6 +252,18 @@ over db:23c, so that the user can override db seting (which influences other fun
 **Default Value**: `false`
 
 When enabled creates all tables compressed.
+
+### transcontext
+
+**Default Value**: `sys_context('APP_CTX','LANG')`
+
+The SQL expression used in the `_resolved` view to determine the current language
+when using `/trans` column directives. For example, to use a different application
+context:
+
+```quicksql
+# transcontext: "sys_context('MY_CTX','LANGUAGE')"
+```
 
 ### createdByCol
 
@@ -495,7 +509,8 @@ columnDirective::= '/'
       |'references'|'reference'
       |'cascade'|'setnull'
       |'fk'
-      |'pk' 
+      |'pk'
+      |'trans'|'translation'|'translations'
       )
 
 datatype::=
@@ -520,6 +535,7 @@ individual_setting::=
       |'resetsettings'|'rowkey'
       |'tenantid'|'rowversion'
       |'schema'|'semantics'
+      |'transcontext'
       |'updatedbycol'|'updatedcolverbose' ) ':' (string_literal| 'true' | 'false')
 ```
 

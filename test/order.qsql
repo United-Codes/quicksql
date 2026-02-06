@@ -3,10 +3,11 @@ emp
   deptno /fk dept
 
 dept 
-  dname
+  dname /trans
 
 user
-  username
+  username /trans
+  description clob /trans
 
 #pk: identityDataType
 #prefix: abc
