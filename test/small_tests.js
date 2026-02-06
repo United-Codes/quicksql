@@ -713,6 +713,24 @@ students
     text`).getDDL();
     assert( "0 < output.indexOf('the_comment')" );
 
+    // /flashback directive (Flashback Data Archive)
+    output = new quicksql(`departments /flashback
+    name`).getDDL();
+    assert( "0 < output.indexOf('alter table departments flashback archive;')" );
+
+    output = new quicksql(`departments /flashback myarchive
+    name`).getDDL();
+    assert( "0 < output.indexOf('alter table departments flashback archive myarchive;')" );
+
+    // /fda alias
+    output = new quicksql(`departments /fda
+    name`).getDDL();
+    assert( "0 < output.indexOf('alter table departments flashback archive;')" );
+
+    output = new quicksql(`departments /fda myarchive
+    name`).getDDL();
+    assert( "0 < output.indexOf('alter table departments flashback archive myarchive;')" );
+
     // https://github.com/oracle/quicksql/issues/55
     output = new quicksql(`escape /insert 1
     financial_year /check '23/24', \`'24/25'\`
