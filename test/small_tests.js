@@ -864,9 +864,62 @@ view dept_v dept {Purpose 'reporting', Classification 'HR'}`).getDDL();
     assert( "0 < output.indexOf('classification')" );
     assert( "0 < output.indexOf(' as')" );
 
-} 
+    // /trans column directive - single table with one /trans column
+    output = new quicksql(`knowledge_type
+    knowledge_type vc(1024) /nn /trans
+    display_order number`).getDDL();
+    assert( "0 < output.indexOf('create table language')" );
+    assert( "0 < output.indexOf('language_code_pk primary key')" );
+    assert( "0 < output.indexOf('create table knowledge_type_trans')" );
+    assert( "0 < output.indexOf('knowledge_type_id')" );
+    assert( "0 < output.indexOf('language_code')" );
+    assert( "0 < output.indexOf('trans_knowledge_type')" );
+    assert( "0 < output.indexOf('knowledge_type_trans_uk unique')" );
+    assert( "0 < output.indexOf('knowledge_type_trans_lang_fk')" );
+    assert( "0 < output.indexOf('create or replace view knowledge_type_resolved')" );
+    assert( "0 < output.indexOf('coalesce(t.trans_knowledge_type, k.knowledge_type)')" );
+    assert( "0 < output.indexOf('k.display_order')" );
+    assert( "0 < output.indexOf(\"sys_context('APP_CTX','LANG')\")" );
 
- 
+    // /trans on clob column - correct type in _trans table
+    output = new quicksql(`articles
+    title vc(200) /trans
+    body clob /trans
+    status vc(20)`).getDDL();
+    assert( "0 < output.indexOf('trans_title')" );
+    assert( "0 < output.indexOf('trans_body')" );
+    assert( "0 < output.indexOf('clob')" );
+    assert( "0 < output.indexOf('create or replace view articles_resolved')" );
+    assert( "0 < output.indexOf('coalesce(t.trans_title, k.title)')" );
+    assert( "0 < output.indexOf('coalesce(t.trans_body, k.body)')" );
+    assert( "0 < output.indexOf('k.status')" );
+
+    // /translation and /translations aliases work too
+    output = new quicksql(`products
+    product_name vc(200) /translation
+    description vc(4000) /translations`).getDDL();
+    assert( "0 < output.indexOf('create table products_trans')" );
+    assert( "0 < output.indexOf('trans_product_name')" );
+    assert( "0 < output.indexOf('trans_description')" );
+
+    // Custom transcontext setting
+    output = new quicksql(`items
+    item_name vc(100) /trans
+    # transcontext: "sys_context('MY_CTX','LANGUAGE')"
+    `).getDDL();
+    assert( "0 < output.indexOf(\"sys_context('MY_CTX','LANGUAGE')\")" );
+
+    // No /trans columns -> no language table or extra output
+    output = new quicksql(`simple_table
+    name
+    description`).getDDL();
+    assert( "output.indexOf('create table language') < 0" );
+    assert( "output.indexOf('_trans') < 0" );
+    assert( "output.indexOf('_resolved') < 0" );
+
+}
+
+
 small_tests();
 
 console.log(assertionCnt);
