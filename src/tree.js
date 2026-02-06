@@ -120,6 +120,18 @@ let tree = (function(){
         this.content = normalize(inputLine);
         this.comment;
 
+        // Extract annotations {key 'value', ...}
+        // Only treat { as annotation start when preceded by whitespace (avoids q'{...}' alt quoting)
+        this.annotations = null;
+        var annStart = this.content.indexOf('{');
+        if( annStart > 0 && (this.content.charAt(annStart - 1) == ' ' || this.content.charAt(annStart - 1) == '\t') ) {
+            var annEnd = this.content.indexOf('}', annStart);
+            if( annEnd > annStart ) {
+                this.annotations = this.content.substring(annStart + 1, annEnd).trim();
+                this.content = this.content.substring(0, annStart) + this.content.substring(annEnd + 1);
+            }
+        }
+
         /**
          * More robust way to parse the tree node content
          * @param {*} token     to look up
@@ -452,6 +464,12 @@ let tree = (function(){
                     typeModifier = ' default on null to_number(sys_guid(), \'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\') ';
                 ret += typeModifier +'\n';  
                 ret += tab + tab + ' '.repeat(parent.maxChildNameLen()) + 'constraint ' + concatNames(ddl.objPrefix(),parent_child,'_pk')+' primary key';
+            }
+            if( this.annotations != null ) {
+                if( 0 <= ret.indexOf('\n') )
+                    ret += '\n' + tab + tab + ' '.repeat(parent.maxChildNameLen()) + 'annotations (' + this.annotations + ')';
+                else
+                    ret += ' annotations (' + this.annotations + ')';
             }
             return ret;
         };
@@ -970,7 +988,8 @@ let tree = (function(){
             ret += this.genConstraint();
             if( ret.lastIndexOf(',\n') == ret.length-2 )
                 ret = ret.substring(0,ret.length-2)+'\n';
-            ret += ')'+(ddl.optionEQvalue('compress','yes') || this.isOption('compress')?' compress':'')+';\n\n';
+            let tableAnnotations = this.annotations != null ? '\nannotations (' + this.annotations + ')' : '';
+            ret += ')'+(ddl.optionEQvalue('compress','yes') || this.isOption('compress')?' compress':'')+tableAnnotations+';\n\n';
             
             if( this.isOption('audit') && !this.isOption('auditcols') &&
                            !this.isOption('audit','col') && !this.isOption('audit','cols') && !this.isOption('audit','columns') ) {
