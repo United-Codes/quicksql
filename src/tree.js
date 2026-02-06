@@ -972,9 +972,15 @@ let tree = (function(){
                 ret = ret.substring(0,ret.length-2)+'\n';
             ret += ')'+(ddl.optionEQvalue('compress','yes') || this.isOption('compress')?' compress':'')+';\n\n';
             
-            if( this.isOption('audit') && !this.isOption('auditcols') && 
+            if( this.isOption('audit') && !this.isOption('auditcols') &&
                            !this.isOption('audit','col') && !this.isOption('audit','cols') && !this.isOption('audit','columns') ) {
                 ret += 'audit all on '+objName+';\n\n';
+            }
+
+            if( this.isOption('flashback') || this.isOption('fda') ) {
+                let archiveName = this.getOptionValue('flashback') || this.getOptionValue('fda') || '';
+                archiveName = archiveName.trim();
+                ret += 'alter table '+objName+' flashback archive'+(0 < archiveName.length ? ' '+archiveName : '')+';\n\n';
             }
      
             for( let fk in this.fks ) {

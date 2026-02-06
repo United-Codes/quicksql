@@ -86,6 +86,7 @@ A comment can appear between any keywords, parameters, or punctuation marks in a
 | /check                                  | table level constraint            |
 | /colprefix                              | Prefix all columns of a given table with this value. Automatically adds an underscore if not provided. |
 | /compress, /compressed                  | Table will be created compressed. |
+| /flashback, /fda                        | Enable Flashback Data Archive on the table. Optionally specify an archive name, e.g. /flashback myarchive. |
 | /insert NN                              | Generate NN SQL INSERT statement(s) with random data, for example: /INSERT 20. (Maximum = 1000) |
 | /rest                                   | Generate REST enablement of the table using Oracle REST Data Services (ORDS) |
 | /unique, /uk                            | Generate table level unique constraint |
@@ -471,6 +472,7 @@ tableDirective::= '/'
       |'audit'|'auditcols'|'audit cols'|'audit columns'
       |'colprefix'
       |'compress'|'compressed'
+      |'flashback'|'fda'
       |'insert' integer
       |'rest'
       |'unique' | 'uk'
