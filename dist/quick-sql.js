@@ -11907,9 +11907,10 @@ annotations (` + this.annotations + ")" : "";
           throw x;
         }
       let r = f.objPrefix() + this.parseName();
-      var t = this.src, s = "create or replace view " + r + ` as
-`;
-      s += `select
+      var t = this.src, s = "create or replace view " + r;
+      this.annotations != null && (s += `
+annotations (` + this.annotations + ")"), s += ` as
+`, s += `select
 `;
       for (var d = 0, M = 2; M < t.length; M++) {
         let x = f.find(t[M].value);

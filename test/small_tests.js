@@ -849,6 +849,21 @@ view emp_v departments employees
     name`).getDDL();
     assert( "0 < output.indexOf('create table departments')" );
 
+    // Oracle annotations - view level
+    output = new quicksql(`dept
+    name
+view dept_v dept {UI_Display 'Department View'}`).getDDL();
+    assert( "0 < output.indexOf('annotations (ui_display')" );
+    assert( "0 < output.indexOf('view dept_v')" );
+
+    // Oracle annotations - view with multiple annotations
+    output = new quicksql(`dept
+    name
+view dept_v dept {Purpose 'reporting', Classification 'HR'}`).getDDL();
+    assert( "0 < output.indexOf('annotations (purpose')" );
+    assert( "0 < output.indexOf('classification')" );
+    assert( "0 < output.indexOf(' as')" );
+
 } 
 
  

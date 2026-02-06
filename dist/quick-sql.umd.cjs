@@ -67,8 +67,9 @@ annotations (`+this.annotations+")":"";if(r+=")"+(f.optionEQvalue("compress","ye
 `),this.parseType()=="table"&&(t="drop table "+r+` cascade constraints;
 `,f.optionEQvalue("api","yes")&&(t+="drop package "+r+`_api;
 `),f.optionEQvalue("pk","SEQ")&&(t+="drop sequence "+r+`_seq;
-`)),t.toLowerCase()},this.generateView=function(){if(this.parseType()!="view"&&this.parseType()!="dv")return"";if(f.optionEQvalue("Duality View","yes")||this.parseType()=="dv")try{return this.generateDualityView()}catch(x){if(x.message==this.one2many2oneUnsupoported)return"";throw x}let r=f.objPrefix()+this.parseName();var t=this.src,s="create or replace view "+r+` as
-`;s+=`select
+`)),t.toLowerCase()},this.generateView=function(){if(this.parseType()!="view"&&this.parseType()!="dv")return"";if(f.optionEQvalue("Duality View","yes")||this.parseType()=="dv")try{return this.generateDualityView()}catch(x){if(x.message==this.one2many2oneUnsupoported)return"";throw x}let r=f.objPrefix()+this.parseName();var t=this.src,s="create or replace view "+r;this.annotations!=null&&(s+=`
+annotations (`+this.annotations+")"),s+=` as
+`,s+=`select
 `;for(var d=0,M=2;M<t.length;M++){let x=f.find(t[M].value);if(x==null)return"";var C=(t[M].value+".id").length;d<C&&(d=C);for(var I=0;I<x.children.length;I++){var E=x.children[I];C=(t[M].value+"."+E.parseName()).length,d<C&&(d=C)}}var G={};for(let x=2;x<t.length;x++){let p=f.find(t[x].value);if(p!=null)for(let S=0;S<p.children.length;S++){var _=p.children[S].parseName(),w=G[_];w==null&&(w=0),G[_]=w+1}}for(let x=2;x<t.length;x++){let p=f.find(t[x].value);if(p==null)continue;let S=" ".repeat(d-(t[x].value+".id").length);s+=c+t[x].value+".id"+c+S+z(t[x].value)+`_id,
 `;for(let H=0;H<p.children.length;H++){let F=p.children[H];if(F.children.length==0){S=" ".repeat(d-(t[x].value+"."+F.parseName()).length);var D="";1<G[F.parseName()]&&(D=z(t[x].value)+"_"),s+=c+t[x].value+"."+F.parseName()+c+S+D+F.parseName()+`,
 `}}if(f.optionEQvalue("rowVersion","yes")||p.isOption("rowversion")){let H=c+" ".repeat(p.maxChildNameLen()-11);s+=c+t[x].value+".row_version"+z(H+t[x].value)+`_row_version,

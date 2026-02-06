@@ -1123,7 +1123,10 @@ let tree = (function(){
             }
             let objName = ddl.objPrefix()  + this.parseName();
             var chunks = this.src;
-            var ret = 'create or replace view ' +objName+ ' as\n';
+            var ret = 'create or replace view ' +objName;
+            if( this.annotations != null )
+                ret += '\nannotations (' + this.annotations + ')';
+            ret += ' as\n';
             ret += 'select\n';
             var maxLen = 0;
             for( var i = 2; i < chunks.length; i++ ) { 
