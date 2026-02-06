@@ -5,6 +5,9 @@ emp
 dept 
   dname
 
+user
+  username
+
 #pk: identityDataType
 #prefix: abc
 #semantics: char

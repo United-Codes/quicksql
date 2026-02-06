@@ -702,6 +702,17 @@ students
     #db:"23c"`).getDDL();
     assert( "output.indexOf('ok    boolean') < 0" );
 
+    // reserved word table name should not get "the_" prefix when user prefix is set
+    output = new quicksql(`comment
+    text
+    # settings = {"prefix":"app"}`).getDDL();
+    assert( "0 < output.indexOf('app_comment')" );
+    assert( "output.indexOf('the_comment') < 0" );
+
+    output = new quicksql(`comment
+    text`).getDDL();
+    assert( "0 < output.indexOf('the_comment')" );
+
     // https://github.com/oracle/quicksql/issues/55
     output = new quicksql(`escape /insert 1
     financial_year /check '23/24', \`'24/25'\`
