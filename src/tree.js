@@ -178,7 +178,8 @@ let tree = (function(){
                 const qVal  = '"'+value+'"';
                 if( this.src[i].type != 'constant.numeric' && value != canonicalObjectName(qVal) ) {
                     ret = this.content.substring(this.src[from].begin,this.src[to-1].end);
-                    this.parsedName = prefix+amend_reserved_word(canonicalObjectName(ret));
+                    const hasPrefix = ddl != null && 0 < (ddl.getOptionValue('prefix')||'').length;
+                    this.parsedName = prefix+(hasPrefix ? canonicalObjectName(ret) : amend_reserved_word(canonicalObjectName(ret)));
                     return this.parsedName;
                 }
             }
@@ -190,10 +191,11 @@ let tree = (function(){
             }
 
             var c = ret.charAt(0);
-            if( c >= '0' && c <= '9' ) 
+            if( c >= '0' && c <= '9' )
                 ret = 'x'+ret;
-        
-            this.parsedName = prefix+amend_reserved_word(canonicalObjectName(ret));
+
+            const hasPrefix = ddl != null && 0 < (ddl.getOptionValue('prefix')||'').length;
+            this.parsedName = prefix+(hasPrefix ? canonicalObjectName(ret) : amend_reserved_word(canonicalObjectName(ret)));
             return this.parsedName;
         }
  
