@@ -12,9 +12,9 @@ function be(f, c) {
     if (G.length > 0 && "0" <= G[0] && G[0] <= "9")
       O = !0;
     else
-      for (let v = 0; v < G.length; v++) {
-        const y = G[v];
-        if (!("a" <= y && y <= "z") && !("A" <= y && y <= "Z") && !("0" <= y && y <= "9") && !(0 <= L.indexOf(y))) {
+      for (let y = 0; y < G.length; y++) {
+        const A = G[y];
+        if (!("a" <= A && A <= "z") && !("A" <= A && A <= "Z") && !("0" <= A && A <= "9") && !(0 <= L.indexOf(A))) {
           O = !0;
           break;
         }
@@ -83,12 +83,12 @@ var le = /* @__PURE__ */ (function() {
     if (typeof G != "string" || L.substring(0, 2).toLowerCase() == "en")
       return G;
     G.indexOf("'") == 0 && (G = G.substring(1, G.length - 1));
-    for (var v = -1, y = 0; y < f.length; y++)
-      if (f[y] == G) {
-        v = y;
+    for (var y = -1, A = 0; A < f.length; A++)
+      if (f[A] == G) {
+        y = A;
         break;
       }
-    return 0 <= v && L.substring(0, 2).toLowerCase() == "jp" && v < c.length ? "'" + c[v] + "'" : 0 <= v && L.substring(0, 2).toLowerCase() == "kr" && v < R.length ? "'" + R[v] + "'" : G;
+    return 0 <= y && L.substring(0, 2).toLowerCase() == "jp" && y < c.length ? "'" + c[y] + "'" : 0 <= y && L.substring(0, 2).toLowerCase() == "kr" && y < R.length ? "'" + R[y] + "'" : G;
   }
   return O;
 })();
@@ -99,11 +99,11 @@ var ee = { exports: {} }, se;
 function Ce() {
   return se || (se = 1, (function(f, c) {
     (function() {
-      var R = 9007199254740992, O = -R, L = "0123456789", G = "abcdefghijklmnopqrstuvwxyz", v = G.toUpperCase(), y = L + "abcdef";
-      function I(e) {
+      var R = 9007199254740992, O = -R, L = "0123456789", G = "abcdefghijklmnopqrstuvwxyz", y = G.toUpperCase(), A = L + "abcdef";
+      function B(e) {
         this.name = "UnsupportedError", this.message = e || "This feature is not supported on this platform";
       }
-      I.prototype = new Error(), I.prototype.constructor = I;
+      B.prototype = new Error(), B.prototype.constructor = B;
       var E = Array.prototype.slice;
       function r(e) {
         if (!(this instanceof r))
@@ -114,10 +114,10 @@ function Ce() {
         for (var a = 0; a < arguments.length; a++) {
           var n = 0;
           if (Object.prototype.toString.call(arguments[a]) === "[object String]")
-            for (var l = 0; l < arguments[a].length; l++) {
-              for (var u = 0, S = 0; S < arguments[a].length; S++)
-                u = arguments[a].charCodeAt(S) + (u << 6) + (u << 16) - u;
-              n += u;
+            for (var s = 0; s < arguments[a].length; s++) {
+              for (var x = 0, m = 0; m < arguments[a].length; m++)
+                x = arguments[a].charCodeAt(m) + (x << 6) + (x << 16) - x;
+              n += x;
             }
           else
             n = arguments[a];
@@ -134,12 +134,12 @@ function Ce() {
             typeof e[n] > "u" && (e[n] = a[n]);
         return e;
       }
-      function h(e) {
+      function b(e) {
         return Array.apply(null, Array(e)).map(function(a, n) {
           return n;
         });
       }
-      function x(e, a) {
+      function p(e, a) {
         if (e)
           throw new RangeError(a);
       }
@@ -151,17 +151,17 @@ function Ce() {
           return new Buffer(a).toString("base64");
         });
       })(), r.prototype.bool = function(e) {
-        return e = t(e, { likelihood: 50 }), x(
+        return e = t(e, { likelihood: 50 }), p(
           e.likelihood < 0 || e.likelihood > 100,
           "Chance: Likelihood accepts values from 0 to 100."
         ), this.random() * 100 < e.likelihood;
       }, r.prototype.falsy = function(e) {
         e = t(e, { pool: [!1, null, 0, NaN, "", void 0] });
-        var a = e.pool, n = this.integer({ min: 0, max: a.length - 1 }), l = a[n];
-        return l;
+        var a = e.pool, n = this.integer({ min: 0, max: a.length - 1 }), s = a[n];
+        return s;
       }, r.prototype.animal = function(e) {
         if (e = t(e), typeof e.type < "u")
-          return x(
+          return p(
             !this.get("animals")[e.type.toLowerCase()],
             "Please pick from desert, ocean, grassland, forest, zoo, pets, farm."
           ), this.pick(this.get("animals")[e.type.toLowerCase()]);
@@ -169,33 +169,33 @@ function Ce() {
         return this.pick(this.get("animals")[this.pick(a)]);
       }, r.prototype.character = function(e) {
         e = t(e);
-        var a = "!@#$%^&*()[]", n, l;
-        return e.casing === "lower" ? n = G : e.casing === "upper" ? n = v : n = G + v, e.pool ? l = e.pool : (l = "", e.alpha && (l += n), e.numeric && (l += L), e.symbols && (l += a), l || (l = n + L + a)), l.charAt(this.natural({ max: l.length - 1 }));
+        var a = "!@#$%^&*()[]", n, s;
+        return e.casing === "lower" ? n = G : e.casing === "upper" ? n = y : n = G + y, e.pool ? s = e.pool : (s = "", e.alpha && (s += n), e.numeric && (s += L), e.symbols && (s += a), s || (s = n + L + a)), s.charAt(this.natural({ max: s.length - 1 }));
       }, r.prototype.floating = function(e) {
-        e = t(e, { fixed: 4 }), x(
+        e = t(e, { fixed: 4 }), p(
           e.fixed && e.precision,
           "Chance: Cannot specify both fixed and precision."
         );
-        var a, n = Math.pow(10, e.fixed), l = R / n, u = -l;
-        x(
-          e.min && e.fixed && e.min < u,
-          "Chance: Min specified is out of range with fixed. Min should be, at least, " + u
-        ), x(
-          e.max && e.fixed && e.max > l,
-          "Chance: Max specified is out of range with fixed. Max should be, at most, " + l
-        ), e = t(e, { min: u, max: l }), a = this.integer({ min: e.min * n, max: e.max * n });
-        var S = (a / n).toFixed(e.fixed);
-        return parseFloat(S);
+        var a, n = Math.pow(10, e.fixed), s = R / n, x = -s;
+        p(
+          e.min && e.fixed && e.min < x,
+          "Chance: Min specified is out of range with fixed. Min should be, at least, " + x
+        ), p(
+          e.max && e.fixed && e.max > s,
+          "Chance: Max specified is out of range with fixed. Max should be, at most, " + s
+        ), e = t(e, { min: x, max: s }), a = this.integer({ min: e.min * n, max: e.max * n });
+        var m = (a / n).toFixed(e.fixed);
+        return parseFloat(m);
       }, r.prototype.integer = function(e) {
-        return e = t(e, { min: O, max: R }), x(e.min > e.max, "Chance: Min cannot be greater than Max."), Math.floor(this.random() * (e.max - e.min + 1) + e.min);
+        return e = t(e, { min: O, max: R }), p(e.min > e.max, "Chance: Min cannot be greater than Max."), Math.floor(this.random() * (e.max - e.min + 1) + e.min);
       }, r.prototype.natural = function(e) {
-        if (e = t(e, { min: 0, max: R }), typeof e.numerals == "number" && (x(e.numerals < 1, "Chance: Numerals cannot be less than one."), e.min = Math.pow(10, e.numerals - 1), e.max = Math.pow(10, e.numerals) - 1), x(e.min < 0, "Chance: Min cannot be less than zero."), e.exclude) {
-          x(!Array.isArray(e.exclude), "Chance: exclude must be an array.");
+        if (e = t(e, { min: 0, max: R }), typeof e.numerals == "number" && (p(e.numerals < 1, "Chance: Numerals cannot be less than one."), e.min = Math.pow(10, e.numerals - 1), e.max = Math.pow(10, e.numerals) - 1), p(e.min < 0, "Chance: Min cannot be less than zero."), e.exclude) {
+          p(!Array.isArray(e.exclude), "Chance: exclude must be an array.");
           for (var a in e.exclude)
-            x(!Number.isInteger(e.exclude[a]), "Chance: exclude must be numbers.");
-          var n = e.min + this.natural({ max: e.max - e.min - e.exclude.length }), l = e.exclude.sort((S, B) => S - B);
-          for (var u in l) {
-            if (n < l[u])
+            p(!Number.isInteger(e.exclude[a]), "Chance: exclude must be numbers.");
+          var n = e.min + this.natural({ max: e.max - e.min - e.exclude.length }), s = e.exclude.sort((m, k) => m - k);
+          for (var x in s) {
+            if (n < s[x])
               break;
             n++;
           }
@@ -203,15 +203,15 @@ function Ce() {
         }
         return this.integer(e);
       }, r.prototype.prime = function(e) {
-        e = t(e, { min: 0, max: 1e4 }), x(e.min < 0, "Chance: Min cannot be less than zero."), x(e.min > e.max, "Chance: Min cannot be greater than Max.");
+        e = t(e, { min: 0, max: 1e4 }), p(e.min < 0, "Chance: Min cannot be less than zero."), p(e.min > e.max, "Chance: Min cannot be greater than Max.");
         var a = M.primes[M.primes.length - 1];
         if (e.max > a)
           for (var n = a + 2; n <= e.max; ++n)
             this.is_prime(n) && M.primes.push(n);
-        var l = M.primes.filter(function(u) {
-          return u >= e.min && u <= e.max;
+        var s = M.primes.filter(function(x) {
+          return x >= e.min && x <= e.max;
         });
-        return this.pick(l);
+        return this.pick(s);
       }, r.prototype.is_prime = function(e) {
         if (e % 1 || e < 2)
           return !1;
@@ -224,7 +224,7 @@ function Ce() {
             return !1;
         return !0;
       }, r.prototype.hex = function(e) {
-        e = t(e, { min: 0, max: R, casing: "lower" }), x(e.min < 0, "Chance: Min cannot be less than zero.");
+        e = t(e, { min: 0, max: R, casing: "lower" }), p(e.min < 0, "Chance: Min cannot be less than zero.");
         var a = this.natural({ min: e.min, max: e.max });
         return e.casing === "upper" ? a.toString(16).toUpperCase() : a.toString(16);
       }, r.prototype.letter = function(e) {
@@ -232,14 +232,14 @@ function Ce() {
         var a = "abcdefghijklmnopqrstuvwxyz", n = this.character({ pool: a });
         return e.casing === "upper" && (n = n.toUpperCase()), n;
       }, r.prototype.string = function(e) {
-        e = t(e, { min: 5, max: 20 }), e.length !== 0 && !e.length && (e.length = this.natural({ min: e.min, max: e.max })), x(e.length < 0, "Chance: Length cannot be less than zero.");
+        e = t(e, { min: 5, max: 20 }), e.length !== 0 && !e.length && (e.length = this.natural({ min: e.min, max: e.max })), p(e.length < 0, "Chance: Length cannot be less than zero.");
         var a = e.length, n = this.n(this.character, a, e);
         return n.join("");
       };
-      function p(e) {
+      function g(e) {
         this.c = e;
       }
-      p.prototype = {
+      g.prototype = {
         substitute: function() {
           return this.c;
         }
@@ -263,7 +263,7 @@ function Ce() {
             return e.character({ pool: L });
           },
           A: function(e) {
-            return e.character({ pool: v });
+            return e.character({ pool: y });
           },
           a: function(e) {
             return e.character({ pool: G });
@@ -276,18 +276,18 @@ function Ce() {
           return a(e);
         }
       };
-      function s(e) {
-        for (var a = [], n = "identity", l = 0; l < e.length; l++) {
-          var u = e[l];
+      function l(e) {
+        for (var a = [], n = "identity", s = 0; s < e.length; s++) {
+          var x = e[s];
           switch (n) {
             case "escape":
-              a.push(new i(u)), n = "identity";
+              a.push(new i(x)), n = "identity";
               break;
             case "identity":
-              u === "{" ? n = "replace" : u === "\\" ? n = "escape" : a.push(new p(u));
+              x === "{" ? n = "replace" : x === "\\" ? n = "escape" : a.push(new g(x));
               break;
             case "replace":
-              u === "}" ? n = "identity" : a.push(new o(u));
+              x === "}" ? n = "identity" : a.push(new o(x));
               break;
           }
         }
@@ -297,13 +297,13 @@ function Ce() {
         if (!e)
           throw new Error("Template string is required");
         var a = this;
-        return s(e).map(function(n) {
+        return l(e).map(function(n) {
           return n.substitute(a);
         }).join("");
       }, r.prototype.buffer = function(e) {
         if (typeof Buffer > "u")
-          throw new I("Sorry, the buffer() function is not supported on your platform");
-        e = t(e, { length: this.natural({ min: 5, max: 20 }) }), x(e.length < 0, "Chance: Length cannot be less than zero.");
+          throw new B("Sorry, the buffer() function is not supported on your platform");
+        e = t(e, { length: this.natural({ min: 5, max: 20 }) }), p(e.length < 0, "Chance: Length cannot be less than zero.");
         var a = e.length, n = this.n(this.character, a, e);
         return Buffer.from(n);
       }, r.prototype.capitalize = function(e) {
@@ -313,29 +313,29 @@ function Ce() {
           this[a] = e[a];
         return this;
       }, r.prototype.unique = function(e, a, n) {
-        x(
+        p(
           typeof e != "function",
           "Chance: The first argument must be a function."
         );
-        var l = function(T, H) {
-          return T.indexOf(H) !== -1;
+        var s = function(T, F) {
+          return T.indexOf(F) !== -1;
         };
-        n && (l = n.comparator || l);
-        for (var u = [], S = 0, B, m = a * 50, b = E.call(arguments, 2); u.length < a; ) {
-          var C = JSON.parse(JSON.stringify(b));
-          if (B = e.apply(this, C), l(u, B) || (u.push(B), S = 0), ++S > m)
+        n && (s = n.comparator || s);
+        for (var x = [], m = 0, k, d = a * 50, h = E.call(arguments, 2); x.length < a; ) {
+          var C = JSON.parse(JSON.stringify(h));
+          if (k = e.apply(this, C), s(x, k) || (x.push(k), m = 0), ++m > d)
             throw new RangeError("Chance: num is likely too large for sample set");
         }
-        return u;
+        return x;
       }, r.prototype.n = function(e, a) {
-        x(
+        p(
           typeof e != "function",
           "Chance: The first argument must be a function."
         ), typeof a > "u" && (a = 1);
-        var n = a, l = [], u = E.call(arguments, 2);
+        var n = a, s = [], x = E.call(arguments, 2);
         for (n = Math.max(0, n), null; n--; null)
-          l.push(e.apply(this, u));
-        return l;
+          s.push(e.apply(this, x));
+        return s;
       }, r.prototype.pad = function(e, a, n) {
         return n = n || "0", e = e + "", e.length >= a ? e : new Array(a - e.length + 1).join(n) + e;
       }, r.prototype.pick = function(e, a) {
@@ -355,54 +355,54 @@ function Ce() {
           throw new RangeError("Chance: Count must be a positive number");
         if (!a || a === 1)
           return [this.pickone(e)];
-        var n = e.slice(0), l = n.length;
+        var n = e.slice(0), s = n.length;
         return this.n(function() {
-          var u = this.natural({ max: --l }), S = n[u];
-          return n[u] = n[l], S;
-        }, Math.min(l, a));
+          var x = this.natural({ max: --s }), m = n[x];
+          return n[x] = n[s], m;
+        }, Math.min(s, a));
       }, r.prototype.shuffle = function(e) {
-        for (var a = [], n = 0, l = Number(e.length), u = h(l), S = l - 1, B, m = 0; m < l; m++)
-          B = this.natural({ max: S }), n = u[B], a[m] = e[n], u[B] = u[S], S -= 1;
+        for (var a = [], n = 0, s = Number(e.length), x = b(s), m = s - 1, k, d = 0; d < s; d++)
+          k = this.natural({ max: m }), n = x[k], a[d] = e[n], x[k] = x[m], m -= 1;
         return a;
       }, r.prototype.weighted = function(e, a, n) {
         if (e.length !== a.length)
           throw new RangeError("Chance: Length of array and weights must match");
-        for (var l = 0, u, S = 0; S < a.length; ++S) {
-          if (u = a[S], isNaN(u))
+        for (var s = 0, x, m = 0; m < a.length; ++m) {
+          if (x = a[m], isNaN(x))
             throw new RangeError("Chance: All weights must be numbers");
-          u > 0 && (l += u);
+          x > 0 && (s += x);
         }
-        if (l === 0)
+        if (s === 0)
           throw new RangeError("Chance: No valid entries in array weights");
-        var B = this.random() * l, m = 0, b = -1, C;
-        for (S = 0; S < a.length; ++S) {
-          if (u = a[S], m += u, u > 0) {
-            if (B <= m) {
-              C = S;
+        var k = this.random() * s, d = 0, h = -1, C;
+        for (m = 0; m < a.length; ++m) {
+          if (x = a[m], d += x, x > 0) {
+            if (k <= d) {
+              C = m;
               break;
             }
-            b = S;
+            h = m;
           }
-          S === a.length - 1 && (C = b);
+          m === a.length - 1 && (C = h);
         }
         var T = e[C];
         return n = typeof n > "u" ? !1 : n, n && (e.splice(C, 1), a.splice(C, 1)), T;
       }, r.prototype.paragraph = function(e) {
         e = t(e);
-        var a = e.sentences || this.natural({ min: 3, max: 7 }), n = this.n(this.sentence, a), l = e.linebreak === !0 ? `
+        var a = e.sentences || this.natural({ min: 3, max: 7 }), n = this.n(this.sentence, a), s = e.linebreak === !0 ? `
 ` : " ";
-        return n.join(l);
+        return n.join(s);
       }, r.prototype.sentence = function(e) {
         e = t(e);
-        var a = e.words || this.natural({ min: 12, max: 18 }), n = e.punctuation, l, u = this.n(this.word, a);
-        return l = u.join(" "), l = this.capitalize(l), n !== !1 && !/^[.?;!:]$/.test(n) && (n = "."), n && (l += n), l;
+        var a = e.words || this.natural({ min: 12, max: 18 }), n = e.punctuation, s, x = this.n(this.word, a);
+        return s = x.join(" "), s = this.capitalize(s), n !== !1 && !/^[.?;!:]$/.test(n) && (n = "."), n && (s += n), s;
       }, r.prototype.syllable = function(e) {
         e = t(e);
-        for (var a = e.length || this.natural({ min: 2, max: 3 }), n = "bcdfghjklmnprstvwz", l = "aeiou", u = n + l, S = "", B, m = 0; m < a; m++)
-          m === 0 ? B = this.character({ pool: u }) : n.indexOf(B) === -1 ? B = this.character({ pool: n }) : B = this.character({ pool: l }), S += B;
-        return e.capitalize && (S = this.capitalize(S)), S;
+        for (var a = e.length || this.natural({ min: 2, max: 3 }), n = "bcdfghjklmnprstvwz", s = "aeiou", x = n + s, m = "", k, d = 0; d < a; d++)
+          d === 0 ? k = this.character({ pool: x }) : n.indexOf(k) === -1 ? k = this.character({ pool: n }) : k = this.character({ pool: s }), m += k;
+        return e.capitalize && (m = this.capitalize(m)), m;
       }, r.prototype.word = function(e) {
-        e = t(e), x(
+        e = t(e), p(
           e.syllables && e.length,
           "Chance: Cannot specify both syllables AND length."
         );
@@ -413,22 +413,22 @@ function Ce() {
           while (n.length < e.length);
           n = n.substring(0, e.length);
         } else
-          for (var l = 0; l < a; l++)
+          for (var s = 0; s < a; s++)
             n += this.syllable();
         return e.capitalize && (n = this.capitalize(n)), n;
       }, r.prototype.emoji = function(e) {
-        e = t(e, { category: "all", length: 1 }), x(
+        e = t(e, { category: "all", length: 1 }), p(
           e.length < 1 || BigInt(e.length) > BigInt(R),
           "Chance: length must be between 1 and " + String(R)
         );
         var a = this.get("emojis");
         e.category === "all" && (e.category = this.pickone(Object.keys(a)));
         var n = a[e.category];
-        return x(
+        return p(
           n === void 0,
           "Chance: Unrecognised emoji category: [" + e.category + "]."
-        ), this.pickset(n, e.length).map(function(l) {
-          return String.fromCodePoint(l);
+        ), this.pickset(n, e.length).map(function(s) {
+          return String.fromCodePoint(s);
         }).join("");
       }, r.prototype.age = function(e) {
         e = t(e);
@@ -455,23 +455,23 @@ function Ce() {
         }
         return this.natural(a);
       }, r.prototype.birthday = function(e) {
-        var a = this.age(e), n = /* @__PURE__ */ new Date(), l = n.getFullYear();
+        var a = this.age(e), n = /* @__PURE__ */ new Date(), s = n.getFullYear();
         if (e && e.type) {
-          var u = /* @__PURE__ */ new Date(), S = /* @__PURE__ */ new Date();
-          u.setFullYear(l - a - 1), S.setFullYear(l - a), e = t(e, {
-            min: u,
-            max: S
+          var x = /* @__PURE__ */ new Date(), m = /* @__PURE__ */ new Date();
+          x.setFullYear(s - a - 1), m.setFullYear(s - a), e = t(e, {
+            min: x,
+            max: m
           });
         } else if (e && (e.minAge !== void 0 || e.maxAge !== void 0)) {
-          x(e.minAge < 0, "Chance: MinAge cannot be less than zero."), x(e.minAge > e.maxAge, "Chance: MinAge cannot be greater than MaxAge.");
-          var B = e.minAge !== void 0 ? e.minAge : 0, m = e.maxAge !== void 0 ? e.maxAge : 100, b = new Date(l - m - 1, n.getMonth(), n.getDate()), C = new Date(l - B, n.getMonth(), n.getDate());
-          b.setDate(b.getDate() + 1), C.setDate(C.getDate() + 1), C.setMilliseconds(C.getMilliseconds() - 1), e = t(e, {
-            min: b,
+          p(e.minAge < 0, "Chance: MinAge cannot be less than zero."), p(e.minAge > e.maxAge, "Chance: MinAge cannot be greater than MaxAge.");
+          var k = e.minAge !== void 0 ? e.minAge : 0, d = e.maxAge !== void 0 ? e.maxAge : 100, h = new Date(s - d - 1, n.getMonth(), n.getDate()), C = new Date(s - k, n.getMonth(), n.getDate());
+          h.setDate(h.getDate() + 1), C.setDate(C.getDate() + 1), C.setMilliseconds(C.getMilliseconds() - 1), e = t(e, {
+            min: h,
             max: C
           });
         } else
           e = t(e, {
-            year: l - a
+            year: s - a
           });
         return this.date(e);
       }, r.prototype.cpf = function(e) {
@@ -480,20 +480,20 @@ function Ce() {
         });
         var a = this.n(this.natural, 9, { max: 9 }), n = a[8] * 2 + a[7] * 3 + a[6] * 4 + a[5] * 5 + a[4] * 6 + a[3] * 7 + a[2] * 8 + a[1] * 9 + a[0] * 10;
         n = 11 - n % 11, n >= 10 && (n = 0);
-        var l = n * 2 + a[8] * 3 + a[7] * 4 + a[6] * 5 + a[5] * 6 + a[4] * 7 + a[3] * 8 + a[2] * 9 + a[1] * 10 + a[0] * 11;
-        l = 11 - l % 11, l >= 10 && (l = 0);
-        var u = "" + a[0] + a[1] + a[2] + "." + a[3] + a[4] + a[5] + "." + a[6] + a[7] + a[8] + "-" + n + l;
-        return e.formatted ? u : u.replace(/\D/g, "");
+        var s = n * 2 + a[8] * 3 + a[7] * 4 + a[6] * 5 + a[5] * 6 + a[4] * 7 + a[3] * 8 + a[2] * 9 + a[1] * 10 + a[0] * 11;
+        s = 11 - s % 11, s >= 10 && (s = 0);
+        var x = "" + a[0] + a[1] + a[2] + "." + a[3] + a[4] + a[5] + "." + a[6] + a[7] + a[8] + "-" + n + s;
+        return e.formatted ? x : x.replace(/\D/g, "");
       }, r.prototype.cnpj = function(e) {
         e = t(e, {
           formatted: !0
         });
         var a = this.n(this.natural, 12, { max: 12 }), n = a[11] * 2 + a[10] * 3 + a[9] * 4 + a[8] * 5 + a[7] * 6 + a[6] * 7 + a[5] * 8 + a[4] * 9 + a[3] * 2 + a[2] * 3 + a[1] * 4 + a[0] * 5;
         n = 11 - n % 11, n < 2 && (n = 0);
-        var l = n * 2 + a[11] * 3 + a[10] * 4 + a[9] * 5 + a[8] * 6 + a[7] * 7 + a[6] * 8 + a[5] * 9 + a[4] * 2 + a[3] * 3 + a[2] * 4 + a[1] * 5 + a[0] * 6;
-        l = 11 - l % 11, l < 2 && (l = 0);
-        var u = "" + a[0] + a[1] + "." + a[2] + a[3] + a[4] + "." + a[5] + a[6] + a[7] + "/" + a[8] + a[9] + a[10] + a[11] + "-" + n + l;
-        return e.formatted ? u : u.replace(/\D/g, "");
+        var s = n * 2 + a[11] * 3 + a[10] * 4 + a[9] * 5 + a[8] * 6 + a[7] * 7 + a[6] * 8 + a[5] * 9 + a[4] * 2 + a[3] * 3 + a[2] * 4 + a[1] * 5 + a[0] * 6;
+        s = 11 - s % 11, s < 2 && (s = 0);
+        var x = "" + a[0] + a[1] + "." + a[2] + a[3] + a[4] + "." + a[5] + a[6] + a[7] + "/" + a[8] + a[9] + a[10] + a[11] + "-" + n + s;
+        return e.formatted ? x : x.replace(/\D/g, "");
       }, r.prototype.first = function(e) {
         return e = t(e, { gender: this.gender(), nationality: "en" }), this.pick(this.get("firstNames")[e.gender.toLowerCase()][e.nationality.toLowerCase()]);
       }, r.prototype.profession = function(e) {
@@ -505,65 +505,65 @@ function Ce() {
       }, r.prototype.last = function(e) {
         if (e = t(e, { nationality: "*" }), e.nationality === "*") {
           var a = [], n = this.get("lastNames");
-          return Object.keys(n).forEach(function(l) {
-            a = a.concat(n[l]);
+          return Object.keys(n).forEach(function(s) {
+            a = a.concat(n[s]);
           }), this.pick(a);
         } else
           return this.pick(this.get("lastNames")[e.nationality.toLowerCase()]);
       }, r.prototype.israelId = function() {
         for (var e = this.string({ pool: "0123456789", length: 8 }), a = 0, n = 0; n < e.length; n++) {
-          var l = e[n] * (n / 2 === parseInt(n / 2) ? 1 : 2);
-          l = this.pad(l, 2).toString(), l = parseInt(l[0]) + parseInt(l[1]), a = a + l;
+          var s = e[n] * (n / 2 === parseInt(n / 2) ? 1 : 2);
+          s = this.pad(s, 2).toString(), s = parseInt(s[0]) + parseInt(s[1]), a = a + s;
         }
         return e = e + (10 - parseInt(a.toString().slice(-1))).toString().slice(-1), e;
       }, r.prototype.mrz = function(e) {
-        var a = function(u) {
-          var S = "<ABCDEFGHIJKLMNOPQRSTUVWXYXZ".split(""), B = [7, 3, 1], m = 0;
-          return typeof u != "string" && (u = u.toString()), u.split("").forEach(function(b, C) {
-            var T = S.indexOf(b);
-            T !== -1 ? b = T === 0 ? 0 : T + 9 : b = parseInt(b, 10), b *= B[C % B.length], m += b;
-          }), m % 10;
-        }, n = function(u) {
-          var S = function(m) {
-            return new Array(m + 1).join("<");
-          }, B = [
+        var a = function(x) {
+          var m = "<ABCDEFGHIJKLMNOPQRSTUVWXYXZ".split(""), k = [7, 3, 1], d = 0;
+          return typeof x != "string" && (x = x.toString()), x.split("").forEach(function(h, C) {
+            var T = m.indexOf(h);
+            T !== -1 ? h = T === 0 ? 0 : T + 9 : h = parseInt(h, 10), h *= k[C % k.length], d += h;
+          }), d % 10;
+        }, n = function(x) {
+          var m = function(d) {
+            return new Array(d + 1).join("<");
+          }, k = [
             "P<",
-            u.issuer,
-            u.last.toUpperCase(),
+            x.issuer,
+            x.last.toUpperCase(),
             "<<",
-            u.first.toUpperCase(),
-            S(39 - (u.last.length + u.first.length + 2)),
-            u.passportNumber,
-            a(u.passportNumber),
-            u.nationality,
-            u.dob,
-            a(u.dob),
-            u.gender,
-            u.expiry,
-            a(u.expiry),
-            S(14),
-            a(S(14))
+            x.first.toUpperCase(),
+            m(39 - (x.last.length + x.first.length + 2)),
+            x.passportNumber,
+            a(x.passportNumber),
+            x.nationality,
+            x.dob,
+            a(x.dob),
+            x.gender,
+            x.expiry,
+            a(x.expiry),
+            m(14),
+            a(m(14))
           ].join("");
-          return B + a(B.substr(44, 10) + B.substr(57, 7) + B.substr(65, 7));
-        }, l = this;
+          return k + a(k.substr(44, 10) + k.substr(57, 7) + k.substr(65, 7));
+        }, s = this;
         return e = t(e, {
           first: this.first(),
           last: this.last(),
           passportNumber: this.integer({ min: 1e8, max: 999999999 }),
           dob: (function() {
-            var u = l.birthday({ type: "adult" });
+            var x = s.birthday({ type: "adult" });
             return [
-              u.getFullYear().toString().substr(2),
-              l.pad(u.getMonth() + 1, 2),
-              l.pad(u.getDate(), 2)
+              x.getFullYear().toString().substr(2),
+              s.pad(x.getMonth() + 1, 2),
+              s.pad(x.getDate(), 2)
             ].join("");
           })(),
           expiry: (function() {
-            var u = /* @__PURE__ */ new Date();
+            var x = /* @__PURE__ */ new Date();
             return [
-              (u.getFullYear() + 5).toString().substr(2),
-              l.pad(u.getMonth() + 1, 2),
-              l.pad(u.getDate(), 2)
+              (x.getFullYear() + 5).toString().substr(2),
+              s.pad(x.getMonth() + 1, 2),
+              s.pad(x.getDate(), 2)
             ].join("");
           })(),
           gender: this.gender() === "Female" ? "F" : "M",
@@ -572,8 +572,8 @@ function Ce() {
         }), n(e);
       }, r.prototype.name = function(e) {
         e = t(e);
-        var a = this.first(e), n = this.last(e), l;
-        return e.middle ? l = a + " " + this.first(e) + " " + n : e.middle_initial ? l = a + " " + this.character({ alpha: !0, casing: "upper" }) + ". " + n : l = a + " " + n, e.prefix && (l = this.prefix(e) + " " + l), e.suffix && (l = l + " " + this.suffix(e)), l;
+        var a = this.first(e), n = this.last(e), s;
+        return e.middle ? s = a + " " + this.first(e) + " " + n : e.middle_initial ? s = a + " " + this.character({ alpha: !0, casing: "upper" }) + ". " + n : s = a + " " + n, e.prefix && (s = this.prefix(e) + " " + s), e.suffix && (s = s + " " + this.suffix(e)), s;
       }, r.prototype.name_prefixes = function(e) {
         e = e || "all", e = e.toLowerCase();
         var a = [
@@ -589,12 +589,12 @@ function Ce() {
         return n += this.string({ pool: e, length: 6 }), n += this.string({ pool: a, length: 2 }), n;
       }, r.prototype.ssn = function(e) {
         e = t(e, { ssnFour: !1, dashes: !0 });
-        var a = "1234567890", n, l = e.dashes ? "-" : "";
-        return e.ssnFour ? n = this.string({ pool: a, length: 4 }) : n = this.string({ pool: a, length: 3 }) + l + this.string({ pool: a, length: 2 }) + l + this.string({ pool: a, length: 4 }), n;
+        var a = "1234567890", n, s = e.dashes ? "-" : "";
+        return e.ssnFour ? n = this.string({ pool: a, length: 4 }) : n = this.string({ pool: a, length: 3 }) + s + this.string({ pool: a, length: 2 }) + s + this.string({ pool: a, length: 4 }), n;
       }, r.prototype.aadhar = function(e) {
         e = t(e, { onlyLastFour: !1, separatedByWhiteSpace: !0 });
-        var a = "1234567890", n, l = e.separatedByWhiteSpace ? " " : "";
-        return e.onlyLastFour ? n = this.string({ pool: a, length: 4 }) : n = this.string({ pool: a, length: 4 }) + l + this.string({ pool: a, length: 4 }) + l + this.string({ pool: a, length: 4 }), n;
+        var a = "1234567890", n, s = e.separatedByWhiteSpace ? " " : "";
+        return e.onlyLastFour ? n = this.string({ pool: a, length: 4 }) : n = this.string({ pool: a, length: 4 }) + s + this.string({ pool: a, length: 4 }) + s + this.string({ pool: a, length: 4 }), n;
       }, r.prototype.name_suffixes = function() {
         var e = [
           { name: "Doctor of Osteopathic Medicine", abbreviation: "D.O." },
@@ -636,15 +636,15 @@ function Ce() {
       }, r.prototype.bb_pin = function() {
         return this.hash({ length: 8 });
       }, r.prototype.avatar = function(e) {
-        var a = null, n = "//www.gravatar.com/avatar/", l = {
+        var a = null, n = "//www.gravatar.com/avatar/", s = {
           http: "http",
           https: "https"
-        }, u = {
+        }, x = {
           bmp: "bmp",
           gif: "gif",
           jpg: "jpg",
           png: "png"
-        }, S = {
+        }, m = {
           404: "404",
           // Return 404 if not found
           mm: "mm",
@@ -659,12 +659,12 @@ function Ce() {
           // 8-bit icon
           blank: "blank"
           // A transparent png
-        }, B = {
+        }, k = {
           g: "g",
           pg: "pg",
           r: "r",
           x: "x"
-        }, m = {
+        }, d = {
           protocol: null,
           email: null,
           fileExtension: null,
@@ -673,27 +673,27 @@ function Ce() {
           rating: null
         };
         if (!e)
-          m.email = this.email(), e = {};
+          d.email = this.email(), e = {};
         else if (typeof e == "string")
-          m.email = e, e = {};
+          d.email = e, e = {};
         else {
           if (typeof e != "object")
             return null;
           if (e.constructor === "Array")
             return null;
         }
-        return m = t(e, m), m.email || (m.email = this.email()), m.protocol = l[m.protocol] ? m.protocol + ":" : "", m.size = parseInt(m.size, 0) ? m.size : "", m.rating = B[m.rating] ? m.rating : "", m.fallback = S[m.fallback] ? m.fallback : "", m.fileExtension = u[m.fileExtension] ? m.fileExtension : "", a = m.protocol + n + this.bimd5.md5(m.email) + (m.fileExtension ? "." + m.fileExtension : "") + (m.size || m.rating || m.fallback ? "?" : "") + (m.size ? "&s=" + m.size.toString() : "") + (m.rating ? "&r=" + m.rating : "") + (m.fallback ? "&d=" + m.fallback : ""), a;
+        return d = t(e, d), d.email || (d.email = this.email()), d.protocol = s[d.protocol] ? d.protocol + ":" : "", d.size = parseInt(d.size, 0) ? d.size : "", d.rating = k[d.rating] ? d.rating : "", d.fallback = m[d.fallback] ? d.fallback : "", d.fileExtension = x[d.fileExtension] ? d.fileExtension : "", a = d.protocol + n + this.bimd5.md5(d.email) + (d.fileExtension ? "." + d.fileExtension : "") + (d.size || d.rating || d.fallback ? "?" : "") + (d.size ? "&s=" + d.size.toString() : "") + (d.rating ? "&r=" + d.rating : "") + (d.fallback ? "&d=" + d.fallback : ""), a;
       }, r.prototype.color = function(e) {
         function a(K, $) {
           return [K, K, K].join($ || "");
         }
         function n(K) {
-          var $ = K ? "rgba" : "rgb", ae = K ? "," + this.floating({ min: z, max: U }) : "", ne = u ? a(this.natural({ min: S, max: B }), ",") : this.natural({ min: C, max: T }) + "," + this.natural({ min: H, max: F }) + "," + this.natural({ max: 255 });
+          var $ = K ? "rgba" : "rgb", ae = K ? "," + this.floating({ min: z, max: V }) : "", ne = x ? a(this.natural({ min: m, max: k }), ",") : this.natural({ min: C, max: T }) + "," + this.natural({ min: F, max: _ }) + "," + this.natural({ max: 255 });
           return $ + "(" + ne + ae + ")";
         }
-        function l(K, $, ae) {
+        function s(K, $, ae) {
           var ne = ae ? "#" : "", X = "";
-          return u ? (X = a(this.pad(this.hex({ min: S, max: B }), 2)), e.format === "shorthex" && (X = a(this.hex({ min: 0, max: 15 })))) : e.format === "shorthex" ? X = this.pad(this.hex({ min: Math.floor(m / 16), max: Math.floor(b / 16) }), 1) + this.pad(this.hex({ min: Math.floor(C / 16), max: Math.floor(T / 16) }), 1) + this.pad(this.hex({ min: Math.floor(H / 16), max: Math.floor(F / 16) }), 1) : m !== void 0 || b !== void 0 || C !== void 0 || T !== void 0 || H !== void 0 || F !== void 0 ? X = this.pad(this.hex({ min: m, max: b }), 2) + this.pad(this.hex({ min: C, max: T }), 2) + this.pad(this.hex({ min: H, max: F }), 2) : X = this.pad(this.hex({ min: S, max: B }), 2) + this.pad(this.hex({ min: S, max: B }), 2) + this.pad(this.hex({ min: S, max: B }), 2), ne + X;
+          return x ? (X = a(this.pad(this.hex({ min: m, max: k }), 2)), e.format === "shorthex" && (X = a(this.hex({ min: 0, max: 15 })))) : e.format === "shorthex" ? X = this.pad(this.hex({ min: Math.floor(d / 16), max: Math.floor(h / 16) }), 1) + this.pad(this.hex({ min: Math.floor(C / 16), max: Math.floor(T / 16) }), 1) + this.pad(this.hex({ min: Math.floor(F / 16), max: Math.floor(_ / 16) }), 1) : d !== void 0 || h !== void 0 || C !== void 0 || T !== void 0 || F !== void 0 || _ !== void 0 ? X = this.pad(this.hex({ min: d, max: h }), 2) + this.pad(this.hex({ min: C, max: T }), 2) + this.pad(this.hex({ min: F, max: _ }), 2) : X = this.pad(this.hex({ min: m, max: k }), 2) + this.pad(this.hex({ min: m, max: k }), 2) + this.pad(this.hex({ min: m, max: k }), 2), ne + X;
         }
         e = t(e, {
           format: this.pick(["hex", "shorthex", "rgb", "rgba", "0x", "name"]),
@@ -710,25 +710,25 @@ function Ce() {
           min_alpha: 0,
           max_alpha: 1
         });
-        var u = e.grayscale, S = e.min, B = e.max, m = e.min_red, b = e.max_red, C = e.min_green, T = e.max_green, H = e.min_blue, F = e.max_blue, z = e.min_alpha, U = e.max_alpha;
-        e.min_red === void 0 && (m = S), e.max_red === void 0 && (b = B), e.min_green === void 0 && (C = S), e.max_green === void 0 && (T = B), e.min_blue === void 0 && (H = S), e.max_blue === void 0 && (F = B), e.min_alpha === void 0 && (z = 0), e.max_alpha === void 0 && (U = 1), u && S === 0 && B === 255 && m !== void 0 && b !== void 0 && (S = (m + C + H) / 3, B = (b + T + F) / 3);
-        var V;
+        var x = e.grayscale, m = e.min, k = e.max, d = e.min_red, h = e.max_red, C = e.min_green, T = e.max_green, F = e.min_blue, _ = e.max_blue, z = e.min_alpha, V = e.max_alpha;
+        e.min_red === void 0 && (d = m), e.max_red === void 0 && (h = k), e.min_green === void 0 && (C = m), e.max_green === void 0 && (T = k), e.min_blue === void 0 && (F = m), e.max_blue === void 0 && (_ = k), e.min_alpha === void 0 && (z = 0), e.max_alpha === void 0 && (V = 1), x && m === 0 && k === 255 && d !== void 0 && h !== void 0 && (m = (d + C + F) / 3, k = (h + T + _) / 3);
+        var U;
         if (e.format === "hex")
-          V = l.call(this, 2, 6, !0);
+          U = s.call(this, 2, 6, !0);
         else if (e.format === "shorthex")
-          V = l.call(this, 1, 3, !0);
+          U = s.call(this, 1, 3, !0);
         else if (e.format === "rgb")
-          V = n.call(this, !1);
+          U = n.call(this, !1);
         else if (e.format === "rgba")
-          V = n.call(this, !0);
+          U = n.call(this, !0);
         else if (e.format === "0x")
-          V = "0x" + l.call(this, 2, 6);
+          U = "0x" + s.call(this, 2, 6);
         else {
           if (e.format === "name")
             return this.pick(this.get("colorNames"));
           throw new RangeError('Invalid format provided. Please provide one of "hex", "shorthex", "rgb", "rgba", "0x" or "name".');
         }
-        return e.casing === "upper" && (V = V.toUpperCase()), V;
+        return e.casing === "upper" && (U = U.toUpperCase()), U;
       }, r.prototype.domain = function(e) {
         return e = t(e), this.word() + "." + (e.tld || this.tld());
       }, r.prototype.email = function(e) {
@@ -808,43 +808,43 @@ function Ce() {
       }, r.prototype.geojson = function(e) {
         return this.latitude(e) + ", " + this.longitude(e) + ", " + this.altitude(e);
       }, r.prototype.latitude = function(e) {
-        var [a, n, l] = ["ddm", "dms", "dd"];
+        var [a, n, s] = ["ddm", "dms", "dd"];
         e = t(
           e,
-          e && e.format && [a, n].includes(e.format.toLowerCase()) ? { min: 0, max: 89, fixed: 4 } : { fixed: 5, min: -90, max: 90, format: l }
+          e && e.format && [a, n].includes(e.format.toLowerCase()) ? { min: 0, max: 89, fixed: 4 } : { fixed: 5, min: -90, max: 90, format: s }
         );
-        var u = e.format.toLowerCase();
-        switch ((u === a || u === n) && (x(e.min < 0 || e.min > 89, "Chance: Min specified is out of range. Should be between 0 - 89"), x(e.max < 0 || e.max > 89, "Chance: Max specified is out of range. Should be between 0 - 89"), x(e.fixed > 4, "Chance: Fixed specified should be below or equal to 4")), u) {
+        var x = e.format.toLowerCase();
+        switch ((x === a || x === n) && (p(e.min < 0 || e.min > 89, "Chance: Min specified is out of range. Should be between 0 - 89"), p(e.max < 0 || e.max > 89, "Chance: Max specified is out of range. Should be between 0 - 89"), p(e.fixed > 4, "Chance: Fixed specified should be below or equal to 4")), x) {
           case a:
             return this.integer({ min: e.min, max: e.max }) + "\xB0" + this.floating({ min: 0, max: 59, fixed: e.fixed });
           case n:
             return this.integer({ min: e.min, max: e.max }) + "\xB0" + this.integer({ min: 0, max: 59 }) + "\u2019" + this.floating({ min: 0, max: 59, fixed: e.fixed }) + "\u201D";
-          case l:
+          case s:
           default:
             return this.floating({ min: e.min, max: e.max, fixed: e.fixed });
         }
       }, r.prototype.longitude = function(e) {
-        var [a, n, l] = ["ddm", "dms", "dd"];
+        var [a, n, s] = ["ddm", "dms", "dd"];
         e = t(
           e,
-          e && e.format && [a, n].includes(e.format.toLowerCase()) ? { min: 0, max: 179, fixed: 4 } : { fixed: 5, min: -180, max: 180, format: l }
+          e && e.format && [a, n].includes(e.format.toLowerCase()) ? { min: 0, max: 179, fixed: 4 } : { fixed: 5, min: -180, max: 180, format: s }
         );
-        var u = e.format.toLowerCase();
-        switch ((u === a || u === n) && (x(e.min < 0 || e.min > 179, "Chance: Min specified is out of range. Should be between 0 - 179"), x(e.max < 0 || e.max > 179, "Chance: Max specified is out of range. Should be between 0 - 179"), x(e.fixed > 4, "Chance: Fixed specified should be below or equal to 4")), u) {
+        var x = e.format.toLowerCase();
+        switch ((x === a || x === n) && (p(e.min < 0 || e.min > 179, "Chance: Min specified is out of range. Should be between 0 - 179"), p(e.max < 0 || e.max > 179, "Chance: Max specified is out of range. Should be between 0 - 179"), p(e.fixed > 4, "Chance: Fixed specified should be below or equal to 4")), x) {
           case a:
             return this.integer({ min: e.min, max: e.max }) + "\xB0" + this.floating({ min: 0, max: 59.9999, fixed: e.fixed });
           case n:
             return this.integer({ min: e.min, max: e.max }) + "\xB0" + this.integer({ min: 0, max: 59 }) + "\u2019" + this.floating({ min: 0, max: 59.9999, fixed: e.fixed }) + "\u201D";
-          case l:
+          case s:
           default:
             return this.floating({ min: e.min, max: e.max, fixed: e.fixed });
         }
       }, r.prototype.phone = function(e) {
-        var a = this, n, l = function(H) {
-          var F = [];
-          return H.sections.forEach(function(z) {
-            F.push(a.string({ pool: "0123456789", length: z }));
-          }), H.area + F.join(" ");
+        var a = this, n, s = function(F) {
+          var _ = [];
+          return F.sections.forEach(function(z) {
+            _.push(a.string({ pool: "0123456789", length: z }));
+          }), F.area + _.join(" ");
         };
         e = t(e, {
           formatted: !0,
@@ -852,10 +852,10 @@ function Ce() {
           mobile: !1,
           exampleNumber: !1
         }), e.formatted || (e.parens = !1);
-        var u;
+        var x;
         switch (e.country) {
           case "fr":
-            e.mobile ? (n = this.pick(["06", "07"]) + a.string({ pool: "0123456789", length: 8 }), u = e.formatted ? n.match(/../g).join(" ") : n) : (n = this.pick([
+            e.mobile ? (n = this.pick(["06", "07"]) + a.string({ pool: "0123456789", length: 8 }), x = e.formatted ? n.match(/../g).join(" ") : n) : (n = this.pick([
               // Valid zone and département codes.
               "01" + this.pick(["30", "34", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "53", "55", "56", "58", "60", "64", "69", "70", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83"]) + a.string({ pool: "0123456789", length: 6 }),
               "02" + this.pick(["14", "18", "22", "23", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "40", "41", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "56", "57", "61", "62", "69", "72", "76", "77", "78", "85", "90", "96", "97", "98", "99"]) + a.string({ pool: "0123456789", length: 6 }),
@@ -863,13 +863,13 @@ function Ce() {
               "04" + this.pick(["11", "13", "15", "20", "22", "26", "27", "30", "32", "34", "37", "42", "43", "44", "50", "56", "57", "63", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "88", "89", "90", "91", "92", "93", "94", "95", "97", "98"]) + a.string({ pool: "0123456789", length: 6 }),
               "05" + this.pick(["08", "16", "17", "19", "24", "31", "32", "33", "34", "35", "40", "45", "46", "47", "49", "53", "55", "56", "57", "58", "59", "61", "62", "63", "64", "65", "67", "79", "81", "82", "86", "87", "90", "94"]) + a.string({ pool: "0123456789", length: 6 }),
               "09" + a.string({ pool: "0123456789", length: 8 })
-            ]), u = e.formatted ? n.match(/../g).join(" ") : n);
+            ]), x = e.formatted ? n.match(/../g).join(" ") : n);
             break;
           case "uk":
             e.mobile ? (n = this.pick([
               { area: "07" + this.pick(["4", "5", "7", "8", "9"]), sections: [2, 6] },
               { area: "07624 ", sections: [6] }
-            ]), u = e.formatted ? l(n) : l(n).replace(" ", "")) : (n = this.pick([
+            ]), x = e.formatted ? s(n) : s(n).replace(" ", "")) : (n = this.pick([
               //valid area codes of major cities/counties followed by random numbers in required format.
               { area: "01" + this.character({ pool: "234569" }) + "1 ", sections: [3, 4] },
               { area: "020 " + this.character({ pool: "378" }), sections: [3, 4] },
@@ -884,7 +884,7 @@ function Ce() {
               { area: "017" + this.pick(["26", "44", "50", "68"]) + " ", sections: [6] },
               { area: "018" + this.pick(["27", "37", "84", "97"]) + " ", sections: [6] },
               { area: "019" + this.pick(["00", "05", "35", "46", "49", "63", "95"]) + " ", sections: [6] }
-            ]), u = e.formatted ? l(n) : l(n).replace(" ", "", "g"));
+            ]), x = e.formatted ? s(n) : s(n).replace(" ", "", "g"));
             break;
           case "za":
             e.mobile ? (n = this.pick([
@@ -894,32 +894,32 @@ function Ce() {
               "071" + this.pick(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]) + a.string({ pool: "0123456789", length: 6 }),
               "07" + this.pick(["2", "3", "4", "6", "7", "8", "9"]) + a.string({ pool: "0123456789", length: 7 }),
               "08" + this.pick(["0", "1", "2", "3", "4", "5"]) + a.string({ pool: "0123456789", length: 7 })
-            ]), u = e.formatted || n) : (n = this.pick([
+            ]), x = e.formatted || n) : (n = this.pick([
               "01" + this.pick(["0", "1", "2", "3", "4", "5", "6", "7", "8"]) + a.string({ pool: "0123456789", length: 7 }),
               "02" + this.pick(["1", "2", "3", "4", "7", "8"]) + a.string({ pool: "0123456789", length: 7 }),
               "03" + this.pick(["1", "2", "3", "5", "6", "9"]) + a.string({ pool: "0123456789", length: 7 }),
               "04" + this.pick(["1", "2", "3", "4", "5", "6", "7", "8", "9"]) + a.string({ pool: "0123456789", length: 7 }),
               "05" + this.pick(["1", "3", "4", "6", "7", "8"]) + a.string({ pool: "0123456789", length: 7 })
-            ]), u = e.formatted || n);
+            ]), x = e.formatted || n);
             break;
           case "us":
-            var S = this.areacode(e).toString(), B = this.natural({ min: 2, max: 9 }).toString() + this.natural({ min: 0, max: 9 }).toString() + this.natural({ min: 0, max: 9 }).toString(), m = this.natural({ min: 1e3, max: 9999 }).toString();
-            u = e.formatted ? S + " " + B + "-" + m : S + B + m;
+            var m = this.areacode(e).toString(), k = this.natural({ min: 2, max: 9 }).toString() + this.natural({ min: 0, max: 9 }).toString() + this.natural({ min: 0, max: 9 }).toString(), d = this.natural({ min: 1e3, max: 9999 }).toString();
+            x = e.formatted ? m + " " + k + "-" + d : m + k + d;
             break;
           case "br":
-            var b = this.pick(["11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22", "24", "27", "28", "31", "32", "33", "34", "35", "37", "38", "41", "42", "43", "44", "45", "46", "47", "48", "49", "51", "53", "54", "55", "61", "62", "63", "64", "65", "66", "67", "68", "69", "71", "73", "74", "75", "77", "79", "81", "82", "83", "84", "85", "86", "87", "88", "89", "91", "92", "93", "94", "95", "96", "97", "98", "99"]), C;
+            var h = this.pick(["11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22", "24", "27", "28", "31", "32", "33", "34", "35", "37", "38", "41", "42", "43", "44", "45", "46", "47", "48", "49", "51", "53", "54", "55", "61", "62", "63", "64", "65", "66", "67", "68", "69", "71", "73", "74", "75", "77", "79", "81", "82", "83", "84", "85", "86", "87", "88", "89", "91", "92", "93", "94", "95", "96", "97", "98", "99"]), C;
             e.mobile ? C = "9" + a.string({ pool: "0123456789", length: 4 }) : C = this.natural({ min: 2e3, max: 5999 }).toString();
             var T = a.string({ pool: "0123456789", length: 4 });
-            u = e.formatted ? "(" + b + ") " + C + "-" + T : b + C + T;
+            x = e.formatted ? "(" + h + ") " + C + "-" + T : h + C + T;
             break;
         }
-        return u;
+        return x;
       }, r.prototype.postal = function() {
         var e = this.character({ pool: "XVTSRPNKLMHJGECBA" }), a = e + this.natural({ max: 9 }) + this.character({ alpha: !0, casing: "upper" }), n = this.natural({ max: 9 }) + this.character({ alpha: !0, casing: "upper" }) + this.natural({ max: 9 });
         return a + " " + n;
       }, r.prototype.postcode = function() {
-        var e = this.pick(this.get("postcodeAreas")).code, a = this.natural({ max: 9 }), n = this.bool() ? this.character({ alpha: !0, casing: "upper" }) : "", l = e + a + n, u = this.natural({ max: 9 }), S = this.character({ alpha: !0, casing: "upper" }) + this.character({ alpha: !0, casing: "upper" }), B = u + S;
-        return l + " " + B;
+        var e = this.pick(this.get("postcodeAreas")).code, a = this.natural({ max: 9 }), n = this.bool() ? this.character({ alpha: !0, casing: "upper" }) : "", s = e + a + n, x = this.natural({ max: 9 }), m = this.character({ alpha: !0, casing: "upper" }) + this.character({ alpha: !0, casing: "upper" }), k = x + m;
+        return s + " " + k;
       }, r.prototype.counties = function(e) {
         return e = t(e, { country: "uk" }), this.get("counties")[e.country.toLowerCase()];
       }, r.prototype.county = function(e) {
@@ -935,8 +935,8 @@ function Ce() {
         var a;
         switch (e.country.toLowerCase()) {
           case "us":
-            var n = this.get("us_states_and_dc"), l = this.get("territories"), u = this.get("armed_forces");
-            a = [], e.us_states_and_dc && (a = a.concat(n)), e.territories && (a = a.concat(l)), e.armed_forces && (a = a.concat(u));
+            var n = this.get("us_states_and_dc"), s = this.get("territories"), x = this.get("armed_forces");
+            a = [], e.us_states_and_dc && (a = a.concat(n)), e.territories && (a = a.concat(s)), e.armed_forces && (a = a.concat(x));
             break;
           case "it":
           case "mx":
@@ -975,16 +975,16 @@ function Ce() {
             american: !0,
             string: !1
           });
-          var l = typeof e.min < "u" ? e.min.getTime() : 1, u = typeof e.max < "u" ? e.max.getTime() : 864e13;
-          n = new Date(this.integer({ min: l, max: u }));
+          var s = typeof e.min < "u" ? e.min.getTime() : 1, x = typeof e.max < "u" ? e.max.getTime() : 864e13;
+          n = new Date(this.integer({ min: s, max: x }));
         } else {
-          var S = this.month({ raw: !0 }), B = S.days;
-          e && e.month && (B = this.get("months")[(e.month % 12 + 12) % 12].days), e = t(e, {
+          var m = this.month({ raw: !0 }), k = m.days;
+          e && e.month && (k = this.get("months")[(e.month % 12 + 12) % 12].days), e = t(e, {
             year: parseInt(this.year(), 10),
             // Necessary to subtract 1 because Date() 0-indexes month but not day or year
             // for some reason.
-            month: S.numeric - 1,
-            day: this.natural({ min: 1, max: B }),
+            month: m.numeric - 1,
+            day: this.natural({ min: 1, max: k }),
             hour: this.hour({ twentyfour: !0 }),
             minute: this.minute(),
             second: this.second(),
@@ -1000,13 +1000,13 @@ function Ce() {
         return e = t(e, {
           min: e && e.twentyfour ? 0 : 1,
           max: e && e.twentyfour ? 23 : 12
-        }), x(e.min < 0, "Chance: Min cannot be less than 0."), x(e.twentyfour && e.max > 23, "Chance: Max cannot be greater than 23 for twentyfour option."), x(!e.twentyfour && e.max > 12, "Chance: Max cannot be greater than 12."), x(e.min > e.max, "Chance: Min cannot be greater than Max."), this.natural({ min: e.min, max: e.max });
+        }), p(e.min < 0, "Chance: Min cannot be less than 0."), p(e.twentyfour && e.max > 23, "Chance: Max cannot be greater than 23 for twentyfour option."), p(!e.twentyfour && e.max > 12, "Chance: Max cannot be greater than 12."), p(e.min > e.max, "Chance: Min cannot be greater than Max."), this.natural({ min: e.min, max: e.max });
       }, r.prototype.millisecond = function() {
         return this.natural({ max: 999 });
       }, r.prototype.minute = r.prototype.second = function(e) {
-        return e = t(e, { min: 0, max: 59 }), x(e.min < 0, "Chance: Min cannot be less than 0."), x(e.max > 59, "Chance: Max cannot be greater than 59."), x(e.min > e.max, "Chance: Min cannot be greater than Max."), this.natural({ min: e.min, max: e.max });
+        return e = t(e, { min: 0, max: 59 }), p(e.min < 0, "Chance: Min cannot be less than 0."), p(e.max > 59, "Chance: Max cannot be greater than 59."), p(e.min > e.max, "Chance: Min cannot be greater than Max."), this.natural({ min: e.min, max: e.max });
       }, r.prototype.month = function(e) {
-        e = t(e, { min: 1, max: 12 }), x(e.min < 1, "Chance: Min cannot be less than 1."), x(e.max > 12, "Chance: Max cannot be greater than 12."), x(e.min > e.max, "Chance: Min cannot be greater than Max.");
+        e = t(e, { min: 1, max: 12 }), p(e.min < 1, "Chance: Min cannot be less than 1."), p(e.max > 12, "Chance: Max cannot be greater than 12."), p(e.min > e.max, "Chance: Min cannot be greater than Max.");
         var a = this.pick(this.months().slice(e.min - 1, e.max));
         return e.raw ? a : a.name;
       }, r.prototype.months = function() {
@@ -1023,17 +1023,17 @@ function Ce() {
         return e = t(e, { min: (/* @__PURE__ */ new Date()).getFullYear() }), e.max = typeof e.max < "u" ? e.max : e.min + 100, this.natural(e).toString();
       }, r.prototype.cc = function(e) {
         e = t(e);
-        var a, n, l;
-        return a = e.type ? this.cc_type({ name: e.type, raw: !0 }) : this.cc_type({ raw: !0 }), n = a.prefix.split(""), l = a.length - a.prefix.length - 1, n = n.concat(this.n(this.integer, l, { min: 0, max: 9 })), n.push(this.luhn_calculate(n.join(""))), n.join("");
+        var a, n, s;
+        return a = e.type ? this.cc_type({ name: e.type, raw: !0 }) : this.cc_type({ raw: !0 }), n = a.prefix.split(""), s = a.length - a.prefix.length - 1, n = n.concat(this.n(this.integer, s, { min: 0, max: 9 })), n.push(this.luhn_calculate(n.join(""))), n.join("");
       }, r.prototype.cc_types = function() {
         return this.get("cc_types");
       }, r.prototype.cc_type = function(e) {
         e = t(e);
         var a = this.cc_types(), n = null;
         if (e.name) {
-          for (var l = 0; l < a.length; l++)
-            if (a[l].name === e.name || a[l].short_name === e.name) {
-              n = a[l];
+          for (var s = 0; s < a.length; s++)
+            if (a[s].name === e.name || a[s].short_name === e.name) {
+              n = a[s];
               break;
             }
           if (n === null)
@@ -1051,9 +1051,9 @@ function Ce() {
         return this.pick(this.timezones());
       }, r.prototype.currency_pair = function(e) {
         var a = this.unique(this.currency, 2, {
-          comparator: function(n, l) {
-            return n.reduce(function(u, S) {
-              return u || S.code === l.code;
+          comparator: function(n, s) {
+            return n.reduce(function(x, m) {
+              return x || m.code === s.code;
             }, !1);
           }
         });
@@ -1070,11 +1070,11 @@ function Ce() {
         return a.year = this.exp_year(), a.year === (/* @__PURE__ */ new Date()).getFullYear().toString() ? a.month = this.exp_month({ future: !0 }) : a.month = this.exp_month(), e.raw ? a : a.month + "/" + a.year;
       }, r.prototype.exp_month = function(e) {
         e = t(e);
-        var a, n, l = (/* @__PURE__ */ new Date()).getMonth() + 1;
-        if (e.future && l !== 12)
+        var a, n, s = (/* @__PURE__ */ new Date()).getMonth() + 1;
+        if (e.future && s !== 12)
           do
             a = this.month({ raw: !0 }).numeric, n = parseInt(a, 10);
-          while (n <= l);
+          while (n <= s);
         else
           a = this.month({ raw: !0 }).numeric;
         return a;
@@ -1094,37 +1094,37 @@ function Ce() {
         return e = this.pad(e, 7) + this.pad(this.pick(this.provinces({ country: "it" })).code, 3), e + this.luhn_calculate(e);
       }, r.prototype.cf = function(e) {
         e = e || {};
-        var a = e.gender ? e.gender : this.gender(), n = e.first ? e.first : this.first({ gender: a, nationality: "it" }), l = e.last ? e.last : this.last({ nationality: "it" }), u = e.birthday ? e.birthday : this.birthday(), S = e.city ? e.city : this.pickone(["A", "B", "C", "D", "E", "F", "G", "H", "I", "L", "M", "Z"]) + this.pad(this.natural({ max: 999 }), 3), B = [], m = function(T, H) {
-          var F, z = [];
-          return T.length < 3 ? z = T.split("").concat("XXX".split("")).splice(0, 3) : (F = T.toUpperCase().split("").map(function(U) {
-            return "BCDFGHJKLMNPRSTVWZ".indexOf(U) !== -1 ? U : void 0;
-          }).join(""), F.length > 3 && (H ? F = F.substr(0, 3) : F = F[0] + F.substr(2, 2)), F.length < 3 && (z = F, F = T.toUpperCase().split("").map(function(U) {
-            return "AEIOU".indexOf(U) !== -1 ? U : void 0;
-          }).join("").substr(0, 3 - z.length)), z = z + F), z;
-        }, b = function(T, H, F) {
+        var a = e.gender ? e.gender : this.gender(), n = e.first ? e.first : this.first({ gender: a, nationality: "it" }), s = e.last ? e.last : this.last({ nationality: "it" }), x = e.birthday ? e.birthday : this.birthday(), m = e.city ? e.city : this.pickone(["A", "B", "C", "D", "E", "F", "G", "H", "I", "L", "M", "Z"]) + this.pad(this.natural({ max: 999 }), 3), k = [], d = function(T, F) {
+          var _, z = [];
+          return T.length < 3 ? z = T.split("").concat("XXX".split("")).splice(0, 3) : (_ = T.toUpperCase().split("").map(function(V) {
+            return "BCDFGHJKLMNPRSTVWZ".indexOf(V) !== -1 ? V : void 0;
+          }).join(""), _.length > 3 && (F ? _ = _.substr(0, 3) : _ = _[0] + _.substr(2, 2)), _.length < 3 && (z = _, _ = T.toUpperCase().split("").map(function(V) {
+            return "AEIOU".indexOf(V) !== -1 ? V : void 0;
+          }).join("").substr(0, 3 - z.length)), z = z + _), z;
+        }, h = function(T, F, _) {
           var z = ["A", "B", "C", "D", "E", "H", "L", "M", "P", "R", "S", "T"];
-          return T.getFullYear().toString().substr(2) + z[T.getMonth()] + F.pad(T.getDate() + (H.toLowerCase() === "female" ? 40 : 0), 2);
+          return T.getFullYear().toString().substr(2) + z[T.getMonth()] + _.pad(T.getDate() + (F.toLowerCase() === "female" ? 40 : 0), 2);
         }, C = function(T) {
-          for (var H = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", F = "ABCDEFGHIJABCDEFGHIJKLMNOPQRSTUVWXYZ", z = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", U = "BAKPLCQDREVOSFTGUHMINJWZYX", V = 0, K = 0; K < 15; K++)
-            K % 2 !== 0 ? V += z.indexOf(F[H.indexOf(T[K])]) : V += U.indexOf(F[H.indexOf(T[K])]);
-          return z[V % 26];
+          for (var F = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", _ = "ABCDEFGHIJABCDEFGHIJKLMNOPQRSTUVWXYZ", z = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", V = "BAKPLCQDREVOSFTGUHMINJWZYX", U = 0, K = 0; K < 15; K++)
+            K % 2 !== 0 ? U += z.indexOf(_[F.indexOf(T[K])]) : U += V.indexOf(_[F.indexOf(T[K])]);
+          return z[U % 26];
         };
-        return B = B.concat(m(l, !0), m(n), b(u, a, this), S.toUpperCase().split("")).join(""), B += C(B.toUpperCase()), B.toUpperCase();
+        return k = k.concat(d(s, !0), d(n), h(x, a, this), m.toUpperCase().split("")).join(""), k += C(k.toUpperCase()), k.toUpperCase();
       }, r.prototype.pl_pesel = function() {
         for (var e = this.natural({ min: 1, max: 9999999999 }), a = this.pad(e, 10).split(""), n = 0; n < a.length; n++)
           a[n] = parseInt(a[n]);
-        var l = (1 * a[0] + 3 * a[1] + 7 * a[2] + 9 * a[3] + 1 * a[4] + 3 * a[5] + 7 * a[6] + 9 * a[7] + 1 * a[8] + 3 * a[9]) % 10;
-        return l !== 0 && (l = 10 - l), a.join("") + l;
+        var s = (1 * a[0] + 3 * a[1] + 7 * a[2] + 9 * a[3] + 1 * a[4] + 3 * a[5] + 7 * a[6] + 9 * a[7] + 1 * a[8] + 3 * a[9]) % 10;
+        return s !== 0 && (s = 10 - s), a.join("") + s;
       }, r.prototype.pl_nip = function() {
         for (var e = this.natural({ min: 1, max: 999999999 }), a = this.pad(e, 9).split(""), n = 0; n < a.length; n++)
           a[n] = parseInt(a[n]);
-        var l = (6 * a[0] + 5 * a[1] + 7 * a[2] + 2 * a[3] + 3 * a[4] + 4 * a[5] + 5 * a[6] + 6 * a[7] + 7 * a[8]) % 11;
-        return l === 10 ? this.pl_nip() : a.join("") + l;
+        var s = (6 * a[0] + 5 * a[1] + 7 * a[2] + 2 * a[3] + 3 * a[4] + 4 * a[5] + 5 * a[6] + 6 * a[7] + 7 * a[8]) % 11;
+        return s === 10 ? this.pl_nip() : a.join("") + s;
       }, r.prototype.pl_regon = function() {
         for (var e = this.natural({ min: 1, max: 99999999 }), a = this.pad(e, 8).split(""), n = 0; n < a.length; n++)
           a[n] = parseInt(a[n]);
-        var l = (8 * a[0] + 9 * a[1] + 2 * a[2] + 3 * a[3] + 4 * a[4] + 5 * a[5] + 6 * a[6] + 7 * a[7]) % 11;
-        return l === 10 && (l = 0), a.join("") + l;
+        var s = (8 * a[0] + 9 * a[1] + 2 * a[2] + 3 * a[3] + 4 * a[4] + 5 * a[5] + 6 * a[6] + 7 * a[7]) % 11;
+        return s === 10 && (s = 0), a.join("") + s;
       }, r.prototype.music_genre = function(e = "general") {
         if (!(e.toLowerCase() in M.music_genres))
           throw new Error(`Unsupported genre: ${e}`);
@@ -1160,39 +1160,39 @@ function Ce() {
       }, r.prototype.coin = function() {
         return this.bool() ? "heads" : "tails";
       };
-      function d(e) {
+      function u(e) {
         return function() {
           return this.natural(e);
         };
       }
-      r.prototype.d4 = d({ min: 1, max: 4 }), r.prototype.d6 = d({ min: 1, max: 6 }), r.prototype.d8 = d({ min: 1, max: 8 }), r.prototype.d10 = d({ min: 1, max: 10 }), r.prototype.d12 = d({ min: 1, max: 12 }), r.prototype.d20 = d({ min: 1, max: 20 }), r.prototype.d30 = d({ min: 1, max: 30 }), r.prototype.d100 = d({ min: 1, max: 100 }), r.prototype.rpg = function(e, a) {
+      r.prototype.d4 = u({ min: 1, max: 4 }), r.prototype.d6 = u({ min: 1, max: 6 }), r.prototype.d8 = u({ min: 1, max: 8 }), r.prototype.d10 = u({ min: 1, max: 10 }), r.prototype.d12 = u({ min: 1, max: 12 }), r.prototype.d20 = u({ min: 1, max: 20 }), r.prototype.d30 = u({ min: 1, max: 30 }), r.prototype.d100 = u({ min: 1, max: 100 }), r.prototype.rpg = function(e, a) {
         if (a = t(a), e) {
-          var n = e.toLowerCase().split("d"), l = [];
+          var n = e.toLowerCase().split("d"), s = [];
           if (n.length !== 2 || !parseInt(n[0], 10) || !parseInt(n[1], 10))
             throw new Error("Chance: Invalid format provided. Please provide #d# where the first # is the number of dice to roll, the second # is the max of each die");
-          for (var u = n[0]; u > 0; u--)
-            l[u - 1] = this.natural({ min: 1, max: n[1] });
-          return typeof a.sum < "u" && a.sum ? l.reduce(function(S, B) {
-            return S + B;
-          }) : l;
+          for (var x = n[0]; x > 0; x--)
+            s[x - 1] = this.natural({ min: 1, max: n[1] });
+          return typeof a.sum < "u" && a.sum ? s.reduce(function(m, k) {
+            return m + k;
+          }) : s;
         } else
           throw new RangeError("Chance: A type of die roll must be included");
       }, r.prototype.guid = function(e) {
         e = t(e, { version: 5 });
-        var a = "abcdef1234567890", n = "ab89", l = this.string({ pool: a, length: 8 }) + "-" + this.string({ pool: a, length: 4 }) + "-" + // The Version
+        var a = "abcdef1234567890", n = "ab89", s = this.string({ pool: a, length: 8 }) + "-" + this.string({ pool: a, length: 4 }) + "-" + // The Version
         e.version + this.string({ pool: a, length: 3 }) + "-" + // The Variant
         this.string({ pool: n, length: 1 }) + this.string({ pool: a, length: 3 }) + "-" + this.string({ pool: a, length: 12 });
-        return l;
+        return s;
       }, r.prototype.hash = function(e) {
         e = t(e, { length: 40, casing: "lower" });
-        var a = e.casing === "upper" ? y.toUpperCase() : y;
+        var a = e.casing === "upper" ? A.toUpperCase() : A;
         return this.string({ pool: a, length: e.length });
       }, r.prototype.luhn_check = function(e) {
         var a = e.toString(), n = +a.substring(a.length - 1);
         return n === this.luhn_calculate(+a.substring(0, a.length - 1));
       }, r.prototype.luhn_calculate = function(e) {
-        for (var a = e.toString().split("").reverse(), n = 0, l, u = 0, S = a.length; S > u; ++u)
-          l = +a[u], u % 2 === 0 && (l *= 2, l > 9 && (l -= 9)), n += l;
+        for (var a = e.toString().split("").reverse(), n = 0, s, x = 0, m = a.length; m > x; ++x)
+          s = +a[x], x % 2 === 0 && (s *= 2, s > 9 && (s -= 9)), n += s;
         return n * 9 % 10;
       }, r.prototype.md5 = function(e) {
         var a = { str: "", key: null, raw: !1 };
@@ -1210,34 +1210,34 @@ function Ce() {
           throw new Error("A parameter is required to return an md5 hash.");
         return this.bimd5.md5(a.str, a.key, a.raw);
       }, r.prototype.file = function(e) {
-        var a = e || {}, n = "fileExtension", l = Object.keys(this.get("fileExtension")), u, S;
-        if (u = this.word({ length: a.length }), a.extension)
-          return S = a.extension, u + "." + S;
+        var a = e || {}, n = "fileExtension", s = Object.keys(this.get("fileExtension")), x, m;
+        if (x = this.word({ length: a.length }), a.extension)
+          return m = a.extension, x + "." + m;
         if (a.extensions) {
           if (Array.isArray(a.extensions))
-            return S = this.pickone(a.extensions), u + "." + S;
+            return m = this.pickone(a.extensions), x + "." + m;
           if (a.extensions.constructor === Object) {
-            var B = a.extensions, m = Object.keys(B);
-            return S = this.pickone(B[this.pickone(m)]), u + "." + S;
+            var k = a.extensions, d = Object.keys(k);
+            return m = this.pickone(k[this.pickone(d)]), x + "." + m;
           }
           throw new Error("Chance: Extensions must be an Array or Object");
         }
         if (a.fileType) {
-          var b = a.fileType;
-          if (l.indexOf(b) !== -1)
-            return S = this.pickone(this.get(n)[b]), u + "." + S;
+          var h = a.fileType;
+          if (s.indexOf(h) !== -1)
+            return m = this.pickone(this.get(n)[h]), x + "." + m;
           throw new RangeError("Chance: Expect file type value to be 'raster', 'vector', '3d' or 'document'");
         }
-        return S = this.pickone(this.get(n)[this.pickone(l)]), u + "." + S;
+        return m = this.pickone(this.get(n)[this.pickone(s)]), x + "." + m;
       }, r.prototype.fileWithContent = function(e) {
         var a = e || {}, n = "fileName" in a ? a.fileName : this.file().split(".")[0];
         if (n += "." + ("fileExtension" in a ? a.fileExtension : this.file().split(".")[1]), typeof a.fileSize != "number")
           throw new Error("File size must be an integer");
-        var l = {
+        var s = {
           fileData: this.buffer({ length: a.fileSize }),
           fileName: n
         };
-        return l;
+        return s;
       };
       var M = {
         firstNames: {
@@ -10771,47 +10771,47 @@ function Ce() {
             "0xe007f"
           ]
         }
-      }, g = Object.prototype.hasOwnProperty, A = Object.keys || function(e) {
+      }, v = Object.prototype.hasOwnProperty, S = Object.keys || function(e) {
         var a = [];
         for (var n in e)
-          g.call(e, n) && a.push(n);
+          v.call(e, n) && a.push(n);
         return a;
       };
-      function k(e, a) {
-        for (var n = A(e), l, u = 0, S = n.length; u < S; u++)
-          l = n[u], a[l] = e[l] || a[l];
+      function I(e, a) {
+        for (var n = S(e), s, x = 0, m = n.length; x < m; x++)
+          s = n[x], a[s] = e[s] || a[s];
       }
       function D(e, a) {
-        for (var n = 0, l = e.length; n < l; n++)
+        for (var n = 0, s = e.length; n < s; n++)
           a[n] = e[n];
       }
-      function _(e, a) {
-        var n = Array.isArray(e), l = a || (n ? new Array(e.length) : {});
-        return n ? D(e, l) : k(e, l), l;
+      function H(e, a) {
+        var n = Array.isArray(e), s = a || (n ? new Array(e.length) : {});
+        return n ? D(e, s) : I(e, s), s;
       }
       r.prototype.get = function(e) {
-        return _(M[e]);
+        return H(M[e]);
       }, r.prototype.mac_address = function(e) {
         e = t(e), e.separator || (e.separator = e.networkVersion ? "." : ":");
         var a = "ABCDEF1234567890", n = "";
         return e.networkVersion ? n = this.n(this.string, 3, { pool: a, length: 4 }).join(e.separator) : n = this.n(this.string, 6, { pool: a, length: 2 }).join(e.separator), n;
       }, r.prototype.normal = function(e) {
-        if (e = t(e, { mean: 0, dev: 1, pool: [] }), x(
+        if (e = t(e, { mean: 0, dev: 1, pool: [] }), p(
           e.pool.constructor !== Array,
           "Chance: The pool option must be a valid array."
-        ), x(
+        ), p(
           typeof e.mean != "number",
           "Chance: Mean (mean) must be a number"
-        ), x(
+        ), p(
           typeof e.dev != "number",
           "Chance: Standard deviation (dev) must be a number"
         ), e.pool.length > 0)
           return this.normal_pool(e);
-        var a, n, l, u, S = e.mean, B = e.dev;
+        var a, n, s, x, m = e.mean, k = e.dev;
         do
-          n = this.random() * 2 - 1, l = this.random() * 2 - 1, a = n * n + l * l;
+          n = this.random() * 2 - 1, s = this.random() * 2 - 1, a = n * n + s * s;
         while (a >= 1);
-        return u = n * Math.sqrt(-2 * Math.log(a) / a), B * u + S;
+        return x = n * Math.sqrt(-2 * Math.log(a) / a), k * x + m;
       }, r.prototype.normal_pool = function(e) {
         var a = 0;
         do {
@@ -10839,7 +10839,7 @@ function Ce() {
         }
         return a + this.character({ alpha: !0, casing: "upper" }) + this.character({ alpha: !0, casing: "upper" }) + this.character({ alpha: !0, casing: "upper" });
       }, r.prototype.set = function(e, a) {
-        typeof e == "string" ? M[e] = a : M = _(e, M);
+        typeof e == "string" ? M[e] = a : M = H(e, M);
       }, r.prototype.tv = function(e) {
         return this.radio(e);
       }, r.prototype.cnpj = function() {
@@ -10861,11 +10861,11 @@ function Ce() {
         for (this.mt[0] = e >>> 0, this.mti = 1; this.mti < this.N; this.mti++)
           e = this.mt[this.mti - 1] ^ this.mt[this.mti - 1] >>> 30, this.mt[this.mti] = (((e & 4294901760) >>> 16) * 1812433253 << 16) + (e & 65535) * 1812433253 + this.mti, this.mt[this.mti] >>>= 0;
       }, P.prototype.init_by_array = function(e, a) {
-        var n = 1, l = 0, u, S;
-        for (this.init_genrand(19650218), u = this.N > a ? this.N : a; u; u--)
-          S = this.mt[n - 1] ^ this.mt[n - 1] >>> 30, this.mt[n] = (this.mt[n] ^ (((S & 4294901760) >>> 16) * 1664525 << 16) + (S & 65535) * 1664525) + e[l] + l, this.mt[n] >>>= 0, n++, l++, n >= this.N && (this.mt[0] = this.mt[this.N - 1], n = 1), l >= a && (l = 0);
-        for (u = this.N - 1; u; u--)
-          S = this.mt[n - 1] ^ this.mt[n - 1] >>> 30, this.mt[n] = (this.mt[n] ^ (((S & 4294901760) >>> 16) * 1566083941 << 16) + (S & 65535) * 1566083941) - n, this.mt[n] >>>= 0, n++, n >= this.N && (this.mt[0] = this.mt[this.N - 1], n = 1);
+        var n = 1, s = 0, x, m;
+        for (this.init_genrand(19650218), x = this.N > a ? this.N : a; x; x--)
+          m = this.mt[n - 1] ^ this.mt[n - 1] >>> 30, this.mt[n] = (this.mt[n] ^ (((m & 4294901760) >>> 16) * 1664525 << 16) + (m & 65535) * 1664525) + e[s] + s, this.mt[n] >>>= 0, n++, s++, n >= this.N && (this.mt[0] = this.mt[this.N - 1], n = 1), s >= a && (s = 0);
+        for (x = this.N - 1; x; x--)
+          m = this.mt[n - 1] ^ this.mt[n - 1] >>> 30, this.mt[n] = (this.mt[n] ^ (((m & 4294901760) >>> 16) * 1566083941 << 16) + (m & 65535) * 1566083941) - n, this.mt[n] >>>= 0, n++, n >= this.N && (this.mt[0] = this.mt[this.N - 1], n = 1);
         this.mt[0] = 2147483648;
       }, P.prototype.genrand_int32 = function() {
         var e, a = new Array(0, this.MATRIX_A);
@@ -10893,26 +10893,26 @@ function Ce() {
       var w = function() {
       };
       w.prototype.VERSION = "1.0.1", w.prototype.safe_add = function(a, n) {
-        var l = (a & 65535) + (n & 65535), u = (a >> 16) + (n >> 16) + (l >> 16);
-        return u << 16 | l & 65535;
+        var s = (a & 65535) + (n & 65535), x = (a >> 16) + (n >> 16) + (s >> 16);
+        return x << 16 | s & 65535;
       }, w.prototype.bit_roll = function(e, a) {
         return e << a | e >>> 32 - a;
-      }, w.prototype.md5_cmn = function(e, a, n, l, u, S) {
-        return this.safe_add(this.bit_roll(this.safe_add(this.safe_add(a, e), this.safe_add(l, S)), u), n);
-      }, w.prototype.md5_ff = function(e, a, n, l, u, S, B) {
-        return this.md5_cmn(a & n | ~a & l, e, a, u, S, B);
-      }, w.prototype.md5_gg = function(e, a, n, l, u, S, B) {
-        return this.md5_cmn(a & l | n & ~l, e, a, u, S, B);
-      }, w.prototype.md5_hh = function(e, a, n, l, u, S, B) {
-        return this.md5_cmn(a ^ n ^ l, e, a, u, S, B);
-      }, w.prototype.md5_ii = function(e, a, n, l, u, S, B) {
-        return this.md5_cmn(n ^ (a | ~l), e, a, u, S, B);
+      }, w.prototype.md5_cmn = function(e, a, n, s, x, m) {
+        return this.safe_add(this.bit_roll(this.safe_add(this.safe_add(a, e), this.safe_add(s, m)), x), n);
+      }, w.prototype.md5_ff = function(e, a, n, s, x, m, k) {
+        return this.md5_cmn(a & n | ~a & s, e, a, x, m, k);
+      }, w.prototype.md5_gg = function(e, a, n, s, x, m, k) {
+        return this.md5_cmn(a & s | n & ~s, e, a, x, m, k);
+      }, w.prototype.md5_hh = function(e, a, n, s, x, m, k) {
+        return this.md5_cmn(a ^ n ^ s, e, a, x, m, k);
+      }, w.prototype.md5_ii = function(e, a, n, s, x, m, k) {
+        return this.md5_cmn(n ^ (a | ~s), e, a, x, m, k);
       }, w.prototype.binl_md5 = function(e, a) {
         e[a >> 5] |= 128 << a % 32, e[(a + 64 >>> 9 << 4) + 14] = a;
-        var n, l, u, S, B, m = 1732584193, b = -271733879, C = -1732584194, T = 271733878;
+        var n, s, x, m, k, d = 1732584193, h = -271733879, C = -1732584194, T = 271733878;
         for (n = 0; n < e.length; n += 16)
-          l = m, u = b, S = C, B = T, m = this.md5_ff(m, b, C, T, e[n], 7, -680876936), T = this.md5_ff(T, m, b, C, e[n + 1], 12, -389564586), C = this.md5_ff(C, T, m, b, e[n + 2], 17, 606105819), b = this.md5_ff(b, C, T, m, e[n + 3], 22, -1044525330), m = this.md5_ff(m, b, C, T, e[n + 4], 7, -176418897), T = this.md5_ff(T, m, b, C, e[n + 5], 12, 1200080426), C = this.md5_ff(C, T, m, b, e[n + 6], 17, -1473231341), b = this.md5_ff(b, C, T, m, e[n + 7], 22, -45705983), m = this.md5_ff(m, b, C, T, e[n + 8], 7, 1770035416), T = this.md5_ff(T, m, b, C, e[n + 9], 12, -1958414417), C = this.md5_ff(C, T, m, b, e[n + 10], 17, -42063), b = this.md5_ff(b, C, T, m, e[n + 11], 22, -1990404162), m = this.md5_ff(m, b, C, T, e[n + 12], 7, 1804603682), T = this.md5_ff(T, m, b, C, e[n + 13], 12, -40341101), C = this.md5_ff(C, T, m, b, e[n + 14], 17, -1502002290), b = this.md5_ff(b, C, T, m, e[n + 15], 22, 1236535329), m = this.md5_gg(m, b, C, T, e[n + 1], 5, -165796510), T = this.md5_gg(T, m, b, C, e[n + 6], 9, -1069501632), C = this.md5_gg(C, T, m, b, e[n + 11], 14, 643717713), b = this.md5_gg(b, C, T, m, e[n], 20, -373897302), m = this.md5_gg(m, b, C, T, e[n + 5], 5, -701558691), T = this.md5_gg(T, m, b, C, e[n + 10], 9, 38016083), C = this.md5_gg(C, T, m, b, e[n + 15], 14, -660478335), b = this.md5_gg(b, C, T, m, e[n + 4], 20, -405537848), m = this.md5_gg(m, b, C, T, e[n + 9], 5, 568446438), T = this.md5_gg(T, m, b, C, e[n + 14], 9, -1019803690), C = this.md5_gg(C, T, m, b, e[n + 3], 14, -187363961), b = this.md5_gg(b, C, T, m, e[n + 8], 20, 1163531501), m = this.md5_gg(m, b, C, T, e[n + 13], 5, -1444681467), T = this.md5_gg(T, m, b, C, e[n + 2], 9, -51403784), C = this.md5_gg(C, T, m, b, e[n + 7], 14, 1735328473), b = this.md5_gg(b, C, T, m, e[n + 12], 20, -1926607734), m = this.md5_hh(m, b, C, T, e[n + 5], 4, -378558), T = this.md5_hh(T, m, b, C, e[n + 8], 11, -2022574463), C = this.md5_hh(C, T, m, b, e[n + 11], 16, 1839030562), b = this.md5_hh(b, C, T, m, e[n + 14], 23, -35309556), m = this.md5_hh(m, b, C, T, e[n + 1], 4, -1530992060), T = this.md5_hh(T, m, b, C, e[n + 4], 11, 1272893353), C = this.md5_hh(C, T, m, b, e[n + 7], 16, -155497632), b = this.md5_hh(b, C, T, m, e[n + 10], 23, -1094730640), m = this.md5_hh(m, b, C, T, e[n + 13], 4, 681279174), T = this.md5_hh(T, m, b, C, e[n], 11, -358537222), C = this.md5_hh(C, T, m, b, e[n + 3], 16, -722521979), b = this.md5_hh(b, C, T, m, e[n + 6], 23, 76029189), m = this.md5_hh(m, b, C, T, e[n + 9], 4, -640364487), T = this.md5_hh(T, m, b, C, e[n + 12], 11, -421815835), C = this.md5_hh(C, T, m, b, e[n + 15], 16, 530742520), b = this.md5_hh(b, C, T, m, e[n + 2], 23, -995338651), m = this.md5_ii(m, b, C, T, e[n], 6, -198630844), T = this.md5_ii(T, m, b, C, e[n + 7], 10, 1126891415), C = this.md5_ii(C, T, m, b, e[n + 14], 15, -1416354905), b = this.md5_ii(b, C, T, m, e[n + 5], 21, -57434055), m = this.md5_ii(m, b, C, T, e[n + 12], 6, 1700485571), T = this.md5_ii(T, m, b, C, e[n + 3], 10, -1894986606), C = this.md5_ii(C, T, m, b, e[n + 10], 15, -1051523), b = this.md5_ii(b, C, T, m, e[n + 1], 21, -2054922799), m = this.md5_ii(m, b, C, T, e[n + 8], 6, 1873313359), T = this.md5_ii(T, m, b, C, e[n + 15], 10, -30611744), C = this.md5_ii(C, T, m, b, e[n + 6], 15, -1560198380), b = this.md5_ii(b, C, T, m, e[n + 13], 21, 1309151649), m = this.md5_ii(m, b, C, T, e[n + 4], 6, -145523070), T = this.md5_ii(T, m, b, C, e[n + 11], 10, -1120210379), C = this.md5_ii(C, T, m, b, e[n + 2], 15, 718787259), b = this.md5_ii(b, C, T, m, e[n + 9], 21, -343485551), m = this.safe_add(m, l), b = this.safe_add(b, u), C = this.safe_add(C, S), T = this.safe_add(T, B);
-        return [m, b, C, T];
+          s = d, x = h, m = C, k = T, d = this.md5_ff(d, h, C, T, e[n], 7, -680876936), T = this.md5_ff(T, d, h, C, e[n + 1], 12, -389564586), C = this.md5_ff(C, T, d, h, e[n + 2], 17, 606105819), h = this.md5_ff(h, C, T, d, e[n + 3], 22, -1044525330), d = this.md5_ff(d, h, C, T, e[n + 4], 7, -176418897), T = this.md5_ff(T, d, h, C, e[n + 5], 12, 1200080426), C = this.md5_ff(C, T, d, h, e[n + 6], 17, -1473231341), h = this.md5_ff(h, C, T, d, e[n + 7], 22, -45705983), d = this.md5_ff(d, h, C, T, e[n + 8], 7, 1770035416), T = this.md5_ff(T, d, h, C, e[n + 9], 12, -1958414417), C = this.md5_ff(C, T, d, h, e[n + 10], 17, -42063), h = this.md5_ff(h, C, T, d, e[n + 11], 22, -1990404162), d = this.md5_ff(d, h, C, T, e[n + 12], 7, 1804603682), T = this.md5_ff(T, d, h, C, e[n + 13], 12, -40341101), C = this.md5_ff(C, T, d, h, e[n + 14], 17, -1502002290), h = this.md5_ff(h, C, T, d, e[n + 15], 22, 1236535329), d = this.md5_gg(d, h, C, T, e[n + 1], 5, -165796510), T = this.md5_gg(T, d, h, C, e[n + 6], 9, -1069501632), C = this.md5_gg(C, T, d, h, e[n + 11], 14, 643717713), h = this.md5_gg(h, C, T, d, e[n], 20, -373897302), d = this.md5_gg(d, h, C, T, e[n + 5], 5, -701558691), T = this.md5_gg(T, d, h, C, e[n + 10], 9, 38016083), C = this.md5_gg(C, T, d, h, e[n + 15], 14, -660478335), h = this.md5_gg(h, C, T, d, e[n + 4], 20, -405537848), d = this.md5_gg(d, h, C, T, e[n + 9], 5, 568446438), T = this.md5_gg(T, d, h, C, e[n + 14], 9, -1019803690), C = this.md5_gg(C, T, d, h, e[n + 3], 14, -187363961), h = this.md5_gg(h, C, T, d, e[n + 8], 20, 1163531501), d = this.md5_gg(d, h, C, T, e[n + 13], 5, -1444681467), T = this.md5_gg(T, d, h, C, e[n + 2], 9, -51403784), C = this.md5_gg(C, T, d, h, e[n + 7], 14, 1735328473), h = this.md5_gg(h, C, T, d, e[n + 12], 20, -1926607734), d = this.md5_hh(d, h, C, T, e[n + 5], 4, -378558), T = this.md5_hh(T, d, h, C, e[n + 8], 11, -2022574463), C = this.md5_hh(C, T, d, h, e[n + 11], 16, 1839030562), h = this.md5_hh(h, C, T, d, e[n + 14], 23, -35309556), d = this.md5_hh(d, h, C, T, e[n + 1], 4, -1530992060), T = this.md5_hh(T, d, h, C, e[n + 4], 11, 1272893353), C = this.md5_hh(C, T, d, h, e[n + 7], 16, -155497632), h = this.md5_hh(h, C, T, d, e[n + 10], 23, -1094730640), d = this.md5_hh(d, h, C, T, e[n + 13], 4, 681279174), T = this.md5_hh(T, d, h, C, e[n], 11, -358537222), C = this.md5_hh(C, T, d, h, e[n + 3], 16, -722521979), h = this.md5_hh(h, C, T, d, e[n + 6], 23, 76029189), d = this.md5_hh(d, h, C, T, e[n + 9], 4, -640364487), T = this.md5_hh(T, d, h, C, e[n + 12], 11, -421815835), C = this.md5_hh(C, T, d, h, e[n + 15], 16, 530742520), h = this.md5_hh(h, C, T, d, e[n + 2], 23, -995338651), d = this.md5_ii(d, h, C, T, e[n], 6, -198630844), T = this.md5_ii(T, d, h, C, e[n + 7], 10, 1126891415), C = this.md5_ii(C, T, d, h, e[n + 14], 15, -1416354905), h = this.md5_ii(h, C, T, d, e[n + 5], 21, -57434055), d = this.md5_ii(d, h, C, T, e[n + 12], 6, 1700485571), T = this.md5_ii(T, d, h, C, e[n + 3], 10, -1894986606), C = this.md5_ii(C, T, d, h, e[n + 10], 15, -1051523), h = this.md5_ii(h, C, T, d, e[n + 1], 21, -2054922799), d = this.md5_ii(d, h, C, T, e[n + 8], 6, 1873313359), T = this.md5_ii(T, d, h, C, e[n + 15], 10, -30611744), C = this.md5_ii(C, T, d, h, e[n + 6], 15, -1560198380), h = this.md5_ii(h, C, T, d, e[n + 13], 21, 1309151649), d = this.md5_ii(d, h, C, T, e[n + 4], 6, -145523070), T = this.md5_ii(T, d, h, C, e[n + 11], 10, -1120210379), C = this.md5_ii(C, T, d, h, e[n + 2], 15, 718787259), h = this.md5_ii(h, C, T, d, e[n + 9], 21, -343485551), d = this.safe_add(d, s), h = this.safe_add(h, x), C = this.safe_add(C, m), T = this.safe_add(T, k);
+        return [d, h, C, T];
       }, w.prototype.binl2rstr = function(e) {
         var a, n = "";
         for (a = 0; a < e.length * 32; a += 8)
@@ -10928,14 +10928,14 @@ function Ce() {
       }, w.prototype.rstr_md5 = function(e) {
         return this.binl2rstr(this.binl_md5(this.rstr2binl(e), e.length * 8));
       }, w.prototype.rstr_hmac_md5 = function(e, a) {
-        var n, l = this.rstr2binl(e), u = [], S = [], B;
-        for (u[15] = S[15] = void 0, l.length > 16 && (l = this.binl_md5(l, e.length * 8)), n = 0; n < 16; n += 1)
-          u[n] = l[n] ^ 909522486, S[n] = l[n] ^ 1549556828;
-        return B = this.binl_md5(u.concat(this.rstr2binl(a)), 512 + a.length * 8), this.binl2rstr(this.binl_md5(S.concat(B), 640));
+        var n, s = this.rstr2binl(e), x = [], m = [], k;
+        for (x[15] = m[15] = void 0, s.length > 16 && (s = this.binl_md5(s, e.length * 8)), n = 0; n < 16; n += 1)
+          x[n] = s[n] ^ 909522486, m[n] = s[n] ^ 1549556828;
+        return k = this.binl_md5(x.concat(this.rstr2binl(a)), 512 + a.length * 8), this.binl2rstr(this.binl_md5(m.concat(k), 640));
       }, w.prototype.rstr2hex = function(e) {
-        var a = "0123456789abcdef", n = "", l, u;
-        for (u = 0; u < e.length; u += 1)
-          l = e.charCodeAt(u), n += a.charAt(l >>> 4 & 15) + a.charAt(l & 15);
+        var a = "0123456789abcdef", n = "", s, x;
+        for (x = 0; x < e.length; x += 1)
+          s = e.charCodeAt(x), n += a.charAt(s >>> 4 & 15) + a.charAt(s & 15);
         return n;
       }, w.prototype.str2rstr_utf8 = function(e) {
         return unescape(encodeURIComponent(e));
@@ -10958,22 +10958,22 @@ const ye = /* @__PURE__ */ ge(ve);
 var re = /* @__PURE__ */ (function() {
   function f(c, R) {
     for (var O = [], L = "", G = 0; G < c.length; G++) {
-      for (var v = c.charAt(G), y = O.length, I = 0; I < R.length; I++) {
-        var E = R.charAt(I);
-        if (v == E) {
-          0 < L.length && O.push(L), O.push(v), L = "";
+      for (var y = c.charAt(G), A = O.length, B = 0; B < R.length; B++) {
+        var E = R.charAt(B);
+        if (y == E) {
+          0 < L.length && O.push(L), O.push(y), L = "";
           continue;
         }
       }
-      y == O.length && (L = L + v);
+      A == O.length && (L = L + y);
     }
     return 0 < L.length && O.push(L), O;
   }
   return f;
 })(), Z = /* @__PURE__ */ (function() {
-  function f(L, G, v, y, I, E) {
-    this.type = y, this.value = L, this.begin = G, this.end = v, this.line = I, this.col = E, this.toString = function() {
-      return "{type:" + y + ",value:" + L + "}";
+  function f(L, G, y, A, B, E) {
+    this.type = A, this.value = L, this.begin = G, this.end = y, this.line = B, this.col = E, this.toString = function() {
+      return "{type:" + A + ",value:" + L + "}";
     }, this.getValue = function() {
       return this.value == null || this.value.length < 2 ? this.value : (this.value.charAt(0) == "`" && this.value.substring(1, this.value.length - 1), this.value);
     }, this.isStandardLiteral = function() {
@@ -11011,122 +11011,122 @@ var re = /* @__PURE__ */ (function() {
       return t == "<" ? ">" : t == "[" ? "]" : t == "{" ? "}" : t == "(" ? ")" : t;
     }
   }
-  function c(L, G, v) {
-    for (var y = [], I = `(){}[]^-|!*+.><='",;:%@?/\\#~` + v, E = ` 
+  function c(L, G, y) {
+    for (var A = [], B = `(){}[]^-|!*+.><='",;:%@?/\\#~` + y, E = ` 
 \r	`, r = re(
       L,
       //".*-+/|><=()\'\", \n\r\t"
-      I + E
-    ), t = 0, h = 0, x = 0, N = 0; N < r.length; N++) {
-      var p = r[N], i = null;
-      if (y.length > 0 && (i = y[y.length - 1]), p == `
-` ? (h++, x = 0) : N > 0 && r[N - 1] !== `
-` ? x = x + r[N - 1].length : x = 0, t += p.length, i != null && i.type == "comment" && (i.value.lastIndexOf("*/") != i.value.length - 2 || i.value == "/*/")) {
-        p == "*" || p == "/" ? i.value = i.value + p : i.value = "/* ... ", i.end = t, i != null && i.type == "comment" && i.value.lastIndexOf("*/") == i.value.length - 2 && i.value != "/*/" && (i.value = L.substring(i.begin, i.end));
+      B + E
+    ), t = 0, b = 0, p = 0, N = 0; N < r.length; N++) {
+      var g = r[N], i = null;
+      if (A.length > 0 && (i = A[A.length - 1]), g == `
+` ? (b++, p = 0) : N > 0 && r[N - 1] !== `
+` ? p = p + r[N - 1].length : p = 0, t += g.length, i != null && i.type == "comment" && (i.value.lastIndexOf("*/") != i.value.length - 2 || i.value == "/*/")) {
+        g == "*" || g == "/" ? i.value = i.value + g : i.value = "/* ... ", i.end = t, i != null && i.type == "comment" && i.value.lastIndexOf("*/") == i.value.length - 2 && i.value != "/*/" && (i.value = L.substring(i.begin, i.end));
         continue;
       }
-      if (i != null && (i.type == "line-comment" || i.type == "dbtools-command") && p != `
+      if (i != null && (i.type == "line-comment" || i.type == "dbtools-command") && g != `
 `) {
-        i.value = i.value + p;
+        i.value = i.value + g;
         continue;
       }
-      if (i != null && (i.type == "line-comment" || i.type == "dbtools-command") && p == `
+      if (i != null && (i.type == "line-comment" || i.type == "dbtools-command") && g == `
 ` && (i.end = i.begin + i.value.length), i != null && i.type == "quoted-string" && !(i.isStandardLiteral() || i.isAltLiteral())) {
-        i.value = i.value + p, i.end = i.begin + i.value.length;
+        i.value = i.value + g, i.end = i.begin + i.value.length;
         continue;
       }
-      if (!(i != null && i.type == "dquoted-string" && p != '"' && !(i.value.endsWith('"') && i.value.length > 1))) {
-        if (i != null && i.type == "dquoted-string" && p == '"') {
+      if (!(i != null && i.type == "dquoted-string" && g != '"' && !(i.value.endsWith('"') && i.value.length > 1))) {
+        if (i != null && i.type == "dquoted-string" && g == '"') {
           i.end = t, i.value = L.substring(i.begin, i.end);
           continue;
         }
-        if (!(i != null && i.type == "bquoted-string" && p != "`" && !(i.value.endsWith("`") && i.value.length > 1))) {
-          if (i != null && i.type == "bquoted-string" && p == "`") {
+        if (!(i != null && i.type == "bquoted-string" && g != "`" && !(i.value.endsWith("`") && i.value.length > 1))) {
+          if (i != null && i.type == "bquoted-string" && g == "`") {
             i.end = t, i.value = L.substring(i.begin, i.end);
             continue;
           }
-          if (p == "*" && i != null && i.value == "/") {
-            i.value = i.value + p, i.end = i.begin + i.value.length, i.type = "comment";
+          if (g == "*" && i != null && i.value == "/") {
+            i.value = i.value + g, i.end = i.begin + i.value.length, i.type = "comment";
             continue;
           }
-          if (p == "-" && i != null && i.value == "-") {
-            i.value = i.value + p, i.type = "line-comment";
+          if (g == "-" && i != null && i.value == "-") {
+            i.value = i.value + g, i.type = "line-comment";
             continue;
           }
-          if (i != null && i.type == "identifier" && i.end == -11 && i.value.indexOf("@") == 0 && !(p == `
-` || p == "\r")) {
-            i.value = i.value + p;
+          if (i != null && i.type == "identifier" && i.end == -11 && i.value.indexOf("@") == 0 && !(g == `
+` || g == "\r")) {
+            i.value = i.value + g;
             continue;
           }
-          if (i != null && i.type == "identifier" && i.end == -11 && i.value.indexOf("@") == 0 && (p == `
-` || p == "\r")) {
-            i.end = t - 1, y.push(new f(p, t - 1, t, "ws", h, x));
+          if (i != null && i.type == "identifier" && i.end == -11 && i.value.indexOf("@") == 0 && (g == `
+` || g == "\r")) {
+            i.end = t - 1, A.push(new f(g, t - 1, t, "ws", b, p));
             continue;
           }
-          if (G && p == "'") {
-            i != null && (i.value.toUpperCase() == "Q" || i.value.toUpperCase() == "N" || i.value.toUpperCase() == "U" || i.value.toUpperCase() == "NQ") ? (i.value += p, i.type = "quoted-string") : y.push(new f(p, t - 1, -10, "quoted-string", h, x));
+          if (G && g == "'") {
+            i != null && (i.value.toUpperCase() == "Q" || i.value.toUpperCase() == "N" || i.value.toUpperCase() == "U" || i.value.toUpperCase() == "NQ") ? (i.value += g, i.type = "quoted-string") : A.push(new f(g, t - 1, -10, "quoted-string", b, p));
             continue;
           }
-          if (G && p == '"') {
-            y.push(new f(p, t - 1, -11, "dquoted-string", h, x));
+          if (G && g == '"') {
+            A.push(new f(g, t - 1, -11, "dquoted-string", b, p));
             continue;
           }
-          if (p == "`" && 0 <= I.indexOf("`")) {
-            y.push(new f(p, t - 1, -11, "bquoted-string", h, x));
+          if (g == "`" && 0 <= B.indexOf("`")) {
+            A.push(new f(g, t - 1, -11, "bquoted-string", b, p));
             continue;
           }
-          if (p.length == 1 && 0 <= I.indexOf(p)) {
-            y.push(new f(p, t - 1, t, "operation", h, x));
+          if (g.length == 1 && 0 <= B.indexOf(g)) {
+            A.push(new f(g, t - 1, t, "operation", b, p));
             continue;
           }
-          if (p.length == 1 && 0 <= E.indexOf(p)) {
-            y.push(new f(p, t - 1, t, "ws", h, x));
+          if (g.length == 1 && 0 <= E.indexOf(g)) {
+            A.push(new f(g, t - 1, t, "ws", b, p));
             continue;
           }
-          if ("0" <= p.charAt(0) && p.charAt(0) <= "9") {
-            R(p, y, t - p.length, h) || (p.charAt(p.length - 1) == "K" || p.charAt(p.length - 1) == "k" || p.charAt(p.length - 1) == "M" || p.charAt(p.length - 1) == "m" || p.charAt(p.length - 1) == "G" || p.charAt(p.length - 1) == "g" || p.charAt(p.length - 1) == "T" || p.charAt(p.length - 1) == "t" || p.charAt(p.length - 1) == "P" || p.charAt(p.length - 1) == "p" || p.charAt(p.length - 1) == "E" || p.charAt(p.length - 1) == "e" ? (y.push(new f(p.substring(0, p.length - 1), t - p.length, t - 1, "constant.numeric", h, x)), y.push(new f(p.substring(p.length - 1), t - 1, t, "constant.numeric", h, x))) : y.push(new f(p, t - p.length, t, "constant.numeric", h, x)));
+          if ("0" <= g.charAt(0) && g.charAt(0) <= "9") {
+            R(g, A, t - g.length, b) || (g.charAt(g.length - 1) == "K" || g.charAt(g.length - 1) == "k" || g.charAt(g.length - 1) == "M" || g.charAt(g.length - 1) == "m" || g.charAt(g.length - 1) == "G" || g.charAt(g.length - 1) == "g" || g.charAt(g.length - 1) == "T" || g.charAt(g.length - 1) == "t" || g.charAt(g.length - 1) == "P" || g.charAt(g.length - 1) == "p" || g.charAt(g.length - 1) == "E" || g.charAt(g.length - 1) == "e" ? (A.push(new f(g.substring(0, g.length - 1), t - g.length, t - 1, "constant.numeric", b, p)), A.push(new f(g.substring(g.length - 1), t - 1, t, "constant.numeric", b, p))) : A.push(new f(g, t - g.length, t, "constant.numeric", b, p)));
             continue;
           }
           var o = "identifier";
-          N + 1 < r.length && r[N + 1], y.push(new f(p, t - p.length, t, o, h, x));
+          N + 1 < r.length && r[N + 1], A.push(new f(g, t - g.length, t, o, b, p));
         }
       }
     }
-    if (y.length > 0) {
-      var i = y[y.length - 1];
+    if (A.length > 0) {
+      var i = A[A.length - 1];
       i.end = L.length;
     }
-    return y;
+    return A;
   }
-  function R(L, G, v, y) {
+  function R(L, G, y, A) {
     if (0 > L.indexOf("e") && 0 > L.indexOf("f") && 0 > L.indexOf("d"))
       return !1;
     0 <= L.indexOf("e"), 0 <= L.indexOf("e"), !(0 <= L.indexOf("e")) && 0 <= L.indexOf("f");
-    for (var I = re(L, "efd"), E = 0; E < I.length; E++) {
-      var r = I[E];
-      v += r.length, "0" <= r.charAt(0) && r.charAt(0) <= "9" ? G.push(new f(r, v - r.length, v, "constant.numeric", y)) : G.push(new f(r, v - r.length, v, "identifier", y));
+    for (var B = re(L, "efd"), E = 0; E < B.length; E++) {
+      var r = B[E];
+      y += r.length, "0" <= r.charAt(0) && r.charAt(0) <= "9" ? G.push(new f(r, y - r.length, y, "constant.numeric", A)) : G.push(new f(r, y - r.length, y, "identifier", A));
     }
     return !0;
   }
-  function O(L, G, v, y) {
-    for (var I = [], E = c(L, v, y), r = null, t = 0; t < E.length; t++) {
-      var h = E[t];
-      if (h.type == "quoted-string") {
+  function O(L, G, y, A) {
+    for (var B = [], E = c(L, y, A), r = null, t = 0; t < E.length; t++) {
+      var b = E[t];
+      if (b.type == "quoted-string") {
         if (r != null && r.type == "quoted-string") {
-          r.value = r.value + h.value, r.end = h.end;
+          r.value = r.value + b.value, r.end = b.end;
           continue;
         }
-        if (r != null && r.type == "identifier" && r.value.toUpperCase() == "N" && r.end == h.begin) {
-          r.begin = h.begin, r.end = h.end, r.type = h.type, r.value = h.value;
+        if (r != null && r.type == "identifier" && r.value.toUpperCase() == "N" && r.end == b.begin) {
+          r.begin = b.begin, r.end = b.end, r.type = b.type, r.value = b.value;
           continue;
         }
       }
-      if (h.value.indexOf("@") == 0 && (h.end = h.begin + h.value.length), h.value == "#" && r != null && r.type == "identifier") {
+      if (b.value.indexOf("@") == 0 && (b.end = b.begin + b.value.length), b.value == "#" && r != null && r.type == "identifier") {
         r.end += 1, r.value += "#";
         continue;
       }
-      if ((h.type === "identifier" || h.type === "constant.numeric") && r !== null && r.value[r.value.length - 1] === "#" && r.type === "identifier") {
-        r.end += h.value.length, r.value += h.value;
+      if ((b.type === "identifier" || b.type === "constant.numeric") && r !== null && r.value[r.value.length - 1] === "#" && r.type === "identifier") {
+        r.end += b.value.length, r.value += b.value;
         continue;
       }
       /*17607445: can just drop preprocessor directives
@@ -11135,55 +11135,55 @@ var re = /* @__PURE__ */ (function() {
           || token.value.equals("$ELSE")
           || token.value.equals("$THEN")
           ||*/
-      h.value.indexOf("$$") == 0 && (h.value = "$$VAR"), (G || h.type != "ws" && h.type != "comment" && h.type != "line-comment") && I.push(h), r = h;
+      b.value.indexOf("$$") == 0 && (b.value = "$$VAR"), (G || b.type != "ws" && b.type != "comment" && b.type != "line-comment") && B.push(b), r = b;
     }
-    return I;
+    return B;
   }
   return O;
 })();
 function fe(f, c, R, O) {
   var L = new ye(te++);
-  let G = R.toUpperCase(), v = f.toUpperCase(), y = c.toUpperCase();
+  let G = R.toUpperCase(), y = f.toUpperCase(), A = c.toUpperCase();
   if (O != null && 0 < O.length) {
-    let t = 0, h = O.length, x = O[Math.floor(Q() * (h - t)) + t];
-    return !G.startsWith("INTEGER") && !G.startsWith("NUMBER") && !G.startsWith("DATE") && (!x.toLowerCase || x.toLowerCase() != "null") && (!x.charAt || x.charAt(0) != "q" && x.charAt(1) != "'") && (x.charAt && x.charAt(0) == "'" && (x = x.substring(1, x.length - 1)), x = x.replaceAll("'", "''"), x = "'" + x + "'"), x;
+    let t = 0, b = O.length, p = O[Math.floor(Q() * (b - t)) + t];
+    return !G.startsWith("INTEGER") && !G.startsWith("NUMBER") && !G.startsWith("DATE") && (!p.toLowerCase || p.toLowerCase() != "null") && (!p.charAt || p.charAt(0) != "q" && p.charAt(1) != "'") && (p.charAt && p.charAt(0) == "'" && (p = p.substring(1, p.length - 1)), p = p.replaceAll("'", "''"), p = "'" + p + "'"), p;
   }
-  if (y == "NAME" && 0 <= v.indexOf("DEPARTMENT")) {
-    var I = ["Sales", "Finance", "Delivery", "Manufacturing"];
-    let t = 0, h = I.length;
-    return "'" + I[Math.floor(Q() * (h - t)) + t] + "'";
+  if (A == "NAME" && 0 <= y.indexOf("DEPARTMENT")) {
+    var B = ["Sales", "Finance", "Delivery", "Manufacturing"];
+    let t = 0, b = B.length;
+    return "'" + B[Math.floor(Q() * (b - t)) + t] + "'";
   }
-  if (L[y.toLowerCase()] != null && y.indexOf("NAME") < 0)
-    return "'" + L[y.toLowerCase()]() + "'";
-  if (y == "FIRST_NAME")
+  if (L[A.toLowerCase()] != null && A.indexOf("NAME") < 0)
+    return "'" + L[A.toLowerCase()]() + "'";
+  if (A == "FIRST_NAME")
     return "'" + L.first() + "'";
-  if (y == "LAST_NAME")
+  if (A == "LAST_NAME")
     return "'" + L.last() + "'";
-  if (0 <= y.indexOf("NAME"))
+  if (0 <= A.indexOf("NAME"))
     return "'" + L.name() + "'";
-  if (0 < y.indexOf("ADDRESS"))
+  if (0 < A.indexOf("ADDRESS"))
     return "'" + L.address() + "'";
-  if (y == "LOCATION")
+  if (A == "LOCATION")
     return "'" + L.city() + "'";
-  if (y == "DESCRIPTION") {
-    let t = L.paragraph({ sentences: 2 }), h = Z(R, !1, !0, ""), x = 400, N = -1;
-    for (let p = 0; p < h.length; p++) {
-      const i = h[p].value;
+  if (A == "DESCRIPTION") {
+    let t = L.paragraph({ sentences: 2 }), b = Z(R, !1, !0, ""), p = 400, N = -1;
+    for (let g = 0; g < b.length; g++) {
+      const i = b[g].value;
       if (i == "(") {
-        N = p + 1;
+        N = g + 1;
         continue;
       }
       if (0 < N && i == ")") {
-        x = parseInt(h[N].value);
+        p = parseInt(b[N].value);
         break;
       }
     }
-    return x < t.length && (t = t.substring(0, x)), "'" + t + "'";
+    return p < t.length && (t = t.substring(0, p)), "'" + t + "'";
   }
-  if (y == "JOB") {
+  if (A == "JOB") {
     var E = ["Engineer", "Consultant", "Architect", "Manager", "Analyst", "Specialist", "Evangelist", "Salesman"];
-    let t = 0, h = E.length;
-    return "'" + E[Math.floor(Q() * (h - t)) + t] + "'";
+    let t = 0, b = E.length;
+    return "'" + E[Math.floor(Q() * (b - t)) + t] + "'";
   }
   if (G.startsWith("INTEGER") || G.startsWith("NUMBER")) {
     let t = 0;
@@ -11339,7 +11339,7 @@ let ue = (function() {
     "ts"
   ];
   G = G.concat(R), G = G.concat(O), G = G.concat(L);
-  function v(E, r, t) {
+  function y(E, r, t) {
     this.line = E, this.parent = t, this.children = [], t?.children.push(this), this.fks = null, this.findChild = function(i) {
       for (var o = 0; o < this.children.length; o++)
         if (this.children[o].parseName() == i)
@@ -11354,53 +11354,57 @@ let ue = (function() {
     }, this.maxChildNameLen = function() {
       var i = 2;
       if ((f.optionEQvalue("rowkey", !0) || this.isOption("rowkey")) && (i = 7), (f.optionEQvalue("Row Version Number", "yes") || this.isOption("rowversion")) && (i = 11), f.optionEQvalue("Audit Columns", "yes") || this.isOption("auditcols") || this.isOption("audit", "col") || this.isOption("audit", "cols") || this.isOption("audit", "columns")) {
-        let g = f.getOptionValue("createdcol").length;
-        i < g && (i = g), g = f.getOptionValue("createdbycol").length, i < g && (i = g), g = f.getOptionValue("updatedcol").length, i < g && (i = g), g = f.getOptionValue("updatedbycol").length, i < g && (i = g);
+        let v = f.getOptionValue("createdcol").length;
+        i < v && (i = v), v = f.getOptionValue("createdbycol").length, i < v && (i = v), v = f.getOptionValue("updatedcol").length, i < v && (i = v), v = f.getOptionValue("updatedbycol").length, i < v && (i = v);
       }
       if (this.fks != null)
         for (var o in this.fks) {
-          var s = o.length;
-          let g = f.find(o);
-          g != null && g.isMany2One() && (s += 3), i < s && (i = s);
+          var l = o.length;
+          let v = f.find(o);
+          v != null && v.isMany2One() && (l += 3), i < l && (i = l);
         }
-      for (var d = 0; d < this.children.length; d++) {
-        let g = this.children[d];
-        if (0 < g.children.length)
+      for (var u = 0; u < this.children.length; u++) {
+        let v = this.children[u];
+        if (0 < v.children.length)
           continue;
-        let A = g.parseName().length;
-        0 < g.indexOf("file") && (A += 9), i < A && (i = A);
+        let S = v.parseName().length;
+        0 < v.indexOf("file") && (S += 9), i < S && (i = S);
       }
       var M = f.additionalColumns();
-      for (let g in M) {
-        let A = g.length;
-        i < A && (i = A);
+      for (let v in M) {
+        let S = v.length;
+        i < S && (i = S);
       }
       return i;
     };
-    function h(i) {
+    function b(i) {
       let o = i;
       return o = o.replace(/ timestamp with local time zone/gi, " tswltz"), o = o.replace(/ timestamp with time zone/gi, " tswtz"), o = o.replace(/ timestamp/gi, " ts"), o;
     }
-    this.content = h(r), this.comment, this.annotations = null;
-    var x = this.content.indexOf("{");
-    if (x > 0 && (this.content.charAt(x - 1) == " " || this.content.charAt(x - 1) == "	")) {
-      var N = this.content.indexOf("}", x);
-      N > x && (this.annotations = this.content.substring(x + 1, N).trim(), this.content = this.content.substring(0, x) + this.content.substring(N + 1));
+    this.content = b(r), this.comment, this.annotations = null;
+    var p = this.content.indexOf("{");
+    if (p > 0 && (this.content.charAt(p - 1) == " " || this.content.charAt(p - 1) == "	")) {
+      var N = this.content.indexOf("}", p);
+      N > p && (this.annotations = this.content.substring(p + 1, N).trim(), this.content = this.content.substring(0, p) + this.content.substring(N + 1));
     }
-    this.indexOf = function(i, o) {
-      for (let s = 0; s < this.src.length; s++) {
-        if (o && this.src[s].value.toLowerCase().indexOf(i.toLowerCase()) == 0)
-          return s;
-        if (i.toLowerCase() == this.src[s].value.toLowerCase())
-          return s;
+    this.getAnnotationValue = function(i) {
+      if (this.annotations == null) return null;
+      var o = new RegExp(i + "\\s+'([^']*)'", "i"), l = this.annotations.match(o);
+      return l ? l[1] : null;
+    }, this.indexOf = function(i, o) {
+      for (let l = 0; l < this.src.length; l++) {
+        if (o && this.src[l].value.toLowerCase().indexOf(i.toLowerCase()) == 0)
+          return l;
+        if (i.toLowerCase() == this.src[l].value.toLowerCase())
+          return l;
       }
       return -1;
     }, this.occursBeforeOption = function(i, o) {
       return 0 < this.indexOf(i, o) && (this.indexOf("/") < 0 || this.indexOf(i, o) < this.indexOf("/"));
     }, this.isOption = function(i, o) {
-      for (let s = 2; s < this.src.length; s++)
-        if (i == this.src[s].value.toLowerCase() && (o == null || s < this.src.length - 1 && o == this.src[s + 1].value.toLowerCase()))
-          return this.src[s - 1].value == "/";
+      for (let l = 2; l < this.src.length; l++)
+        if (i == this.src[l].value.toLowerCase() && (o == null || l < this.src.length - 1 && o == this.src[l + 1].value.toLowerCase()))
+          return this.src[l - 1].value == "/";
       return !1;
     }, this.getOptionValue = function(i) {
       if (this.src.length < 3)
@@ -11408,56 +11412,56 @@ let ue = (function() {
       const o = this.indexOf(i);
       if (o < 2 || this.src[o - 1].value != "/")
         return null;
-      let s = "";
-      for (let d = o + 1; d < this.src.length && this.src[d].value != "/" && this.src[d].value != "["; d++)
-        s += this.src[d].value;
-      return s;
+      let l = "";
+      for (let u = o + 1; u < this.src.length && this.src[u].value != "/" && this.src[u].value != "["; u++)
+        l += this.src[u].value;
+      return l;
     }, this.sugarcoatName = function(i, o) {
-      let s = "";
-      this.children.length == 0 && this.parent != null && this.parent.colprefix != null && (s = this.parent.colprefix + "_");
-      let d = "", M = "_";
-      for (let k = i; k < o; k++) {
-        const D = this.src[k].value, _ = '"' + D + '"';
-        if (this.src[k].type != "constant.numeric" && D != q(_)) {
-          d = this.content.substring(this.src[i].begin, this.src[o - 1].end);
+      let l = "";
+      this.children.length == 0 && this.parent != null && this.parent.colprefix != null && (l = this.parent.colprefix + "_");
+      let u = "", M = "_";
+      for (let I = i; I < o; I++) {
+        const D = this.src[I].value, H = '"' + D + '"';
+        if (this.src[I].type != "constant.numeric" && D != q(H)) {
+          u = this.content.substring(this.src[i].begin, this.src[o - 1].end);
           const P = f != null && 0 < (f.getOptionValue("prefix") || "").length;
-          return this.parsedName = s + (P ? q(d) : ce(q(d))), this.parsedName;
+          return this.parsedName = l + (P ? q(u) : ce(q(u))), this.parsedName;
         }
       }
-      for (let k = i; k < o; k++)
-        i < k && (d += M), d += this.src[k].value;
-      var g = d.charAt(0);
-      g >= "0" && g <= "9" && (d = "x" + d);
-      const A = f != null && 0 < (f.getOptionValue("prefix") || "").length;
-      return this.parsedName = s + (A ? q(d) : ce(q(d))), this.parsedName;
+      for (let I = i; I < o; I++)
+        i < I && (u += M), u += this.src[I].value;
+      var v = u.charAt(0);
+      v >= "0" && v <= "9" && (u = "x" + u);
+      const S = f != null && 0 < (f.getOptionValue("prefix") || "").length;
+      return this.parsedName = l + (S ? q(u) : ce(q(u))), this.parsedName;
     }, this.src = Z(this.content, !1, !0, "`");
-    const p = this.getOptionValue("colprefix");
-    p != null && (this.colprefix = p), this.parsedName = null, this.parseName = function() {
+    const g = this.getOptionValue("colprefix");
+    g != null && (this.colprefix = g), this.parsedName = null, this.parseName = function() {
       if (this.parsedName != null)
         return this.parsedName;
       let i = 0, o = this.src[0].value;
       (o == ">" || o == "<") && (o = this.src[1].value, i = 1);
-      const s = o.indexOf('"'), d = o.indexOf('"', s + 1);
-      if (0 <= s && s < d)
-        return o.substring(s, d + 1);
+      const l = o.indexOf('"'), u = o.indexOf('"', l + 1);
+      if (0 <= l && l < u)
+        return o.substring(l, u + 1);
       if (this.src[0].value == "view")
         return this.src[1].value;
       if (1 < this.src.length && this.src[1].value == "=")
         return this.src[0].value;
-      let M = this.src.length, g = this.indexOf("/");
-      0 < g && (M = g), g = this.indexOf("["), 0 < g && (M = g);
-      for (let A = 0; A < G.length; A++) {
-        let k = this.indexOf(G[A]);
-        if (k < 0 && (k = this.indexOf(G[A], !0)), 0 < k && k < M)
-          return M = k, this.sugarcoatName(i, M);
+      let M = this.src.length, v = this.indexOf("/");
+      0 < v && (M = v), v = this.indexOf("["), 0 < v && (M = v);
+      for (let S = 0; S < G.length; S++) {
+        let I = this.indexOf(G[S]);
+        if (I < 0 && (I = this.indexOf(G[S], !0)), 0 < I && I < M)
+          return M = I, this.sugarcoatName(i, M);
       }
-      for (let A = i; A < M; A++) {
-        const k = this.src[A].value.toLowerCase();
-        if (k.charAt(0) == "v" && k.charAt(1) == "c") {
-          if (k.charAt(2) == "(")
-            return this.sugarcoatName(i, A);
-          if (0 <= k.charAt(2) && k.charAt(2) <= "9")
-            return this.sugarcoatName(i, A);
+      for (let S = i; S < M; S++) {
+        const I = this.src[S].value.toLowerCase();
+        if (I.charAt(0) == "v" && I.charAt(1) == "c") {
+          if (I.charAt(2) == "(")
+            return this.sugarcoatName(i, S);
+          if (0 <= I.charAt(2) && I.charAt(2) <= "9")
+            return this.sugarcoatName(i, S);
         }
       }
       return this.sugarcoatName(i, M);
@@ -11469,85 +11473,85 @@ let ue = (function() {
         return "view";
       if (this.parent == null)
         return "table";
-      var s = f.semantics(), d = 4e3;
-      (o[0].value.endsWith("_name") || o[0].value.startsWith("name") || o[0].value.startsWith("email")) && (d = f.getOptionValue("namelen"));
+      var l = f.semantics(), u = 4e3;
+      (o[0].value.endsWith("_name") || o[0].value.startsWith("name") || o[0].value.startsWith("email")) && (u = f.getOptionValue("namelen"));
       const M = this.indexOf("vc", !0);
       if (0 < M) {
         o[M].begin, o[M].end;
         let a = o[M].value.substring(2);
-        a == "" && this.indexOf("(") == M + 1 && (a = o[M + 2].value), a != "" && (d = parseInt(a)), o[M].value.endsWith("k") && (d < 32 ? d = d * 1024 : d = d * 1024 - 1);
+        a == "" && this.indexOf("(") == M + 1 && (a = o[M + 2].value), a != "" && (u = parseInt(a)), o[M].value.endsWith("k") && (u < 32 ? u = u * 1024 : u = u * 1024 - 1);
       }
-      var g = "varchar2(" + d + s + ")";
-      i == "plsql" && (g = "varchar2"), o[0].value.endsWith("_id") && M < 0 && this.indexOf("date") < 0 && (g = "number"), o[1] && o[1].value == "id" && (g = "number"), o[0].value == "quantity" && (g = "number"), o[0].value.endsWith("_number") && (g = "number"), o[0].value.endsWith("id") && M < 0 && this.indexOf("/") + 1 == this.indexOf("pk") && (g = "number"), this.occursBeforeOption("int", !0) && (g = "integer"), 0 < M && (g = "varchar2(" + d + s + ")", i == "plsql" && (g = "varchar2"));
-      const A = this.vectorType("vector");
-      if (A != null)
-        g = A;
+      var v = "varchar2(" + u + l + ")";
+      i == "plsql" && (v = "varchar2"), o[0].value.endsWith("_id") && M < 0 && this.indexOf("date") < 0 && (v = "number"), o[1] && o[1].value == "id" && (v = "number"), o[0].value == "quantity" && (v = "number"), o[0].value.endsWith("_number") && (v = "number"), o[0].value.endsWith("id") && M < 0 && this.indexOf("/") + 1 == this.indexOf("pk") && (v = "number"), this.occursBeforeOption("int", !0) && (v = "integer"), 0 < M && (v = "varchar2(" + u + l + ")", i == "plsql" && (v = "varchar2"));
+      const S = this.vectorType("vector");
+      if (S != null)
+        v = S;
       else {
         const a = this.vectorType("vect");
-        a != null && (g = a);
+        a != null && (v = a);
       }
-      const k = J(t.parseName(), "_", this.parseName());
+      const I = J(t.parseName(), "_", this.parseName());
       this.isOption("default");
       let D = "";
-      (o[0].value.endsWith("_yn") || o[0].value.startsWith("is_")) && (g = "varchar2(1" + f.semantics() + ")", D = `
-` + c + c + " ".repeat(t.maxChildNameLen()) + "constraint " + J(f.objPrefix(), k) + " check (" + this.parseName() + " in ('Y','N'))");
+      (o[0].value.endsWith("_yn") || o[0].value.startsWith("is_")) && (v = "varchar2(1" + f.semantics() + ")", D = `
+` + c + c + " ".repeat(t.maxChildNameLen()) + "constraint " + J(f.objPrefix(), I) + " check (" + this.parseName() + " in ('Y','N'))");
       for (let a in O)
         if (0 < this.indexOf(O[a])) {
-          g = "varchar2(1" + f.semantics() + ")", D = `
-` + c + c + " ".repeat(t.maxChildNameLen()) + "constraint " + J(f.objPrefix(), k) + " check (" + this.parseName() + " in ('Y','N'))";
+          v = "varchar2(1" + f.semantics() + ")", D = `
+` + c + c + " ".repeat(t.maxChildNameLen()) + "constraint " + J(f.objPrefix(), I) + " check (" + this.parseName() + " in ('Y','N'))";
           break;
         }
-      const _ = f.getOptionValue("db");
-      D != "" && (f.getOptionValue("boolean") == "native" || f.getOptionValue("boolean") != "yn" && 0 < _.length && 23 <= pe(_)) && (D = "", g = "boolean"), this.indexOf("phone_number") == 0 && (g = "number");
+      const H = f.getOptionValue("db");
+      D != "" && (f.getOptionValue("boolean") == "native" || f.getOptionValue("boolean") != "yn" && 0 < H.length && 23 <= pe(H)) && (D = "", v = "boolean"), this.indexOf("phone_number") == 0 && (v = "number");
       let P = this.indexOf("num", !0);
-      0 < P && (g = "number");
+      0 < P && (v = "number");
       let w = this.indexOf(")");
-      if (0 < P && 0 < w && (g += this.content.toLowerCase().substring(o[P + 1].begin, o[w].end)), (0 <= this.indexOf("date") || this.indexOf("hiredate") == 0 || o[0].value.endsWith("_date") || o[0].value.startsWith("date_of_") || 1 < o.length && o[1].value == "d" || o[0].value.startsWith("created") || o[0].value.startsWith("updated")) && (g = f.getOptionValue("Date Data Type").toLowerCase()), M < 0 && (this.occursBeforeOption("clob") && (g = "clob"), (this.occursBeforeOption("blob") || this.occursBeforeOption("file")) && (g = "blob"), this.occursBeforeOption("json") && (g = "clob check (" + this.parseName() + " is json)")), this.occursBeforeOption("tswltz") && this.indexOf("/") ? g = "TIMESTAMP WITH LOCAL TIME ZONE".toLowerCase() : this.occursBeforeOption("tswtz") || this.occursBeforeOption("tstz") ? g = "TIMESTAMP WITH TIME ZONE".toLowerCase() : this.occursBeforeOption("ts") && (g = "TIMESTAMP".toLowerCase()), i) {
+      if (0 < P && 0 < w && (v += this.content.toLowerCase().substring(o[P + 1].begin, o[w].end)), (0 <= this.indexOf("date") || this.indexOf("hiredate") == 0 || o[0].value.endsWith("_date") || o[0].value.startsWith("date_of_") || 1 < o.length && o[1].value == "d" || o[0].value.startsWith("created") || o[0].value.startsWith("updated")) && (v = f.getOptionValue("Date Data Type").toLowerCase()), M < 0 && (this.occursBeforeOption("clob") && (v = "clob"), (this.occursBeforeOption("blob") || this.occursBeforeOption("file")) && (v = "blob"), this.occursBeforeOption("json") && (v = "clob check (" + this.parseName() + " is json)")), this.occursBeforeOption("tswltz") && this.indexOf("/") ? v = "TIMESTAMP WITH LOCAL TIME ZONE".toLowerCase() : this.occursBeforeOption("tswtz") || this.occursBeforeOption("tstz") ? v = "TIMESTAMP WITH TIME ZONE".toLowerCase() : this.occursBeforeOption("ts") && (v = "TIMESTAMP".toLowerCase()), i) {
         if (this.isOption("fk") || 0 < this.indexOf("reference", !0)) {
           const a = this.refId();
           let n = "number";
-          g == "integer" && (n = g);
-          let l = f.find(a);
-          return l != null && l.getExplicitPkName() != null && (n = l.getPkType()), n;
+          v == "integer" && (n = v);
+          let s = f.find(a);
+          return s != null && s.getExplicitPkName() != null && (n = s.getPkType()), n;
         }
-        return g;
+        return v;
       }
-      (this.isOption("unique") || this.isOption("uk")) && (g += `
-`, g += c + c + " ".repeat(t.maxChildNameLen()) + "constraint " + J(f.objPrefix(), k, "_unq") + " unique");
+      (this.isOption("unique") || this.isOption("uk")) && (v += `
+`, v += c + c + " ".repeat(t.maxChildNameLen()) + "constraint " + J(f.objPrefix(), I, "_unq") + " unique");
       var e = "'";
-      if ((g.startsWith("integer") || g.startsWith("number") || g.startsWith("date")) && (e = ""), this.isOption("default")) {
+      if ((v.startsWith("integer") || v.startsWith("number") || v.startsWith("date")) && (e = ""), this.isOption("default")) {
         let a = "";
         for (let n = this.indexOf("default") + 1; n < o.length; n++) {
-          const l = o[n].getValue();
-          if (l == "/" || l == "-" || l == "[")
+          const s = o[n].getValue();
+          if (s == "/" || s == "-" || s == "[")
             break;
           a += o[n].getValue();
         }
-        g += " default on null " + e + a + e;
+        v += " default on null " + e + a + e;
       }
-      if ((this.isOption("nn") || this.indexOf("not") + 1 == this.indexOf("null")) && this.indexOf("pk") < 0 && (g += " not null"), (this.isOption("hidden") || this.isOption("invincible")) && (g += " invisible"), g += this.genConstraint(e), g += D, this.isOption("between")) {
+      if ((this.isOption("nn") || this.indexOf("not") + 1 == this.indexOf("null")) && this.indexOf("pk") < 0 && (v += " not null"), (this.isOption("hidden") || this.isOption("invincible")) && (v += " invisible"), v += this.genConstraint(e), v += D, this.isOption("between")) {
         const a = this.indexOf("between"), n = o[a + 1].getValue() + " and " + o[a + 3].getValue();
-        g += " constraint " + J(k, "_bet") + `
-`, g += "           check (" + this.parseName() + " between " + n + ")";
+        v += " constraint " + J(I, "_bet") + `
+`, v += "           check (" + this.parseName() + " between " + n + ")";
       }
       if (this.isOption("pk")) {
         let a = " not null";
-        g.startsWith("number") && f.optionEQvalue("pk", "identityDataType") && (a = " GENERATED BY DEFAULT ON NULL AS IDENTITY".toLowerCase()), g.startsWith("number") && f.optionEQvalue("pk", "seq") && (a = " default on null " + (f.objPrefix() + this.parent.parseName()) + "_seq.NEXTVAL ".toLowerCase()), g.startsWith("number") && f.optionEQvalue("pk", "guid") && (a = " default on null to_number(sys_guid(), 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX') "), g += a + `
-`, g += c + c + " ".repeat(t.maxChildNameLen()) + "constraint " + J(f.objPrefix(), k, "_pk") + " primary key";
+        v.startsWith("number") && f.optionEQvalue("pk", "identityDataType") && (a = " GENERATED BY DEFAULT ON NULL AS IDENTITY".toLowerCase()), v.startsWith("number") && f.optionEQvalue("pk", "seq") && (a = " default on null " + (f.objPrefix() + this.parent.parseName()) + "_seq.NEXTVAL ".toLowerCase()), v.startsWith("number") && f.optionEQvalue("pk", "guid") && (a = " default on null to_number(sys_guid(), 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX') "), v += a + `
+`, v += c + c + " ".repeat(t.maxChildNameLen()) + "constraint " + J(f.objPrefix(), I, "_pk") + " primary key";
       }
-      return this.annotations != null && (0 <= g.indexOf(`
-`) ? g += `
-` + c + c + " ".repeat(t.maxChildNameLen()) + "annotations (" + this.annotations + ")" : g += " annotations (" + this.annotations + ")"), g;
+      return this.annotations != null && (0 <= v.indexOf(`
+`) ? v += `
+` + c + c + " ".repeat(t.maxChildNameLen()) + "annotations (" + this.annotations + ")" : v += " annotations (" + this.annotations + ")"), v;
     }, this.vectorType = function(i) {
-      const o = this.indexOf(i, !0), s = this.src;
+      const o = this.indexOf(i, !0), l = this.src;
       if (0 < o) {
-        s[o].begin, s[o].end;
-        let d = s[o].value.substring(i.length);
-        d == "" && this.indexOf("(") == d + 1 && (d = s[d + 2].value);
+        l[o].begin, l[o].end;
+        let u = l[o].value.substring(i.length);
+        u == "" && this.indexOf("(") == u + 1 && (u = l[u + 2].value);
         let M = "*";
-        if (d != "") {
-          let g = 1;
-          d.endsWith("k") && (g = 1024), d = d.substring(0, d.length - 1), M = parseInt(d) * g;
+        if (u != "") {
+          let v = 1;
+          u.endsWith("k") && (v = 1024), u = u.substring(0, u.length - 1), M = parseInt(u) * v;
         }
         return "vector(" + M + ",*,*)";
       }
@@ -11555,19 +11559,19 @@ let ue = (function() {
     }, this.genConstraint = function(i) {
       let o = "";
       if (this.isOption("check")) {
-        let s = "";
-        t != null && (s = J(t.parseName(), "_"));
-        const d = J(s, this.parseName());
+        let l = "";
+        t != null && (l = J(t.parseName(), "_"));
+        const u = J(l, this.parseName());
         let M = c;
         t != null && (M = " ".repeat(t.maxChildNameLen()));
-        let g = this.getGeneralConstraint();
-        if (g != null)
-          return this.children != null && 0 < this.children.length ? (o += c + "constraint " + J(f.objPrefix(), d, "_ck"), o += "  check " + g + `,
-`) : (o += " constraint " + J(f.objPrefix(), d, "_ck") + `
-`, o += c + c + M + "check " + g), o;
-        const A = this.getValues("check");
-        o += " constraint " + J(f.objPrefix(), d, "_ck") + `
-`, o += c + c + M + "check (" + this.parseName() + " in (" + A + "))";
+        let v = this.getGeneralConstraint();
+        if (v != null)
+          return this.children != null && 0 < this.children.length ? (o += c + "constraint " + J(f.objPrefix(), u, "_ck"), o += "  check " + v + `,
+`) : (o += " constraint " + J(f.objPrefix(), u, "_ck") + `
+`, o += c + c + M + "check " + v), o;
+        const S = this.getValues("check");
+        o += " constraint " + J(f.objPrefix(), u, "_ck") + `
+`, o += c + c + M + "check (" + this.parseName() + " in (" + S + "))";
       }
       return o;
     }, this.isMany2One = function() {
@@ -11582,16 +11586,16 @@ let ue = (function() {
       }
       return null;
     }, this.trimmedContent = function() {
-      var i = this.content.trim(), o = i.indexOf("["), s = i.indexOf("]");
-      return this.comment == null && 0 < o && (this.comment = i.substr(o + 1, s - o - 1)), 0 < o && (i = i.substr(0, o) + i.substr(s + 2)), o = i.indexOf("--"), this.comment == null && 0 < o && (this.comment = i.substr(o + 2)), 0 < o && (i = i.substr(0, o)), i.trim();
+      var i = this.content.trim(), o = i.indexOf("["), l = i.indexOf("]");
+      return this.comment == null && 0 < o && (this.comment = i.substr(o + 1, l - o - 1)), 0 < o && (i = i.substr(0, o) + i.substr(l + 2)), o = i.indexOf("--"), this.comment == null && 0 < o && (this.comment = i.substr(o + 2)), 0 < o && (i = i.substr(0, o)), i.trim();
     }, this.refId = function() {
       var i = this.trimmedContent();
       i = i.replace(/\/cascade/g, "");
       var o = i.indexOf(" id ");
       if (o < 0 && o == i.length - 3 && (o = i.indexOf(" id")), o < 0 && (o = i.indexOf(" id"), o != i.length - 3 && (o = -1)), o < 0 && (o = i.indexOf("_id "), o != i.length - 4 && (o = -1)), o < 0 && (o = i.indexOf("_id"), o != i.length - 3 && (o = -1)), o < 0 && (o = i.indexOf("Id "), o != i.length - 3 && (o = -1)), 0 < o) {
-        let s = i.substr(0, o) + "s";
-        if (f.find(s) != null || (s = i.substr(0, o), f.find(s) != null))
-          return s;
+        let l = i.substr(0, o) + "s";
+        if (f.find(l) != null || (l = i.substr(0, o), f.find(l) != null))
+          return l;
       }
       return o = i.indexOf("/fk"), 0 < o ? (i = i.substr(o + 3).trim(), o = i.indexOf("/"), 0 < o && (i = i.substring(0, o).trim()), o = i.indexOf("["), 0 < o && (i = i.substring(0, o).trim()), i.replace(" ", "_")) : (o = i.indexOf("/reference"), 0 < o ? (i = i.substr(o + 10).trim(), i.indexOf("s") == 0 && (i = i.substring(1).trim()), o = i.indexOf("/"), 0 < o && (i = i.substring(0, o).trim()), o = i.indexOf("["), 0 < o && (i = i.substring(0, o).trim()), i.replace(" ", "_")) : null);
     }, this.getGeneralConstraint = function() {
@@ -11600,42 +11604,42 @@ let ue = (function() {
         let o = i + 2;
         for (; o < this.src.length && this.src[o].value != "/" && this.src[o].value != "["; )
           o++;
-        let s = this.content.substring(this.src[i + 1].begin, this.src[o - 1].end);
-        return s.charAt(0) != "(" && (s = "(" + s + ")"), s;
+        let l = this.content.substring(this.src[i + 1].begin, this.src[o - 1].end);
+        return l.charAt(0) != "(" && (l = "(" + l + ")"), l;
       }
       return null;
     }, this.listValues = function(i) {
-      let o = [], s = this.indexOf(i), d = " ";
-      for (let A = s + 1; A < this.src.length && this.src[A].value != "/" && this.src[A].value != "["; A++)
-        if (this.src[A].value == ",") {
-          d = ",";
+      let o = [], l = this.indexOf(i), u = " ";
+      for (let S = l + 1; S < this.src.length && this.src[S].value != "/" && this.src[S].value != "["; S++)
+        if (this.src[S].value == ",") {
+          u = ",";
           break;
-        } else if (this.src[A].value.toLowerCase && this.src[A].value.toLowerCase() == "and") {
-          d = this.src[A].value;
+        } else if (this.src[S].value.toLowerCase && this.src[S].value.toLowerCase() == "and") {
+          u = this.src[S].value;
           break;
         }
-      if (d == " ") {
-        for (let A = s + 1; A < this.src.length && this.src[A].value != "/" && this.src[A].value != "["; A++) {
-          let k = this.src[A].value;
-          this.src[A].type == "identifier" && k != "null" && (k = "'" + k + "'"), k.charAt(0) == "`" && (k = k.substring(1, k.length - 1)), o.push(k);
+      if (u == " ") {
+        for (let S = l + 1; S < this.src.length && this.src[S].value != "/" && this.src[S].value != "["; S++) {
+          let I = this.src[S].value;
+          this.src[S].type == "identifier" && I != "null" && (I = "'" + I + "'"), I.charAt(0) == "`" && (I = I.substring(1, I.length - 1)), o.push(I);
         }
         return o;
       }
-      let M = null, g = null;
-      for (let A = s + 1; A < this.src.length && this.src[A].value != "/" && this.src[A].value != "["; A++) {
-        let k = this.src[A].value, D = this.content.substring(this.src[A - 1].end, this.src[A].begin);
-        if (k == d) {
-          g == "identifier" && M != "null" && (M = "'" + M + "'"), o.push(M), M = null, g = null;
+      let M = null, v = null;
+      for (let S = l + 1; S < this.src.length && this.src[S].value != "/" && this.src[S].value != "["; S++) {
+        let I = this.src[S].value, D = this.content.substring(this.src[S - 1].end, this.src[S].begin);
+        if (I == u) {
+          v == "identifier" && M != "null" && (M = "'" + M + "'"), o.push(M), M = null, v = null;
           continue;
         }
-        k != "(" && k != ")" && (k.charAt(0) == "`" ? k = k.substring(1, k.length - 1) : this.src[A].type == "identifier" && (g = "identifier"), M == null ? M = k : M += D + k);
+        I != "(" && I != ")" && (I.charAt(0) == "`" ? I = I.substring(1, I.length - 1) : this.src[S].type == "identifier" && (v = "identifier"), M == null ? M = I : M += D + I);
       }
-      return g == "identifier" && (M = "'" + M + "'"), o.push(M), o;
+      return v == "identifier" && (M = "'" + M + "'"), o.push(M), o;
     }, this.getValues = function(i) {
       let o = "";
-      const s = this.listValues(i);
-      for (let d = 0; d < s.length; d++)
-        0 < d && (o += ","), o += s[d];
+      const l = this.listValues(i);
+      for (let u = 0; u < l.length; u++)
+        0 < u && (o += ","), o += l[u];
       return o;
     }, this.parseValues = function() {
       var i;
@@ -11644,20 +11648,20 @@ let ue = (function() {
       if (this.isOption("values"))
         return this.listValues("values");
       if (this.isOption("between")) {
-        for (var i = this.listValues("between"), o = [], s = parseInt(i[0]); s <= parseInt(i[1]); s++)
-          o.push(s);
+        for (var i = this.listValues("between"), o = [], l = parseInt(i[0]); l <= parseInt(i[1]); l++)
+          o.push(l);
         return o;
       }
       return null;
     }, this.apparentDepth = function() {
       let i = this.content.split(/ |\t/), o = 0;
-      for (var s = 0; s < i.length; s++) {
-        var d = i[s];
-        if (d == "	") {
+      for (var l = 0; l < i.length; l++) {
+        var u = i[l];
+        if (u == "	") {
           o += this.tab;
           continue;
         }
-        if (d == "") {
+        if (u == "") {
           o++;
           continue;
         }
@@ -11682,7 +11686,7 @@ let ue = (function() {
     }, this.getPkType = function() {
       if (this.getGenIdColName() == null) {
         const o = this.getExplicitPkName();
-        return this.findChild(o).parseType((s) => !0);
+        return this.findChild(o).parseType((l) => !0);
       }
       return "number";
     }, this.lateInitFks = function() {
@@ -11693,8 +11697,8 @@ let ue = (function() {
       }
     }, this.singleDDL = function() {
       if (this.children.length == 0 && 0 < this.apparentDepth()) {
-        let l = c;
-        return this.parent != null && (l += " ".repeat(this.parent.maxChildNameLen() - this.parseName().length)), this.parseName() + l + this.parseType();
+        let m = c;
+        return this.parent != null && (m += " ".repeat(this.parent.maxChildNameLen() - this.parseName().length)), this.parseName() + m + this.parseType();
       }
       this.lateInitFks();
       var i = "";
@@ -11703,146 +11707,146 @@ let ue = (function() {
 
 `), i = i + "create table " + o + ` (
 `;
-      var s = c + " ".repeat(this.maxChildNameLen() - 2);
-      let d = this.getGenIdColName();
-      if (d != null && !this.isOption("pk")) {
-        let l = "not null";
-        f.optionEQvalue("pk", "identityDataType") && (l = "GENERATED BY DEFAULT ON NULL AS IDENTITY".toLowerCase()), f.optionEQvalue("pk", "seq") && (l = "default on null " + o + "_seq.NEXTVAL ".toLowerCase()), f.optionEQvalue("pk", "guid") && (l = "default on null to_number(sys_guid(), 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX') "), i += c + d + s + "number " + l + `
+      var l = c + " ".repeat(this.maxChildNameLen() - 2);
+      let u = this.getGenIdColName();
+      if (u != null && !this.isOption("pk")) {
+        let m = "not null";
+        f.optionEQvalue("pk", "identityDataType") && (m = "GENERATED BY DEFAULT ON NULL AS IDENTITY".toLowerCase()), f.optionEQvalue("pk", "seq") && (m = "default on null " + o + "_seq.NEXTVAL ".toLowerCase()), f.optionEQvalue("pk", "guid") && (m = "default on null to_number(sys_guid(), 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX') "), i += c + u + l + "number " + m + `
 `;
-        const u = J(f.objPrefix("no schema") + this.parseName(), "_", d);
-        i += c + c + " ".repeat(this.maxChildNameLen()) + "constraint " + J(u, "_pk") + ` primary key,
+        const k = J(f.objPrefix("no schema") + this.parseName(), "_", u);
+        i += c + c + " ".repeat(this.maxChildNameLen()) + "constraint " + J(k, "_pk") + ` primary key,
 `;
       } else {
-        let l = this.getExplicitPkName();
-        if (l != null && l.indexOf(",") < 0) {
-          let u = c + " ".repeat(this.maxChildNameLen() - l.length), S = "number";
-          const B = this.findChild(l);
-          B != null && (S = B.parseType()), i += c + l + u + S + `,
+        let m = this.getExplicitPkName();
+        if (m != null && m.indexOf(",") < 0) {
+          let k = c + " ".repeat(this.maxChildNameLen() - m.length), d = "number";
+          const h = this.findChild(m);
+          h != null && (d = h.parseType()), i += c + m + k + d + `,
 `;
         }
       }
-      for (let l in this.fks) {
-        let u = this.fks[l];
-        if (0 < l.indexOf(",")) {
-          let C = f.find(u);
-          for (var M = re(l, ", "), g = 0; g < M.length; g++) {
-            var A = M[g];
-            if (A == ",")
+      for (let m in this.fks) {
+        let k = this.fks[m];
+        if (0 < m.indexOf(",")) {
+          let F = f.find(k);
+          for (var M = re(m, ", "), v = 0; v < M.length; v++) {
+            var S = M[v];
+            if (S == ",")
               continue;
-            const T = C.findChild(A);
-            s = c + " ".repeat(this.maxChildNameLen() - A.length), i += c + A + s + T.parseType((H) => !0) + `,
+            const _ = F.findChild(S);
+            l = c + " ".repeat(this.maxChildNameLen() - S.length), i += c + S + l + _.parseType((z) => !0) + `,
 `;
           }
           continue;
         }
-        let S = "number";
-        const B = this.findChild(l);
-        B != null && (S = B.parseType("fk"));
-        let m = f.find(u), b = "";
-        if (m != null) {
-          const C = m.getExplicitPkName();
-          C != null && C.indexOf(",") < 0 && (S = m.getPkType());
+        let d = "number";
+        const h = this.findChild(m);
+        h != null && (d = h.parseType("fk"));
+        let C = f.find(k), T = "";
+        if (C != null) {
+          const F = C.getExplicitPkName();
+          F != null && F.indexOf(",") < 0 && (d = C.getPkType());
         } else
-          m = f.find(l), m.isMany2One() & !l.endsWith("_id") && (u = l, l = W(l), b = "_id");
-        if (s = c + " ".repeat(this.maxChildNameLen() - l.length), i += c + l + b + s + S, m.line < this.line || m.isMany2One()) {
-          i += c + c + " ".repeat(this.maxChildNameLen()) + "constraint " + o + "_" + l + `_fk
+          C = f.find(m), C.isMany2One() & !m.endsWith("_id") && (k = m, m = W(m), T = "_id");
+        if (l = c + " ".repeat(this.maxChildNameLen() - m.length), i += c + m + T + l + d, C.line < this.line || C.isMany2One()) {
+          i += c + c + " ".repeat(this.maxChildNameLen()) + "constraint " + o + "_" + m + `_fk
 `;
-          let C = "";
-          this.isOption("cascade") ? C = " on delete cascade" : this.isOption("setnull") && (C = " on delete set null");
-          let T = "";
-          for (let H in this.children) {
-            let F = this.children[H];
-            if (l == F.parseName()) {
-              (F.isOption("nn") || F.isOption("notnull")) && (T = " NOT NULL".toLowerCase()), F.isOption("cascade") ? C = " on delete cascade" : this.isOption("setnull") && (C = " on delete set null");
+          let F = "";
+          this.isOption("cascade") ? F = " on delete cascade" : this.isOption("setnull") && (F = " on delete set null");
+          let _ = "";
+          for (let z in this.children) {
+            let V = this.children[z];
+            if (m == V.parseName()) {
+              (V.isOption("nn") || V.isOption("notnull")) && (_ = " NOT NULL".toLowerCase()), V.isOption("cascade") ? F = " on delete cascade" : this.isOption("setnull") && (F = " on delete set null");
               break;
             }
           }
-          i += c + c + " ".repeat(this.maxChildNameLen()) + "references " + f.objPrefix() + u + C + T + `,
+          i += c + c + " ".repeat(this.maxChildNameLen()) + "references " + f.objPrefix() + k + F + _ + `,
 `;
         } else {
           i += `,
 `;
-          const C = "alter table " + o + " add constraint " + o + "_" + l + "_fk foreign key (" + l + ") references " + f.objPrefix() + u + `;
+          const F = "alter table " + o + " add constraint " + o + "_" + m + "_fk foreign key (" + m + ") references " + f.objPrefix() + k + `;
 `;
-          f.postponedAlters.includes(C) || f.postponedAlters.push(C);
+          f.postponedAlters.includes(F) || f.postponedAlters.push(F);
         }
       }
       if (f.optionEQvalue("rowkey", !0) || this.isOption("rowkey")) {
-        let l = c + " ".repeat(this.maxChildNameLen() - 7);
-        i += c + "row_key" + l + "varchar2(30" + f.semantics() + `)
+        let m = c + " ".repeat(this.maxChildNameLen() - 7);
+        i += c + "row_key" + m + "varchar2(30" + f.semantics() + `)
 `, i += c + c + " ".repeat(this.maxChildNameLen()) + "constraint " + o + `_row_key_unq unique not null,
 `;
       }
-      for (let l = 0; l < this.children.length; l++) {
-        let u = this.children[l];
-        if (!(d != null && u.parseName() == "id") && !(0 < u.children.length) && u.refId() == null) {
-          if (u.parseName() == this.getExplicitPkName())
+      for (let m = 0; m < this.children.length; m++) {
+        let k = this.children[m];
+        if (!(u != null && k.parseName() == "id") && !(0 < k.children.length) && k.refId() == null) {
+          if (k.parseName() == this.getExplicitPkName())
             continue;
-          if (i += c + u.singleDDL() + `,
-`, 0 < u.indexOf("file")) {
-            const S = u.parseName().toUpperCase();
-            let B = S + "_FILENAME", m = c + " ".repeat(this.maxChildNameLen() - B.length);
-            i += c + B.toLowerCase() + m + "varchar2(255" + f.semantics() + `),
-`, B = S + "_MIMETYPE", m = c + " ".repeat(this.maxChildNameLen() - B.length), i += c + B.toLowerCase() + m + "varchar2(255" + f.semantics() + `),
-`, B = S + "_CHARSET", m = c + " ".repeat(this.maxChildNameLen() - B.length), i += c + B.toLowerCase() + m + "varchar2(255" + f.semantics() + `),
-`, B = S + "_LASTUPD", m = c + " ".repeat(this.maxChildNameLen() - B.length), i += c + B.toLowerCase() + m + f.getOptionValue("Date Data Type").toLowerCase() + `,
+          if (i += c + k.singleDDL() + `,
+`, 0 < k.indexOf("file")) {
+            const d = k.parseName().toUpperCase();
+            let h = d + "_FILENAME", C = c + " ".repeat(this.maxChildNameLen() - h.length);
+            i += c + h.toLowerCase() + C + "varchar2(255" + f.semantics() + `),
+`, h = d + "_MIMETYPE", C = c + " ".repeat(this.maxChildNameLen() - h.length), i += c + h.toLowerCase() + C + "varchar2(255" + f.semantics() + `),
+`, h = d + "_CHARSET", C = c + " ".repeat(this.maxChildNameLen() - h.length), i += c + h.toLowerCase() + C + "varchar2(255" + f.semantics() + `),
+`, h = d + "_LASTUPD", C = c + " ".repeat(this.maxChildNameLen() - h.length), i += c + h.toLowerCase() + C + f.getOptionValue("Date Data Type").toLowerCase() + `,
 `;
           }
         }
       }
       if (f.optionEQvalue("rowVersion", "yes") || this.isOption("rowversion")) {
-        let l = c + " ".repeat(this.maxChildNameLen() - 11);
-        i += c + "row_version" + l + `integer not null,
+        let m = c + " ".repeat(this.maxChildNameLen() - 11);
+        i += c + "row_version" + m + `integer not null,
 `;
       }
       if (f.optionEQvalue("Audit Columns", "yes") || this.isOption("auditcols") || this.isOption("audit", "col") || this.isOption("audit", "cols") || this.isOption("audit", "columns")) {
-        let l = f.getOptionValue("createdcol"), u = c + " ".repeat(this.maxChildNameLen() - l.length);
-        i += c + l + u + f.getOptionValue("Date Data Type").toLowerCase() + ` not null,
+        let m = f.getOptionValue("createdcol"), k = c + " ".repeat(this.maxChildNameLen() - m.length);
+        i += c + m + k + f.getOptionValue("Date Data Type").toLowerCase() + ` not null,
 `;
-        let S = f.getOptionValue("createdbycol");
-        u = c + " ".repeat(this.maxChildNameLen() - S.length), i += c + S + u + "varchar2(255" + f.semantics() + `) not null,
+        let d = f.getOptionValue("createdbycol");
+        k = c + " ".repeat(this.maxChildNameLen() - d.length), i += c + d + k + "varchar2(255" + f.semantics() + `) not null,
 `;
-        let B = f.getOptionValue("updatedcol");
-        u = c + " ".repeat(this.maxChildNameLen() - B.length), i += c + B + u + f.getOptionValue("Date Data Type").toLowerCase() + ` not null,
+        let h = f.getOptionValue("updatedcol");
+        k = c + " ".repeat(this.maxChildNameLen() - h.length), i += c + h + k + f.getOptionValue("Date Data Type").toLowerCase() + ` not null,
 `;
-        let m = f.getOptionValue("updatedbycol");
-        u = c + " ".repeat(this.maxChildNameLen() - m.length), i += c + m + u + "varchar2(255" + f.semantics() + `) not null,
+        let C = f.getOptionValue("updatedbycol");
+        k = c + " ".repeat(this.maxChildNameLen() - C.length), i += c + C + k + "varchar2(255" + f.semantics() + `) not null,
 `;
       }
-      var k = f.additionalColumns();
-      for (let l in k) {
-        var D = k[l];
-        s = c + " ".repeat(this.maxChildNameLen() - l.length), i += c + l.toUpperCase() + s + D + ` not null,
+      var I = f.additionalColumns();
+      for (let m in I) {
+        var D = I[m];
+        l = c + " ".repeat(this.maxChildNameLen() - m.length), i += c + m.toUpperCase() + l + D + ` not null,
 `;
       }
       i += this.genConstraint(), i.lastIndexOf(`,
 `) == i.length - 2 && (i = i.substring(0, i.length - 2) + `
 `);
-      let _ = this.annotations != null ? `
+      let H = this.annotations != null ? `
 annotations (` + this.annotations + ")" : "";
-      if (i += ")" + (f.optionEQvalue("compress", "yes") || this.isOption("compress") ? " compress" : "") + _ + `;
+      if (i += ")" + (f.optionEQvalue("compress", "yes") || this.isOption("compress") ? " compress" : "") + H + `;
 
 `, this.isOption("audit") && !this.isOption("auditcols") && !this.isOption("audit", "col") && !this.isOption("audit", "cols") && !this.isOption("audit", "columns") && (i += "audit all on " + o + `;
 
 `), this.isOption("flashback") || this.isOption("fda")) {
-        let l = this.getOptionValue("flashback") || this.getOptionValue("fda") || "";
-        l = l.trim(), i += "alter table " + o + " flashback archive" + (0 < l.length ? " " + l : "") + `;
+        let m = this.getOptionValue("flashback") || this.getOptionValue("fda") || "";
+        m = m.trim(), i += "alter table " + o + " flashback archive" + (0 < m.length ? " " + m : "") + `;
 
 `;
       }
-      for (let l in this.fks)
-        if (0 < l.indexOf(",")) {
-          var P = this.fks[l];
-          i += "alter table " + o + " add constraint " + P + "_" + o + "_fk foreign key (" + l + ") references " + P + `;
+      for (let m in this.fks)
+        if (0 < m.indexOf(",")) {
+          var P = this.fks[m];
+          i += "alter table " + o + " add constraint " + P + "_" + o + "_fk foreign key (" + m + ") references " + P + `;
 
 `;
         }
       let w = 1;
-      for (let l in this.fks)
+      for (let m in this.fks)
         if (!this.isMany2One()) {
-          var P = this.fks[l], e = P, A = l;
-          A == null && (A = W(e) + "_id"), w == 1 && (i += `-- table index
-`), i += "create index " + o + "_i" + w++ + " on " + o + " (" + A + `);
+          var P = this.fks[m], e = P, S = m;
+          S == null && (S = W(e) + "_id"), w == 1 && (i += `-- table index
+`), i += "create index " + o + "_i" + w++ + " on " + o + " (" + S + `);
 
 `;
         }
@@ -11852,17 +11856,19 @@ annotations (` + this.annotations + ")" : "";
 `), a = this.getOptionValue("unique"), a == null && (a = this.getOptionValue("uk")), a != null && (i += "alter table " + o + " add constraint " + o + "_uk unique (" + a + `);
 
 `);
-      for (let l = 0; l < this.children.length; l++) {
-        var n = this.children[l];
+      for (let m = 0; m < this.children.length; m++) {
+        var n = this.children[m];
         (n.isOption("idx") || n.isOption("index")) && (w == 1 && (i += `-- table index
 `), i += "create index " + o + "_i" + w++ + " on " + o + " (" + n.parseName() + `);
 `);
       }
-      this.comment != null && (i += "comment on table " + o + " is '" + this.comment + `';
+      var s = this.getAnnotationValue("DESCRIPTION") || this.comment;
+      s != null && (i += "comment on table " + o + " is '" + s + `';
 `);
-      for (let l = 0; l < this.children.length; l++) {
-        let u = this.children[l];
-        u.comment != null && u.children.length == 0 && (i += "comment on column " + o + "." + u.parseName() + " is '" + u.comment + `';
+      for (let m = 0; m < this.children.length; m++) {
+        let k = this.children[m];
+        var x = k.getAnnotationValue("DESCRIPTION") || k.comment;
+        x != null && k.children.length == 0 && (i += "comment on column " + o + "." + k.parseName() + " is '" + x + `';
 `);
       }
       return i += `
@@ -11872,15 +11878,15 @@ annotations (` + this.annotations + ")" : "";
         return "";
       var i = this.orderedTableNodes();
       let o = "";
-      for (let s = 0; s < i.length; s++)
-        o += i[s].singleDDL();
+      for (let l = 0; l < i.length; l++)
+        o += i[l].singleDDL();
       return o;
     }, this.orderedTableNodes = function() {
       var i = [this];
       const o = this.descendants();
-      for (let d = 1; d < o.length; d++) {
-        var s = o[d];
-        s.children.length != 0 && (s.isMany2One() ? s.isContainedIn(i) || i.unshift(s) : s.isContainedIn(i) || i.push(s));
+      for (let u = 1; u < o.length; u++) {
+        var l = o[u];
+        l.children.length != 0 && (l.isMany2One() ? l.isContainedIn(i) || i.unshift(l) : l.isContainedIn(i) || i.push(l));
       }
       return i;
     }, this.isContainedIn = function(i) {
@@ -11901,122 +11907,122 @@ annotations (` + this.annotations + ")" : "";
       if (f.optionEQvalue("Duality View", "yes") || this.parseType() == "dv")
         try {
           return this.generateDualityView();
-        } catch (b) {
-          if (b.message == this.one2many2oneUnsupoported)
+        } catch (h) {
+          if (h.message == this.one2many2oneUnsupoported)
             return "";
-          throw b;
+          throw h;
         }
       let i = f.objPrefix() + this.parseName();
-      var o = this.src, s = "create or replace view " + i;
-      this.annotations != null && (s += `
-annotations (` + this.annotations + ")"), s += ` as
-`, s += `select
+      var o = this.src, l = "create or replace view " + i;
+      this.annotations != null && (l += `
+annotations (` + this.annotations + ")"), l += ` as
+`, l += `select
 `;
-      for (var d = 0, M = 2; M < o.length; M++) {
-        let b = f.find(o[M].value);
-        if (b == null)
+      for (var u = 0, M = 2; M < o.length; M++) {
+        let h = f.find(o[M].value);
+        if (h == null)
           return "";
-        var g = (o[M].value + ".id").length;
-        d < g && (d = g);
-        for (var A = 0; A < b.children.length; A++) {
-          var k = b.children[A];
-          g = (o[M].value + "." + k.parseName()).length, d < g && (d = g);
+        var v = (o[M].value + ".id").length;
+        u < v && (u = v);
+        for (var S = 0; S < h.children.length; S++) {
+          var I = h.children[S];
+          v = (o[M].value + "." + I.parseName()).length, u < v && (u = v);
         }
       }
       var D = {};
-      for (let b = 2; b < o.length; b++) {
-        let C = f.find(o[b].value);
+      for (let h = 2; h < o.length; h++) {
+        let C = f.find(o[h].value);
         if (C != null)
           for (let T = 0; T < C.children.length; T++) {
-            var _ = C.children[T].parseName(), P = D[_];
-            P == null && (P = 0), D[_] = P + 1;
+            var H = C.children[T].parseName(), P = D[H];
+            P == null && (P = 0), D[H] = P + 1;
           }
       }
-      for (let b = 2; b < o.length; b++) {
-        let C = f.find(o[b].value);
+      for (let h = 2; h < o.length; h++) {
+        let C = f.find(o[h].value);
         if (C == null)
           continue;
-        let T = " ".repeat(d - (o[b].value + ".id").length);
-        s += c + o[b].value + ".id" + c + T + W(o[b].value) + `_id,
+        let T = " ".repeat(u - (o[h].value + ".id").length);
+        l += c + o[h].value + ".id" + c + T + W(o[h].value) + `_id,
 `;
-        for (let H = 0; H < C.children.length; H++) {
-          let F = C.children[H];
-          if (F.children.length == 0) {
-            T = " ".repeat(d - (o[b].value + "." + F.parseName()).length);
+        for (let F = 0; F < C.children.length; F++) {
+          let _ = C.children[F];
+          if (_.children.length == 0) {
+            T = " ".repeat(u - (o[h].value + "." + _.parseName()).length);
             var w = "";
-            1 < D[F.parseName()] && (w = W(o[b].value) + "_"), s += c + o[b].value + "." + F.parseName() + c + T + w + F.parseName() + `,
+            1 < D[_.parseName()] && (w = W(o[h].value) + "_"), l += c + o[h].value + "." + _.parseName() + c + T + w + _.parseName() + `,
 `;
           }
         }
         if (f.optionEQvalue("rowVersion", "yes") || C.isOption("rowversion")) {
-          let H = c + " ".repeat(C.maxChildNameLen() - 11);
-          s += c + o[b].value + ".row_version" + W(H + o[b].value) + `_row_version,
+          let F = c + " ".repeat(C.maxChildNameLen() - 11);
+          l += c + o[h].value + ".row_version" + W(F + o[h].value) + `_row_version,
 `;
         }
         if (f.optionEQvalue("rowkey", "yes") || C.isOption("rowkey")) {
-          let H = c + " ".repeat(C.maxChildNameLen() - 7);
-          s += c + o[b].value + ".ROW_KEY" + W(H + o[b].value) + `_ROW_KEY,
+          let F = c + " ".repeat(C.maxChildNameLen() - 7);
+          l += c + o[h].value + ".ROW_KEY" + W(F + o[h].value) + `_ROW_KEY,
 `;
         }
         if (f.optionEQvalue("Audit Columns", "yes") || C.isOption("auditcols") || C.isOption("audit", "col") || C.isOption("audit", "cols") || C.isOption("audit", "columns")) {
-          let H = f.getOptionValue("createdcol"), F = c + " ".repeat(C.maxChildNameLen() - H.length);
-          s += c + o[b].value + "." + H + W(F + o[b].value) + "_" + H + `,
+          let F = f.getOptionValue("createdcol"), _ = c + " ".repeat(C.maxChildNameLen() - F.length);
+          l += c + o[h].value + "." + F + W(_ + o[h].value) + "_" + F + `,
 `;
           let z = f.getOptionValue("createdbycol");
-          F = c + " ".repeat(C.maxChildNameLen() - z.length), s += c + o[b].value + "." + z + W(F + o[b].value) + "_" + z + `,
+          _ = c + " ".repeat(C.maxChildNameLen() - z.length), l += c + o[h].value + "." + z + W(_ + o[h].value) + "_" + z + `,
 `;
-          let U = f.getOptionValue("updatedcol");
-          F = c + " ".repeat(C.maxChildNameLen() - U.length), s += c + o[b].value + "." + U + W(F + o[b].value) + "_" + U + `,
+          let V = f.getOptionValue("updatedcol");
+          _ = c + " ".repeat(C.maxChildNameLen() - V.length), l += c + o[h].value + "." + V + W(_ + o[h].value) + "_" + V + `,
 `;
-          let V = f.getOptionValue("updatedbycol");
-          F = c + " ".repeat(C.maxChildNameLen() - V.length), s += c + o[b].value + "." + V + W(F + o[b].value) + "_" + V + `,
+          let U = f.getOptionValue("updatedbycol");
+          _ = c + " ".repeat(C.maxChildNameLen() - U.length), l += c + o[h].value + "." + U + W(_ + o[h].value) + "_" + U + `,
 `;
         }
       }
-      s.lastIndexOf(`,
-`) == s.length - 2 && (s = s.substr(0, s.length - 2) + `
-`), s += `from
+      l.lastIndexOf(`,
+`) == l.length - 2 && (l = l.substr(0, l.length - 2) + `
+`), l += `from
 `;
-      for (let b = 2; b < o.length; b++) {
-        let C = " ".repeat(d - o[b].length);
-        var e = o[b].value;
-        f.objPrefix() != null && f.objPrefix() != "" && (e = f.objPrefix() + o[b].value + C + o[b].value), s += c + e + `,
+      for (let h = 2; h < o.length; h++) {
+        let C = " ".repeat(u - o[h].length);
+        var e = o[h].value;
+        f.objPrefix() != null && f.objPrefix() != "" && (e = f.objPrefix() + o[h].value + C + o[h].value), l += c + e + `,
 `;
       }
-      s.lastIndexOf(`,
-`) == s.length - 2 && (s = s.substr(0, s.length - 2) + `
-`), s += `where
+      l.lastIndexOf(`,
+`) == l.length - 2 && (l = l.substr(0, l.length - 2) + `
+`), l += `where
 `;
-      for (let b = 2; b < o.length; b++)
+      for (let h = 2; h < o.length; h++)
         for (let C = 2; C < o.length; C++)
-          if (C != b) {
-            var a = o[b].value, n = o[C].value, l = f.find(a);
-            if (l != null) {
-              var u = f.find(n);
-              if (u != null)
-                for (var S in l.fks) {
-                  var B = l.fks[S];
-                  B == n && (s += c + a + "." + W(B) + "_id(+) = " + n + `.id and
+          if (C != h) {
+            var a = o[h].value, n = o[C].value, s = f.find(a);
+            if (s != null) {
+              var x = f.find(n);
+              if (x != null)
+                for (var m in s.fks) {
+                  var k = s.fks[m];
+                  k == n && (l += c + a + "." + W(k) + "_id(+) = " + n + `.id and
 `);
                 }
             }
           }
-      s = s.toLowerCase();
-      let m = `where
+      l = l.toLowerCase();
+      let d = `where
 `;
-      return 0 < s.indexOf(m) && s.indexOf(m) == s.length - m.length && (s = s.substring(0, s.length - m.length).trim()), m = `and
-`, 0 < s.indexOf(m) && s.indexOf(m) == s.length - m.length && (s = s.substring(0, s.length - m.length).trim()), s.endsWith(`
-`) || (s += `
-`), s += `/
-`, s.toLowerCase();
+      return 0 < l.indexOf(d) && l.indexOf(d) == l.length - d.length && (l = l.substring(0, l.length - d.length).trim()), d = `and
+`, 0 < l.indexOf(d) && l.indexOf(d) == l.length - d.length && (l = l.substring(0, l.length - d.length).trim()), l.endsWith(`
+`) || (l += `
+`), l += `/
+`, l.toLowerCase();
     }, this.restEnable = function() {
       if (this.parseType() != "table" || !this.isOption("rest"))
         return "";
       let i = this.parseName();
       const o = i.indexOf('"') == 0;
-      let s = f.objPrefix() + i;
-      return o ? s = f.objPrefix() + i.substring(1, i.length - 1) : s = (f.objPrefix() + i).toUpperCase(), `begin
-` + c + "ords.enable_object(p_enabled=>TRUE, p_object=>'" + s + `');
+      let l = f.objPrefix() + i;
+      return o ? l = f.objPrefix() + i.substring(1, i.length - 1) : l = (f.objPrefix() + i).toUpperCase(), `begin
+` + c + "ords.enable_object(p_enabled=>TRUE, p_object=>'" + l + `');
 end;
 /
 `;
@@ -12026,12 +12032,12 @@ end;
       let i = "";
       f.optionEQvalue("editionable", "yes") && (i = " editionable");
       let o = f.objPrefix() + this.parseName();
-      var s = "create or replace" + i + " trigger " + o.toLowerCase() + `_BIU
+      var l = "create or replace" + i + " trigger " + o.toLowerCase() + `_BIU
 `.toLowerCase();
-      s += `    before insert or update
-`, s += "    on " + o.toLowerCase() + `
-`, s += `    for each row
-`, (f.optionEQvalue("rowkey", "yes") || this.isOption("rowkey")) && (s += `declare
+      l += `    before insert or update
+`, l += "    on " + o.toLowerCase() + `
+`, l += `    for each row
+`, (f.optionEQvalue("rowkey", "yes") || this.isOption("rowkey")) && (l += `declare
     function compress_int (n in integer ) return varchar2
     as
         ret       varchar2(30);
@@ -12054,116 +12060,116 @@ end;
         if length(ret) < 5 then ret := lpad(ret, 4, 'A'); end if ;
         return upper(ret);
     end compress_int;
-`), s += `begin
+`), l += `begin
 `;
-      var d = !1, M = "user";
-      f.optionEQvalue("apex", "yes") && (M = "coalesce(sys_context('APEX$SESSION','APP_USER'),user)"), (f.optionEQvalue("rowkey", "yes") || this.isOption("rowkey")) && (s += `    if inserting then
-`, s += `        :new.row_key := compress_int(row_key_seq.nextval);
-`, s += `    end if;
-`, d = !0);
-      for (var g = 0; g < this.children.length; g++) {
-        var A = this.children[g];
+      var u = !1, M = "user";
+      f.optionEQvalue("apex", "yes") && (M = "coalesce(sys_context('APEX$SESSION','APP_USER'),user)"), (f.optionEQvalue("rowkey", "yes") || this.isOption("rowkey")) && (l += `    if inserting then
+`, l += `        :new.row_key := compress_int(row_key_seq.nextval);
+`, l += `    end if;
+`, u = !0);
+      for (var v = 0; v < this.children.length; v++) {
+        var S = this.children[v];
         let P = null;
-        0 < A.content.indexOf("/lower") ? P = "LOWER".toLowerCase() : 0 < A.content.indexOf("/upper") && (P = "UPPER".toLowerCase()), P != null && (s += "    :new." + A.parseName().toLowerCase() + " := " + P + "(:new." + A.parseName().toLowerCase() + `);
-`, d = !0);
+        0 < S.content.indexOf("/lower") ? P = "LOWER".toLowerCase() : 0 < S.content.indexOf("/upper") && (P = "UPPER".toLowerCase()), P != null && (l += "    :new." + S.parseName().toLowerCase() + " := " + P + "(:new." + S.parseName().toLowerCase() + `);
+`, u = !0);
       }
-      (f.optionEQvalue("Row Version Number", "yes") || this.isOption("rowversion")) && (s += `    if inserting then
-`, s += `        :new.row_version := 1;
-`, s += `    elsif updating then
-`, s += `        :new.row_version := NVL(:old.row_version, 0) + 1;
-`, s += `    end if;
-`, d = !0), (f.optionEQvalue("Audit Columns", "yes") || this.isOption("auditcols") || this.isOption("audit", "col") || this.isOption("audit", "cols") || this.isOption("audit", "columns")) && (s += `    if inserting then
-`, s += "        :new." + f.getOptionValue("createdcol") + ` := SYSDATE;
-`.toLowerCase(), s += "        :new." + f.getOptionValue("createdbycol") + " := " + M + `;
-`.toLowerCase(), s += `    end if;
-`, s += "    :new." + f.getOptionValue("updatedcol") + ` := SYSDATE;
-`.toLowerCase(), s += "    :new." + f.getOptionValue("updatedbycol") + " := " + M + `;
-`.toLowerCase(), d = !0);
-      var k = f.additionalColumns();
-      for (var D in k) {
-        var _ = k[D];
-        s += "    if :new." + D + ` is null then
-`, _.startsWith("INT") ? s += "        " + D + ` := 0;
-` : s += "        " + D + ` := 'N/A';
-`, s += `    end if;
-`, d = !0;
+      (f.optionEQvalue("Row Version Number", "yes") || this.isOption("rowversion")) && (l += `    if inserting then
+`, l += `        :new.row_version := 1;
+`, l += `    elsif updating then
+`, l += `        :new.row_version := NVL(:old.row_version, 0) + 1;
+`, l += `    end if;
+`, u = !0), (f.optionEQvalue("Audit Columns", "yes") || this.isOption("auditcols") || this.isOption("audit", "col") || this.isOption("audit", "cols") || this.isOption("audit", "columns")) && (l += `    if inserting then
+`, l += "        :new." + f.getOptionValue("createdcol") + ` := SYSDATE;
+`.toLowerCase(), l += "        :new." + f.getOptionValue("createdbycol") + " := " + M + `;
+`.toLowerCase(), l += `    end if;
+`, l += "    :new." + f.getOptionValue("updatedcol") + ` := SYSDATE;
+`.toLowerCase(), l += "    :new." + f.getOptionValue("updatedbycol") + " := " + M + `;
+`.toLowerCase(), u = !0);
+      var I = f.additionalColumns();
+      for (var D in I) {
+        var H = I[D];
+        l += "    if :new." + D + ` is null then
+`, H.startsWith("INT") ? l += "        " + D + ` := 0;
+` : l += "        " + D + ` := 'N/A';
+`, l += `    end if;
+`, u = !0;
       }
-      return d ? (s += "end " + o.toLowerCase() + `_BIU;
+      return u ? (l += "end " + o.toLowerCase() + `_BIU;
 /
 
-`.toLowerCase(), s) : "";
+`.toLowerCase(), l) : "";
     }, this.procDecl = function(i) {
       let o = "";
       i != "get" && (o = " default null");
-      let s = "out";
-      i != "get" && (s = " in");
-      let d = c + "procedure " + i + `_row (
+      let l = "out";
+      i != "get" && (l = " in");
+      let u = c + "procedure " + i + `_row (
 `, M = this.getGenIdColName();
-      M == null && (M = this.getExplicitPkName()), d += c + c + "p_" + M + "        in  number" + o;
-      for (var g in this.fks) {
-        let k = this.fks[g], D = "number", _ = f.find(k);
-        _ != null && _.getExplicitPkName() != null && (D = _.getPkType()), d += `,
-`, d += c + c + "P_" + g + "   " + s + "  " + D + o;
+      M == null && (M = this.getExplicitPkName()), u += c + c + "p_" + M + "        in  number" + o;
+      for (var v in this.fks) {
+        let I = this.fks[v], D = "number", H = f.find(I);
+        H != null && H.getExplicitPkName() != null && (D = H.getPkType()), u += `,
+`, u += c + c + "P_" + v + "   " + l + "  " + D + o;
       }
-      for (let k = 0; k < this.children.length; k++) {
-        var A = this.children[k];
-        A.refId() == null && A.children.length == 0 && (d += `,
-`, d += c + c + "P_" + A.parseName() + "   " + s + "  " + A.parseType("plsql") + o);
+      for (let I = 0; I < this.children.length; I++) {
+        var S = this.children[I];
+        S.refId() == null && S.children.length == 0 && (u += `,
+`, u += c + c + "P_" + S.parseName() + "   " + l + "  " + S.parseType("plsql") + o);
       }
-      return d += `
-    )`, d;
+      return u += `
+    )`, u;
     }, this.procBody = function(i) {
       let o = this.getGenIdColName();
       o == null && (o = this.getExplicitPkName());
-      let s = f.objPrefix() + this.parseName(), d = c + `is 
+      let l = f.objPrefix() + this.parseName(), u = c + `is 
 `;
-      d += c + `begin 
+      u += c + `begin 
 `;
-      let M = c + c + "for c1 in (select * from " + s + " where " + o + " = p_" + o + `) loop 
+      let M = c + c + "for c1 in (select * from " + l + " where " + o + " = p_" + o + `) loop 
 `;
-      i == "insert" && (M = c + c + "insert into " + s + ` ( 
-`, M += c + c + c + o), i == "update" && (M = c + c + "update  " + s + ` set 
-`, M += c + c + c + o + " = p_" + o), d += M;
+      i == "insert" && (M = c + c + "insert into " + l + ` ( 
+`, M += c + c + c + o), i == "update" && (M = c + c + "update  " + l + ` set 
+`, M += c + c + c + o + " = p_" + o), u += M;
       for (let D in this.fks) {
-        let _ = this.fks[D], P = f.find(_);
-        P != null && P.getExplicitPkName() != null && P.getPkType(), (i == "insert" || i == "update") && (d += `,
+        let H = this.fks[D], P = f.find(H);
+        P != null && P.getExplicitPkName() != null && P.getPkType(), (i == "insert" || i == "update") && (u += `,
 `);
         let w = c + c + c + "P_" + D + " := c1." + D + `;
 `;
-        i == "insert" && (w = c + c + c + D), i == "update" && (w = c + c + c + D + " = P_" + D), d += w;
+        i == "insert" && (w = c + c + c + D), i == "update" && (w = c + c + c + D + " = P_" + D), u += w;
       }
-      for (var g = 0; g < this.children.length; g++) {
-        var A = this.children[g];
-        if (A.refId() != null || A.children.length != 0)
+      for (var v = 0; v < this.children.length; v++) {
+        var S = this.children[v];
+        if (S.refId() != null || S.children.length != 0)
           continue;
-        (i == "insert" || i == "update") && (d += `,
+        (i == "insert" || i == "update") && (u += `,
 `);
-        let D = c + c + c + "P_" + A.parseName().toLowerCase() + " := c1." + A.parseName().toLowerCase() + `;
+        let D = c + c + c + "P_" + S.parseName().toLowerCase() + " := c1." + S.parseName().toLowerCase() + `;
 `;
-        i == "insert" && (D = c + c + c + A.parseName().toLowerCase()), i == "update" && (D = c + c + c + A.parseName().toLowerCase() + " = P_" + A.parseName().toLowerCase()), d += D;
+        i == "insert" && (D = c + c + c + S.parseName().toLowerCase()), i == "update" && (D = c + c + c + S.parseName().toLowerCase() + " = P_" + S.parseName().toLowerCase()), u += D;
       }
       if (i == "insert") {
-        d += `
+        u += `
 ` + c + c + `) values ( 
-`, d += c + c + c + "p_" + o;
+`, u += c + c + c + "p_" + o;
         for (let D in this.fks)
-          d += `,
-`, d += c + c + c + "p_" + D;
+          u += `,
+`, u += c + c + c + "p_" + D;
         for (let D = 0; D < this.children.length; D++) {
-          let _ = this.children[D];
-          _.refId() == null && _.children.length == 0 && (d += `,
-`, d += c + c + c + "p_" + _.parseName());
+          let H = this.children[D];
+          H.refId() == null && H.children.length == 0 && (u += `,
+`, u += c + c + c + "p_" + H.parseName());
         }
       }
-      let k = `
+      let I = `
         end loop;
 `;
-      return i == "insert" && (k = `
-` + c + c + ");"), i == "update" && (k = `
-` + c + c + "where " + o + " = p_" + o + ";"), d += k, d += `
+      return i == "insert" && (I = `
+` + c + c + ");"), i == "update" && (I = `
+` + c + c + "where " + o + " = p_" + o + ";"), u += I, u += `
 ` + c + "end " + i + `_row;
- `, d += `
- `, d;
+ `, u += `
+ `, u;
     }, this.generateTAPI = function() {
       if (this.children.length == 0)
         return "";
@@ -12179,9 +12185,9 @@ is
 `, o += this.procDecl("update"), o += `;
 
 `;
-      let s = this.getGenIdColName();
-      return s == null && (s = this.getExplicitPkName()), o += `    procedure delete_row (
-        p_` + s + `              in number
+      let l = this.getGenIdColName();
+      return l == null && (l = this.getExplicitPkName()), o += `    procedure delete_row (
+        p_` + l + `              in number
     );
 end ` + i.toLowerCase() + `_api;
 /
@@ -12193,11 +12199,11 @@ is
 `, o += this.procBody("get"), o += this.procDecl("insert"), o += `
 `, o += this.procBody("insert"), o += this.procDecl("update"), o += `
 `, o += this.procBody("update"), o += `    procedure delete_row (
-`, o += "        p_" + s + `              in number
+`, o += "        p_" + l + `              in number
 `, o += `    )
 `, o += `    is
 `, o += `    begin
-`, o += "        delete from " + i.toLowerCase() + " where " + s + " = p_" + s + `;
+`, o += "        delete from " + i.toLowerCase() + " where " + l + " = p_" + l + `;
 `, o += `    end delete_row;
 `, o += "end " + i.toLowerCase() + `_api;
 `, o += `/
@@ -12205,132 +12211,132 @@ is
     }, this.cardinality = function() {
       if (0 < this.isOption("insert")) {
         const o = this.indexOf("insert");
-        let s = parseInt(this.src[o + 1].value);
-        const d = f.getOptionValue("datalimit");
-        return d < s && (s = d), s;
+        let l = parseInt(this.src[o + 1].value);
+        const u = f.getOptionValue("datalimit");
+        return u < l && (l = u), l;
       }
       return 0;
     }, this.generateData = function(i) {
       if (Ae(), f.optionEQvalue("inserts", !1))
         return "";
-      const o = this.inserts4tbl(i), s = this.orderedTableNodes();
-      let d = "";
-      for (let M = 0; M < s.length; M++) {
-        const g = f.objPrefix() + s[M].parseName(), A = o[g];
-        A != null && (d += A);
+      const o = this.inserts4tbl(i), l = this.orderedTableNodes();
+      let u = "";
+      for (let M = 0; M < l.length; M++) {
+        const v = f.objPrefix() + l[M].parseName(), S = o[v];
+        S != null && (u += S);
       }
-      return d;
+      return u;
     }, this.inserts4tbl = function(i) {
       let o = {};
       if (f.optionEQvalue("inserts", !1))
         return "";
-      const s = f.objPrefix() + this.parseName();
-      let d = "", M = null, g = null;
-      for (let k = 0; k < this.cardinality(); k++) {
+      const l = f.objPrefix() + this.parseName();
+      let u = "", M = null, v = null;
+      for (let I = 0; I < this.cardinality(); I++) {
         let D = null;
         if (i != null) {
-          const P = i[s];
-          P != null && Array.isArray(P) && (D = P[k]);
+          const P = i[l];
+          P != null && Array.isArray(P) && (D = P[I]);
         }
-        d += "insert into " + s + ` (
+        u += "insert into " + l + ` (
 `;
-        let _ = this.getGenIdColName();
-        if (_ != null)
-          M = _, d += c + M + `,
+        let H = this.getGenIdColName();
+        if (H != null)
+          M = H, u += c + M + `,
 `;
         else {
           let P = this.getExplicitPkName();
-          P != null && (d += c + P + `,
+          P != null && (u += c + P + `,
 `);
         }
         for (let P in this.fks) {
           let w = this.fks[P], e = f.find(w), a = "";
-          e == null && (e = f.find(P), e.isMany2One() & !P.endsWith("_id") && (w = P, P = W(P), a = "_id")), d += c + P + a + `,
+          e == null && (e = f.find(P), e.isMany2One() & !P.endsWith("_id") && (w = P, P = W(P), a = "_id")), u += c + P + a + `,
 `;
         }
         for (let P = 0; P < this.children.length; P++) {
           let w = this.children[P];
-          if (!(_ != null && w.parseName() == "id") && w.refId() == null) {
+          if (!(H != null && w.parseName() == "id") && w.refId() == null) {
             if (w.isOption("pk"))
               continue;
-            w.children.length == 0 && (d += c + w.parseName() + `,
+            w.children.length == 0 && (u += c + w.parseName() + `,
 `);
           }
         }
-        if (d.lastIndexOf(`,
-`) == d.length - 2 && (d = d.substring(0, d.length - 2) + `
-`), d += `) values (
-`, _ != null)
-          g = k + 1, d += c + g + `,
+        if (u.lastIndexOf(`,
+`) == u.length - 2 && (u = u.substring(0, u.length - 2) + `
+`), u += `) values (
+`, H != null)
+          v = I + 1, u += c + v + `,
 `;
         else {
           let P = this.getExplicitPkName();
           if (P != null) {
             const w = P;
-            let e = I(f.data, null, w, this.parseName()), a = -1;
-            D != null && (a = D[w]), e != null && e[k] != null && (a = e[k]), a.replaceAll && (a = "'" + a + "'"), g = a != -1 ? a : k + 1, d += c + g + `,
+            let e = B(f.data, null, w, this.parseName()), a = -1;
+            D != null && (a = D[w]), e != null && e[I] != null && (a = e[I]), a.replaceAll && (a = "'" + a + "'"), v = a != -1 ? a : I + 1, u += c + v + `,
 `;
           }
         }
         for (let P in this.fks) {
           let w = this.fks[P], e = f.find(w), a = [], n = "INTEGER";
-          for (let l = 1; l <= e.cardinality(); l++)
-            a.push(l);
+          for (let s = 1; s <= e.cardinality(); s++)
+            a.push(s);
           if (D != null) {
-            let l = D[P];
-            if (l != null)
-              typeof l == "string" && (n = "STRING"), a = [], a[0] = l;
+            let s = D[P];
+            if (s != null)
+              typeof s == "string" && (n = "STRING"), a = [], a[0] = s;
             else {
-              const u = s + "_" + w, S = f.data[u];
-              if (S != null) {
-                for (const B in S)
-                  if (S[B][s + "_id"] == g) {
-                    const m = S[B][P];
-                    m != null && (typeof m == "string" && (n = "STRING"), a = [], a[0] = m);
+              const x = l + "_" + w, m = f.data[x];
+              if (m != null) {
+                for (const k in m)
+                  if (m[k][l + "_id"] == v) {
+                    const d = m[k][P];
+                    d != null && (typeof d == "string" && (n = "STRING"), a = [], a[0] = d);
                     break;
                   }
               } else {
-                let B = e.getPkName(), m = D[B];
-                m != null && (typeof m == "string" && (n = "STRING"), a = [], a[0] = m);
+                let k = e.getPkName(), d = D[k];
+                d != null && (typeof d == "string" && (n = "STRING"), a = [], a[0] = d);
               }
             }
           }
-          d += c + le(f.getOptionValue("Data Language"), fe(s, W(w) + "_id", n, a)) + `,
+          u += c + le(f.getOptionValue("Data Language"), fe(l, W(w) + "_id", n, a)) + `,
 `;
         }
         for (let P = 0; P < this.children.length; P++) {
           let w = this.children[P];
-          if (!(_ != null && w.parseName() == "id") && w.refId() == null) {
+          if (!(H != null && w.parseName() == "id") && w.refId() == null) {
             if (w.parseName() == this.getExplicitPkName())
               continue;
             if (w.children.length == 0) {
               let e = w.parseValues(), a = w.parseName();
               if (D != null) {
-                let l = D[a];
-                l != null && (e = [], e[0] = l);
+                let s = D[a];
+                s != null && (e = [], e[0] = s);
               }
-              let n = fe(s, a, w.parseType((l) => !0), e);
-              d += c + le(f.getOptionValue("Data Language"), n) + `,
+              let n = fe(l, a, w.parseType((s) => !0), e);
+              u += c + le(f.getOptionValue("Data Language"), n) + `,
 `;
             }
           }
         }
-        d.lastIndexOf(`,
-`) == d.length - 2 && (d = d.substring(0, d.length - 2) + `
-`), d += `);
+        u.lastIndexOf(`,
+`) == u.length - 2 && (u = u.substring(0, u.length - 2) + `
+`), u += `);
 `;
       }
-      d != "" && (d += `
+      u != "" && (u += `
 commit;
 
 `);
-      let A = this.getGenIdColName();
-      A != null && 1 < this.cardinality() && !f.optionEQvalue("pk", "guid") && (d += "alter table " + s + `
-modify ` + A + " generated always  as identity restart start with " + (this.cardinality() + 1) + `;
+      let S = this.getGenIdColName();
+      S != null && 1 < this.cardinality() && !f.optionEQvalue("pk", "guid") && (u += "alter table " + l + `
+modify ` + S + " generated always  as identity restart start with " + (this.cardinality() + 1) + `;
 
-`), o[s] = d;
-      for (let k = 0; k < this.children.length; k++) {
-        const D = this.children[k];
+`), o[l] = u;
+      for (let I = 0; I < this.children.length; I++) {
+        const D = this.children[I];
         0 < D.children.length && (o = { ...o, ...D.inserts4tbl(i) });
       }
       return o;
@@ -12340,14 +12346,14 @@ modify ` + A + " generated always  as identity restart start with " + (this.card
       if (!i.endsWith("_id"))
         return !1;
       var o = i.slice(0, -3);
-      return this.children.some((s) => s.children.length > 0 && s.parseName() == o && !s.isArray());
+      return this.children.some((l) => l.children.length > 0 && l.parseName() == o && !l.isArray());
     }, this.generateDualityView = function() {
       return "/* not supported yet*/";
     }, this.getTransColumns = function() {
       let i = [];
       for (let o = 0; o < this.children.length; o++) {
-        let s = this.children[o];
-        (s.isOption("trans") || s.isOption("translation") || s.isOption("translations")) && i.push(s);
+        let l = this.children[o];
+        (l.isOption("trans") || l.isOption("translation") || l.isOption("translations")) && i.push(l);
       }
       return i;
     }, this.getBaseType = function() {
@@ -12360,129 +12366,129 @@ modify ` + A + " generated always  as identity restart start with " + (this.card
       let i = this.getTransColumns();
       if (i.length == 0)
         return "";
-      let o = f.objPrefix() + this.parseName(), s = o + "_trans", d = f.semantics(), M = 13, g = W(this.parseName()) + "_id";
-      g.length > M && (M = g.length);
+      let o = f.objPrefix() + this.parseName(), l = o + "_trans", u = f.semantics(), M = 13, v = W(this.parseName()) + "_id";
+      v.length > M && (M = v.length);
       for (let P = 0; P < i.length; P++) {
         let w = "trans_" + i[P].parseName();
         w.length > M && (M = w.length);
       }
       2 > M && (M = 2);
-      let A = "";
-      A += "create table " + s + ` (
+      let S = "";
+      S += "create table " + l + ` (
 `;
-      let k = c + " ".repeat(M - 2), D = "not null";
-      f.optionEQvalue("pk", "identityDataType") && (D = "generated by default on null as identity"), f.optionEQvalue("pk", "seq") && (D = "default on null " + s + "_seq.nextval"), f.optionEQvalue("pk", "guid") && (D = "default on null to_number(sys_guid(), 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX') "), A += c + "id" + k + "number " + D + `
-`, A += c + c + " ".repeat(M) + "constraint " + s + `_id_pk primary key,
-`, k = c + " ".repeat(M - g.length), A += c + g + k + `number not null,
-`, k = c + " ".repeat(M - 13), A += c + "language_code" + k + "varchar2(5" + d + `) not null,
+      let I = c + " ".repeat(M - 2), D = "not null";
+      f.optionEQvalue("pk", "identityDataType") && (D = "generated by default on null as identity"), f.optionEQvalue("pk", "seq") && (D = "default on null " + l + "_seq.nextval"), f.optionEQvalue("pk", "guid") && (D = "default on null to_number(sys_guid(), 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX') "), S += c + "id" + I + "number " + D + `
+`, S += c + c + " ".repeat(M) + "constraint " + l + `_id_pk primary key,
+`, I = c + " ".repeat(M - v.length), S += c + v + I + `number not null,
+`, I = c + " ".repeat(M - 13), S += c + "language_code" + I + "varchar2(5" + u + `) not null,
 `;
       for (let P = 0; P < i.length; P++) {
         let w = "trans_" + i[P].parseName();
-        k = c + " ".repeat(M - w.length);
+        I = c + " ".repeat(M - w.length);
         let e = i[P].getBaseType(), a = (P < i.length - 1, ",");
-        A += c + w + k + e + a + `
+        S += c + w + I + e + a + `
 `;
       }
-      A += c + "constraint " + s + "_uk unique (" + g + `, language_code)
-`, A += `);
+      S += c + "constraint " + l + "_uk unique (" + v + `, language_code)
+`, S += `);
 
 `;
-      let _ = this.parseName();
-      return _.length > 2 && (_ = _.substring(0, 2)), A += "alter table " + s + " add constraint " + s + "_" + _ + `_id_fk
-`, A += c + "foreign key (" + g + ") references " + o + `;
+      let H = this.parseName();
+      return H.length > 2 && (H = H.substring(0, 2)), S += "alter table " + l + " add constraint " + l + "_" + H + `_id_fk
+`, S += c + "foreign key (" + v + ") references " + o + `;
 
-`, A += "alter table " + s + " add constraint " + s + `_lang_fk
-`, A += c + "foreign key (language_code) references " + f.objPrefix() + `language (code);
+`, S += "alter table " + l + " add constraint " + l + `_lang_fk
+`, S += c + "foreign key (language_code) references " + f.objPrefix() + `language (code);
 
-`, A += "create index " + s + "_i1 on " + s + " (" + g + `);
-`, A += "create index " + s + "_i2 on " + s + ` (language_code);
+`, S += "create index " + l + "_i1 on " + l + " (" + v + `);
+`, S += "create index " + l + "_i2 on " + l + ` (language_code);
 
-`, A;
+`, S;
     }, this.generateResolvedView = function() {
       if (this.parseType() != "table")
         return "";
       let i = this.getTransColumns();
       if (i.length == 0)
         return "";
-      let o = f.objPrefix() + this.parseName(), s = o + "_trans", d = o + "_resolved", M = W(this.parseName()) + "_id", g = f.getOptionValue("transcontext"), A = "create or replace view " + d + ` as
+      let o = f.objPrefix() + this.parseName(), l = o + "_trans", u = o + "_resolved", M = W(this.parseName()) + "_id", v = f.getOptionValue("transcontext"), S = "create or replace view " + u + ` as
 `;
-      A += "select ";
-      let k = [], D = this.getGenIdColName();
+      S += "select ";
+      let I = [], D = this.getGenIdColName();
       if (D != null)
-        k.push("k." + D);
+        I.push("k." + D);
       else {
         let P = this.getExplicitPkName();
-        P != null && k.push("k." + P);
+        P != null && I.push("k." + P);
       }
       this.lateInitFks();
       for (let P in this.fks) {
         if (0 < P.indexOf(",")) continue;
         let w = f.find(this.fks[P]), e = "";
-        w != null && w.isMany2One && w.isMany2One() && !P.endsWith("_id") && (e = "_id"), k.push("k." + P + e);
+        w != null && w.isMany2One && w.isMany2One() && !P.endsWith("_id") && (e = "_id"), I.push("k." + P + e);
       }
-      let _ = {};
+      let H = {};
       for (let P = 0; P < i.length; P++)
-        _[i[P].parseName()] = !0;
+        H[i[P].parseName()] = !0;
       for (let P = 0; P < this.children.length; P++) {
         let w = this.children[P];
         if (w.children.length > 0 || w.refId() != null) continue;
         let e = w.parseName();
-        D != null && e == "id" || e != this.getExplicitPkName() && (_[e] ? k.push("coalesce(t.trans_" + e + ", k." + e + ") as " + e) : k.push("k." + e));
+        D != null && e == "id" || e != this.getExplicitPkName() && (H[e] ? I.push("coalesce(t.trans_" + e + ", k." + e + ") as " + e) : I.push("k." + e));
       }
-      A += k[0] + `,
+      S += I[0] + `,
 `;
-      for (let P = 1; P < k.length; P++)
-        A += c + c + " " + k[P], P < k.length - 1 && (A += ","), A += `
+      for (let P = 1; P < I.length; P++)
+        S += c + c + " " + I[P], P < I.length - 1 && (S += ","), S += `
 `;
-      return A += "from " + o + ` k
-`, A += "left join " + s + ` t
-`, A += c + "on t." + M + " = k." + (D || this.getExplicitPkName()) + `
-`, A += c + "and t.language_code = " + g + `;
+      return S += "from " + o + ` k
+`, S += "left join " + l + ` t
+`, S += c + "on t." + M + " = k." + (D || this.getExplicitPkName()) + `
+`, S += c + "and t.language_code = " + v + `;
 
-`, A;
+`, S;
     };
   }
-  function y(E) {
+  function A(E) {
     f = E;
     const r = E.input;
-    let t = [], h = [];
-    const x = Z(r + `
+    let t = [], b = [];
+    const p = Z(r + `
 `, !0, !0, "`");
     f.data = null;
-    let N = null, p = "";
-    e: for (let i = 0; i < x.length; i++) {
-      const o = x[i];
+    let N = null, g = "";
+    e: for (let i = 0; i < p.length; i++) {
+      const o = p[i];
       if (o.value == `
 ` && N == null) {
-        if (p = p.replace(/\r/g, ""), p.replace(/\r/g, "").replace(/ /g, "") == "") {
-          p = "";
+        if (g = g.replace(/\r/g, ""), g.replace(/\r/g, "").replace(/ /g, "") == "") {
+          g = "";
           continue;
         }
-        let d = new v(o.line - 1, p, null), M = !1;
-        for (let g = 0; g < t.length; g++) {
-          let A = t[g];
-          if (d.apparentDepth() <= A.apparentDepth())
-            if (0 < g) {
-              let k = t[g - 1];
-              d = new v(o.line - 1, p, k), t[g] = d, t = t.slice(0, g + 1), M = !0;
+        let u = new y(o.line - 1, g, null), M = !1;
+        for (let v = 0; v < t.length; v++) {
+          let S = t[v];
+          if (u.apparentDepth() <= S.apparentDepth())
+            if (0 < v) {
+              let I = t[v - 1];
+              u = new y(o.line - 1, g, I), t[v] = u, t = t.slice(0, v + 1), M = !0;
               break;
             } else
-              t[0] = d, t = t.slice(0, 1), h.push(d), M = !0;
+              t[0] = u, t = t.slice(0, 1), b.push(u), M = !0;
         }
         if (!M) {
           if (0 < t.length) {
-            let g = t[t.length - 1];
-            d = new v(o.line - 1, p, g);
+            let v = t[t.length - 1];
+            u = new y(o.line - 1, g, v);
           }
-          t.push(d), d.apparentDepth() == 0 && h.push(d);
+          t.push(u), u.apparentDepth() == 0 && b.push(u);
         }
-        if (d.isMany2One()) {
-          const g = d.parent;
-          g.fks == null && (g.fks = []);
-          let A = d.refId();
-          A == null && (A = d.parseName()), g.fks[d.parseName() + "_id"] = A;
+        if (u.isMany2One()) {
+          const v = u.parent;
+          v.fks == null && (v.fks = []);
+          let S = u.refId();
+          S == null && (S = u.parseName()), v.fks[u.parseName() + "_id"] = S;
         }
-        p = "";
+        g = "";
         continue;
       }
       if (N == null && o.value == "#") {
@@ -12493,36 +12499,36 @@ modify ` + A + " generated always  as identity restart start with " + (this.card
         if (N += o.value, o.value != `
 ` && o.value != "}")
           continue;
-        const s = Z(N, !1, !0, "");
-        if (s.length % 4 == 3 && s[1].value == ":") {
-          E.setOptions(N), N = null, p = "";
+        const l = Z(N, !1, !0, "");
+        if (l.length % 4 == 3 && l[1].value == ":") {
+          E.setOptions(N), N = null, g = "";
           continue;
         }
-        let d = null, M = null;
-        for (let g in s) {
-          const A = s[g];
-          if (d == null && A.value == "flattened") {
-            d = "";
+        let u = null, M = null;
+        for (let v in l) {
+          const S = l[v];
+          if (u == null && S.value == "flattened") {
+            u = "";
             continue;
           }
-          if (d != null) {
-            if (d += A.value, d == "=" || d.charAt(d.length - 1) != "}")
+          if (u != null) {
+            if (u += S.value, u == "=" || u.charAt(u.length - 1) != "}")
               continue;
-            let k = d.substring(1);
+            let I = u.substring(1);
             try {
-              f.data = JSON.parse(k), N = null, p = "";
+              f.data = JSON.parse(I), N = null, g = "";
               continue e;
             } catch {
             }
           }
-          if (M == null && A.value == "settings") {
+          if (M == null && S.value == "settings") {
             M = "";
             continue;
           }
           if (M != null) {
-            M += A.value, M.substring(1);
+            M += S.value, M.substring(1);
             try {
-              E.setOptions(M), N = null, p = "";
+              E.setOptions(M), N = null, g = "";
               continue e;
             } catch {
             }
@@ -12531,37 +12537,37 @@ modify ` + A + " generated always  as identity restart start with " + (this.card
       }
       if (o.type != "comment") {
         if (o.type == "line-comment") {
-          0 < p.trim().length && (p += o.value);
+          0 < g.trim().length && (g += o.value);
           continue;
         }
-        p += o.value;
+        g += o.value;
       }
     }
-    return h;
+    return b;
   }
-  function I(E, r, t, h) {
-    let x = [];
+  function B(E, r, t, b) {
+    let p = [];
     if (E == null || typeof E != "object")
       return null;
     let N = E[t];
-    N != null && r == h && x.push(N);
-    for (var p in E) {
-      let i = E[p];
-      N = I(i, p, t, h), N != null && (x = x.concat(N));
+    N != null && r == b && p.push(N);
+    for (var g in E) {
+      let i = E[g];
+      N = B(i, g, t, b), N != null && (p = p.concat(N));
     }
-    return x;
+    return p;
   }
-  return y;
+  return A;
 })();
 var Se = /* @__PURE__ */ (function() {
   function f(r) {
-    for (var t = "", h = 0; h < r; h++)
+    for (var t = "", b = 0; b < r; b++)
       t = t + "   ";
     return t;
   }
   function c(r, t) {
-    for (const h in r)
-      if (JSON.stringify(r[h]) == JSON.stringify(t))
+    for (const b in r)
+      if (JSON.stringify(r[b]) == JSON.stringify(t))
         return !0;
     return !1;
   }
@@ -12569,10 +12575,10 @@ var Se = /* @__PURE__ */ (function() {
     let t = ["_id", "Id"];
     if (r.id != null)
       return { key: "id", value: r.id };
-    for (let h = 0; h < t.length; h++) {
-      const x = t[h];
+    for (let b = 0; b < t.length; b++) {
+      const p = t[b];
       for (let N in r)
-        if (N.endsWith(x))
+        if (N.endsWith(p))
           return { key: N, value: r[N] };
     }
   }
@@ -12584,157 +12590,157 @@ var Se = /* @__PURE__ */ (function() {
   }
   function L(r) {
     let t = null;
-    e: for (const h in r)
-      if (h == 0)
-        for (const x in r[h]) {
-          t = x;
+    e: for (const b in r)
+      if (b == 0)
+        for (const p in r[b]) {
+          t = p;
           break e;
         }
       else {
-        t = h;
+        t = b;
         break e;
       }
     return t.toLowerCase() == "id" ? null : t.toLowerCase().endsWith("_id") ? t.substring(0, t.length - 3) : t.endsWith("Id") ? t.substring(0, t.length - 2) : null;
   }
-  function G(r, t, h) {
-    let x = !1, N = !1;
+  function G(r, t, b) {
+    let p = !1, N = !1;
     for (const i in r)
-      for (var p = 0; p < i; p++)
-        if (r[i][t] == r[p][t] && r[i][h] != r[p][h] ? x = !0 : r[i][t] != r[p][t] && r[i][h] == r[p][h] && (N = !0), x && N)
+      for (var g = 0; g < i; g++)
+        if (r[i][t] == r[g][t] && r[i][b] != r[g][b] ? p = !0 : r[i][t] != r[g][t] && r[i][b] == r[g][b] && (N = !0), p && N)
           return !0;
     return !1;
   }
-  function v(r) {
+  function y(r) {
     if (r == null || typeof r != "object")
       return "";
     let t = "(";
-    for (let h in r) {
-      if (h == 0)
-        return v(r[h]);
-      r[h] != null && typeof r[h] == "object" || (t += h + ",");
+    for (let b in r) {
+      if (b == 0)
+        return y(r[b]);
+      r[b] != null && typeof r[b] == "object" || (t += b + ",");
     }
     return t.lastIndexOf(",") == t.length - 1 && (t = t.substring(0, t.length - 1)), t + ")";
   }
-  function y(r, t) {
-    let h = r.indexOf("(");
-    return 0 < h && (r = r.substring(0, h)), h = t.indexOf("("), 0 < h && (t = t.substring(0, h)), r + "_" + t + "(" + r + "_id," + t + "_id)";
+  function A(r, t) {
+    let b = r.indexOf("(");
+    return 0 < b && (r = r.substring(0, b)), b = t.indexOf("("), 0 < b && (t = t.substring(0, b)), r + "_" + t + "(" + r + "_id," + t + "_id)";
   }
-  function I(r, t) {
-    const h = JSON.parse(r), x = L(h);
-    x != null && (t = x), t == null && (t = "root_tbl");
+  function B(r, t) {
+    const b = JSON.parse(r), p = L(b);
+    p != null && (t = p), t == null && (t = "root_tbl");
     const N = new E();
-    N.duplicatesAndParents(t + v(h), h), N.flatten(t + v(h), h);
-    let p = N.output(t + v(h), h, 0);
-    p += `
+    N.duplicatesAndParents(t + y(b), b), N.flatten(t + y(b), b);
+    let g = N.output(t + y(b), b, 0);
+    g += `
 
-#settings = { genpk: false, drop: true, pk: identityDataType, semantics: char }`, p += `
+#settings = { genpk: false, drop: true, pk: identityDataType, semantics: char }`, g += `
 
 #flattened = 
 `;
     const i = {};
     for (const o in N.tableContent)
       i[N.tableName(o)] = N.tableContent[o];
-    return p += JSON.stringify(i, null, 3), p += `
-`, p += `
+    return g += JSON.stringify(i, null, 3), g += `
+`, g += `
 
 -- Generated by json2qsql.js ${oe()} ` + (/* @__PURE__ */ new Date()).toLocaleString() + `
 
-`, p += `#document = 
-`, p += JSON.stringify(h, null, 3), p += `
-`, p;
+`, g += `#document = 
+`, g += JSON.stringify(b, null, 3), g += `
+`, g;
   }
   function E() {
-    this.tableContent = {}, this.notNormalized = [], this.tableSignatures = [], this.child2parent = {}, this.objCounts = {}, this.output = function(r, t, h, x) {
-      if (x != !1 && this.notNormalized.includes(r)) {
-        const i = y(this.parent(r), r), o = this.tableContent[i];
+    this.tableContent = {}, this.notNormalized = [], this.tableSignatures = [], this.child2parent = {}, this.objCounts = {}, this.output = function(r, t, b, p) {
+      if (p != !1 && this.notNormalized.includes(r)) {
+        const i = A(this.parent(r), r), o = this.tableContent[i];
         if (o != null) {
-          let s = `
-` + f(h) + this.tableName(i) + " /insert " + o.length;
+          let l = `
+` + f(b) + this.tableName(i) + " /insert " + o.length;
           if (o[0], G(o, this.refIdName(this.parent(r)), this.refIdName(r)))
-            return s += this.output(r, t, h + 1, !1), s;
+            return l += this.output(r, t, b + 1, !1), l;
         }
       }
       let N = "";
       this.notNormalized.includes(r) && (N = ">");
-      let p = `
-` + f(h) + N + this.tableName(r);
-      if (typeof t == "number" && (p += " num", r.endsWith("_id") || r.endsWith("Id")))
-        return p += " /pk", p;
+      let g = `
+` + f(b) + N + this.tableName(r);
+      if (typeof t == "number" && (g += " num", r.endsWith("_id") || r.endsWith("Id")))
+        return g += " /pk", g;
       if (r == "id")
         return `
-` + f(h) + "id vc32 /pk";
+` + f(b) + "id vc32 /pk";
       e: if (t != null && typeof t == "object") {
         if (Array.isArray(t))
           for (const o in t) {
             1 <= o && console.log("1 <= property !");
-            const s = t[o];
-            p = this.output(r, s, h, x);
+            const l = t[o];
+            g = this.output(r, l, b, p);
             break e;
           }
         else
-          r != "" && (this.tableContent[r] == null && console.log(), p += "  /insert " + this.tableContent[r].length);
+          r != "" && (this.tableContent[r] == null && console.log(), g += "  /insert " + this.tableContent[r].length);
         let i = "";
-        this.tableSignatures.includes(r) || (p = "", h--);
+        this.tableSignatures.includes(r) || (g = "", b--);
         for (let o in t) {
-          const s = t[o];
+          const l = t[o];
           if (o != null) {
-            const M = W(r), g = o.toLowerCase();
-            if (r != null && M + "_id" == g && 0 < h && (i = o), M + "_id" == g || !isNaN(o) && !Array.isArray(t))
+            const M = W(r), v = o.toLowerCase();
+            if (r != null && M + "_id" == v && 0 < b && (i = o), M + "_id" == v || !isNaN(o) && !Array.isArray(t))
               continue;
           }
-          const d = this.output(o + v(s), s, h + 1);
-          p += d;
+          const u = this.output(o + y(l), l, b + 1);
+          g += u;
         }
-        i != "" && (p += `
-` + f(h) + i);
+        i != "" && (g += `
+` + f(b) + i);
       }
-      return p;
-    }, this.idSeq = 1, this.flatten = function(r, t, h) {
-      let x = {};
+      return g;
+    }, this.idSeq = 1, this.flatten = function(r, t, b) {
+      let p = {};
       for (let i in t)
         if (t[i] != null && typeof t[i] == "object") {
-          let o = r, s = h;
+          let o = r, l = b;
           if (isNaN(i)) {
-            o = i + v(t[i]);
-            const d = R(x);
-            d != null && (s = d);
+            o = i + y(t[i]);
+            const u = R(p);
+            u != null && (l = u);
           }
-          this.flatten(o, t[i], s);
+          this.flatten(o, t[i], l);
         } else
-          x[i] = t[i];
-      !this.notNormalized.includes(r) && h != null && Object.keys(x).length && (x[h.key] = h.value);
-      const N = 0 < Object.keys(x).length;
-      let p = this.tableContent[r];
+          p[i] = t[i];
+      !this.notNormalized.includes(r) && b != null && Object.keys(p).length && (p[b.key] = b.value);
+      const N = 0 < Object.keys(p).length;
+      let g = this.tableContent[r];
       if (N) {
-        if (p == null && (p = []), c(p, x) || p.push(x), this.notNormalized.includes(r)) {
+        if (g == null && (g = []), c(g, p) || g.push(p), this.notNormalized.includes(r)) {
           const i = this.parent(r);
           if (i != null) {
-            const o = y(i, r);
-            let s = this.tableContent[o];
-            s == null && (s = []);
-            const d = {};
-            d[this.refIdName(i)] = h.value;
-            let M = R(x);
-            M == null && (x.id = this.idSeq++, M = R(x)), d[this.refIdName(r)] = M.value, s.push(d), this.tableContent[o] = s;
+            const o = A(i, r);
+            let l = this.tableContent[o];
+            l == null && (l = []);
+            const u = {};
+            u[this.refIdName(i)] = b.value;
+            let M = R(p);
+            M == null && (p.id = this.idSeq++, M = R(p)), u[this.refIdName(r)] = M.value, l.push(u), this.tableContent[o] = l;
           }
         }
-        this.tableContent[r] = p;
-      } else p == null && (this.tableContent[r] = []);
+        this.tableContent[r] = g;
+      } else g == null && (this.tableContent[r] = []);
     }, this.duplicatesAndParents = function(r, t) {
-      const h = '"' + r + '":' + JSON.stringify(t);
-      let x = this.objCounts[h];
-      x == null && (x = 0);
+      const b = '"' + r + '":' + JSON.stringify(t);
+      let p = this.objCounts[b];
+      p == null && (p = 0);
       let N = !1;
       for (let i in t)
         if (t[i] != null && typeof t[i] == "object") {
           let o = r;
           if (isNaN(i))
-            o = i + v(t[i]);
+            o = i + y(t[i]);
           else if (!Array.isArray(t))
             continue;
           o != r && (this.child2parent[o] = r), this.duplicatesAndParents(o, t[i]), N = !0;
         }
-      O(t) && !this.tableSignatures.includes(r) && this.tableSignatures.push(r), N || (this.objCounts[h] = x + 1), 1 < this.objCounts[h] && !this.notNormalized.includes(r) && this.notNormalized.push(r);
+      O(t) && !this.tableSignatures.includes(r) && this.tableSignatures.push(r), N || (this.objCounts[b] = p + 1), 1 < this.objCounts[b] && !this.notNormalized.includes(r) && this.notNormalized.push(r);
     }, this.parent = function(r) {
       let t = this.child2parent[r];
       return t != null && !this.tableSignatures.includes(t) ? this.parent(t) : t;
@@ -12742,119 +12748,119 @@ var Se = /* @__PURE__ */ (function() {
       const t = r.indexOf("(");
       if (t < 0)
         return r;
-      let h = r.substring(0, t), x = 0, N = -1;
-      for (const p in this.tableSignatures) {
-        const i = this.tableSignatures[p];
-        i.substring(0, i.indexOf("(")) == h && x++, i == r && (N = x);
+      let b = r.substring(0, t), p = 0, N = -1;
+      for (const g in this.tableSignatures) {
+        const i = this.tableSignatures[g];
+        i.substring(0, i.indexOf("(")) == b && p++, i == r && (N = p);
       }
-      return x < 2 ? h : h + N;
+      return p < 2 ? b : b + N;
     }, this.refIdName = function(r) {
       return W(this.tableName(r)) + "_id";
     };
   }
-  return I;
+  return B;
 })();
 const Me = /* @__PURE__ */ (function() {
-  function f(y, I, E, r) {
-    this.from = I, this.to = E, E == null && (this.to = new c(I.line, I.depth + 1)), this.message = y, this.severity = r, r == null && (this.severity = "error");
+  function f(A, B, E, r) {
+    this.from = B, this.to = E, E == null && (this.to = new c(B.line, B.depth + 1)), this.message = A, this.severity = r, r == null && (this.severity = "error");
   }
-  function c(y, I) {
-    this.line = y, this.depth = I;
+  function c(A, B) {
+    this.line = A, this.depth = B;
   }
-  function R(y) {
-    const I = y, E = y.input;
+  function R(A) {
+    const B = A, E = A.input;
     let r = [];
     E.split(`
 `);
     let t = [];
-    for (var h = 0; h < y.forest.length; h++)
-      y.forest[h].parseType() == "table" && (t = t.concat(y.forest[h].descendants()));
-    r = r.concat(v(t));
-    const x = I.descendants();
-    for (let N = 0; N < x.length; N++) {
-      const p = x[N];
-      if (I.optionEQvalue("genpk", !0) && x[N].parseName() == "id") {
-        const s = p.content.toLowerCase().indexOf("id");
-        r.push(new f(j.duplicateId, new c(p.line, s), new c(p.line, s + 2)));
+    for (var b = 0; b < A.forest.length; b++)
+      A.forest[b].parseType() == "table" && (t = t.concat(A.forest[b].descendants()));
+    r = r.concat(y(t));
+    const p = B.descendants();
+    for (let N = 0; N < p.length; N++) {
+      const g = p[N];
+      if (B.optionEQvalue("genpk", !0) && p[N].parseName() == "id") {
+        const l = g.content.toLowerCase().indexOf("id");
+        r.push(new f(j.duplicateId, new c(g.line, l), new c(g.line, l + 2)));
         continue;
       }
-      const i = p.src[2];
-      if (2 < p.src.length && i.value == "-") {
-        const s = i.begin;
-        r.push(new f(j.invalidDatatype, new c(p.line, s), new c(p.line, s + 2)));
+      const i = g.src[2];
+      if (2 < g.src.length && i.value == "-") {
+        const l = i.begin;
+        r.push(new f(j.invalidDatatype, new c(g.line, l), new c(g.line, l + 2)));
         continue;
       }
-      const o = p.src[1];
-      if (1 < p.src.length && o.value == "vc0") {
-        const s = o.begin;
-        r.push(new f(j.invalidDatatype, new c(p.line, s)));
+      const o = g.src[1];
+      if (1 < g.src.length && o.value == "vc0") {
+        const l = o.begin;
+        r.push(new f(j.invalidDatatype, new c(g.line, l)));
         continue;
       }
-      r = r.concat(L(I, p)), r = r.concat(G(I, p)), r = r.concat(O(I, p));
+      r = r.concat(L(B, g)), r = r.concat(G(B, g)), r = r.concat(O(B, g));
     }
     return r;
   }
-  function O(y, I) {
-    const E = I.parseType() == "table";
-    for (var r = [], t = I.src, h = !1, x = 1; x < t.length; x++) {
-      if (t[x].value == "/") {
-        h = !0;
+  function O(A, B) {
+    const E = B.parseType() == "table";
+    for (var r = [], t = B.src, b = !1, p = 1; p < t.length; p++) {
+      if (t[p].value == "/") {
+        b = !0;
         continue;
       }
-      if (h) {
-        h = !1, E && Te.indexOf(t[x].value.toLowerCase()) < 0 && r.push(new f(
+      if (b) {
+        b = !1, E && Te.indexOf(t[p].value.toLowerCase()) < 0 && r.push(new f(
           j.tableDirectiveTypo,
-          new c(I.line, t[x].begin),
-          new c(I.line, t[x].begin + t[x].value.length)
-        )), !E && ke.indexOf(t[x].value.toLowerCase()) < 0 && r.push(new f(
+          new c(B.line, t[p].begin),
+          new c(B.line, t[p].begin + t[p].value.length)
+        )), !E && ke.indexOf(t[p].value.toLowerCase()) < 0 && r.push(new f(
           j.columnDirectiveTypo,
-          new c(I.line, t[x].begin),
-          new c(I.line, t[x].begin + t[x].value.length)
+          new c(B.line, t[p].begin),
+          new c(B.line, t[p].begin + t[p].value.length)
         ));
         continue;
       }
     }
     return r;
   }
-  function L(y, I) {
+  function L(A, B) {
     var E = [];
-    if (I.parseType() == "view")
-      for (var r = I.src, t = 2; t < r.length; t++) {
-        var h = y.find(r[t].value);
-        h == null && E.push(new f(
+    if (B.parseType() == "view")
+      for (var r = B.src, t = 2; t < r.length; t++) {
+        var b = A.find(r[t].value);
+        b == null && E.push(new f(
           j.undefinedObject + r[t].value,
-          new c(I.line, r[t].begin),
-          new c(I.line, r[t].begin + r[t].value.length)
+          new c(B.line, r[t].begin),
+          new c(B.line, r[t].begin + r[t].value.length)
         ));
       }
     return E;
   }
-  function G(y, I) {
+  function G(A, B) {
     var E = [];
-    if (I.isOption("fk") || 0 < I.indexOf("reference", !0)) {
-      let t = I.indexOf("fk");
-      if (t < 0 && (t = I.indexOf("reference")), t++, I.src.length - 1 < t || I.src[t].value == "/")
+    if (B.isOption("fk") || 0 < B.indexOf("reference", !0)) {
+      let t = B.indexOf("fk");
+      if (t < 0 && (t = B.indexOf("reference")), t++, B.src.length - 1 < t || B.src[t].value == "/")
         return E;
-      var r = y.find(I.src[t].value);
+      var r = A.find(B.src[t].value);
       r == null && E.push(new f(
-        j.undefinedObject + I.src[t].value,
-        new c(I.line, I.src[t].begin),
-        new c(I.line, I.src[t].begin + I.src[t].value.length)
+        j.undefinedObject + B.src[t].value,
+        new c(B.line, B.src[t].begin),
+        new c(B.line, B.src[t].begin + B.src[t].value.length)
       ));
     }
     return E;
   }
-  function v(y) {
-    for (var I = [], E = Ie(y), r = 1; r < y.length; r++) {
-      var t = y[r], h = xe(t);
-      h % E != 0 && I.push(
+  function y(A) {
+    for (var B = [], E = Ie(A), r = 1; r < A.length; r++) {
+      var t = A[r], b = xe(t);
+      b % E != 0 && B.push(
         new f(
           j.misalignedAttribute + E,
-          new c(t.line, h)
+          new c(t.line, b)
         )
       );
     }
-    return I;
+    return B;
   }
   return R;
 })(), Te = [
@@ -12903,16 +12909,16 @@ function Ie(f) {
     c[R] = xe(O);
   }
   let L = [];
-  for (let v = 0; v < c.length; v++) {
-    let y = Be(c, v);
-    if (y != null) {
-      let I = L[c[v] - c[y]];
-      I == null && (I = 0), L[c[v] - c[y]] = I + 1;
+  for (let y = 0; y < c.length; y++) {
+    let A = Be(c, y);
+    if (A != null) {
+      let B = L[c[y] - c[A]];
+      B == null && (B = 0), L[c[y] - c[A]] = B + 1;
     }
   }
   let G = null;
-  for (let v in L)
-    (G == null || L[G] <= L[v]) && (G = parseInt(v));
+  for (let y in L)
+    (G == null || L[G] <= L[y]) && (G = parseInt(y));
   return G;
 }
 function xe(f) {
@@ -12975,86 +12981,86 @@ const j = {
     return typeof L == "string" && (L = L.toLowerCase()), L == "yes" ? !0 : L == "no" ? !1 : L == "y" ? !0 : L == "n" ? !1 : L == "true" ? !0 : L == "false" ? !1 : L == de.toLowerCase() ? "identity" : L == ie.toLowerCase() ? "guid" : L == me.toLowerCase() ? "tswtz" : L == he.toLowerCase() ? "tswltz" : L;
   }
   function R(O, L) {
-    this.ddl = null, this.erd = null, this.errors = null, this.options = JSON.parse(JSON.stringify(f)), this.input = O, this.postponedAlters = [], this.getOptionValue = function(v) {
-      const y = v.toLowerCase();
-      let I = this.options[y];
-      if (!(y in this.options))
+    this.ddl = null, this.erd = null, this.errors = null, this.options = JSON.parse(JSON.stringify(f)), this.input = O, this.postponedAlters = [], this.getOptionValue = function(y) {
+      const A = y.toLowerCase();
+      let B = this.options[A];
+      if (!(A in this.options))
         for (let E in this.options) {
           const r = this.options[E].label;
           if (r == null)
             continue;
-          r.toLowerCase() == y && (I = this.options[E]);
+          r.toLowerCase() == A && (B = this.options[E]);
         }
-      return I == null ? null : I.value;
-    }, this.optionEQvalue = function(v, y) {
-      var I = this.getOptionValue(v);
-      return c(I) == c(y);
+      return B == null ? null : B.value;
+    }, this.optionEQvalue = function(y, A) {
+      var B = this.getOptionValue(y);
+      return c(B) == c(A);
     }, this.nonDefaultOptions = function() {
-      let v = {};
-      for (let y in this.options)
-        f[y] && !this.optionEQvalue(y, f[y].value) && (v[y] = this.options[y].value);
-      return v;
+      let y = {};
+      for (let A in this.options)
+        f[A] && !this.optionEQvalue(A, f[A].value) && (y[A] = this.options[A].value);
+      return y;
     }, this.unknownOptions = function() {
-      let v = [];
-      for (let y in this.options)
-        f[y] == null && v.push(y);
-      return v;
-    }, this.setOptionValue = function(v, y) {
-      let I = v.toLowerCase();
-      if (!(I in this.options)) {
+      let y = [];
+      for (let A in this.options)
+        f[A] == null && y.push(A);
+      return y;
+    }, this.setOptionValue = function(y, A) {
+      let B = y.toLowerCase();
+      if (!(B in this.options)) {
         for (let r in this.options)
-          if (this.options[r].label == v) {
-            this.options[r].value = y;
+          if (this.options[r].label == y) {
+            this.options[r].value = A;
             return;
           }
       }
-      y == null && (y = "");
-      let E = this.options[I];
-      E == null && (E = {}, this.options[I] = E), E.value = y;
+      A == null && (A = "");
+      let E = this.options[B];
+      E == null && (E = {}, this.options[B] = E), E.value = A;
     }, this.semantics = function() {
-      var v = "";
-      return this.optionEQvalue("semantics", "CHAR") ? v = " char" : this.optionEQvalue("semantics", "BYTE") && (v = " byte"), v;
-    }, this.name2node = null, this.find = function(v) {
+      var y = "";
+      return this.optionEQvalue("semantics", "CHAR") ? y = " char" : this.optionEQvalue("semantics", "BYTE") && (y = " byte"), y;
+    }, this.name2node = null, this.find = function(y) {
       if (this.name2node != null)
-        return this.name2node[q(v)];
+        return this.name2node[q(y)];
       this.name2node = {};
-      for (var y = 0; y < this.forest.length; y++)
-        for (var I = this.forest[y].descendants(), E = 0; E < I.length; E++) {
-          var r = I[E];
+      for (var A = 0; A < this.forest.length; A++)
+        for (var B = this.forest[A].descendants(), E = 0; E < B.length; E++) {
+          var r = B[E];
           this.name2node[r.parseName()] = r;
         }
-      return this.name2node[q(v)];
-    }, this.setOptions = function(v) {
-      v = v.trim(), v.startsWith("#") && (v = v.substring(1).trim());
-      const y = v.indexOf("=");
-      let I = v.substring(y + 1).trim();
-      I.indexOf("{") < 0 && (I = "{" + v + "}");
-      let E = "", r = Z(I, !0, !0, "");
-      for (let h in r) {
-        let x = r[h];
-        x.type == "identifier" && x.value != "true" && x.value != "false" && x.value != "null" ? E += '"' + x.value + '"' : E += x.value;
+      return this.name2node[q(y)];
+    }, this.setOptions = function(y) {
+      y = y.trim(), y.startsWith("#") && (y = y.substring(1).trim());
+      const A = y.indexOf("=");
+      let B = y.substring(A + 1).trim();
+      B.indexOf("{") < 0 && (B = "{" + y + "}");
+      let E = "", r = Z(B, !0, !0, "");
+      for (let b in r) {
+        let p = r[b];
+        p.type == "identifier" && p.value != "true" && p.value != "false" && p.value != "null" ? E += '"' + p.value + '"' : E += p.value;
       }
       let t = JSON.parse(E);
-      for (let h in t)
-        this.setOptionValue(h.toLowerCase(), t[h]);
+      for (let b in t)
+        this.setOptionValue(b.toLowerCase(), t[b]);
     }, this.descendants = function() {
-      for (var v = [], y = 0; y < this.forest.length; y++)
-        v = v.concat(this.forest[y].descendants());
-      return v;
+      for (var y = [], A = 0; A < this.forest.length; A++)
+        y = y.concat(this.forest[A].descendants());
+      return y;
     }, this.additionalColumns = function() {
-      var v = [], y = this.getOptionValue("Auxiliary Columns");
-      if (y == null)
-        return v;
-      for (var I = y.split(","), E = 0; E < I.length; E++) {
-        var r = I[E].trim(), t = "VARCHAR2(4000)", h = r.indexOf(" ");
-        0 < h && (t = r.substring(h + 1).toUpperCase(), r = r.substring(0, h)), v[r] = t;
+      var y = [], A = this.getOptionValue("Auxiliary Columns");
+      if (A == null)
+        return y;
+      for (var B = A.split(","), E = 0; E < B.length; E++) {
+        var r = B[E].trim(), t = "VARCHAR2(4000)", b = r.indexOf(" ");
+        0 < b && (t = r.substring(b + 1).toUpperCase(), r = r.substring(0, b)), y[r] = t;
       }
-      return v;
-    }, this.objPrefix = function(v) {
-      var y = this.getOptionValue("schema");
-      y == null && (y = ""), y != "" && v == null ? y = y + "." : y = "";
-      var I = "";
-      return this.getOptionValue("prefix") != null && (I = this.getOptionValue("prefix")), y = y + I, I != "" && !I.endsWith("_") && (y = y + "_"), y.toLowerCase();
+      return y;
+    }, this.objPrefix = function(y) {
+      var A = this.getOptionValue("schema");
+      A == null && (A = ""), A != "" && y == null ? A = A + "." : A = "";
+      var B = "";
+      return this.getOptionValue("prefix") != null && (B = this.getOptionValue("prefix")), A = A + B, B != "" && !B.endsWith("_") && (A = A + "_"), A.toLowerCase();
     };
     let G = "";
     0 < O.toLowerCase().indexOf("overridesettings") && ue(this), L != null && this.optionEQvalue("overrideSettings", !1) && (G = "# settings = " + L + `
@@ -13062,205 +13068,205 @@ const j = {
 `), this.input = G + O, this.forest = ue(this), this.getERD = function() {
       if (this.erd != null)
         return this.erd;
-      let v = this.descendants(), y = { items: [] };
-      for (let x = 0; x < v.length; x++) {
-        if (v[x].parseType() != "table")
+      let y = this.descendants(), A = { items: [] };
+      for (let p = 0; p < y.length; p++) {
+        if (y[p].parseType() != "table")
           continue;
-        let N = { name: this.objPrefix("no schema") + v[x].parseName("") }, p = this.getOptionValue("schema");
-        p == "" && (p = null), N.schema = p, N.columns = [], y.items.push(N);
-        let i = v[x].getGenIdColName();
-        if (i != null && !v[x].isOption("pk"))
+        let N = { name: this.objPrefix("no schema") + y[p].parseName("") }, g = this.getOptionValue("schema");
+        g == "" && (g = null), N.schema = g, N.columns = [], A.items.push(N);
+        let i = y[p].getGenIdColName();
+        if (i != null && !y[p].isOption("pk"))
           N.columns.push({ name: i, datatype: "number" });
         else {
-          let s = v[x].getExplicitPkName();
-          if (s != null && s.indexOf(",") < 0) {
-            let d = "number";
-            const M = v[x].findChild(s);
-            M != null && (d = M.parseType()), N.columns.push({ name: s, datatype: d });
+          let l = y[p].getExplicitPkName();
+          if (l != null && l.indexOf(",") < 0) {
+            let u = "number";
+            const M = y[p].findChild(l);
+            M != null && (u = M.parseType()), N.columns.push({ name: l, datatype: u });
           }
         }
-        v[x].lateInitFks();
-        for (let s in v[x].fks) {
-          let d = v[x].fks[s];
-          if (0 < s.indexOf(",")) {
-            let k = this.find(d);
-            for (var I = split_str(s, ", "), E = 0; E < I.length; E++) {
-              var r = I[E];
+        y[p].lateInitFks();
+        for (let l in y[p].fks) {
+          let u = y[p].fks[l];
+          if (0 < l.indexOf(",")) {
+            let I = this.find(u);
+            for (var B = split_str(l, ", "), E = 0; E < B.length; E++) {
+              var r = B[E];
               if (r == ",")
                 continue;
-              const D = k.findChild(r);
-              N.columns.push({ name: r, datatype: D.parseType((_) => !0) });
+              const D = I.findChild(r);
+              N.columns.push({ name: r, datatype: D.parseType((H) => !0) });
             }
             continue;
           }
           let M = "number";
-          const g = v[x].findChild(s);
-          g != null && (M = g.parseType("fk"));
-          let A = this.find(d);
-          if (A != null) {
-            const k = A.getExplicitPkName();
-            k != null && k.indexOf(",") < 0 && (M = A.getPkType());
+          const v = y[p].findChild(l);
+          v != null && (M = v.parseType("fk"));
+          let S = this.find(u);
+          if (S != null) {
+            const I = S.getExplicitPkName();
+            I != null && I.indexOf(",") < 0 && (M = S.getPkType());
           } else
-            A = this.find(s), A.isMany2One() & !s.endsWith("_id") && (d = s, s = singular(s));
-          N.columns.push({ name: s, datatype: M });
+            S = this.find(l), S.isMany2One() & !l.endsWith("_id") && (u = l, l = singular(l));
+          N.columns.push({ name: l, datatype: M });
         }
-        for (let s = 0; s < v[x].children.length; s++) {
-          let d = v[x].children[s];
-          if (d.parseType() != "table" && d.refId() == null && (N.columns.push({ name: d.parseName(""), datatype: d.parseType((M) => !0) }), 0 < d.indexOf("file"))) {
-            const M = d.parseName();
+        for (let l = 0; l < y[p].children.length; l++) {
+          let u = y[p].children[l];
+          if (u.parseType() != "table" && u.refId() == null && (N.columns.push({ name: u.parseName(""), datatype: u.parseType((M) => !0) }), 0 < u.indexOf("file"))) {
+            const M = u.parseName();
             N.columns.push({ name: M + "_filename", datatype: "varchar2(255" + this.semantics() + ")" }), N.columns.push({ name: M + "_mimetype", datatype: "varchar2(255" + this.semantics() + ")" }), N.columns.push({ name: M + "_charset", datatype: "varchar2(255" + this.semantics() + ")" }), N.columns.push({ name: M + "_lastupd", datatype: "date" });
           }
         }
-        const o = v[x].trimmedContent().toUpperCase();
+        const o = y[p].trimmedContent().toUpperCase();
         if ((this.optionEQvalue("rowkey", !0) || 0 < o.indexOf("/ROWKEY")) && N.columns.push({ name: "row_key", datatype: "varchar2(30" + this.semantics() + ")" }), (this.optionEQvalue("rowVersion", "yes") || 0 < o.indexOf("/ROWVERSION")) && N.columns.push({ name: "row_version", datatype: "integer" }), this.optionEQvalue("Audit Columns", "yes") || 0 < o.indexOf("/AUDITCOLS")) {
-          let s = this.getOptionValue("createdcol");
-          N.columns.push({ name: s, datatype: this.getOptionValue("Date Data Type").toLowerCase() });
-          let d = this.getOptionValue("createdbycol");
-          N.columns.push({ name: d, datatype: "varchar2(255" + this.semantics() + ")" });
+          let l = this.getOptionValue("createdcol");
+          N.columns.push({ name: l, datatype: this.getOptionValue("Date Data Type").toLowerCase() });
+          let u = this.getOptionValue("createdbycol");
+          N.columns.push({ name: u, datatype: "varchar2(255" + this.semantics() + ")" });
           let M = this.getOptionValue("updatedcol");
           N.columns.push({ name: M, datatype: this.getOptionValue("Date Data Type").toLowerCase() });
-          let g = this.getOptionValue("updatedbycol");
-          N.columns.push({ name: g, datatype: "varchar2(255" + this.semantics() + ")" });
+          let v = this.getOptionValue("updatedbycol");
+          N.columns.push({ name: v, datatype: "varchar2(255" + this.semantics() + ")" });
         }
         var t = this.additionalColumns();
-        for (let s in t) {
-          var h = t[s];
-          pad = tab + " ".repeat(this.maxChildNameLen() - s.length), ret += tab + s.toUpperCase() + pad + h + ` not null,
+        for (let l in t) {
+          var b = t[l];
+          pad = tab + " ".repeat(this.maxChildNameLen() - l.length), ret += tab + l.toUpperCase() + pad + b + ` not null,
 `;
         }
       }
-      y.links = [];
-      for (let x = 0; x < v.length; x++)
-        if (v[x].parseType() == "table") {
-          v[x].toDDL();
-          for (let N in v[x].fks) {
-            let p = v[x].fks[N], i = this.find(p);
+      A.links = [];
+      for (let p = 0; p < y.length; p++)
+        if (y[p].parseType() == "table") {
+          y[p].toDDL();
+          for (let N in y[p].fks) {
+            let g = y[p].fks[N], i = this.find(g);
             if (i == null)
               continue;
             let o = "id";
-            i.getExplicitPkName() != null && (o = i.getExplicitPkName()), y.links.push({
-              source: this.objPrefix() + p,
+            i.getExplicitPkName() != null && (o = i.getExplicitPkName()), A.links.push({
+              source: this.objPrefix() + g,
               source_id: o,
-              target: this.objPrefix() + v[x].parseName(""),
+              target: this.objPrefix() + y[p].parseName(""),
               target_id: N
             });
           }
         }
-      return this.erd = y, y;
+      return this.erd = A, A;
     }, this.getDDL = function() {
       if (this.ddl != null)
         return this.ddl;
-      var v = "", y = this.descendants();
+      var y = "", A = this.descendants();
       if (this.optionEQvalue("Include Drops", "yes"))
-        for (let t = 0; t < y.length; t++) {
-          let h = y[t].generateDrop();
-          h != "" && (v += h);
+        for (let t = 0; t < A.length; t++) {
+          let b = A[t].generateDrop();
+          b != "" && (y += b);
         }
       if (this.optionEQvalue("rowkey", !0))
-        v += `create sequence  row_key_seq;
+        y += `create sequence  row_key_seq;
 
 `;
       else for (let t = 0; t < this.forest.length; t++)
         if (0 < this.forest[t].trimmedContent().toUpperCase().indexOf("/ROWKEY")) {
-          v += `create sequence  row_key_seq;
+          y += `create sequence  row_key_seq;
 
 `;
           break;
         }
-      v += `-- create tables
+      y += `-- create tables
 
 `;
       for (let t = 0; t < this.forest.length; t++)
-        v += this.forest[t].toDDL() + `
+        y += this.forest[t].toDDL() + `
 `;
       for (let t = 0; t < this.postponedAlters.length; t++)
-        v += this.postponedAlters[t] + `
+        y += this.postponedAlters[t] + `
 `;
-      let I = !1;
-      for (let t = 0; t < y.length; t++)
-        if (y[t].getTransColumns && y[t].getTransColumns().length > 0) {
-          I = !0;
+      let B = !1;
+      for (let t = 0; t < A.length; t++)
+        if (A[t].getTransColumns && A[t].getTransColumns().length > 0) {
+          B = !0;
           break;
         }
-      if (I) {
+      if (B) {
         let t = this.semantics();
-        v += `-- translation support
+        y += `-- translation support
 
-`, v += "create table " + this.objPrefix() + `language (
-`, v += "    code           varchar2(5" + t + `) not null
-`, v += "                   constraint " + this.objPrefix() + `language_code_pk primary key,
-`, v += "    locale         varchar2(28" + t + `) not null
-`, v += "                   constraint " + this.objPrefix() + `language_locale_unq unique,
-`, v += "    name           varchar2(1024" + t + `),
-`, v += "    native_name    varchar2(1024" + t + `)
-`, v += `);
+`, y += "create table " + this.objPrefix() + `language (
+`, y += "    code           varchar2(5" + t + `) not null
+`, y += "                   constraint " + this.objPrefix() + `language_code_pk primary key,
+`, y += "    locale         varchar2(28" + t + `) not null
+`, y += "                   constraint " + this.objPrefix() + `language_locale_unq unique,
+`, y += "    name           varchar2(1024" + t + `),
+`, y += "    native_name    varchar2(1024" + t + `)
+`, y += `);
 
-`, v += "create index " + this.objPrefix() + "language_i1 on " + this.objPrefix() + `language (locale);
+`, y += "create index " + this.objPrefix() + "language_i1 on " + this.objPrefix() + `language (locale);
 
 `;
-        for (let h = 0; h < y.length; h++) {
-          let x = y[h].generateTransTable();
-          x != "" && (v += x);
+        for (let b = 0; b < A.length; b++) {
+          let p = A[b].generateTransTable();
+          p != "" && (y += p);
         }
       }
       let E = 0;
-      for (let t = 0; t < y.length; t++) {
-        let h = y[t].generateTrigger();
-        h != "" && (E++ == 0 && (v += `-- triggers
-`), v += h + `
+      for (let t = 0; t < A.length; t++) {
+        let b = A[t].generateTrigger();
+        b != "" && (E++ == 0 && (y += `-- triggers
+`), y += b + `
 `);
       }
       E = 0;
-      for (let t = 0; t < y.length; t++) {
-        let h = y[t].restEnable();
-        h != "" && (v += h + `
+      for (let t = 0; t < A.length; t++) {
+        let b = A[t].restEnable();
+        b != "" && (y += b + `
 `);
       }
       E = 0;
-      for (let t = 0; t < y.length; t++) {
-        if (this.optionEQvalue("api", !1) && y[t].trimmedContent().toLowerCase().indexOf("/api") < 0)
+      for (let t = 0; t < A.length; t++) {
+        if (this.optionEQvalue("api", !1) && A[t].trimmedContent().toLowerCase().indexOf("/api") < 0)
           continue;
-        let h = y[t].generateTAPI();
-        h != "" && (E++ == 0 && (v += `-- APIs
-`), v += h + `
+        let b = A[t].generateTAPI();
+        b != "" && (E++ == 0 && (y += `-- APIs
+`), y += b + `
 `);
       }
       E = 0;
       for (let t = 0; t < this.forest.length; t++) {
-        let h = this.forest[t].generateView();
-        h != "" && (E++ == 0 && (v += `-- create views
-`), v += h + `
+        let b = this.forest[t].generateView();
+        b != "" && (E++ == 0 && (y += `-- create views
+`), y += b + `
 `);
       }
-      for (let t = 0; t < y.length; t++) {
-        let h = y[t].generateResolvedView();
-        h != "" && (E++ == 0 && (v += `-- create views
-`), v += h);
+      for (let t = 0; t < A.length; t++) {
+        let b = A[t].generateResolvedView();
+        b != "" && (E++ == 0 && (y += `-- create views
+`), y += b);
       }
       E = 0;
       for (let t = 0; t < this.forest.length; t++) {
-        let h = this.forest[t].generateData(this.data);
-        h != "" && (E++ == 0 && (v += `-- load data
+        let b = this.forest[t].generateData(this.data);
+        b != "" && (E++ == 0 && (y += `-- load data
 
-`), v += h + `
+`), y += b + `
 `);
       }
-      E = 0, v += `-- Generated by Quick SQL ${this.version()} ` + (/* @__PURE__ */ new Date()).toLocaleString() + `
+      E = 0, y += `-- Generated by Quick SQL ${this.version()} ` + (/* @__PURE__ */ new Date()).toLocaleString() + `
 
-`, v += `/*
+`, y += `/*
 `;
       let r = O;
       r = r.replace(/#.+/g, `
-`), r = r.replace(/\/\*/g, "--<--"), r = r.replace(/\*\//g, "-->--"), r = r.replace(/\/* Non-default options:/g, ""), v += r, v += `
+`), r = r.replace(/\/\*/g, "--<--"), r = r.replace(/\*\//g, "-->--"), r = r.replace(/\/* Non-default options:/g, ""), y += r, y += `
 `;
       for (let t = 0; t < this.unknownOptions().length; t++)
-        v += "*** Unknown setting: " + this.unknownOptions()[t] + `
+        y += "*** Unknown setting: " + this.unknownOptions()[t] + `
 `;
-      return v += `
+      return y += `
  Non-default options:
 # settings = ` + JSON.stringify(this.nonDefaultOptions()) + `
-`, v += `
-*/`, this.ddl = v, v;
+`, y += `
+*/`, this.ddl = y, y;
     }, this.getErrors = function() {
       return this.errors != null ? this.errors : (this.errors = Pe.findErrors(this, this.fullInput), this.errors);
     }, this.version = oe;
