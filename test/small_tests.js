@@ -803,9 +803,66 @@ view emp_v departments employees
     `).getDDL();
     //console.log(output);
     // src = quicksql.lexer( output, false, true, '`' );
-    // src[?].value != src[?].value   
-    assert( "0 < output.indexOf('Landon Glover') " );     
-    assert( "0 < output.indexOf('Jack Jackson') " ); 
+    // src[?].value != src[?].value
+    assert( "0 < output.indexOf('Landon Glover') " );
+    assert( "0 < output.indexOf('Jack Jackson') " );
+
+    // Oracle annotations - table level
+    output = new quicksql(`departments {UI_Display 'Departments', Classification 'HR'}
+    name`).getDDL();
+    assert( "0 < output.indexOf('annotations (UI_Display')" );
+    assert( "0 < output.indexOf(')\\nannotations (')" );
+
+    // Oracle annotations - column level
+    output = new quicksql(`departments
+    name {UI_Display 'Department Name'}`).getDDL();
+    assert( "0 < output.indexOf('annotations (UI_Display')" );
+    assert( "0 < output.indexOf('char) annotations (')" );
+
+    // Oracle annotations - flag annotation (no value)
+    output = new quicksql(`departments
+    code {SurrogateKey}`).getDDL();
+    assert( "0 < output.indexOf('annotations (SurrogateKey)')" );
+
+    // Oracle annotations - both comments and annotations
+    output = new quicksql(`departments [Main table] {Classification 'HR'}
+    name [Full name] {UI_Display 'Name'}`).getDDL();
+    assert( "0 < output.indexOf('comment on table departments')" );
+    assert( "0 < output.indexOf('comment on column departments.name')" );
+    assert( "0 < output.indexOf('annotations (Classification')" );
+    assert( "0 < output.indexOf('annotations (UI_Display')" );
+
+    // Oracle annotations - multiple annotations on column
+    output = new quicksql(`departments
+    name {UI_Display 'Name', Highlight}`).getDDL();
+    assert( "0 < output.indexOf('Highlight')" );
+    assert( "0 < output.indexOf('UI_Display')" );
+
+    // Oracle annotations - annotations with /nn option
+    output = new quicksql(`departments
+    name /nn {Format 'text'}`).getDDL();
+    assert( "0 < output.indexOf('not null')" );
+    assert( "0 < output.indexOf('annotations (Format')" );
+
+    // Oracle annotations - table name is not affected
+    output = new quicksql(`departments {SomeAnnotation}
+    name`).getDDL();
+    assert( "0 < output.indexOf('create table departments')" );
+
+    // Oracle annotations - view level
+    output = new quicksql(`dept
+    name
+view dept_v dept {UI_Display 'Department View'}`).getDDL();
+    assert( "0 < output.indexOf('annotations (ui_display')" );
+    assert( "0 < output.indexOf('view dept_v')" );
+
+    // Oracle annotations - view with multiple annotations
+    output = new quicksql(`dept
+    name
+view dept_v dept {Purpose 'reporting', Classification 'HR'}`).getDDL();
+    assert( "0 < output.indexOf('annotations (purpose')" );
+    assert( "0 < output.indexOf('classification')" );
+    assert( "0 < output.indexOf(' as')" );
 
 } 
 
