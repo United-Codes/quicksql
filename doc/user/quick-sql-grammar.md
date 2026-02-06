@@ -180,11 +180,11 @@ Oracle SQL annotations can be added to tables, columns, and views using curly br
 ### Annotation Syntax
 
 ```quicksql
-table_name {Key 'value', AnotherKey 'value', FlagKey}
+table_name {Key 'value', AnotherKey "value", FlagKey}
     column_name {Key 'value'}
 ```
 
-- Key-value annotations: `Key 'value'`
+- Key-value annotations: `Key 'value'` or `Key "value"` (single or double quotes)
 - Flag annotations (no value): `FlagKey`
 - Multiple annotations are comma-separated
 
@@ -576,7 +576,7 @@ columnDirective::= '/'
 
 annotation::= '{' annotationEntry ( ',' annotationEntry )* '}'
 
-annotationEntry::= identifier string_literal
+annotationEntry::= identifier ( string_literal | double_quoted_literal )
                   | identifier
 
 datatype::=
