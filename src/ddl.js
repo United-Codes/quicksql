@@ -461,6 +461,14 @@ export const quicksql = (function () {
                     output += trigger +'\n';
                 }
             }
+            for( let i = 0; i < descendants.length; i++ ) {
+                let trigger = descendants[i].generateImmutableTrigger();
+                if( trigger != '' ) {
+                    if( j++ == 0 )
+                        output += '-- immutable triggers\n';
+                    output += trigger;
+                }
+            }
             j = 0;
 
             for( let i = 0; i < descendants.length; i++ ) {
@@ -500,6 +508,30 @@ export const quicksql = (function () {
                         output += '-- create views\n';
                     output += resolvedView;
                 }
+            }
+
+            // table groups from GROUP annotations
+            let groups = {};
+            for( let i = 0; i < descendants.length; i++ ) {
+                if( descendants[i].parseType() != 'table' ) continue;
+                let groupName = descendants[i].getAnnotationValue('GROUP');
+                if( groupName != null ) {
+                    if( !groups[groupName] ) groups[groupName] = [];
+                    groups[groupName].push(this.objPrefix() + descendants[i].parseName());
+                }
+            }
+            let groupNames = Object.keys(groups);
+            if( groupNames.length > 0 ) {
+                output += '-- table groups\n';
+                for( let g = 0; g < groupNames.length; g++ ) {
+                    let gn = groupNames[g];
+                    output += "insert into user_annotations_groups$ (group_name) values ('" + gn + "');\n";
+                    let members = groups[gn];
+                    for( let m = 0; m < members.length; m++ ) {
+                        output += "insert into user_annotations_group_members$ (group_name, object_name) values ('" + gn + "', '" + members[m].toUpperCase() + "');\n";
+                    }
+                }
+                output += '\n';
             }
 
             j = 0;

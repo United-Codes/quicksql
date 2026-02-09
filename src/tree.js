@@ -444,7 +444,11 @@ let tree = (function(){
                         break;
                     value += src[i].getValue();
                 }
-                ret +=' default '+'on null ' + optQuote+value+optQuote ;
+                const sqlDateExpressions = ['sysdate', 'current_date', 'current_timestamp', 'systimestamp', 'localtimestamp'];
+                if( sqlDateExpressions.includes(value.toLowerCase()) )
+                    ret += ' default on null ' + value;
+                else
+                    ret += ' default on null ' + optQuote + value + optQuote;
             }
             if( this.isOption('nn') || this.indexOf('not')+1== this.indexOf('null') )
                 if( this.indexOf('pk') < 0 ) 
@@ -833,11 +837,24 @@ let tree = (function(){
             }
 
             this.lateInitFks();
-            
-            //var indexedColumns = [];
-            var ret = '';
 
             const objName = ddl.objPrefix()  + this.parseName();
+
+            // SODA collection: fixed schema, skip normal column generation
+            if( this.isOption('soda') ) {
+                let ret = 'create table '+objName+' (\n';
+                ret += tab + 'id              varchar2(255) not null\n';
+                ret += tab + '                constraint '+objName+'_id_pk primary key,\n';
+                ret += tab + 'created_on      timestamp default sys_extract_utc(systimestamp) not null,\n';
+                ret += tab + 'last_modified   timestamp default sys_extract_utc(systimestamp) not null,\n';
+                ret += tab + 'version         varchar2(255) not null,\n';
+                ret += tab + 'json_document   json\n';
+                ret += ');\n\n';
+                return ret;
+            }
+
+            //var indexedColumns = [];
+            var ret = '';
             if( ddl.optionEQvalue('pk', 'SEQ') && ddl.optionEQvalue('genpk', true) ) {
                 ret =  ret + 'create sequence  '+objName+'_seq;\n\n';                
             }
@@ -1166,49 +1183,73 @@ let tree = (function(){
                     colCnts[col] = cnt+1;	
                 }
             }
-            for( let i = 2; i < chunks.length; i++ ) { 
+            // Determine which tables have /trans columns
+            let tblTransCols = {};
+            for( let i = 2; i < chunks.length; i++ ) {
+                let tbl = ddl.find(chunks[i].value);
+                if( tbl != null && tbl.getTransColumns ) {
+                    let tc = tbl.getTransColumns();
+                    if( tc.length > 0 ) {
+                        let transNames = {};
+                        for( let t = 0; t < tc.length; t++ )
+                            transNames[tc[t].parseName()] = true;
+                        tblTransCols[chunks[i].value] = transNames;
+                    }
+                }
+            }
+
+            for( let i = 2; i < chunks.length; i++ ) {
                 let tbl = ddl.find(chunks[i].value);
                 if( tbl == null )
                     continue;
-                let pad = ' '.repeat(maxLen - (chunks[i].value+'.id').length);
-                ret += tab + chunks[i].value+'.id'+tab+pad+singular(chunks[i].value)+'_id,\n';
+                let tblName = chunks[i].value;
+                let transNames = tblTransCols[tblName] || {};
+                let pad = ' '.repeat(maxLen - (tblName+'.id').length);
+                ret += tab + tblName+'.id'+tab+pad+singular(tblName)+'_id,\n';
                 for( let j = 0; j < tbl.children.length; j++ ) {
                     let child = tbl.children[j];
                     if( 0 == child.children.length ) {
-                        pad = ' '.repeat(maxLen - (chunks[i].value+'.'+child.parseName()).length);
+                        let cname = child.parseName();
                         var disambiguator = '';
-                        if( 1< colCnts[child.parseName()] )
-                            disambiguator = singular(chunks[i].value)+'_';
-                        ret += tab + chunks[i].value+'.'+child.parseName()+tab+pad+disambiguator+child.parseName()+',\n';
+                        if( 1< colCnts[cname] )
+                            disambiguator = singular(tblName)+'_';
+                        if( transNames[cname] ) {
+                            let tAlias = 't_' + tblName;
+                            let expr = 'coalesce('+tAlias+'.trans_'+cname+', '+tblName+'.'+cname+')';
+                            ret += tab + expr + tab + disambiguator+cname+',\n';
+                        } else {
+                            pad = ' '.repeat(maxLen - (tblName+'.'+cname).length);
+                            ret += tab + tblName+'.'+cname+tab+pad+disambiguator+cname+',\n';
+                        }
                     }
                 }
                 if( ddl.optionEQvalue('rowVersion','yes') || tbl.isOption('rowversion') ) {
                     let pad = tab+' '.repeat(tbl.maxChildNameLen() - 'row_version'.length);
-                    ret += tab + chunks[i].value+'.'+ 'row_version' + singular(pad + chunks[i].value)+'_'+ 'row_version,\n';              	
-                }            	
+                    ret += tab + tblName+'.'+ 'row_version' + singular(pad + tblName)+'_'+ 'row_version,\n';
+                }
                 if( ddl.optionEQvalue('rowkey','yes') || tbl.isOption('rowkey') ) {
                     let pad = tab+' '.repeat(tbl.maxChildNameLen() - 'ROW_KEY'.length);
-                    ret += tab + chunks[i].value+'.'+ 'ROW_KEY' + singular(pad + chunks[i].value)+'_'+ 'ROW_KEY,\n';              	
-                }            	
-                if( ddl.optionEQvalue('Audit Columns','yes') || tbl.isOption('auditcols') 
+                    ret += tab + tblName+'.'+ 'ROW_KEY' + singular(pad + tblName)+'_'+ 'ROW_KEY,\n';
+                }
+                if( ddl.optionEQvalue('Audit Columns','yes') || tbl.isOption('auditcols')
                    || tbl.isOption('audit','col') || tbl.isOption('audit','cols') || tbl.isOption('audit','columns') ) {
                     let created = ddl.getOptionValue('createdcol');
                     let pad = tab+' '.repeat(tbl.maxChildNameLen() - created.length);
-                    ret += tab + chunks[i].value+'.'+  created + singular(pad + chunks[i].value)+'_'+ created+',\n';  
+                    ret += tab + tblName+'.'+  created + singular(pad + tblName)+'_'+ created+',\n';
                     let createdby = ddl.getOptionValue('createdbycol');
                     pad = tab+' '.repeat(tbl.maxChildNameLen() - createdby.length);
-                    ret += tab + chunks[i].value+'.'+  createdby + singular(pad + chunks[i].value)+'_'+  createdby+',\n';  
+                    ret += tab + tblName+'.'+  createdby + singular(pad + tblName)+'_'+  createdby+',\n';
                     let updated = ddl.getOptionValue('updatedcol');
                     pad = tab+' '.repeat(tbl.maxChildNameLen() - updated.length);
-                    ret += tab + chunks[i].value+'.'+  updated + singular(pad + chunks[i].value)+'_'+  updated+',\n';  
+                    ret += tab + tblName+'.'+  updated + singular(pad + tblName)+'_'+  updated+',\n';
                     let updatedby = ddl.getOptionValue('updatedbycol');
                     pad = tab+' '.repeat(tbl.maxChildNameLen() - updatedby.length);
-                    ret += tab + chunks[i].value+'.'+  updatedby + singular(pad + chunks[i].value)+'_'+ updatedby + ',\n';  
-                }            	
+                    ret += tab + tblName+'.'+  updatedby + singular(pad + tblName)+'_'+ updatedby + ',\n';
+                }
             }
             if( ret.lastIndexOf(',\n') == ret.length-2 )
                 ret = ret.substr(0,ret.length-2)+'\n';
-            ret += 'from\n'; 
+            ret += 'from\n';
             for( let i = 2; i < chunks.length; i++ ) {
                 let pad = ' '.repeat(maxLen - chunks[i].length);
                 var tbl = chunks[i].value;
@@ -1216,10 +1257,27 @@ let tree = (function(){
                     tbl = ddl.objPrefix()+chunks[i].value + pad + chunks[i].value;
                 ret += tab + tbl + ',\n';
             }
+            // Add LEFT JOINs for translation tables
+            let transContext = ddl.getOptionValue('transcontext');
+            for( let i = 2; i < chunks.length; i++ ) {
+                let tblName = chunks[i].value;
+                if( tblTransCols[tblName] ) {
+                    let tblNode = ddl.find(tblName);
+                    let transName = ddl.objPrefix() + tblName + '_trans';
+                    let tAlias = 't_' + tblName;
+                    let fkCol = singular(tblName) + '_id';
+                    let pkCol = tblNode.getGenIdColName() || tblNode.getExplicitPkName() || 'id';
+                    if( ret.lastIndexOf(',\n') == ret.length-2 )
+                        ret = ret.substr(0,ret.length-2)+'\n';
+                    ret += tab + 'left join ' + transName + ' ' + tAlias + '\n';
+                    ret += tab + tab + 'on ' + tAlias + '.' + fkCol + ' = ' + tblName + '.' + pkCol + '\n';
+                    ret += tab + tab + 'and ' + tAlias + '.language_code = ' + transContext + ',\n';
+                }
+            }
             if( ret.lastIndexOf(',\n') == ret.length-2 )
                 ret = ret.substr(0,ret.length-2)+'\n';
-            ret += 'where\n'; 
-            for( let i = 2; i < chunks.length; i++ )  
+            ret += 'where\n';
+            for( let i = 2; i < chunks.length; i++ )
                 for( let j = 2; j < chunks.length; j++ ) {
                     if( j == i )
                         continue;
@@ -1374,6 +1432,21 @@ let tree = (function(){
             return ret;
         };
 
+
+        this.generateImmutableTrigger = function() {
+            if( this.parseType() != 'table' )
+                return '';
+            if( !this.isOption('immutable') )
+                return '';
+            let objName = ddl.objPrefix()  + this.parseName();
+            let ret = 'create or replace trigger trg_'+ objName.toLowerCase() +'_insertonly\n';
+            ret += '    before update or delete\n';
+            ret += '    on '+ objName.toLowerCase() +'\n';
+            ret += 'begin\n';
+            ret += '    raise_application_error(-20055, \''+ objName.toLowerCase() +' is immutable\');\n';
+            ret += 'end;\n/\n\n';
+            return ret;
+        };
 
         this.procDecl = function( kind /* get, insert, update */ ) {
             let modifier = '';

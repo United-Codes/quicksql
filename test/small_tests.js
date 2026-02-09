@@ -953,6 +953,89 @@ view dept_v dept {Purpose 'reporting', Classification 'HR'}`).getDDL();
     assert( "output.indexOf('_trans') < 0" );
     assert( "output.indexOf('_resolved') < 0" );
 
+    // Feature: /immutable directive
+    output = new quicksql(`inspection_p /immutable
+    finding vc(200)
+    severity vc(20)`).getDDL();
+    assert( "0 < output.indexOf('before update or delete')" );
+    assert( "0 < output.indexOf('raise_application_error(-20055')" );
+    assert( "0 < output.indexOf('trg_inspection_p_insertonly')" );
+    assert( "0 < output.indexOf('inspection_p is immutable')" );
+
+    // /immutable not present -> no immutable trigger
+    output = new quicksql(`regular_table
+    name`).getDDL();
+    assert( "output.indexOf('insertonly') < 0" );
+    assert( "output.indexOf('raise_application_error') < 0" );
+
+    // Feature: /soda directive
+    output = new quicksql(`mycollection /soda`).getDDL();
+    assert( "0 < output.indexOf('create table mycollection')" );
+    assert( "0 < output.indexOf('id              varchar2(255)')" );
+    assert( "0 < output.indexOf('mycollection_id_pk primary key')" );
+    assert( "0 < output.indexOf('created_on      timestamp')" );
+    assert( "0 < output.indexOf('last_modified   timestamp')" );
+    assert( "0 < output.indexOf('version         varchar2(255)')" );
+    assert( "0 < output.indexOf('json_document   json')" );
+
+    // /soda with prefix
+    output = new quicksql(`docs /soda
+    # settings = {"prefix":"app"}`).getDDL();
+    assert( "0 < output.indexOf('create table app_docs')" );
+    assert( "0 < output.indexOf('json_document')" );
+
+    // Feature: Default date expressions (unquoted)
+    output = new quicksql(`events
+    created_at ts /default current_timestamp
+    modified_at ts /default systimestamp
+    regular_col vc(20) /default hello`).getDDL();
+    assert( "0 < output.indexOf('default on null current_timestamp')" );
+    assert( "0 < output.indexOf('default on null systimestamp')" );
+    assert( "0 < output.indexOf(\"default on null 'hello'\")" );
+
+    // localtimestamp also unquoted
+    output = new quicksql(`events2
+    created_at ts /default localtimestamp`).getDDL();
+    assert( "0 < output.indexOf('default on null localtimestamp')" );
+
+    // Feature: Table groups via GROUP annotation
+    output = new quicksql(`departments {GROUP 'HR Tables'}
+    name
+employees {GROUP 'HR Tables'}
+    name
+projects {GROUP 'PM Tables'}
+    name`).getDDL();
+    assert( "0 < output.indexOf('table groups')" );
+    assert( "0 < output.indexOf(\"insert into user_annotations_groups$ (group_name) values ('HR Tables')\")" );
+    assert( "0 < output.indexOf(\"insert into user_annotations_group_members$ (group_name, object_name) values ('HR Tables', 'DEPARTMENTS')\")" );
+    assert( "0 < output.indexOf(\"insert into user_annotations_group_members$ (group_name, object_name) values ('HR Tables', 'EMPLOYEES')\")" );
+    assert( "0 < output.indexOf(\"insert into user_annotations_groups$ (group_name) values ('PM Tables')\")" );
+    assert( "0 < output.indexOf(\"insert into user_annotations_group_members$ (group_name, object_name) values ('PM Tables', 'PROJECTS')\")" );
+    // GROUP annotation still appears on table DDL
+    assert( "0 < output.indexOf('annotations (GROUP')" );
+
+    // Feature: Views with translation awareness
+    output = new quicksql(`locations
+    name vc(200) /trans
+    code vc(10)
+    tenant_id
+
+view location_v locations`).getDDL();
+    assert( "0 < output.indexOf('coalesce(t_locations.trans_name, locations.name)')" );
+    assert( "0 < output.indexOf('left join locations_trans t_locations')" );
+    assert( "0 < output.indexOf(\"sys_context('APP_CTX','LANG')\")" );
+    // tenant_id is just a regular column surfaced in the view
+    assert( "0 < output.indexOf('locations.tenant_id')" );
+    // non-translated columns come through normally
+    assert( "0 < output.indexOf('locations.code')" );
+
+    // View without /trans -> no LEFT JOIN
+    output = new quicksql(`dept
+    name
+view dept_v dept`).getDDL();
+    assert( "output.indexOf('left join') < 0" );
+    assert( "output.indexOf('coalesce') < 0" );
+
 }
 
 
@@ -961,7 +1044,7 @@ small_tests();
 console.log(assertionCnt);
 
 // metatest that watches tests
-const minimalTestCnt = 150;
+const minimalTestCnt = 175;
 if( assertionCnt < minimalTestCnt ) {
     console.error("assertionCnt < "+minimalTestCnt);
     throw new Error('Test failed');

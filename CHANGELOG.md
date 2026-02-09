@@ -105,3 +105,16 @@ Table and column directive syntax check
 
 - **DESCRIPTION annotation comment generation**: When a table or column annotation includes a `DESCRIPTION` key (e.g., `{DESCRIPTION 'Main HR table'}`), a `COMMENT ON TABLE` or `COMMENT ON COLUMN` statement is automatically generated. The `DESCRIPTION` annotation takes precedence over explicit comments.
 - **Double-quoted annotation values**: Annotation values now support both single quotes (`'value'`) and double quotes (`"value"`).
+
+### 1.3.5 - 2026-02-09
+
+#### Added
+
+- **Immutable tables** (`/immutable`): New table directive that generates a `BEFORE UPDATE OR DELETE` trigger preventing any modifications after insert. Use for audit logs, inspection records, and other append-only tables.
+- **SODA collections** (`/soda`): New table directive that generates a fixed-schema SODA-compatible collection table with `id`, `created_on`, `last_modified`, `version`, and `json_document` columns. Child columns are ignored.
+- **Table groups** (`{GROUP 'name'}`): New `GROUP` annotation on tables that generates `INSERT` statements into `USER_ANNOTATIONS_GROUPS$` and `USER_ANNOTATIONS_GROUP_MEMBERS$` for logical table grouping.
+- **Translation-aware views**: Views over tables with `/trans` columns now automatically use `coalesce(t.trans_col, tbl.col)` expressions and `LEFT JOIN` to the `_trans` table with the configured `transcontext` language filter.
+
+#### Fixed
+
+- **Default date expressions**: SQL date expressions (`sysdate`, `current_date`, `current_timestamp`, `systimestamp`, `localtimestamp`) used with `/default` are no longer incorrectly quoted on timestamp and varchar columns.
