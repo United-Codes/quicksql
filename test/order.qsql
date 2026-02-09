@@ -1,8 +1,8 @@
-emp
+emp {GROUP "Employee Group"}
   ename
   deptno /fk dept
 
-dept 
+dept /immutable
   dname /trans
 
 user {DESCRIPTION "User table"}
