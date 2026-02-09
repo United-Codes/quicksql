@@ -20,6 +20,7 @@ export const quicksql = (function () {
             createdbycol: {label: 'Created By Column Name', value: 'created_by'},
             updatedcol: {label: 'Updated Column Name', value: 'updated'},
             updatedbycol: {label: 'Updated By Column Name', value: 'updated_by'},
+            auditdate: {label: 'Audit Column Date Type', value:''},
         boolean: {label: 'Boolean Datatype', value:'not set',check:['yn','native']},
         genpk: {label:'Auto Primary Key', value:'yes',check:['yes','no']},
         semantics: {label: 'Character Strings',value:'CHAR',check:['BYTE','CHAR','Default']},
@@ -344,13 +345,17 @@ export const quicksql = (function () {
                     item.columns.push({name: 'row_version', datatype: 'integer'});
                 }            	
                 if( this.optionEQvalue('Audit Columns','yes') || 0 < nodeContent.indexOf('/AUDITCOLS') ) {
+                    let auditDateType = this.getOptionValue('auditdate');
+                    if( auditDateType == null || auditDateType == '' )
+                        auditDateType = this.getOptionValue('Date Data Type');
+                    auditDateType = auditDateType.toLowerCase();
                     let created = this.getOptionValue('createdcol');
-                    item.columns.push({name: created, datatype: this.getOptionValue('Date Data Type').toLowerCase()});
+                    item.columns.push({name: created, datatype: auditDateType});
                     let createdby = this.getOptionValue('createdbycol');
                     item.columns.push({name: createdby, datatype: 'varchar2(255'+this.semantics()+')'});
                     let updated = this.getOptionValue('updatedcol');
-                    item.columns.push({name: updated, datatype: this.getOptionValue('Date Data Type').toLowerCase()});
-                    let updatedby = this.getOptionValue('updatedbycol'); 
+                    item.columns.push({name: updated, datatype: auditDateType});
+                    let updatedby = this.getOptionValue('updatedbycol');
                     item.columns.push({name: updatedby, datatype: 'varchar2(255'+this.semantics()+')'});
                 }            	
                 var cols = this.additionalColumns();

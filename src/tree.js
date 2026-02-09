@@ -372,12 +372,13 @@ let tree = (function(){
                 }
             } 
             const dbVer = ddl.getOptionValue('db');
-            if( booleanCheck != '' && ( ddl.getOptionValue('boolean')=='native' 
-                                      || ddl.getOptionValue('boolean') != 'yn' && 0 < dbVer.length && 23 <= getMajorVersion(dbVer) ) 
+            if( booleanCheck != '' && ( ddl.getOptionValue('boolean')=='native'
+                                      || ddl.getOptionValue('boolean') != 'yn' && 0 < dbVer.length && 23 <= getMajorVersion(dbVer) )
             ) {
                 booleanCheck = '';
                 ret = 'boolean';
             }
+            let isNativeBoolean = (ret === 'boolean');
 
 
             if( this.indexOf('phone_number') == 0 )
@@ -399,8 +400,12 @@ let tree = (function(){
                     ret = 'clob';
                 if( this.occursBeforeOption('blob') || this.occursBeforeOption('file') ) 
                     ret = 'blob';
-                if( this.occursBeforeOption('json') ) 
-                    ret = 'clob check ('+this.parseName()+' is json)';
+                if( this.occursBeforeOption('json') ) {
+                    if( dbVer != null && 0 < dbVer.length && 23 <= getMajorVersion(dbVer) )
+                        ret = 'json';
+                    else
+                        ret = 'clob check ('+this.parseName()+' is json)';
+                }
             }
 
             if( this.occursBeforeOption('tswltz') && this.indexOf('/')  ) 
@@ -445,7 +450,10 @@ let tree = (function(){
                     value += src[i].getValue();
                 }
                 const sqlDateExpressions = ['sysdate', 'current_date', 'current_timestamp', 'systimestamp', 'localtimestamp'];
-                if( sqlDateExpressions.includes(value.toLowerCase()) )
+                if( isNativeBoolean ) {
+                    let boolVal = (value.toUpperCase() === 'Y' || value.toLowerCase() === 'true') ? 'true' : 'false';
+                    ret += ' default on null ' + boolVal;
+                } else if( sqlDateExpressions.includes(value.toLowerCase()) )
                     ret += ' default on null ' + value;
                 else
                     ret += ' default on null ' + optQuote + value + optQuote;
@@ -455,7 +463,8 @@ let tree = (function(){
                     ret += ' not null';
             if( this.isOption('hidden') || this.isOption('invincible') ) 
                 ret += ' invisible';
-            ret += this.genConstraint(optQuote);
+            if( !isNativeBoolean )
+                ret += this.genConstraint(optQuote);
             ret += booleanCheck;
             if( this.isOption('between') ) {
                 const bi = this.indexOf('between');
@@ -859,7 +868,12 @@ let tree = (function(){
                 ret =  ret + 'create sequence  '+objName+'_seq;\n\n';                
             }
 
-            ret =  ret + 'create table '+objName+' (\n';
+            const _dbVer = ddl.getOptionValue('db');
+            const _db23plus = _dbVer != null && 0 < _dbVer.length && 23 <= getMajorVersion(_dbVer);
+            let immutableKeyword = '';
+            if( this.isOption('immutable') && _db23plus )
+                immutableKeyword = 'immutable ';
+            ret =  ret + 'create '+immutableKeyword+'table '+objName+' (\n';
             var pad = tab+' '.repeat(this.maxChildNameLen() - 'ID'.length);
 
             let idColName = this.getGenIdColName();
@@ -988,20 +1002,24 @@ let tree = (function(){
                 let pad = tab+' '.repeat(this.maxChildNameLen() - 'row_version'.length);
                 ret += tab +  'row_version' + pad + 'integer not null,\n';              	
             }            	
-            if( ddl.optionEQvalue('Audit Columns','yes') || this.isOption('auditcols') 
+            if( ddl.optionEQvalue('Audit Columns','yes') || this.isOption('auditcols')
                       || this.isOption('audit','col') || this.isOption('audit','cols') || this.isOption('audit','columns') ) {
+                let auditDateType = ddl.getOptionValue('auditdate');
+                if( auditDateType == null || auditDateType == '' )
+                    auditDateType = ddl.getOptionValue('Date Data Type');
+                auditDateType = auditDateType.toLowerCase();
                 let created = ddl.getOptionValue('createdcol');
                 let pad = tab+' '.repeat(this.maxChildNameLen() - created.length);
-                ret += tab +  created + pad + ddl.getOptionValue('Date Data Type').toLowerCase() + ' not null,\n';  
+                ret += tab +  created + pad + auditDateType + ' not null,\n';
                 let createdby = ddl.getOptionValue('createdbycol');
                 pad = tab+' '.repeat(this.maxChildNameLen() - createdby.length);
-                ret += tab +  createdby + pad + 'varchar2(255'+ddl.semantics()+') not null,\n';  
+                ret += tab +  createdby + pad + 'varchar2(255'+ddl.semantics()+') not null,\n';
                 let updated = ddl.getOptionValue('updatedcol');
                  pad = tab+' '.repeat(this.maxChildNameLen() - updated.length);
-                ret += tab +  updated + pad + ddl.getOptionValue('Date Data Type').toLowerCase() + ' not null,\n'; 
-                let updatedby = ddl.getOptionValue('updatedbycol'); 
+                ret += tab +  updated + pad + auditDateType + ' not null,\n';
+                let updatedby = ddl.getOptionValue('updatedbycol');
                 pad = tab+' '.repeat(this.maxChildNameLen() - updatedby.length);
-                ret += tab +  updatedby + pad + 'varchar2(255'+ddl.semantics()+') not null,\n';  
+                ret += tab +  updatedby + pad + 'varchar2(255'+ddl.semantics()+') not null,\n';
             }            	
             var cols = ddl.additionalColumns();
             for( let col in cols ) {
@@ -1013,7 +1031,11 @@ let tree = (function(){
             if( ret.lastIndexOf(',\n') == ret.length-2 )
                 ret = ret.substring(0,ret.length-2)+'\n';
             let tableAnnotations = this.annotations != null ? '\nannotations (' + this.annotations + ')' : '';
-            ret += ')'+(ddl.optionEQvalue('compress','yes') || this.isOption('compress')?' compress':'')+tableAnnotations+';\n\n';
+            let compressClause = '';
+            if( ddl.optionEQvalue('compress','yes') || this.isOption('compress') )
+                compressClause = _db23plus ? ' row store compress advanced' : ' compress';
+            let immutableSuffix = (immutableKeyword != '') ? ' no drop no delete' : '';
+            ret += ')'+compressClause+tableAnnotations+immutableSuffix+';\n\n';
             
             if( this.isOption('audit') && !this.isOption('auditcols') &&
                            !this.isOption('audit','col') && !this.isOption('audit','cols') && !this.isOption('audit','columns') ) {
@@ -1070,6 +1092,17 @@ let tree = (function(){
                 }
             }
             
+            if( _db23plus ) {
+                for( let i = 0; i < this.children.length; i++ ) {
+                    let child = this.children[i];
+                    if( child.children.length == 0 && child.parseType(true).startsWith('vector') ) {
+                        ret += 'create vector index '+objName+'_vi'+(num++)+' on '+objName+' ('+child.parseName()+')\n';
+                        ret += '    organization neighbor partitions\n';
+                        ret += '    with distance cosine;\n\n';
+                    }
+                }
+            }
+
             var tableComment = this.getAnnotationValue('DESCRIPTION') || this.comment;
             if( tableComment != null )
                 ret += 'comment on table '+objName+' is \''+tableComment+'\';\n';
@@ -1121,15 +1154,17 @@ let tree = (function(){
 
         this.generateDrop = function() {
             let objName = ddl.objPrefix()  + this.parseName();
+            const dbVer = ddl.getOptionValue('db');
+            const ifExists = dbVer != null && 0 < dbVer.length && 23 <= getMajorVersion(dbVer) ? 'if exists ' : '';
             let ret = '';
-            if( this.parseType() == 'view' ) 
-                ret = 'drop view '+objName+';\n';
+            if( this.parseType() == 'view' )
+                ret = 'drop view '+ifExists+objName+';\n';
             if( this.parseType() == 'table' ) {
-                ret = 'drop table '+objName+' cascade constraints;\n';
+                ret = 'drop table '+ifExists+objName+' cascade constraints;\n';
                 if( ddl.optionEQvalue('api','yes') )
-                    ret+= 'drop package '+objName+'_api;\n';
+                    ret+= 'drop package '+ifExists+objName+'_api;\n';
                 if( ddl.optionEQvalue('pk','SEQ') )
-                    ret+= 'drop sequence '+objName+'_seq;\n';
+                    ret+= 'drop sequence '+ifExists+objName+'_seq;\n';
             }
             return ret.toLowerCase();
         };
@@ -1149,22 +1184,27 @@ let tree = (function(){
             }
             let objName = ddl.objPrefix()  + this.parseName();
             var chunks = this.src;
+            // Build alias map for SQL table aliases (amend reserved words)
+            let aliasMap = {};
+            for( let i = 2; i < chunks.length; i++ )
+                aliasMap[chunks[i].value] = amend_reserved_word(chunks[i].value);
             var ret = 'create or replace view ' +objName;
             if( this.annotations != null )
                 ret += '\nannotations (' + this.annotations + ')';
             ret += ' as\n';
             ret += 'select\n';
             var maxLen = 0;
-            for( var i = 2; i < chunks.length; i++ ) { 
+            for( var i = 2; i < chunks.length; i++ ) {
                 let tbl = ddl.find(chunks[i].value);
                 if( tbl == null )
                     return '';
-                var len = (chunks[i].value+'.id').length;
+                let alias = aliasMap[chunks[i].value];
+                var len = (alias+'.id').length;
                 if( maxLen < len )
                     maxLen = len;
                 for( var j = 0; j < tbl.children.length; j++ ) {
                     var child = tbl.children[j];
-                    len = (chunks[i].value+'.'+child.parseName()).length;
+                    len = (alias+'.'+child.parseName()).length;
                     if( maxLen < len )
                         maxLen = len;
                 }
@@ -1182,6 +1222,12 @@ let tree = (function(){
                         cnt = 0;
                     colCnts[col] = cnt+1;	
                 }
+            }
+            // Count auto-generated ID aliases to detect duplicates with child columns
+            for( let i = 2; i < chunks.length; i++ ) {
+                let idAlias = singular(chunks[i].value) + '_id';
+                let cnt = colCnts[idAlias] || 0;
+                colCnts[idAlias] = cnt + 1;
             }
             // Determine which tables have /trans columns
             let tblTransCols = {};
@@ -1203,9 +1249,10 @@ let tree = (function(){
                 if( tbl == null )
                     continue;
                 let tblName = chunks[i].value;
+                let alias = aliasMap[tblName];
                 let transNames = tblTransCols[tblName] || {};
-                let pad = ' '.repeat(maxLen - (tblName+'.id').length);
-                ret += tab + tblName+'.id'+tab+pad+singular(tblName)+'_id,\n';
+                let pad = ' '.repeat(maxLen - (alias+'.id').length);
+                ret += tab + alias+'.id'+tab+pad+singular(tblName)+'_id,\n';
                 for( let j = 0; j < tbl.children.length; j++ ) {
                     let child = tbl.children[j];
                     if( 0 == child.children.length ) {
@@ -1215,52 +1262,53 @@ let tree = (function(){
                             disambiguator = singular(tblName)+'_';
                         if( transNames[cname] ) {
                             let tAlias = 't_' + tblName;
-                            let expr = 'coalesce('+tAlias+'.trans_'+cname+', '+tblName+'.'+cname+')';
+                            let expr = 'coalesce('+tAlias+'.trans_'+cname+', '+alias+'.'+cname+')';
                             ret += tab + expr + tab + disambiguator+cname+',\n';
                         } else {
-                            pad = ' '.repeat(maxLen - (tblName+'.'+cname).length);
-                            ret += tab + tblName+'.'+cname+tab+pad+disambiguator+cname+',\n';
+                            pad = ' '.repeat(maxLen - (alias+'.'+cname).length);
+                            ret += tab + alias+'.'+cname+tab+pad+disambiguator+cname+',\n';
                         }
                     }
                 }
                 if( ddl.optionEQvalue('rowVersion','yes') || tbl.isOption('rowversion') ) {
                     let pad = tab+' '.repeat(tbl.maxChildNameLen() - 'row_version'.length);
-                    ret += tab + tblName+'.'+ 'row_version' + singular(pad + tblName)+'_'+ 'row_version,\n';
+                    ret += tab + alias+'.'+ 'row_version' + pad + singular(tblName)+'_'+ 'row_version,\n';
                 }
                 if( ddl.optionEQvalue('rowkey','yes') || tbl.isOption('rowkey') ) {
                     let pad = tab+' '.repeat(tbl.maxChildNameLen() - 'ROW_KEY'.length);
-                    ret += tab + tblName+'.'+ 'ROW_KEY' + singular(pad + tblName)+'_'+ 'ROW_KEY,\n';
+                    ret += tab + alias+'.'+ 'ROW_KEY' + pad + singular(tblName)+'_'+ 'ROW_KEY,\n';
                 }
                 if( ddl.optionEQvalue('Audit Columns','yes') || tbl.isOption('auditcols')
                    || tbl.isOption('audit','col') || tbl.isOption('audit','cols') || tbl.isOption('audit','columns') ) {
                     let created = ddl.getOptionValue('createdcol');
                     let pad = tab+' '.repeat(tbl.maxChildNameLen() - created.length);
-                    ret += tab + tblName+'.'+  created + singular(pad + tblName)+'_'+ created+',\n';
+                    ret += tab + alias+'.'+  created + pad + singular(tblName)+'_'+ created+',\n';
                     let createdby = ddl.getOptionValue('createdbycol');
                     pad = tab+' '.repeat(tbl.maxChildNameLen() - createdby.length);
-                    ret += tab + tblName+'.'+  createdby + singular(pad + tblName)+'_'+  createdby+',\n';
+                    ret += tab + alias+'.'+  createdby + pad + singular(tblName)+'_'+  createdby+',\n';
                     let updated = ddl.getOptionValue('updatedcol');
                     pad = tab+' '.repeat(tbl.maxChildNameLen() - updated.length);
-                    ret += tab + tblName+'.'+  updated + singular(pad + tblName)+'_'+  updated+',\n';
+                    ret += tab + alias+'.'+  updated + pad + singular(tblName)+'_'+  updated+',\n';
                     let updatedby = ddl.getOptionValue('updatedbycol');
                     pad = tab+' '.repeat(tbl.maxChildNameLen() - updatedby.length);
-                    ret += tab + tblName+'.'+  updatedby + singular(pad + tblName)+'_'+ updatedby + ',\n';
+                    ret += tab + alias+'.'+  updatedby + pad + singular(tblName)+'_'+ updatedby + ',\n';
                 }
             }
             if( ret.lastIndexOf(',\n') == ret.length-2 )
                 ret = ret.substr(0,ret.length-2)+'\n';
             ret += 'from\n';
             for( let i = 2; i < chunks.length; i++ ) {
-                let pad = ' '.repeat(maxLen - chunks[i].length);
-                var tbl = chunks[i].value;
+                let alias = aliasMap[chunks[i].value];
+                var tbl = alias;
                 if( ddl.objPrefix() != null && ddl.objPrefix() != '' )
-                    tbl = ddl.objPrefix()+chunks[i].value + pad + chunks[i].value;
+                    tbl = ddl.objPrefix()+chunks[i].value + ' ' + alias;
                 ret += tab + tbl + ',\n';
             }
             // Add LEFT JOINs for translation tables
             let transContext = ddl.getOptionValue('transcontext');
             for( let i = 2; i < chunks.length; i++ ) {
                 let tblName = chunks[i].value;
+                let alias = aliasMap[tblName];
                 if( tblTransCols[tblName] ) {
                     let tblNode = ddl.find(tblName);
                     let transName = ddl.objPrefix() + tblName + '_trans';
@@ -1270,7 +1318,7 @@ let tree = (function(){
                     if( ret.lastIndexOf(',\n') == ret.length-2 )
                         ret = ret.substr(0,ret.length-2)+'\n';
                     ret += tab + 'left join ' + transName + ' ' + tAlias + '\n';
-                    ret += tab + tab + 'on ' + tAlias + '.' + fkCol + ' = ' + tblName + '.' + pkCol + '\n';
+                    ret += tab + tab + 'on ' + tAlias + '.' + fkCol + ' = ' + alias + '.' + pkCol + '\n';
                     ret += tab + tab + 'and ' + tAlias + '.language_code = ' + transContext + ',\n';
                 }
             }
@@ -1283,6 +1331,8 @@ let tree = (function(){
                         continue;
                     var nameA = chunks[i].value;
                     var nameB = chunks[j].value;
+                    var aliasA = aliasMap[nameA];
+                    var aliasB = aliasMap[nameB];
                     var nodeA = ddl.find(nameA);
                     if( nodeA == null )
                         continue;
@@ -1292,16 +1342,16 @@ let tree = (function(){
                     for( var k in nodeA.fks ) {
                         var parent = nodeA.fks[k];
                         if( parent == nameB) {
-                            ret += tab + nameA+'.'+singular(parent)+'_id(+) = ' +nameB+'.id and\n';
+                            ret += tab + aliasA+'.'+k+'(+) = ' +aliasB+'.id and\n';
                         }
                     }
                 }
             ret = ret.toLowerCase();
-            let postfix =  'where\n';   
-            if( 0 < ret.indexOf(postfix) && ret.indexOf(postfix) == ret.length-postfix.length )
-                ret = ret.substring(0, ret.length-postfix.length).trim();           
-            postfix =  'and\n';   
-            if( 0 < ret.indexOf(postfix) && ret.indexOf(postfix) == ret.length-postfix.length )
+            let postfix =  'where\n';
+            if( 0 < ret.lastIndexOf(postfix) && ret.lastIndexOf(postfix) == ret.length-postfix.length )
+                ret = ret.substring(0, ret.length-postfix.length).trim();
+            postfix =  'and\n';
+            if( 0 < ret.lastIndexOf(postfix) && ret.lastIndexOf(postfix) == ret.length-postfix.length )
                 ret = ret.substring(0, ret.length-postfix.length).trim(); 
             if( !ret.endsWith('\n') )
                 ret += '\n';         
@@ -1329,7 +1379,9 @@ let tree = (function(){
 
 
         this.generateTrigger = function() {
-            if( this.parseType() != 'table' ) 
+            if( this.parseType() != 'table' )
+                return '';
+            if( this.isOption('soda') )
                 return '';
             let editionable = '';
             if( ddl.optionEQvalue('editionable','yes') )
@@ -1399,11 +1451,13 @@ let tree = (function(){
                 OK = true;
             }
             if( ddl.optionEQvalue('Audit Columns','yes') || this.isOption('auditcols') || this.isOption('audit','col') || this.isOption('audit','cols') || this.isOption('audit','columns') ) {
+                let auditDateType = ddl.getOptionValue('auditdate') || ddl.getOptionValue('Date Data Type');
+                let sysDateFn = (auditDateType.toLowerCase().indexOf('timestamp') >= 0) ? 'systimestamp' : 'sysdate';
                 ret += '    if inserting then\n';
-                ret += '        :new.'+ddl.getOptionValue('createdcol')+' := SYSDATE;\n'.toLowerCase();
+                ret += '        :new.'+ddl.getOptionValue('createdcol')+' := '+sysDateFn+';\n';
                 ret += '        :new.'+ddl.getOptionValue('createdbycol')+' := '+user+';\n'.toLowerCase();
                 ret += '    end if;\n';
-                ret += '    :new.'+ddl.getOptionValue('updatedcol')+' := SYSDATE;\n'.toLowerCase();
+                ret += '    :new.'+ddl.getOptionValue('updatedcol')+' := '+sysDateFn+';\n';
                 ret += '    :new.'+ddl.getOptionValue('updatedbycol')+' := '+user+';\n'.toLowerCase();
                 OK = true;
             }
@@ -1437,6 +1491,9 @@ let tree = (function(){
             if( this.parseType() != 'table' )
                 return '';
             if( !this.isOption('immutable') )
+                return '';
+            const dbVer = ddl.getOptionValue('db');
+            if( dbVer != null && 0 < dbVer.length && 23 <= getMajorVersion(dbVer) )
                 return '';
             let objName = ddl.objPrefix()  + this.parseName();
             let ret = 'create or replace trigger trg_'+ objName.toLowerCase() +'_insertonly\n';

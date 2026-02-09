@@ -1036,6 +1036,198 @@ view dept_v dept`).getDDL();
     assert( "output.indexOf('left join') < 0" );
     assert( "output.indexOf('coalesce') < 0" );
 
+    // -- Issue #1: Boolean native type with db >= 23 should use true/false, not 'Y'/'N'
+    output = new quicksql(`
+# settings = {"db":"23ai","pk":"IDENTITY"}
+tenant
+  is_active vc(1) /nn /check Y, N /default Y
+  flag_yn boolean /default N
+`).getDDL();
+    assert( "0 < output.indexOf('is_active')" );
+    assert( "0 < output.indexOf('boolean default on null true')" );
+    assert( "output.indexOf(\"default on null 'Y'\") < 0" );
+    assert( "output.indexOf(\"in ('Y','N')\") < 0" );
+    assert( "0 < output.indexOf('flag_yn')" );
+    assert( "0 < output.indexOf('boolean default on null false')" );
+
+    // Boolean with db < 23 should still use varchar2 Y/N
+    output = new quicksql(`
+# settings = {"db":"19c","pk":"IDENTITY"}
+tenant
+  is_active vc(1) /nn /check Y, N /default Y
+`).getDDL();
+    assert( "0 < output.indexOf(\"varchar2(1\")" );
+    assert( "0 < output.indexOf(\"default on null 'Y'\")" );
+    assert( "0 < output.indexOf(\"in ('Y','N')\")" );
+
+    // -- Issue #6: View FROM clause should have space between table name and alias
+    output = new quicksql(`
+# settings = {"prefix":"IW","pk":"IDENTITY"}
+dept
+    name
+view dept_v dept`).getDDL();
+    assert( "0 < output.indexOf('iw_dept dept')" );
+    assert( "output.indexOf('iw_deptdept') < 0" );
+
+    // -- Issue #7: Reserved word 'user' should be amended in view aliases
+    output = new quicksql(`
+# settings = {"prefix":"IW","pk":"IDENTITY"}
+user
+    username vc(50)
+task
+    user_id /fk user
+view task_v task user`).getDDL();
+    assert( "0 < output.indexOf('iw_user the_user')" );
+    assert( "0 < output.indexOf('the_user.id')" );
+    assert( "0 < output.indexOf('the_user.username')" );
+
+    // -- Issue #10: View WHERE clause should use actual FK column name
+    output = new quicksql(`
+# settings = {"prefix":"IW","pk":"IDENTITY"}
+user
+    username vc(50)
+visit
+    planned_by /fk user
+view stats_v visit user`).getDDL();
+    assert( "0 < output.indexOf('visit.planned_by(+) = the_user.id')" );
+    assert( "output.indexOf('visit.user_id(+)') < 0" );
+
+    // -- Issue #8: Trailing 'and' should be stripped in multi-condition WHERE
+    assert( "output.indexOf('and\\n/') < 0" );
+
+    // -- Issue #9: Duplicate column aliases should be disambiguated
+    output = new quicksql(`
+# settings = {"prefix":"IW","pk":"IDENTITY"}
+user
+    username vc(50)
+auth
+    user_id /fk user
+view auth_v user auth`).getDDL();
+    // user.id -> user_id, auth.user_id -> auth_user_id (disambiguated)
+    assert( "0 < output.indexOf('auth_user_id')" );
+
+    // -- Issue #11: SODA collection should not get a BIU trigger
+    output = new quicksql(`
+# settings = {"pk":"IDENTITY","rowversion":true,"auditcols":"Y","apex":"Y"}
+visit_inspection_c /soda
+`).getDDL();
+    assert( "output.indexOf('visit_inspection_c_biu') < 0" );
+    assert( "0 < output.indexOf('json_document')" );
+
+    // -- Recommendation #13: Native JSON type for db >= 23
+    output = new quicksql(`
+# settings = {"db":"23ai"}
+test_json
+    payload json
+`).getDDL();
+    assert( "0 < output.indexOf('payload    json')" );
+    assert( "output.indexOf('clob check') < 0" );
+    assert( "output.indexOf('is json') < 0" );
+
+    // Native JSON not used for db < 23
+    output = new quicksql(`
+# settings = {"db":"19c"}
+test_json
+    payload json
+`).getDDL();
+    assert( "0 < output.indexOf('clob check (payload is json)')" );
+
+    // -- Recommendation #14: Audit date type setting (timestamp with time zone)
+    output = new quicksql(`
+# settings = {"auditdate":"timestamp with time zone","auditcols":"Y","apex":"Y"}
+test_audit
+    name
+`).getDDL();
+    assert( "0 < output.indexOf('timestamp with time zone not null')" );
+    assert( "0 < output.indexOf('systimestamp')" );
+    assert( "output.indexOf(':= sysdate') < 0" );
+
+    // Audit date type defaults to Date Data Type when auditdate not set
+    output = new quicksql(`
+# settings = {"auditcols":"Y","apex":"Y"}
+test_audit2
+    name
+`).getDDL();
+    assert( "0 < output.indexOf('sysdate')" );
+
+    // -- Recommendation #16: DROP IF EXISTS for db >= 23
+    output = new quicksql(`
+# settings = {"db":"26ai","drop":"Y"}
+test_drop
+    name
+`).getDDL();
+    assert( "0 <= output.indexOf('drop table if exists')" );
+
+    // DROP without IF EXISTS for db < 23
+    output = new quicksql(`
+# settings = {"db":"19c","drop":"Y"}
+test_drop2
+    name
+`).getDDL();
+    assert( "0 <= output.indexOf('drop table test_drop2')" );
+    assert( "output.indexOf('if exists') < 0" );
+
+    // -- Recommendation #17: IMMUTABLE TABLE for db >= 23 uses CREATE IMMUTABLE TABLE ... NO DROP NO DELETE
+    output = new quicksql(`
+# settings = {"db":"23ai"}
+audit_log /immutable
+    finding vc(200)
+`).getDDL();
+    assert( "0 < output.indexOf('create immutable table audit_log')" );
+    assert( "0 < output.indexOf('no drop no delete')" );
+    // No trigger-based immutability needed for db >= 23
+    assert( "output.indexOf('raise_application_error') < 0" );
+    assert( "output.indexOf('insertonly') < 0" );
+
+    // IMMUTABLE TABLE for db < 23 uses trigger-based approach
+    output = new quicksql(`
+# settings = {"db":"19c"}
+audit_log /immutable
+    finding vc(200)
+`).getDDL();
+    assert( "output.indexOf('create immutable table') < 0" );
+    assert( "0 < output.indexOf('create table audit_log')" );
+    assert( "0 < output.indexOf('raise_application_error')" );
+    assert( "0 < output.indexOf('insertonly')" );
+
+    // -- Recommendation #18: VECTOR INDEX for db >= 23
+    output = new quicksql(`
+# settings = {"db":"26ai"}
+documents
+    title vc(200)
+    embedding vector
+`).getDDL();
+    assert( "0 < output.indexOf('create vector index')" );
+    assert( "0 < output.indexOf('organization neighbor partitions')" );
+    assert( "0 < output.indexOf('with distance cosine')" );
+
+    // No vector index for db < 23
+    output = new quicksql(`
+# settings = {"db":"19c"}
+documents
+    title vc(200)
+    embedding vector
+`).getDDL();
+    assert( "output.indexOf('create vector index') < 0" );
+
+    // -- Recommendation #22: COMPRESS ADVANCED for db >= 23
+    output = new quicksql(`
+# settings = {"db":"26ai","compress":"Y"}
+big_table
+    name
+`).getDDL();
+    assert( "0 < output.indexOf('row store compress advanced')" );
+    assert( "output.indexOf(') compress;') < 0" );
+
+    // Regular compress for db < 23
+    output = new quicksql(`
+# settings = {"db":"19c","compress":"Y"}
+big_table2
+    name
+`).getDDL();
+    assert( "0 < output.indexOf(') compress;')" );
+    assert( "output.indexOf('row store compress advanced') < 0" );
+
 }
 
 
