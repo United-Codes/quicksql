@@ -179,12 +179,8 @@ var lexer = (function(){
                 continue;
             }
             if( quotedStrings && '\'' == token ) {  // start
-                if( last != null && (
-                    'Q'/*.toUpperCase()*/ == last.value.toUpperCase()
-                    || 'N'/*.toUpperCase()*/ == last.value.toUpperCase()
-                    || 'U'/*.toUpperCase()*/ == last.value.toUpperCase()
-                    || 'NQ'/*.toUpperCase()*/ == last.value.toUpperCase()
-                ) ) {
+                var lastLower = last != null && last.value.length <= 2 ? last.value.toLowerCase() : '';
+                if( lastLower === 'q' || lastLower === 'n' || lastLower === 'u' || lastLower === 'nq' ) {
                     last.value += token;
                     last.type = 'quoted-string';
                 } else {
@@ -250,11 +246,14 @@ var lexer = (function(){
     // "1e01" is treated as "digits", "1e+01" is treated as "digits '+' digits"
     // This seems to be a minor bug -- the containing expressions are OK
     function fixedExponent( input, ret, pos, line ) {
-        if( 0>input.indexOf('e') && 0>input.indexOf('f') && 0>input.indexOf('d') )
+        var eIdx = input.indexOf('e');
+        var fIdx = input.indexOf('f');
+        var dIdx = input.indexOf('d');
+        if( 0>eIdx && 0>fIdx && 0>dIdx )
             return false;
-        var x1 = 0<=input.indexOf('e');
-        var x2 = !(0<=input.indexOf('e'));
-        var x3 = !(0<=input.indexOf('e')) && !(0<=input.indexOf('f'));
+        var x1 = 0<=eIdx;
+        var x2 = !(0<=eIdx);
+        var x3 = !(0<=eIdx) && !(0<=fIdx);
         var chunks = split_str(input,'efd');
         for( var i = 0; i < chunks.length; i++ ) {
             var token = chunks[i]/*.intern()*/;

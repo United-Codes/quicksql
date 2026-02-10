@@ -2,11 +2,12 @@ export function singular( name ) {
     // identity columns in JSON document are singular
     if( name == null )
         return name;
-    if( name.toUpperCase().endsWith('IES') )
+    const upper = name.toUpperCase();
+    if( upper.endsWith('IES') )
         return name.substring(0,name.length-3)+'y';
-    if( name.toUpperCase().endsWith('ES') )
+    if( upper.endsWith('ES') )
         return name.substring(0,name.length-1);
-    if( name.toUpperCase().endsWith('S') )
+    if( upper.endsWith('S') )
         return name.substring(0,name.length-1);
     return name;
 }
@@ -81,10 +82,10 @@ function quoteIdentifier(/*String*/ s, /*char*/ quoteChar ) {
 export function canonicalObjectName( nAme ) {
     if( nAme == null )
         return null;
-    if( nAme.indexOf('"') == 0 )
+    if( nAme.charAt(0) === '"' )
         return nAme;
     let possiblyQuoted = quoteIdentifier(nAme);
-    if( possiblyQuoted.indexOf('"') == 0 )
+    if( possiblyQuoted.charAt(0) === '"' )
         return possiblyQuoted;
     possiblyQuoted = possiblyQuoted.replace(/ /g,"_"); 
     return possiblyQuoted;
@@ -95,15 +96,15 @@ export function concatNames(chunk1, chunk2, chunk3) {
     let quote = false;
     if( chunk3 == null )
         chunk3 = '';
-    if( 0 == chunk1.indexOf('"') ) {
+    if( chunk1.charAt(0) === '"' ) {
         quote = true;
         chunk1 = chunk1.substring(1,chunk1.length-1);
     }
-    if( 0 == chunk2.indexOf('"') ) {
+    if( chunk2.charAt(0) === '"' ) {
         quote = true;
         chunk2 = chunk2.substring(1,chunk2.length-1);
     }
-    if( 0 == chunk3.indexOf('"') ) {
+    if( chunk3.charAt(0) === '"' ) {
         quote = true;
         chunk3 = chunk3.substring(1,chunk3.length-1);
     }

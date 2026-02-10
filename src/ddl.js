@@ -11,6 +11,12 @@ const guid = 'guid';
 const tswtz = 'Timestamp with time zone';
 const tswltz = 'Timestamp with local time zone';
 
+// Pre-computed lowercase versions for normalize()
+const identityDataType_lower = identityDataType.toLowerCase();
+const guid_lower = guid.toLowerCase();
+const tswtz_lower = tswtz.toLowerCase();
+const tswltz_lower = tswltz.toLowerCase();
+
 export const quicksql = (function () {
 
     const defaultOptions = { 
@@ -63,10 +69,10 @@ export const quicksql = (function () {
         if( input == 'n') return false;
         if( input == 'true') return true;
         if( input == 'false') return false;
-        if( input == identityDataType.toLowerCase() ) return 'identity';
-        if( input == guid.toLowerCase() ) return 'guid';
-        if( input == tswtz.toLowerCase() ) return 'tswtz';
-        if( input == tswltz.toLowerCase() ) return 'tswltz';
+        if( input == identityDataType_lower ) return 'identity';
+        if( input == guid_lower ) return 'guid';
+        if( input == tswtz_lower ) return 'tswtz';
+        if( input == tswltz_lower ) return 'tswltz';
         return input;
     };
 

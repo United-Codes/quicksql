@@ -361,7 +361,7 @@ class f {
     });
   }
 }
-const E = "1.3.11", b = {
+const E = "1.3.12", b = {
   Diagram: f,
   version: E
 };
