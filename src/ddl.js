@@ -77,22 +77,26 @@ export const quicksql = (function () {
         this.errors = null;
         this.options = JSON.parse(JSON.stringify(defaultOptions));
         this.input = fullInput;
-        this.postponedAlters = []; 
+        this.postponedAlters = [];
+        this.postponedAltersSet = new Set();
+
+        // Pre-compute label-to-key lookup map for getOptionValue
+        this._labelToKey = {};
+        for( let x in this.options ) {
+            const lbl = this.options[x].label;
+            if( lbl != null )
+                this._labelToKey[lbl.toLowerCase()] = x;
+        }
 
         this.getOptionValue = function( kEy ) {
-            const key = kEy.toLowerCase(); 
+            const key = kEy.toLowerCase();
             let option = this.options[key];
             if( !(key in this.options) ) {
-                for( let x in this.options ) {
-                    const lAbel = this.options[x].label;
-                    if( lAbel == null )
-                        continue;
-                    const label = lAbel.toLowerCase();
-                    if( label == key )
-                        option = this.options[x];
-                }
+                const mapped = this._labelToKey[key];
+                if( mapped != null )
+                    option = this.options[mapped];
             }
-            if( option == null ) 
+            if( option == null )
                 return null;
             return option.value;
         };
@@ -191,10 +195,10 @@ export const quicksql = (function () {
             
         }
     
-        this.descendants = function () { 
+        this.descendants = function () {
             var ret = [];
             for( var i = 0; i < this.forest.length; i++ ) {
-                ret = ret.concat(this.forest[i].descendants());
+                ret.push(...this.forest[i].descendants());
             }
             return ret;
         };

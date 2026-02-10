@@ -118,3 +118,19 @@ Table and column directive syntax check
 #### Fixed
 
 - **Default date expressions**: SQL date expressions (`sysdate`, `current_date`, `current_timestamp`, `systimestamp`, `localtimestamp`) used with `/default` are no longer incorrectly quoted on timestamp and varchar columns.
+
+### 1.3.6 - 2026-02-09
+
+#### Fixed
+
+- **External FK prefix**: Foreign key references to external tables (not defined in the QuickSQL model) no longer get the object prefix prepended. E.g. `/fk UC_FLOWFORMS_FORM` with prefix `IW` now correctly generates `references UC_FLOWFORMS_FORM` instead of `references iw_UC_FLOWFORMS_FORM`.
+
+### 1.3.11 - 2026-02-10
+
+#### Changed
+
+- **ANSI JOIN syntax in views**: Views now use `LEFT JOIN ... ON` and `CROSS JOIN` instead of comma-separated tables with Oracle `(+)` outer join syntax in `WHERE`. Tables are topologically sorted so base tables appear first, then dependent tables join via FK conditions.
+
+#### Fixed
+
+- **Immutable table trigger**: `BEFORE INSERT OR UPDATE` reduced to `BEFORE INSERT` for `/immutable` tables, and the dead `ELSIF UPDATING` branch for `row_version` is omitted.

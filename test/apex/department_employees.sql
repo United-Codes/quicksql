@@ -50,11 +50,10 @@ select
     employees.cost_center                              cost_center,
     employees.date_hired                               date_hired,
     employees.job                                      job
-from 
-    departments,
-    employees
-where
-    employees.department_id(+) = departments.id
+from
+    departments
+    left join employees
+        on employees.department_id = departments.id
 /
 
 -- load data

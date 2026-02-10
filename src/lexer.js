@@ -8,70 +8,72 @@ var lexer = (function(){
         this.end = to;
         this.line = line;
         this.col = col;
-        this.toString = function() {
-            return '{type:'+type+',value:'+value+'}';
-        };
-        this.getValue = function() {
-            if( this.value == null || this.value.length < 2 )
-                return this.value;
-            if( this.value.charAt(0) == '`' ) {
-                let ret = this.value.substring(1,this.value.length-1);
-                ret = "q'[" + ret + "]'";
-            }
-            return this.value;
-        };
-        this.isStandardLiteral = function () {
-            // fast fail
-            if( this.value.length < 2 )
-                return false;
-            if( !(this.value.charAt(0)=='\'' || this.value.charAt(0)=='n' || this.value.charAt(0)=='N') )
-                return false;
-
-            var text = this.value;
-            if( text.charAt(0)=='n' || text.charAt(0)=='N' ) {
-                if( text.length < 3 )
-                    return false;
-                text = text.substring(1);
-            }
-            if( text.length < 2 )
-                return false;
-            return text.charAt(0)=='\'' && text.charAt(text.length-1)=='\'';
-        };
-        this.isAltLiteral = function () {
-            // fast fail
-            if( this.value.length < 5 )
-                return false;
-            if( !(this.value.charAt(0)=='q' || this.value.charAt(0)=='Q'
-                || this.value.charAt(0)=='n' || this.value.charAt(0)=='N') )
-                return false;
-
-            var text = this.value;
-            if( this.value.charAt(0)=='q' || this.value.charAt(0)=='Q' ) {
-                text = text.substring(1);
-            } else if( /*content.startsWith("Nq")*/
-                (this.value.charAt(0)=='n' || this.value.charAt(0)=='N')
-                && (this.value.charAt(1)=='q' || this.value.charAt(1)=='Q')
-            ) {
-                if( text.length < 6 )
-                    return false;
-                text = text.substring(2);
-            } else
-                return false;
-            if( text.charAt(0)=='\'' && text.charAt(text.length-1)=='\'' )
-                text = text.substring(1,text.length-1);
-            else
-                return false;
-
-            return matchingDelimiter(text.charAt(0)) == text.charAt(text.length-1);
-        };
-        function matchingDelimiter( ch ) {
-            if ( '<'==ch ) return '>';
-            else if ( '['==ch ) return ']';
-            else if ( '{'==ch ) return '}';
-            else if ( '('==ch ) return ')';
-            else return ch;
-        }
     }
+
+    function matchingDelimiter( ch ) {
+        if ( '<'==ch ) return '>';
+        else if ( '['==ch ) return ']';
+        else if ( '{'==ch ) return '}';
+        else if ( '('==ch ) return ')';
+        else return ch;
+    }
+
+    LexerToken.prototype.toString = function() {
+        return '{type:'+this.type+',value:'+this.value+'}';
+    };
+    LexerToken.prototype.getValue = function() {
+        if( this.value == null || this.value.length < 2 )
+            return this.value;
+        if( this.value.charAt(0) == '`' ) {
+            let ret = this.value.substring(1,this.value.length-1);
+            ret = "q'[" + ret + "]'";
+        }
+        return this.value;
+    };
+    LexerToken.prototype.isStandardLiteral = function () {
+        // fast fail
+        if( this.value.length < 2 )
+            return false;
+        if( !(this.value.charAt(0)=='\'' || this.value.charAt(0)=='n' || this.value.charAt(0)=='N') )
+            return false;
+
+        var text = this.value;
+        if( text.charAt(0)=='n' || text.charAt(0)=='N' ) {
+            if( text.length < 3 )
+                return false;
+            text = text.substring(1);
+        }
+        if( text.length < 2 )
+            return false;
+        return text.charAt(0)=='\'' && text.charAt(text.length-1)=='\'';
+    };
+    LexerToken.prototype.isAltLiteral = function () {
+        // fast fail
+        if( this.value.length < 5 )
+            return false;
+        if( !(this.value.charAt(0)=='q' || this.value.charAt(0)=='Q'
+            || this.value.charAt(0)=='n' || this.value.charAt(0)=='N') )
+            return false;
+
+        var text = this.value;
+        if( this.value.charAt(0)=='q' || this.value.charAt(0)=='Q' ) {
+            text = text.substring(1);
+        } else if( /*content.startsWith("Nq")*/
+            (this.value.charAt(0)=='n' || this.value.charAt(0)=='N')
+            && (this.value.charAt(1)=='q' || this.value.charAt(1)=='Q')
+        ) {
+            if( text.length < 6 )
+                return false;
+            text = text.substring(2);
+        } else
+            return false;
+        if( text.charAt(0)=='\'' && text.charAt(text.length-1)=='\'' )
+            text = text.substring(1,text.length-1);
+        else
+            return false;
+
+        return matchingDelimiter(text.charAt(0)) == text.charAt(text.length-1);
+    };
 
     function iterate_tokens( sourceExpr, quotedStrings, extraOper ) {
         var ret = [];

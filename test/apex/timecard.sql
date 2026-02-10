@@ -522,11 +522,10 @@ select
     timecards.created_by                               timecard_created_by,
     timecards.updated                                  timecard_updated,
     timecards.updated_by                               timecard_updated_by
-from 
-    employees,
-    timecards
-where
-    timecards.employee_id(+) = employees.id
+from
+    employees
+    left join timecards
+        on timecards.employee_id = employees.id
 /
 
 -- load data

@@ -51,20 +51,21 @@ let tree = (function(){
         };
                 
         this.descendants = function() {
-            var ret = [];
-            ret.push(this);
-            for( var i = 0; i < this.children.length; i++ ) 
-                ret = ret.concat(this.children[i].descendants());
+            var ret = [this];
+            for( var i = 0; i < this.children.length; i++ )
+                ret.push(...this.children[i].descendants());
             return ret;
         };
         
+        this._maxChildNameLen = -1;
         this.maxChildNameLen = function() {
+            if( this._maxChildNameLen >= 0 ) return this._maxChildNameLen;
             var maxLen = 2;
             if( ddl.optionEQvalue('rowkey',true) || this.isOption('rowkey') )
                 maxLen = 'row_key'.length;
             if( ddl.optionEQvalue('Row Version Number','yes') || this.isOption('rowversion') )
                 maxLen = 'row_version'.length;
-            if( ddl.optionEQvalue('Audit Columns','yes') || this.isOption('auditcols') 
+            if( ddl.optionEQvalue('Audit Columns','yes') || this.isOption('auditcols')
             || this.isOption('audit','col') || this.isOption('audit','cols') || this.isOption('audit','columns') ) {
                 let len = ddl.getOptionValue('createdcol').length;
                 if( maxLen < len )
@@ -78,7 +79,7 @@ let tree = (function(){
                 len = ddl.getOptionValue('updatedbycol').length;
                 if( maxLen < len )
                     maxLen = len;
-            }                    
+            }
             if( this.fks != null )
                 for( var col in this.fks ) {
                     //var parent = this.fks[col];
@@ -105,7 +106,8 @@ let tree = (function(){
                 if( maxLen < len )
                     maxLen = len;
             }
- 
+
+            this._maxChildNameLen = maxLen;
             return maxLen;
         };
         
@@ -146,24 +148,29 @@ let tree = (function(){
          * @returns
          */
         this.indexOf = function( token, isPrefix ) {
+            const lowerToken = token.toLowerCase();
             for( let i = 0; i < this.src.length; i++ ) {
-                if( isPrefix && 0 == this.src[i].value.toLowerCase().indexOf(token.toLowerCase()) )  
+                const lv = this.src[i].lowerValue;
+                if( isPrefix && 0 == lv.indexOf(lowerToken) )
                     return i;
-                else if( token.toLowerCase() == this.src[i].value.toLowerCase() )
+                else if( lowerToken == lv )
                     return i;
             }
             return -1;
         }
 
+        this._slashPos = undefined;
         this.occursBeforeOption = function( token, isPrefix ) {
-            return 0 < this.indexOf(token, isPrefix) 
-               && ( this.indexOf('/') < 0 || this.indexOf(token, isPrefix) < this.indexOf('/') );
+            const tokenPos = this.indexOf(token, isPrefix);
+            if( tokenPos <= 0 ) return false;
+            if( this._slashPos === undefined ) this._slashPos = this.indexOf('/');
+            return this._slashPos < 0 || tokenPos < this._slashPos;
         }
 
         this.isOption = function( token, token2 ) {
             for( let i = 2; i < this.src.length; i++ ) {
-                if( token == this.src[i].value.toLowerCase() )
-                    if( token2 == null || i < this.src.length-1 && token2 ==this.src[i+1].value.toLowerCase() )
+                if( token == this.src[i].lowerValue )
+                    if( token2 == null || i < this.src.length-1 && token2 ==this.src[i+1].lowerValue )
                         return this.src[i-1].value == '/';
             }
             return false;
@@ -218,7 +225,9 @@ let tree = (function(){
             return this.parsedName;
         }
  
-        this.src = lexer( this.content/*.toLowerCase()*/, false, true, '`' ); 
+        this.src = lexer( this.content/*.toLowerCase()*/, false, true, '`' );
+        for( let i = 0; i < this.src.length; i++ )
+            this.src[i].lowerValue = this.src[i].value.toLowerCase();
 
         const cp = this.getOptionValue('colprefix');
         if( cp != null )
@@ -269,7 +278,7 @@ let tree = (function(){
             }
 
             for( let i = nameFrom; i < nameTo; i++ ) {
-                const tmp = this.src[i].value.toLowerCase();
+                const tmp = this.src[i].lowerValue;
                 if( tmp.charAt(0) == 'v' && tmp.charAt(1) == 'c' ) {
                     if( tmp.charAt(2) == '(' )
                         return this.sugarcoatName(nameFrom, i); 
@@ -326,17 +335,20 @@ let tree = (function(){
                 ret = 'varchar2';
             //if( pure == 'fk' )
                 //ret = null;
-            if( src[0].value.endsWith('_id') && vcPos < 0 && this.indexOf('date') < 0 ) 
+            const datePos = this.indexOf('date');
+            if( this._slashPos === undefined ) this._slashPos = this.indexOf('/');
+            const slashPos = this._slashPos;
+            if( src[0].value.endsWith('_id') && vcPos < 0 && datePos < 0 )
                 ret = 'number';
-            if( src[1] && src[1].value == 'id' ) 
+            if( src[1] && src[1].value == 'id' )
                 ret = 'number';
-            if( src[0].value == 'quantity' ) 
+            if( src[0].value == 'quantity' )
                 ret = 'number';
-            if( src[0].value.endsWith('_number') ) 
+            if( src[0].value.endsWith('_number') )
                 ret = 'number';
-            if( src[0].value.endsWith('id') && vcPos < 0 && this.indexOf('/')+1 == this.indexOf('pk') ) 
+            if( src[0].value.endsWith('id') && vcPos < 0 && slashPos+1 == this.indexOf('pk') )
                 ret = 'number';
-            if( this.occursBeforeOption('int', true) ) 
+            if( this.occursBeforeOption('int', true) )
                 ret = 'integer';
 
             if( 0 < vcPos ) {
@@ -388,8 +400,8 @@ let tree = (function(){
                 ret = 'number';
             let to = this.indexOf(')');  
             if( 0 < from && 0 < to )
-                ret += this.content.toLowerCase().substring(src[from+1].begin, src[to].end);
-            if( 0 <= this.indexOf('date') || 0 == this.indexOf('hiredate') || src[0].value.endsWith('_date') || src[0].value.startsWith('date_of_')
+                ret += this.content.substring(src[from+1].begin, src[to].end).toLowerCase();
+            if( 0 <= datePos || 0 == this.indexOf('hiredate') || src[0].value.endsWith('_date') || src[0].value.startsWith('date_of_')
              || 1 < src.length && src[1].value == 'd' //0 < type.indexOf(' d') && type.indexOf(' d') == type.length-' d'.length 
              || src[0].value.startsWith('created')
              || src[0].value.startsWith('updated')
@@ -408,7 +420,7 @@ let tree = (function(){
                 }
             }
 
-            if( this.occursBeforeOption('tswltz') && this.indexOf('/')  ) 
+            if( this.occursBeforeOption('tswltz') && slashPos !== 0  )
                 ret = 'TIMESTAMP WITH LOCAL TIME ZONE'.toLowerCase();
             else if( this.occursBeforeOption('tswtz') || this.occursBeforeOption('tstz') ) 
                 ret = 'TIMESTAMP WITH TIME ZONE'.toLowerCase();
@@ -652,7 +664,7 @@ let tree = (function(){
         this.getGeneralConstraint = function() { // parenthesized constraint to return verbatim, e.g. c1 /check (c1 in ('A','B','C'))
             let from = this.indexOf('check');
             if(   0 < from && this.src[from-1].value == '/' &&
-                ( this.src[from+1].value == '(' || this.src[from+1].value.toLowerCase() == 'not' ) 
+                ( this.src[from+1].value == '(' || this.src[from+1].lowerValue == 'not' )
             ) {    
                 let i = from+2
                 for( ; i < this.src.length && this.src[i].value != '/' && this.src[i].value != '[' ; ) 
@@ -675,7 +687,7 @@ let tree = (function(){
                 if( this.src[i].value == ',' ) { 
                     separator = ',';
                     break;
-                } else if( this.src[i].value.toLowerCase && this.src[i].value.toLowerCase() == 'and' ) { 
+                } else if( this.src[i].lowerValue == 'and' ) {
                     separator = this.src[i].value;
                     break;
                 }   
@@ -852,11 +864,11 @@ let tree = (function(){
             // SODA collection: fixed schema, skip normal column generation
             if( this.isOption('soda') ) {
                 let ret = 'create table '+objName+' (\n';
-                ret += tab + 'id              varchar2(255) not null\n';
+                ret += tab + 'id              varchar2(255'+ddl.semantics()+') not null\n';
                 ret += tab + '                constraint '+objName+'_id_pk primary key,\n';
                 ret += tab + 'created_on      timestamp default sys_extract_utc(systimestamp) not null,\n';
                 ret += tab + 'last_modified   timestamp default sys_extract_utc(systimestamp) not null,\n';
-                ret += tab + 'version         varchar2(255) not null,\n';
+                ret += tab + 'version         varchar2(255'+ddl.semantics()+') not null,\n';
                 ret += tab + 'json_document   json\n';
                 ret += ');\n\n';
                 return ret;
@@ -934,33 +946,36 @@ let tree = (function(){
                     }
                 }
                 pad = tab+' '.repeat(this.maxChildNameLen() - fk.length);
-                ret += tab + fk + _id  + pad + type;  
+                ret += tab + fk + _id  + pad + type;
+                const refPrefix = ddl.find(parent) != null ? ddl.objPrefix() : '';
                 if( refNode.line < this.line || refNode.isMany2One() ) {
                     ret += tab + tab+' '.repeat(this.maxChildNameLen()) + 'constraint '+objName+'_'+fk+'_fk\n';
                     let onDelete = '';
-                    if( this.isOption('cascade')) 
+                    if( this.isOption('cascade'))
                         onDelete = ' on delete cascade';
-                    else if( this.isOption('setnull')) 
+                    else if( this.isOption('setnull'))
                         onDelete = ' on delete set null';
                     let	notNull = '';
                     for( let c in this.children ) {
                         let child = this.children[c];
                         if( fk == child.parseName() )  {
-                            if( child.isOption('nn') || child.isOption('notnull')  ) 
-                                notNull = ' NOT NULL'.toLowerCase();        
-                            if( child.isOption('cascade')  ) 
-                                onDelete = ' on delete cascade';  
-                            else if( this.isOption('setnull')) 
+                            if( child.isOption('nn') || child.isOption('notnull')  )
+                                notNull = ' NOT NULL'.toLowerCase();
+                            if( child.isOption('cascade')  )
+                                onDelete = ' on delete cascade';
+                            else if( this.isOption('setnull'))
                                 onDelete = ' on delete set null';
                             break;
                         }
                     }
-                    ret += tab + tab+' '.repeat(this.maxChildNameLen()) + 'references '+ddl.objPrefix()+parent+onDelete+notNull+',\n';
+                    ret += tab + tab+' '.repeat(this.maxChildNameLen()) + 'references '+refPrefix+parent+onDelete+notNull+',\n';
                 } else {
                     ret += ',\n';
-                    const alter = 'alter table '+objName+' add constraint '+objName+'_'+fk+'_fk foreign key ('+fk+') references '+ddl.objPrefix()+parent+';\n'
-                    if( !ddl.postponedAlters.includes(alter) )
+                    const alter = 'alter table '+objName+' add constraint '+objName+'_'+fk+'_fk foreign key ('+fk+') references '+refPrefix+parent+';\n'
+                    if( !ddl.postponedAltersSet.has(alter) ) {
                         ddl.postponedAlters.push(alter);
+                        ddl.postponedAltersSet.add(alter);
+                    }
                 }
             }
 
@@ -1184,10 +1199,13 @@ let tree = (function(){
             }
             let objName = ddl.objPrefix()  + this.parseName();
             var chunks = this.src;
-            // Build alias map for SQL table aliases (amend reserved words)
+            // Build alias map and cache table lookups (avoid repeated ddl.find calls)
             let aliasMap = {};
-            for( let i = 2; i < chunks.length; i++ )
+            let tblCache = {};
+            for( let i = 2; i < chunks.length; i++ ) {
                 aliasMap[chunks[i].value] = amend_reserved_word(chunks[i].value);
+                tblCache[chunks[i].value] = ddl.find(chunks[i].value);
+            }
             var ret = 'create or replace view ' +objName;
             if( this.annotations != null )
                 ret += '\nannotations (' + this.annotations + ')';
@@ -1195,7 +1213,7 @@ let tree = (function(){
             ret += 'select\n';
             var maxLen = 0;
             for( var i = 2; i < chunks.length; i++ ) {
-                let tbl = ddl.find(chunks[i].value);
+                let tbl = tblCache[chunks[i].value];
                 if( tbl == null )
                     return '';
                 let alias = aliasMap[chunks[i].value];
@@ -1210,8 +1228,8 @@ let tree = (function(){
                 }
             }
             var colCnts = {};
-            for( let i = 2; i < chunks.length; i++ ) { 
-                let tbl = ddl.find(chunks[i].value);
+            for( let i = 2; i < chunks.length; i++ ) {
+                let tbl = tblCache[chunks[i].value];
                 if( tbl == null )
                     continue;
                 for( let j = 0; j < tbl.children.length; j++ ) {
@@ -1220,7 +1238,7 @@ let tree = (function(){
                     var cnt = colCnts[col];
                     if( cnt == null )
                         cnt = 0;
-                    colCnts[col] = cnt+1;	
+                    colCnts[col] = cnt+1;
                 }
             }
             // Count auto-generated ID aliases to detect duplicates with child columns
@@ -1232,7 +1250,7 @@ let tree = (function(){
             // Determine which tables have /trans columns
             let tblTransCols = {};
             for( let i = 2; i < chunks.length; i++ ) {
-                let tbl = ddl.find(chunks[i].value);
+                let tbl = tblCache[chunks[i].value];
                 if( tbl != null && tbl.getTransColumns ) {
                     let tc = tbl.getTransColumns();
                     if( tc.length > 0 ) {
@@ -1245,7 +1263,7 @@ let tree = (function(){
             }
 
             for( let i = 2; i < chunks.length; i++ ) {
-                let tbl = ddl.find(chunks[i].value);
+                let tbl = tblCache[chunks[i].value];
                 if( tbl == null )
                     continue;
                 let tblName = chunks[i].value;
@@ -1296,63 +1314,112 @@ let tree = (function(){
             }
             if( ret.lastIndexOf(',\n') == ret.length-2 )
                 ret = ret.substr(0,ret.length-2)+'\n';
-            ret += 'from\n';
+            // Build set of view table names for quick lookup
+            let viewTableNames = {};
+            for( let i = 2; i < chunks.length; i++ )
+                viewTableNames[chunks[i].value] = true;
+            // Collect join conditions: joinConditions[childTable] = [{fkCol, parentTable}]
+            let joinConditions = {};
             for( let i = 2; i < chunks.length; i++ ) {
-                let alias = aliasMap[chunks[i].value];
-                var tbl = alias;
-                if( ddl.objPrefix() != null && ddl.objPrefix() != '' )
-                    tbl = ddl.objPrefix()+chunks[i].value + ' ' + alias;
-                ret += tab + tbl + ',\n';
+                let nameA = chunks[i].value;
+                let nodeA = tblCache[nameA];
+                if( nodeA == null )
+                    continue;
+                for( let k in nodeA.fks ) {
+                    let parent = nodeA.fks[k];
+                    if( viewTableNames[parent] && parent != nameA ) {
+                        if( !joinConditions[nameA] )
+                            joinConditions[nameA] = [];
+                        joinConditions[nameA].push({ fkCol: k, parentTable: parent });
+                    }
+                }
             }
-            // Add LEFT JOINs for translation tables
-            let transContext = ddl.getOptionValue('transcontext');
+            // Topological sort: base tables first (no FKs to other view tables), then dependents
+            let emitted = {};
+            let sortedTables = [];
+            // First pass: tables with no join conditions (base tables)
             for( let i = 2; i < chunks.length; i++ ) {
-                let tblName = chunks[i].value;
+                let name = chunks[i].value;
+                if( !joinConditions[name] ) {
+                    sortedTables.push(name);
+                    emitted[name] = true;
+                }
+            }
+            // Second pass: tables with join conditions (all parents must be emitted)
+            let remaining = [];
+            for( let i = 2; i < chunks.length; i++ ) {
+                let name = chunks[i].value;
+                if( joinConditions[name] )
+                    remaining.push(name);
+            }
+            while( remaining.length > 0 ) {
+                let progress = false;
+                let next = [];
+                for( let r = 0; r < remaining.length; r++ ) {
+                    let name = remaining[r];
+                    let conds = joinConditions[name];
+                    let allParentsEmitted = true;
+                    for( let c = 0; c < conds.length; c++ ) {
+                        if( !emitted[conds[c].parentTable] ) {
+                            allParentsEmitted = false;
+                            break;
+                        }
+                    }
+                    if( allParentsEmitted ) {
+                        sortedTables.push(name);
+                        emitted[name] = true;
+                        progress = true;
+                    } else {
+                        next.push(name);
+                    }
+                }
+                remaining = next;
+                if( !progress ) {
+                    // Circular dependency fallback: emit remaining in original order
+                    for( let r = 0; r < remaining.length; r++ ) {
+                        sortedTables.push(remaining[r]);
+                        emitted[remaining[r]] = true;
+                    }
+                    break;
+                }
+            }
+            // Generate FROM clause with ANSI JOINs
+            ret += 'from\n';
+            let transContext = ddl.getOptionValue('transcontext');
+            for( let si = 0; si < sortedTables.length; si++ ) {
+                let tblName = sortedTables[si];
                 let alias = aliasMap[tblName];
+                let tblExpr = alias;
+                if( ddl.objPrefix() != null && ddl.objPrefix() != '' )
+                    tblExpr = ddl.objPrefix() + tblName + ' ' + alias;
+                if( si == 0 ) {
+                    ret += tab + tblExpr + '\n';
+                } else if( joinConditions[tblName] ) {
+                    let conds = joinConditions[tblName];
+                    ret += tab + 'left join ' + tblExpr + '\n';
+                    for( let c = 0; c < conds.length; c++ ) {
+                        let aliasB = aliasMap[conds[c].parentTable];
+                        let prefix = (c == 0) ? 'on ' : 'and ';
+                        ret += tab + tab + prefix + alias + '.' + conds[c].fkCol + ' = ' + aliasB + '.id\n';
+                    }
+                } else {
+                    ret += tab + 'cross join ' + tblExpr + '\n';
+                }
+                // Add translation table LEFT JOIN immediately after the base table
                 if( tblTransCols[tblName] ) {
-                    let tblNode = ddl.find(tblName);
+                    let tblNode = tblCache[tblName];
                     let transName = ddl.objPrefix() + tblName + '_trans';
                     let tAlias = 't_' + tblName;
                     let fkCol = singular(tblName) + '_id';
                     let pkCol = tblNode.getGenIdColName() || tblNode.getExplicitPkName() || 'id';
-                    if( ret.lastIndexOf(',\n') == ret.length-2 )
-                        ret = ret.substr(0,ret.length-2)+'\n';
                     ret += tab + 'left join ' + transName + ' ' + tAlias + '\n';
                     ret += tab + tab + 'on ' + tAlias + '.' + fkCol + ' = ' + alias + '.' + pkCol + '\n';
-                    ret += tab + tab + 'and ' + tAlias + '.language_code = ' + transContext + ',\n';
+                    ret += tab + tab + 'and ' + tAlias + '.language_code = ' + transContext + '\n';
                 }
             }
-            if( ret.lastIndexOf(',\n') == ret.length-2 )
-                ret = ret.substr(0,ret.length-2)+'\n';
-            ret += 'where\n';
-            for( let i = 2; i < chunks.length; i++ )
-                for( let j = 2; j < chunks.length; j++ ) {
-                    if( j == i )
-                        continue;
-                    var nameA = chunks[i].value;
-                    var nameB = chunks[j].value;
-                    var aliasA = aliasMap[nameA];
-                    var aliasB = aliasMap[nameB];
-                    var nodeA = ddl.find(nameA);
-                    if( nodeA == null )
-                        continue;
-                    var nodeB = ddl.find(nameB);
-                    if( nodeB == null )
-                        continue;
-                    for( var k in nodeA.fks ) {
-                        var parent = nodeA.fks[k];
-                        if( parent == nameB) {
-                            ret += tab + aliasA+'.'+k+'(+) = ' +aliasB+'.id and\n';
-                        }
-                    }
-                }
             ret = ret.toLowerCase();
-            let postfix =  'where\n';
-            if( 0 < ret.lastIndexOf(postfix) && ret.lastIndexOf(postfix) == ret.length-postfix.length )
-                ret = ret.substring(0, ret.length-postfix.length).trim();
-            postfix =  'and\n';
-            if( 0 < ret.lastIndexOf(postfix) && ret.lastIndexOf(postfix) == ret.length-postfix.length )
-                ret = ret.substring(0, ret.length-postfix.length).trim(); 
+            if( ret.endsWith('\n') )
+                ret = ret.trimEnd(); 
             if( !ret.endsWith('\n') )
                 ret += '\n';         
             ret += '/\n'; 
@@ -1388,7 +1455,7 @@ let tree = (function(){
                 editionable = ' editionable';
             let objName = ddl.objPrefix()  + this.parseName();
             var ret = 'create or replace'+editionable+' trigger '+ objName.toLowerCase() +'_BIU\n'.toLowerCase();
-            ret += '    before insert or update\n'; 
+            ret += this.isOption('immutable') ? '    before insert\n' : '    before insert or update\n';
             ret += '    on '+ objName.toLowerCase() +'\n';
             ret += '    for each row\n';
 
@@ -1445,8 +1512,10 @@ let tree = (function(){
             if( ddl.optionEQvalue('Row Version Number','yes') || this.isOption('rowversion') )  {
                 ret += '    if inserting then\n';
                 ret += '        :new.row_version := 1;\n';
-                ret += '    elsif updating then\n';
-                ret += '        :new.row_version := NVL(:old.row_version, 0) + 1;\n';
+                if( !this.isOption('immutable') ) {
+                    ret += '    elsif updating then\n';
+                    ret += '        :new.row_version := NVL(:old.row_version, 0) + 1;\n';
+                }
                 ret += '    end if;\n';
                 OK = true;
             }

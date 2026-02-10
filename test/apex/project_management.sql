@@ -187,11 +187,10 @@ select
     milestones.created_by                              milestone_created_by,
     milestones.updated                                 milestone_updated,
     milestones.updated_by                              milestone_updated_by
-from 
-    projects,
-    milestones
-where
-    milestones.project_id(+) = projects.id
+from
+    projects
+    left join milestones
+        on milestones.project_id = projects.id
 /
 
 create or replace view project_ai as 
@@ -212,11 +211,10 @@ select
     action_items.created_by                            action_item_created_by,
     action_items.updated                               action_item_updated,
     action_items.updated_by                            action_item_updated_by
-from 
-    projects,
-    action_items
-where
-    action_items.project_id(+) = projects.id
+from
+    projects
+    left join action_items
+        on action_items.project_id = projects.id
 /
 
 -- load data

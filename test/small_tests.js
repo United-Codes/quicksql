@@ -971,12 +971,17 @@ view dept_v dept {Purpose 'reporting', Classification 'HR'}`).getDDL();
     // Feature: /soda directive
     output = new quicksql(`mycollection /soda`).getDDL();
     assert( "0 < output.indexOf('create table mycollection')" );
-    assert( "0 < output.indexOf('id              varchar2(255)')" );
+    assert( "0 < output.indexOf('id              varchar2(255 char)')" );
     assert( "0 < output.indexOf('mycollection_id_pk primary key')" );
     assert( "0 < output.indexOf('created_on      timestamp')" );
     assert( "0 < output.indexOf('last_modified   timestamp')" );
-    assert( "0 < output.indexOf('version         varchar2(255)')" );
+    assert( "0 < output.indexOf('version         varchar2(255 char)')" );
     assert( "0 < output.indexOf('json_document   json')" );
+
+    // /soda with semantics: byte
+    output = new quicksql(`mycollection /soda
+    # settings = {"semantics":"byte"}`).getDDL();
+    assert( "0 < output.indexOf('varchar2(255 byte)')" );
 
     // /soda with prefix
     output = new quicksql(`docs /soda
@@ -1089,11 +1094,9 @@ user
 visit
     planned_by /fk user
 view stats_v visit user`).getDDL();
-    assert( "0 < output.indexOf('visit.planned_by(+) = the_user.id')" );
-    assert( "output.indexOf('visit.user_id(+)') < 0" );
-
-    // -- Issue #8: Trailing 'and' should be stripped in multi-condition WHERE
-    assert( "output.indexOf('and\\n/') < 0" );
+    assert( "0 < output.indexOf('left join')" );
+    assert( "0 < output.indexOf('on visit.planned_by = the_user.id')" );
+    assert( "output.indexOf('(+)') < 0" );
 
     // -- Issue #9: Duplicate column aliases should be disambiguated
     output = new quicksql(`
