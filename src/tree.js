@@ -18,6 +18,7 @@ let tree = (function(){
     const stringTypes = ['string', 'varchar2', 'varchar', 'vc' , 'char'];
     const boolTypes = ['yn', 'boolean', 'bool', ];
     const vectTypes = ['vect', 'vector', ];
+    const geoTypes = ['geometry', 'sdo_geometry'];
     let datatypes = [
         'integer',
         'number', 'num',
@@ -34,6 +35,7 @@ let tree = (function(){
     datatypes = datatypes.concat(stringTypes);
     datatypes = datatypes.concat(boolTypes);
     datatypes = datatypes.concat(vectTypes);
+    datatypes = datatypes.concat(geoTypes);
 
     /**
      * Node in QSQL tree defining a Table, a Column, a View, or an Option
@@ -304,8 +306,8 @@ let tree = (function(){
 
             if( src[0].value == 'view' || 1 < src.length && src[1].value == '=' ) 
                 return 'view';
-            /*if( src[0].value == 'dv' ) 
-                return 'dv';*/
+            if( src[0].value == 'dv' )
+                return 'dv';
                         
             if( this.parent == null )
                 return 'table';
@@ -424,6 +426,19 @@ let tree = (function(){
                         ret = 'json';
                     else
                         ret = 'clob check ('+this.parseName()+' is json)';
+                }
+            }
+
+            for( let i in geoTypes ) {
+                if( this.occursBeforeOption(geoTypes[i]) ) {
+                    ret = 'sdo_geometry';
+                    break;
+                }
+            }
+
+            if( this.isOption('domain') ) {
+                if( dbVer != null && 0 < dbVer.length && 23 <= getMajorVersion(dbVer) ) {
+                    ret = this.getOptionValue('domain');
                 }
             }
 
@@ -1122,6 +1137,14 @@ let tree = (function(){
                         ret += '    organization neighbor partitions\n';
                         ret += '    with distance cosine;\n\n';
                     }
+                }
+            }
+
+            for( let i = 0; i < this.children.length; i++ ) {
+                let child = this.children[i];
+                if( child.children.length == 0 && child.parseType(true) == 'sdo_geometry' ) {
+                    ret += 'create index '+objName+'_si'+(num++)+' on '+objName+' ('+child.parseName()+')\n';
+                    ret += '    indextype is mdsys.spatial_index_v2;\n\n';
                 }
             }
 
@@ -1971,7 +1994,117 @@ let tree = (function(){
         };
 
         this.generateDualityView = function() {
-            return '/* not supported yet*/';
+            const chunks = this.src;
+            if( chunks.length < 3 )
+                return '/* duality view requires at least a view name and one table */\n';
+
+            const viewName = ddl.objPrefix() + chunks[1].value;
+            const rootTableName = chunks[2].value;
+            const rootNode = ddl.find(rootTableName);
+            if( rootNode == null )
+                return '/* duality view: table ' + rootTableName + ' not found */\n';
+
+            rootNode.lateInitFks();
+
+            const annotations = '@insert @update @delete';
+            let ret = 'create or replace json relational duality view ' + viewName + ' as\n';
+            ret += ddl.objPrefix() + rootNode.parseName() + ' ' + annotations + '\n';
+            ret += '{\n';
+
+            // Root table columns
+            const rootPkCol = rootNode.getGenIdColName() || rootNode.getExplicitPkName() || 'id';
+            let rootMaxLen = ('_id').length;
+            for( let i = 0; i < rootNode.children.length; i++ ) {
+                let child = rootNode.children[i];
+                if( child.children.length > 0 ) continue;
+                if( child.refId() != null ) continue;
+                let len = child.parseName().length;
+                if( len > rootMaxLen ) rootMaxLen = len;
+            }
+            // Check nested table name lengths
+            for( let t = 3; t < chunks.length; t++ ) {
+                let len = chunks[t].value.length;
+                if( len > rootMaxLen ) rootMaxLen = len;
+            }
+
+            ret += tab + '_id' + ' '.repeat(rootMaxLen - '_id'.length) + ' : ' + rootPkCol + ',\n';
+
+            // Regular columns (skip FK columns and child tables)
+            let fkCols = {};
+            if( rootNode.fks != null )
+                for( let fk in rootNode.fks ) fkCols[fk] = true;
+            for( let i = 0; i < rootNode.children.length; i++ ) {
+                let child = rootNode.children[i];
+                if( child.children.length > 0 ) continue;
+                let cname = child.parseName();
+                if( cname == rootPkCol ) continue;
+                if( fkCols[cname] ) continue;
+                if( child.refId() != null ) continue;
+                ret += tab + cname + ' '.repeat(rootMaxLen - cname.length) + ' : ' + cname + ',\n';
+            }
+
+            // Nested tables
+            for( let t = 3; t < chunks.length; t++ ) {
+                let nestedName = chunks[t].value;
+                let nestedNode = ddl.find(nestedName);
+                if( nestedNode == null ) continue;
+                nestedNode.lateInitFks();
+
+                // Determine relationship: is nestedNode a child (has FK to root) or parent?
+                let isChild = false;
+                if( nestedNode.fks != null ) {
+                    for( let fk in nestedNode.fks ) {
+                        if( nestedNode.fks[fk] == rootNode.parseName() ) {
+                            isChild = true;
+                            break;
+                        }
+                    }
+                }
+
+                let nestedPkCol = nestedNode.getGenIdColName() || nestedNode.getExplicitPkName() || 'id';
+
+                // Compute max col name length for nested table
+                let nestedMaxLen = ('_id').length;
+                for( let i = 0; i < nestedNode.children.length; i++ ) {
+                    let child = nestedNode.children[i];
+                    if( child.children.length > 0 ) continue;
+                    if( child.refId() != null ) continue;
+                    let len = child.parseName().length;
+                    if( len > nestedMaxLen ) nestedMaxLen = len;
+                }
+                // Exclude FK columns from nested output
+                let nestedFkCols = {};
+                if( nestedNode.fks != null )
+                    for( let fk in nestedNode.fks ) nestedFkCols[fk] = true;
+
+                let open = isChild ? '[{\n' : '{\n';
+                let close = isChild ? '}]' : '}';
+
+                ret += tab + nestedName + ' '.repeat(rootMaxLen - nestedName.length) + ' : ' + ddl.objPrefix() + nestedNode.parseName() + ' ' + annotations + '\n';
+                ret += tab + open;
+
+                ret += tab + tab + '_id' + ' '.repeat(nestedMaxLen - '_id'.length) + ' : ' + nestedPkCol + ',\n';
+
+                for( let i = 0; i < nestedNode.children.length; i++ ) {
+                    let child = nestedNode.children[i];
+                    if( child.children.length > 0 ) continue;
+                    let cname = child.parseName();
+                    if( cname == nestedPkCol ) continue;
+                    if( nestedFkCols[cname] ) continue;
+                    if( child.refId() != null ) continue;
+                    ret += tab + tab + cname + ' '.repeat(nestedMaxLen - cname.length) + ' : ' + cname + ',\n';
+                }
+
+                // Remove trailing comma from last column
+                ret = ret.replace(/,\n$/, '\n');
+                ret += tab + close + ',\n';
+            }
+
+            // Remove trailing comma from last nested block
+            ret = ret.replace(/,\n$/, '\n');
+            ret += '};\n\n';
+
+            return ret.toLowerCase();
         };
 
         this.getTransColumns = function() {

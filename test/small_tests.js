@@ -1231,6 +1231,62 @@ big_table2
     assert( "0 < output.indexOf(') compress;')" );
     assert( "output.indexOf('row store compress advanced') < 0" );
 
+    // -- Feature: Oracle DOMAIN types (23ai+)
+    output = new quicksql(`
+# settings = {"db":"23ai"}
+users
+    email /domain email_d /nn
+    phone /domain phone_d
+`).getDDL();
+    assert( "0 < output.indexOf('email_d not null')" );
+    assert( "0 < output.indexOf('phone_d')" );
+    assert( "output.indexOf('varchar2') < 0 || output.indexOf('varchar2') > output.indexOf('phone_d')" );
+
+    // Domain directive ignored for db < 23
+    output = new quicksql(`
+# settings = {"db":"19c"}
+users2
+    email /domain email_d
+`).getDDL();
+    assert( "0 < output.indexOf('varchar2')" );
+    assert( "0 < output.indexOf('email    varchar2')" );
+
+    // -- Feature: SDO_GEOMETRY spatial type
+    output = new quicksql(`
+addresses
+    street_name
+    location geometry
+`).getDDL();
+    assert( "0 < output.indexOf('sdo_geometry')" );
+    assert( "0 < output.indexOf('indextype is mdsys.spatial_index_v2')" );
+
+    output = new quicksql(`
+addresses2
+    street_name
+    geo sdo_geometry
+`).getDDL();
+    assert( "0 < output.indexOf('sdo_geometry')" );
+    assert( "0 < output.indexOf('indextype is mdsys.spatial_index_v2')" );
+
+    // -- Feature: JSON Relational Duality Views
+    output = new quicksql(`
+# settings = {"db":"23ai"}
+departments
+    name
+    employees
+        first_name
+        last_name
+        salary num
+
+dv dept_emp_dv departments employees
+`).getDDL();
+    assert( "0 < output.indexOf('create or replace json relational duality view')" );
+    assert( "0 < output.indexOf('dept_emp_dv')" );
+    assert( "0 < output.indexOf('@insert @update @delete')" );
+    assert( "0 < output.indexOf('[{')" );
+    assert( "0 < output.indexOf('first_name')" );
+    assert( "0 < output.indexOf('last_name')" );
+
 }
 
 
@@ -1239,7 +1295,7 @@ small_tests();
 console.log(assertionCnt);
 
 // metatest that watches tests
-const minimalTestCnt = 175;
+const minimalTestCnt = 189;
 if( assertionCnt < minimalTestCnt ) {
     console.error("assertionCnt < "+minimalTestCnt);
     throw new Error('Test failed');

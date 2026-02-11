@@ -71,6 +71,7 @@ A comment can appear between any keywords, parameters, or punctuation marks in a
 | char, vc, varchar, varchar2, string         | VARCHAR2(4000)                |
 | vcNNN,vc(NNN)                               | VARCHAR2(NNN)                 |
 | vc32k                                       | VARCHAR2(32767)               |
+| geometry, sdo_geometry                      | SDO_GEOMETRY                  |
 | vect, vector                                | VECTOR(*,*,*)                 |
 | vectNNN,vect(NNN)                           | VECTOR(NNN,*,*)               |
 | vcNk                                        | VARCHAR2(N*1024)              |
@@ -132,6 +133,7 @@ and is usually omitted from QSQL schema definition.
 | /check                         | Creates a check constraint with comma or white space delimited values e.g. /check Yes, No |
 | /constant                      | When generating data set this column to a constant value. For example /constant NYC. |
 | /default                       | Adds default value if the column is null   |
+| /domain                        | Use an Oracle SQL Domain as the column type (23ai+). The domain name becomes the column's type, e.g. `/domain email_d`. |
 | /values                        | Comma separated list of values to use when generating data. For example /values 1, 2, 3, 4 or /values Yes, No. |
 | /upper                         | Forces column values to upper case         |
 | /lower                         | Forces column values to lower case         |
@@ -172,6 +174,46 @@ view dept_emp emp dept
 
 This syntax restricts views to conjunctive queries (i.e. containing equijoin
 predicates) only.
+
+### Duality View Syntax (23ai+)
+
+```quicksql
+dv [view_name] [root_table] [nested_table]...
+```
+
+JSON Relational Duality Views expose relational data as JSON documents. The first table is the root; subsequent tables are nested as child or parent objects based on their foreign key relationships.
+
+### Duality View Example
+
+```quicksql
+# settings = {db: "23ai"}
+departments
+    name
+    employees
+        first_name
+        last_name
+        salary num
+
+dv dept_emp_dv departments employees
+```
+
+Generates:
+
+```sql
+create or replace json relational duality view dept_emp_dv as
+departments @insert @update @delete
+{
+    _id       : id,
+    name      : name,
+    employees : employees @insert @update @delete
+    [{
+        _id        : id,
+        first_name : first_name,
+        last_name  : last_name,
+        salary     : salary
+    }]
+};
+```
 
 ## Annotations
 
@@ -526,6 +568,7 @@ stmt::= tree
 
 view::= 'view' view_name table_name+ annotation?
        | view_name '=' table_name+
+       | 'dv' view_name table_name+
 
 view_name::= identifier
 table_name::= identifier
@@ -571,6 +614,7 @@ columnDirective::= '/'
       |'cascade'|'setnull'
       |'fk'
       |'pk'
+      |'domain'
       |'trans'|'translation'|'translations'
       )
 
@@ -589,6 +633,7 @@ datatype::=
        |'vc' integer | 'vc' '(' integer ')'
        | 'vc32k'
        | 'clob'|'blob'|'jsonfile'
+       | 'geometry'|'sdo_geometry'
 
 individual_setting::=
       ( 'apex'|'api'|'audit'
