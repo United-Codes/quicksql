@@ -270,6 +270,20 @@ departments
 view dept_v dept {UI_Display 'Department View'}
 ```
 
+### AI Enrichment (aienrichment + db >= 26)
+
+When the `aienrichment` setting is `yes` and `db` is `26ai` or higher, Quick SQL additionally generates a PL/SQL block that populates the `METADATA_ANNOTATIONS` AI enrichment layer. This enables Oracle 26ai features such as `METADATA_ANNOTATIONS_USAGE`, `METADATA_ANNOTATIONS_GROUPS`, and `METADATA_ANNOTATIONS_GROUP_MEM` views.
+
+For key-value annotations, `metadata_annotations.set()` calls are generated:
+
+- **Table annotations** — `metadata_annotations.set(label, value, 'TABLE_NAME')`
+- **Column annotations** — `metadata_annotations.set(label, value, 'TABLE.COLUMN', 'TABLE COLUMN')`
+- **View annotations** — `metadata_annotations.set(label, value, 'VIEW_NAME', 'VIEW')`
+
+For `GROUP` annotations, `metadata_annotations.create_group()` and `metadata_annotations.add_to_group()` calls are generated.
+
+Flag annotations (without a value) are skipped since the package requires a value argument.
+
 ## Settings
 
 You can enter inline settings to explicitly set SQL syntax generation options.

@@ -1019,6 +1019,59 @@ projects {GROUP 'PM Tables'}
     // GROUP annotation still appears on table DDL
     assert( "0 < output.indexOf('annotations (GROUP')" );
 
+    // Feature: AI enrichment via metadata_annotations (aienrichment + db >= 26)
+    // Table annotations → metadata_annotations.set()
+    output = new quicksql(`departments {Classification 'HR', UI_Display 'Departments'}
+    name`, '{"db":"26ai", "aienrichment":"yes"}').getDDL();
+    assert( "0 < output.indexOf('AI enrichment')" );
+    assert( "0 < output.indexOf(\"metadata_annotations.set('Classification', 'HR', 'DEPARTMENTS')\")" );
+    assert( "0 < output.indexOf(\"metadata_annotations.set('UI_Display', 'Departments', 'DEPARTMENTS')\")" );
+
+    // Column annotations → set() with 'TABLE COLUMN' type
+    output = new quicksql(`departments
+    name {UI_Display 'Department Name'}`, '{"db":"26ai", "aienrichment":"yes"}').getDDL();
+    assert( "0 < output.indexOf(\"metadata_annotations.set('UI_Display', 'Department Name', 'DEPARTMENTS.NAME', 'TABLE COLUMN')\")" );
+
+    // View annotations → set() with 'VIEW' type
+    output = new quicksql(`departments
+    name
+view dept_v departments {UI_Display 'Department View'}`, '{"db":"26ai", "aienrichment":"yes"}').getDDL();
+    assert( "0 < output.indexOf(\"metadata_annotations.set('UI_Display', 'Department View', 'DEPT_V', 'VIEW')\")" );
+
+    // GROUP annotations → create_group() + add_to_group()
+    output = new quicksql(`departments {GROUP 'HR Tables'}
+    name
+employees {GROUP 'HR Tables'}
+    name`, '{"db":"26ai", "aienrichment":"yes"}').getDDL();
+    assert( "0 < output.indexOf(\"metadata_annotations.create_group('HR Tables')\")" );
+    assert( "0 < output.indexOf(\"metadata_annotations.add_to_group('HR Tables', 'DEPARTMENTS', 'TABLE')\")" );
+    assert( "0 < output.indexOf(\"metadata_annotations.add_to_group('HR Tables', 'EMPLOYEES', 'TABLE')\")" );
+
+    // No enrichment when db < 26 (even with aienrichment on)
+    output = new quicksql(`departments {Classification 'HR'}
+    name`, '{"db":"23ai", "aienrichment":"yes"}').getDDL();
+    assert( "-1 == output.indexOf('metadata_annotations')" );
+
+    // No enrichment when db not set
+    output = new quicksql(`departments {Classification 'HR'}
+    name`, '{"aienrichment":"yes"}').getDDL();
+    assert( "-1 == output.indexOf('metadata_annotations')" );
+
+    // No enrichment when aienrichment not enabled
+    output = new quicksql(`departments {Classification 'HR'}
+    name`, '{"db":"26ai"}').getDDL();
+    assert( "-1 == output.indexOf('metadata_annotations')" );
+
+    // Flag annotations skipped (no value)
+    output = new quicksql(`departments {SurrogateKey}
+    name`, '{"db":"26ai", "aienrichment":"yes"}').getDDL();
+    assert( "-1 == output.indexOf('metadata_annotations')" );
+
+    // Object prefix applied correctly
+    output = new quicksql(`departments {Classification 'HR'}
+    name`, '{"db":"26ai", "aienrichment":"yes", "prefix":"APP"}').getDDL();
+    assert( "0 < output.indexOf(\"metadata_annotations.set('Classification', 'HR', 'APP_DEPARTMENTS')\")" );
+
     // Feature: Views with translation awareness
     output = new quicksql(`locations
     name vc(200) /trans
@@ -1295,7 +1348,7 @@ small_tests();
 console.log(assertionCnt);
 
 // metatest that watches tests
-const minimalTestCnt = 189;
+const minimalTestCnt = 204;
 if( assertionCnt < minimalTestCnt ) {
     console.error("assertionCnt < "+minimalTestCnt);
     throw new Error('Test failed');

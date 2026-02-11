@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.3.14] - 2026-02-11
+
+### ERD Diagram — Highlight & UI Improvements
+- **Distinct highlight colors**: Selected table uses vivid blue, related tables use warm amber/gold — instantly distinguishable at any depth
+- **White text on highlighted tables**: Text color now switches to white during highlight for reliable contrast in both light and dark themes
+- **Active filter chip styling**: Group filter chips use a fixed accent blue with white text instead of theme foreground/background swap, ensuring visibility in all themes
+
 ## [1.2.0] - 2023-11-8
 
 [Compatible API amendments](https://github.com/oracle/quicksql/issues/23)

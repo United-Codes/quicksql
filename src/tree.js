@@ -145,9 +145,20 @@ let tree = (function(){
 
         this.getAnnotationValue = function( key ) {
             if( this.annotations == null ) return null;
-            var regex = new RegExp(key + "\\s+['\"]([^'\"]*)['\"]", 'i');
+            var regex = new RegExp(key + ":?\\s+['\"]([^'\"]*)['\"]", 'i');
             var match = this.annotations.match(regex);
             return match ? match[1] : null;
+        };
+
+        this.getAnnotationPairs = function() {
+            if( this.annotations == null ) return [];
+            var pairs = [];
+            var regex = /(\w+)(?:\s+['"]([^'"]*)['"'])?/g;
+            var match;
+            while( (match = regex.exec(this.annotations)) !== null ) {
+                pairs.push({ label: match[1], value: match[2] !== undefined ? match[2] : null });
+            }
+            return pairs;
         };
 
         /**

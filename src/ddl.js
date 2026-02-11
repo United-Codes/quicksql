@@ -4,7 +4,7 @@ import tree from './tree.js';
 import lexer from './lexer.js';
 import json2qsql from './json2qsql.js'
 import errorMsgs from './errorMsgs.js'
-import {canonicalObjectName} from './naming.js'
+import {canonicalObjectName, getMajorVersion} from './naming.js'
 
 const identityDataType = 'identityDataType';
 const guid = 'guid';
@@ -27,6 +27,7 @@ export const quicksql = (function () {
             updatedcol: {label: 'Updated Column Name', value: 'updated'},
             updatedbycol: {label: 'Updated By Column Name', value: 'updated_by'},
             auditdate: {label: 'Audit Column Date Type', value:''},
+        aienrichment: {label: 'AI Enrichment', value:'no',check:['yes','no']},
         boolean: {label: 'Boolean Datatype', value:'not set',check:['yn','native']},
         genpk: {label:'Auto Primary Key', value:'yes',check:['yes','no']},
         semantics: {label: 'Character Strings',value:'CHAR',check:['BYTE','CHAR','Default']},
@@ -290,7 +291,7 @@ export const quicksql = (function () {
                         let type = 'number';
                         const child = descendants[i].findChild(pkName);
                         if( child != null )
-                            type = child.parseType();
+                            type = child.parseType(true);
                         item.columns.push({name: pkName, datatype: type});
                     }
                 }
@@ -306,7 +307,7 @@ export const quicksql = (function () {
                             if( col == ',' )
                                 continue;
                             const pChild = refNode.findChild(col);
-                            item.columns.push({name: col, datatype: pChild.parseType(pure=>true)});
+                            item.columns.push({name: col, datatype: pChild.parseType(true)});
                         }
                         continue;
                     }
@@ -331,13 +332,16 @@ export const quicksql = (function () {
                     item.columns.push({name: fk, datatype: type});                    
                 }
     
+                let explicitPk = descendants[i].getExplicitPkName();
                 for( let j = 0; j < descendants[i].children.length; j++ ) {
                     let child = descendants[i].children[j];
-                    if( child.parseType() == 'table' ) 
+                    if( child.parseType() == 'table' )
                         continue;
                     if( child.refId() != null )
                         continue;
-                    item.columns.push({name: child.parseName(''), datatype: child.parseType(pure=>true)});
+                    if( child.parseName() == explicitPk )
+                        continue;
+                    item.columns.push({name: child.parseName(''), datatype: child.parseType(true)});
                     if( 0 < child.indexOf('file') ) {
                         const col = child.parseName();
                         item.columns.push({name: col+'_filename', datatype: 'varchar2(255'+this.semantics()+ ')'});
@@ -397,6 +401,18 @@ export const quicksql = (function () {
                     output.links.push({source: this.objPrefix() +parent, source_id: pk,
                                        target: this.objPrefix() + descendants[i].parseName(''), target_id: fk
                     });
+                }
+            }
+
+            output.groups = {};
+            for( let i = 0; i < descendants.length; i++ ) {
+                if( descendants[i].parseType() != 'table' ) continue;
+                let groupName = descendants[i].getAnnotationValue('GROUP');
+                if( groupName != null ) {
+                    if( !output.groups[groupName] ) output.groups[groupName] = [];
+                    output.groups[groupName].push(
+                        this.objPrefix('no schema') + descendants[i].parseName('')
+                    );
                 }
             }
 
@@ -547,6 +563,66 @@ export const quicksql = (function () {
                     }
                 }
                 output += '\n';
+            }
+
+            // AI enrichment calls (aienrichment setting + db >= 26)
+            const enrichDbVer = this.getOptionValue('db');
+            if( this.optionEQvalue('aienrichment',true) && enrichDbVer != null && enrichDbVer.length >= 2 && 26 <= getMajorVersion(enrichDbVer) ) {
+                let enrichCalls = [];
+                let enrichGroups = {};
+                let prefix = this.objPrefix();
+
+                for( let i = 0; i < this.forest.length; i++ ) {
+                    let node = this.forest[i];
+                    let type = node.parseType();
+                    let pairs = node.getAnnotationPairs();
+                    let objName = (prefix + node.parseName()).toUpperCase();
+
+                    if( type == 'table' ) {
+                        for( let p = 0; p < pairs.length; p++ ) {
+                            if( pairs[p].label.toUpperCase() === 'GROUP' ) {
+                                if( pairs[p].value != null ) {
+                                    if( !enrichGroups[pairs[p].value] ) enrichGroups[pairs[p].value] = [];
+                                    enrichGroups[pairs[p].value].push(objName);
+                                }
+                                continue;
+                            }
+                            if( pairs[p].value == null ) continue;
+                            enrichCalls.push("    metadata_annotations.set('" + pairs[p].label + "', '" + pairs[p].value + "', '" + objName + "');");
+                        }
+                        for( let c = 0; c < node.children.length; c++ ) {
+                            let col = node.children[c];
+                            if( col.children.length > 0 ) continue;
+                            let colPairs = col.getAnnotationPairs();
+                            let colName = objName + '.' + col.parseName().toUpperCase();
+                            for( let p = 0; p < colPairs.length; p++ ) {
+                                if( colPairs[p].value == null ) continue;
+                                enrichCalls.push("    metadata_annotations.set('" + colPairs[p].label + "', '" + colPairs[p].value + "', '" + colName + "', 'TABLE COLUMN');");
+                            }
+                        }
+                    } else if( type == 'view' ) {
+                        for( let p = 0; p < pairs.length; p++ ) {
+                            if( pairs[p].value == null ) continue;
+                            enrichCalls.push("    metadata_annotations.set('" + pairs[p].label + "', '" + pairs[p].value + "', '" + objName + "', 'VIEW');");
+                        }
+                    }
+                }
+
+                let enrichGroupNames = Object.keys(enrichGroups);
+                for( let g = 0; g < enrichGroupNames.length; g++ ) {
+                    let gn = enrichGroupNames[g];
+                    enrichCalls.push("    metadata_annotations.create_group('" + gn + "');");
+                    let members = enrichGroups[gn];
+                    for( let m = 0; m < members.length; m++ ) {
+                        enrichCalls.push("    metadata_annotations.add_to_group('" + gn + "', '" + members[m] + "', 'TABLE');");
+                    }
+                }
+
+                if( enrichCalls.length > 0 ) {
+                    output += '-- AI enrichment\nbegin\n';
+                    output += enrichCalls.join('\n') + '\n';
+                    output += 'end;\n/\n\n';
+                }
             }
 
             j = 0;

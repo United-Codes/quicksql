@@ -31,6 +31,7 @@ const gBuildOptions = gTargetLibrary === 'DDL' ?
         },
         rollupOptions: {
             output: {
+                inlineDynamicImports: true,
                 assetFileNames: assetInfo => {
                     // TODO: Make this config more generic
                     return assetInfo.type === 'asset' ? `${ buildConstants.__ERD_LIBRARY_FILE_NAME__ }[extname]` : assetInfo.name;
