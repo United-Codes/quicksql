@@ -1,4 +1,4 @@
-emp {GROUP "Employee Group"}
+emp {TGROUP "Employee Group"}
   ename
   deptno /fk dept
 

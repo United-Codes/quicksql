@@ -11872,8 +11872,10 @@ let he = (function() {
       let a = this.annotations != null ? `
 annotations (` + this.annotations + ")" : "", n = "";
       (s.optionEQvalue("compress", "yes") || this.isOption("compress")) && (n = u ? " row store compress advanced" : " compress");
-      let c = C != "" ? " no drop no delete" : "";
-      if (r += ")" + n + a + c + `;
+      let c = C != "" ? `
+no drop
+no delete` : "";
+      if (r += ")" + n + c + a + `;
 
 `, this.isOption("audit") && !this.isOption("auditcols") && !this.isOption("audit", "col") && !this.isOption("audit", "cols") && !this.isOption("audit", "columns") && (r += "audit all on " + i + `;
 
@@ -13396,7 +13398,7 @@ const Z = {
       M.groups = {};
       for (let d = 0; d < p.length; d++) {
         if (p[d].parseType() != "table") continue;
-        let b = p[d].getAnnotationValue("GROUP");
+        let b = p[d].getAnnotationValue("TGROUP");
         b != null && (M.groups[b] || (M.groups[b] = []), M.groups[b].push(
           this.objPrefix("no schema") + p[d].parseName("")
         ));
@@ -13500,7 +13502,7 @@ const Z = {
       let t = {};
       for (let b = 0; b < M.length; b++) {
         if (M[b].parseType() != "table") continue;
-        let I = M[b].getAnnotationValue("GROUP");
+        let I = M[b].getAnnotationValue("TGROUP");
         I != null && (t[I] || (t[I] = []), t[I].push(this.objPrefix() + M[b].parseName()));
       }
       let o = Object.keys(t);
@@ -13526,7 +13528,7 @@ const Z = {
           let l = this.forest[r], u = l.parseType(), C = l.getAnnotationPairs(), x = (A + l.parseName()).toUpperCase();
           if (u == "table") {
             for (let T = 0; T < C.length; T++) {
-              if (C[T].label.toUpperCase() === "GROUP") {
+              if (C[T].label.toUpperCase() === "TGROUP") {
                 C[T].value != null && (I[C[T].value] || (I[C[T].value] = []), I[C[T].value].push(x));
                 continue;
               }

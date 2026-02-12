@@ -407,7 +407,7 @@ export const quicksql = (function () {
             output.groups = {};
             for( let i = 0; i < descendants.length; i++ ) {
                 if( descendants[i].parseType() != 'table' ) continue;
-                let groupName = descendants[i].getAnnotationValue('GROUP');
+                let groupName = descendants[i].getAnnotationValue('TGROUP');
                 if( groupName != null ) {
                     if( !output.groups[groupName] ) output.groups[groupName] = [];
                     output.groups[groupName].push(
@@ -541,11 +541,11 @@ export const quicksql = (function () {
                 }
             }
 
-            // table groups from GROUP annotations
+            // table groups from TGROUP annotations
             let groups = {};
             for( let i = 0; i < descendants.length; i++ ) {
                 if( descendants[i].parseType() != 'table' ) continue;
-                let groupName = descendants[i].getAnnotationValue('GROUP');
+                let groupName = descendants[i].getAnnotationValue('TGROUP');
                 if( groupName != null ) {
                     if( !groups[groupName] ) groups[groupName] = [];
                     groups[groupName].push(this.objPrefix() + descendants[i].parseName());
@@ -580,7 +580,7 @@ export const quicksql = (function () {
 
                     if( type == 'table' ) {
                         for( let p = 0; p < pairs.length; p++ ) {
-                            if( pairs[p].label.toUpperCase() === 'GROUP' ) {
+                            if( pairs[p].label.toUpperCase() === 'TGROUP' ) {
                                 if( pairs[p].value != null ) {
                                     if( !enrichGroups[pairs[p].value] ) enrichGroups[pairs[p].value] = [];
                                     enrichGroups[pairs[p].value].push(objName);

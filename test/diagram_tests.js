@@ -79,18 +79,18 @@ customer_addresses /cascade
     assert( "output.items[1].columns[1].name == output1.items[1].columns[1].name" );
     assert( "output.items[1].columns[1].datatype == output1.items[1].columns[1].datatype" );
 
-    // === GROUP annotation tests ===
+    // === TGROUP annotation tests ===
 
     // getERD() returns groups property
     input =
-`departments {GROUP "HR"}
+`departments {TGROUP "HR"}
     name
-employees {GROUP "HR"}
+employees {TGROUP "HR"}
     departments_id /fk departments
     name
-projects {GROUP "PM"}
+projects {TGROUP "PM"}
     name
-tasks {GROUP "PM"}
+tasks {TGROUP "PM"}
     projects_id /fk projects
     name`
     output = new quicksql(input).getERD();
@@ -108,7 +108,7 @@ tasks {GROUP "PM"}
     assert( "output.groups['PM'].indexOf(output.items[2].name) >= 0" );
     assert( "output.groups['PM'].indexOf(output.items[3].name) >= 0" );
 
-    // Empty groups when no GROUP annotations
+    // Empty groups when no TGROUP annotations
     input =
 `orders
     name
@@ -122,7 +122,7 @@ order_items
 
     // Groups with prefix setting
     input =
-`departments {GROUP "Core"}
+`departments {TGROUP "Core"}
     name
 # settings = { "prefix": "app" }`
     output = new quicksql(input).getERD();

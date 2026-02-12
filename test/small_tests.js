@@ -1003,12 +1003,12 @@ view dept_v dept {Purpose 'reporting', Classification 'HR'}`).getDDL();
     created_at ts /default localtimestamp`).getDDL();
     assert( "0 < output.indexOf('default on null localtimestamp')" );
 
-    // Feature: Table groups via GROUP annotation
-    output = new quicksql(`departments {GROUP 'HR Tables'}
+    // Feature: Table groups via TGROUP annotation
+    output = new quicksql(`departments {TGROUP 'HR Tables'}
     name
-employees {GROUP 'HR Tables'}
+employees {TGROUP 'HR Tables'}
     name
-projects {GROUP 'PM Tables'}
+projects {TGROUP 'PM Tables'}
     name`).getDDL();
     assert( "0 < output.indexOf('table groups')" );
     assert( "0 < output.indexOf(\"insert into user_annotations_groups$ (group_name) values ('HR Tables')\")" );
@@ -1016,8 +1016,8 @@ projects {GROUP 'PM Tables'}
     assert( "0 < output.indexOf(\"insert into user_annotations_group_members$ (group_name, object_name) values ('HR Tables', 'EMPLOYEES')\")" );
     assert( "0 < output.indexOf(\"insert into user_annotations_groups$ (group_name) values ('PM Tables')\")" );
     assert( "0 < output.indexOf(\"insert into user_annotations_group_members$ (group_name, object_name) values ('PM Tables', 'PROJECTS')\")" );
-    // GROUP annotation still appears on table DDL
-    assert( "0 < output.indexOf('annotations (GROUP')" );
+    // TGROUP annotation still appears on table DDL
+    assert( "0 < output.indexOf('annotations (TGROUP')" );
 
     // Feature: AI enrichment via metadata_annotations (aienrichment + db >= 26)
     // Table annotations → metadata_annotations.set()
@@ -1038,10 +1038,10 @@ projects {GROUP 'PM Tables'}
 view dept_v departments {UI_Display 'Department View'}`, '{"db":"26ai", "aienrichment":"yes"}').getDDL();
     assert( "0 < output.indexOf(\"metadata_annotations.set('UI_Display', 'Department View', 'DEPT_V', 'VIEW')\")" );
 
-    // GROUP annotations → create_group() + add_to_group()
-    output = new quicksql(`departments {GROUP 'HR Tables'}
+    // TGROUP annotations → create_group() + add_to_group()
+    output = new quicksql(`departments {TGROUP 'HR Tables'}
     name
-employees {GROUP 'HR Tables'}
+employees {TGROUP 'HR Tables'}
     name`, '{"db":"26ai", "aienrichment":"yes"}').getDDL();
     assert( "0 < output.indexOf(\"metadata_annotations.create_group('HR Tables')\")" );
     assert( "0 < output.indexOf(\"metadata_annotations.add_to_group('HR Tables', 'DEPARTMENTS', 'TABLE')\")" );
@@ -1230,7 +1230,8 @@ audit_log /immutable
     finding vc(200)
 `).getDDL();
     assert( "0 < output.indexOf('create immutable table audit_log')" );
-    assert( "0 < output.indexOf('no drop no delete')" );
+    assert( "0 < output.indexOf('no drop')" );
+    assert( "0 < output.indexOf('no delete')" );
     // No trigger-based immutability needed for db >= 23
     assert( "output.indexOf('raise_application_error') < 0" );
     assert( "output.indexOf('insertonly') < 0" );
