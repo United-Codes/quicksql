@@ -54,7 +54,7 @@
 `);let a=this.annotations!=null?`
 annotations (`+this.annotations+")":"",n="";(s.optionEQvalue("compress","yes")||this.isOption("compress"))&&(n=u?" row store compress advanced":" compress");let c=C!=""?`
 no drop until 0 days idle
-no delete`:"";if(c!=""&&n!=""&&(n=`
+no delete until 16 days after insert`:"";if(c!=""&&n!=""&&(n=`
 `+n.trimStart()),t+=")"+c+n+a+`;
 
 `,this.isOption("audit")&&!this.isOption("auditcols")&&!this.isOption("audit","col")&&!this.isOption("audit","cols")&&!this.isOption("audit","columns")&&(t+="audit all on "+i+`;

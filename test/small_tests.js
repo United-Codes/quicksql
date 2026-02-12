@@ -1231,7 +1231,7 @@ audit_log /immutable
 `).getDDL();
     assert( "0 < output.indexOf('create immutable table audit_log')" );
     assert( "0 < output.indexOf('no drop until 0 days idle')" );
-    assert( "0 < output.indexOf('no delete')" );
+    assert( "0 < output.indexOf('no delete until 16 days after insert')" );
     // No trigger-based immutability needed for db >= 23
     assert( "output.indexOf('raise_application_error') < 0" );
     assert( "output.indexOf('insertonly') < 0" );

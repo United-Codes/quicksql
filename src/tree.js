@@ -1082,7 +1082,7 @@ let tree = (function(){
             let compressClause = '';
             if( ddl.optionEQvalue('compress','yes') || this.isOption('compress') )
                 compressClause = _db23plus ? ' row store compress advanced' : ' compress';
-            let immutableSuffix = (immutableKeyword != '') ? '\nno drop until 0 days idle\nno delete' : '';
+            let immutableSuffix = (immutableKeyword != '') ? '\nno drop until 0 days idle\nno delete until 16 days after insert' : '';
             if( immutableSuffix != '' && compressClause != '' ) compressClause = '\n' + compressClause.trimStart();
             ret += ')'+immutableSuffix+compressClause+tableAnnotations+';\n\n';
             

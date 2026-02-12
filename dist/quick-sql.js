@@ -11874,7 +11874,7 @@ annotations (` + this.annotations + ")" : "", n = "";
       (s.optionEQvalue("compress", "yes") || this.isOption("compress")) && (n = u ? " row store compress advanced" : " compress");
       let c = C != "" ? `
 no drop until 0 days idle
-no delete` : "";
+no delete until 16 days after insert` : "";
       if (c != "" && n != "" && (n = `
 ` + n.trimStart()), r += ")" + c + n + a + `;
 
