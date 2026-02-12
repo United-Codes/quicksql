@@ -1230,7 +1230,7 @@ audit_log /immutable
     finding vc(200)
 `).getDDL();
     assert( "0 < output.indexOf('create immutable table audit_log')" );
-    assert( "0 < output.indexOf('no drop')" );
+    assert( "0 < output.indexOf('no drop until 0 days idle')" );
     assert( "0 < output.indexOf('no delete')" );
     // No trigger-based immutability needed for db >= 23
     assert( "output.indexOf('raise_application_error') < 0" );

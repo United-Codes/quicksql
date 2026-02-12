@@ -11873,9 +11873,10 @@ let he = (function() {
 annotations (` + this.annotations + ")" : "", n = "";
       (s.optionEQvalue("compress", "yes") || this.isOption("compress")) && (n = u ? " row store compress advanced" : " compress");
       let c = C != "" ? `
-no drop
+no drop until 0 days idle
 no delete` : "";
-      if (r += ")" + n + c + a + `;
+      if (c != "" && n != "" && (n = `
+` + n.trimStart()), r += ")" + c + n + a + `;
 
 `, this.isOption("audit") && !this.isOption("auditcols") && !this.isOption("audit", "col") && !this.isOption("audit", "cols") && !this.isOption("audit", "columns") && (r += "audit all on " + i + `;
 

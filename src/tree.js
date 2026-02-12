@@ -1082,8 +1082,9 @@ let tree = (function(){
             let compressClause = '';
             if( ddl.optionEQvalue('compress','yes') || this.isOption('compress') )
                 compressClause = _db23plus ? ' row store compress advanced' : ' compress';
-            let immutableSuffix = (immutableKeyword != '') ? '\nno drop\nno delete' : '';
-            ret += ')'+compressClause+immutableSuffix+tableAnnotations+';\n\n';
+            let immutableSuffix = (immutableKeyword != '') ? '\nno drop until 0 days idle\nno delete' : '';
+            if( immutableSuffix != '' && compressClause != '' ) compressClause = '\n' + compressClause.trimStart();
+            ret += ')'+immutableSuffix+compressClause+tableAnnotations+';\n\n';
             
             if( this.isOption('audit') && !this.isOption('auditcols') &&
                            !this.isOption('audit','col') && !this.isOption('audit','cols') && !this.isOption('audit','columns') ) {
